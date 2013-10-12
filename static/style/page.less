@@ -1,0 +1,127 @@
+@import "fonts.less";
+
+// layout
+//-----------------------------------------------------
+html{
+    position: relative;
+    min-height: 100%;
+
+    body{
+        #main-wap{
+            padding-bottom: 4em;
+        }
+
+        #footer{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2.5em;
+            z-index: 10;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        #copyright{
+            float: left;
+        }
+
+        #links{
+            float: right;
+            margin: 0;
+            list-style-type: none;
+
+            li{
+                display: inline-block;
+                margin-right: 15px;
+            }
+        }
+    }
+}
+
+#page-note{
+    .note-book-info{
+        margin-bottom: 15px;
+    }
+
+    .note-quote{
+        p{
+            margin-bottom: 18px;
+            line-height: 24px;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .note-note{
+        p{
+            margin-bottom: 18px;
+            line-height: 24px;
+        }        
+    }
+
+    .book-cover{
+        width: 140px;
+        margin-bottom: 10px;
+    }
+
+    .book-author{
+        color: gray;
+    }
+}
+
+#page-books{
+    #book-tags{
+        list-style-type: none;
+        padding: 0;
+
+        li{
+            margin-bottom: 2px;
+            
+            a{
+                display: block;
+                padding: 7px 15px;
+                background-color: #f0f0f0;
+                text-decoration: none;
+                color: #555;
+
+                &:hover{
+                    background-color: #eaeaea;
+                }
+            }
+        }
+    }
+}
+
+#page-book{
+    .book-header{
+        margin-bottom: 25px;
+
+        .book-cover{
+            float: left;
+            width: 120px;
+            margin-right: 25px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+            border-radius: 3px;
+        }
+
+        .book-info-wap{
+            overflow: hidden;
+
+            .book-author{
+                color: gray;
+            }
+        }
+    }
+
+    .book-intro{
+        line-height: 24px;
+    }
+
+    .author-intro{
+        line-height: 24px;
+    }
+}

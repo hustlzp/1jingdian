@@ -1,0 +1,100 @@
+@import 'fonts.less';
+
+.book-item{
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+    margin-right: 30px;
+    margin-left: 10px;
+
+    a{
+        text-decoration: none;
+        color: #555;
+    }
+
+    .cover{
+        width: 120px;
+        margin-bottom: 12px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+    }
+
+    .title{
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .author{
+        font-size: 13px;
+        color: #aaa;
+    }
+}
+
+.note-item{
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+
+    .book-cover{
+        float: left;
+        width: 100px;
+        margin-right: 20px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+    }
+
+    .note-wap{
+        .note-title{
+            font-size: 22px;
+            line-height: 22px;
+            margin-bottom: 10px;
+            padding-top: 2px;
+
+            a{
+                .font-hei;
+                color: #555;
+            }
+        }
+
+        .note-book-info{
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .note-content{
+            line-height: 23px;
+            margin-bottom: 5px;
+            color: #888;
+        }
+
+        .note-time{
+            color: #888;
+            font-size: 12px;
+            text-align: right; 
+        }
+    }
+}
+
+.book-note-item{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+
+    .book-title{
+        margin-bottom: 5px;
+        .font-hei;
+
+        a{
+            font-size: 16px;
+        }
+
+        small{
+            padding-left: 5px;
+        }
+    }
+
+    .book-quote{
+        color: #666;
+        line-height: 22px;
+    }
+}

@@ -1,0 +1,21 @@
+{% extends layout.html %}
+
+{% block page_title %}{{ note.title }} (摘自: {{ note.book_title }}) - 壹经典{% end %}
+{% block page_id %}page-note{% end %}
+
+{% block body %}
+<h1>{{ note.title }}</h1>
+<div class='note-book-info'>摘自《<a href="/book/{{ note.book_id }}">{{ note.book_title }}</a>》P{{ note.page_start }}-P{{ note.page_end }}</div>
+
+<div class='row'>
+   <div class='col-md-8'>
+      <div class='well note-quote'>{% raw note.quote %}</div>
+      <div class='note-note'>{% raw note.note %}</div>
+   </div>
+
+   <div class='col-md-4'>
+      <a href="/book/{{ note.book_id }}"><img class='book-cover' src="{{ note.cover_image }}"></a>
+      <p class='book-author'>{{ note.author }}</p>
+   </div>
+</div>
+{% end %}

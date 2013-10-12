@@ -1,0 +1,10 @@
+.font-hei{font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
+.font-kai{font-family:"AR PL UKai CN","AR PL UKai HK","AR PL UKai TW","AR PL UKai TW MBE","AR PL KaitiM GB","TW\-Kai","KaiTi","KaiTi_GB2312","STKaiti"}
+.font-song{font-family:"NSimSun","SimSun","STSong","AR PL SungtiL GB","TW\-Sung","WenQuanYi Bitmap Song"}
+.font-fang-song{font-family:"FangSong","FangSong_GB2312","STFangsong","CWTEX\-F"}
+.font-ming{font-family:"AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","PMingLiU","MingLiU"}
+@media (min-width:1200px){.container{max-width:970px}}.navbar{margin-bottom:30px}
+.navbar-brand{padding:14px 15px;font-size:22px;line-height:22px}.navbar-brand small{font-size:12px;color:#999;padding-left:10px}
+h1{margin:0 0 15px 0;font-size:30px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
+h2{font-size:18px;margin-bottom:15px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
+.well{background-color:#f6f6f1;box-shadow:none}

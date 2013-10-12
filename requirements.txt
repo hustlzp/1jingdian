@@ -1,1 +1,3 @@
+MySQL-python
+tornado
 torndb

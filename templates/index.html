@@ -1,0 +1,28 @@
+{% extends layout.html %}
+
+{% block page_title %}壹经典{% end %}
+{% block page_id %}#page-index{% end %}
+
+{% block body %}
+<div class='row'>
+   <div class='col-md-8'>
+      {% for n in notes %}
+      <div class='note-item clearfix'>
+         <a href="/book/{{ n.book_id }}">
+            <img class='book-cover' src="{{ n.cover_image }}" title="{{ n.book_title }}" alt="{{ n.book_title }}">
+         </a>
+         <div class='note-wap'>
+            <div class='note-title'><a href="/note/{{ n.id }}">{{ n.title }}</a></div>
+            <div class='note-book-info'>《<a href="/book/{{ n.book_id }}">{{ n.book_title }}</a>》P{{ n.page_start }} - P{{ n.page_end }}</div>
+            <div class='note-content'>{{ n.quote }}</div>
+            <div class='note-time'>{{ n.create_time }}</div>
+         </div>
+      </div>
+      {% end %}
+   </div>
+
+   <div class='col-md-4'>
+
+   </div>
+</div>
+{% end %}
