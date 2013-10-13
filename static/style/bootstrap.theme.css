@@ -8,6 +8,6 @@
 h1{margin:0 0 15px 0;font-size:30px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
 h2{font-size:18px;margin-bottom:15px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
 .col-md-4 h2:first-child{margin-top:0}
-.well{background-color:#f6f6f2;box-shadow:none;border-radius:0;border:1px solid #f6f6f2;padding:22px 25px;color:#4a4a4a}
+.well{background-color:#f6f6f2;box-shadow:none;border-radius:0;padding:22px 25px;color:#4a4a4a}
 .progress{height:10px;box-shadow:inset 1px 1px 1px rgba(0,0,0,0.2);border-radius:0;position:relative}.progress .progress-bar{position:absolute;top:0;cursor:pointer}
 .tooltip-inner{font-size:12px;line-height:12px;padding:6px 8px;border-radius:2px}

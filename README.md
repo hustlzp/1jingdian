@@ -3,4 +3,6 @@
 
 http://www.1jingdian.com
 
-Read the classic books.
+Lovely build with Tornado & Bootstrap3.
+
+摘录与点评经典书籍。
