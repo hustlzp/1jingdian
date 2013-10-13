@@ -7,6 +7,7 @@ html{position:relative;min-height:100%}html body #main-wap{padding-bottom:10em}
 html body #footer{position:absolute;left:0;bottom:0;width:100%;height:2.5em;z-index:10;text-align:center;font-size:12px;color:#666}
 html body #copyright{float:left}
 html body #links{float:right;margin:0;list-style-type:none}html body #links li{display:inline-block}
+#page-index .label-note-foreshow{margin-left:10px}
 #page-index .wx-qrcode{width:100px}
 #page-note .note-book-info{margin-bottom:20px}
 #page-note .note-quote p{margin-bottom:20px;line-height:26px;text-indent:2em}#page-note .note-quote p:last-child{margin-bottom:0}
