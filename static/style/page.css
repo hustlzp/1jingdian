@@ -3,17 +3,20 @@
 .font-song{font-family:"NSimSun","SimSun","STSong","AR PL SungtiL GB","TW\-Sung","WenQuanYi Bitmap Song"}
 .font-fang-song{font-family:"FangSong","FangSong_GB2312","STFangsong","CWTEX\-F"}
 .font-ming{font-family:"AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","PMingLiU","MingLiU"}
-html{position:relative;min-height:100%}html body #main-wap{padding-bottom:4em}
+html{position:relative;min-height:100%}html body #main-wap{padding-bottom:10em}
 html body #footer{position:absolute;left:0;bottom:0;width:100%;height:2.5em;z-index:10;text-align:center;font-size:12px;color:#666}
 html body #copyright{float:left}
 html body #links{float:right;margin:0;list-style-type:none}html body #links li{display:inline-block;margin-right:15px}
-#page-note .note-book-info{margin-bottom:15px}
+#page-index .wx-qrcode{width:100px}
+#page-note .note-book-info{margin-bottom:20px}
 #page-note .note-quote p{margin-bottom:18px;line-height:24px}#page-note .note-quote p:last-child{margin-bottom:0}
 #page-note .note-note p{margin-bottom:18px;line-height:24px}
 #page-note .book-cover{width:140px;margin-bottom:10px}
 #page-note .book-author{color:#808080}
-#page-books #book-tags{list-style-type:none;padding:0}#page-books #book-tags li{margin-bottom:2px}#page-books #book-tags li a{display:block;padding:7px 15px;background-color:#f0f0f0;text-decoration:none;color:#555}#page-books #book-tags li a:hover{background-color:#eaeaea}
+#page-books .book-tags{list-style-type:none;padding:0}#page-books .book-tags li{margin-bottom:2px}#page-books .book-tags li a{display:block;padding:7px 15px;background-color:#f0f0f0;text-decoration:none;color:#555}#page-books .book-tags li a:hover{background-color:#eaeaea}
+#page-books .books-wap{margin-top:5px}
 #page-book .book-header{margin-bottom:25px}#page-book .book-header .book-cover{float:left;width:120px;margin-right:25px;box-shadow:0 0 3px rgba(0,0,0,0.4);border-radius:3px}
 #page-book .book-header .book-info-wap{overflow:hidden}#page-book .book-header .book-info-wap .book-author{color:#808080}
 #page-book .book-intro{line-height:24px}
 #page-book .author-intro{line-height:24px}
+#page-book .book-external-link a{text-decoration:none;margin-right:7px}#page-book .book-external-link a img{width:32px}

@@ -1,4 +1,6 @@
-import os
+from __future__ import division
+import math
+import os, sys
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -7,15 +9,19 @@ import torndb
 import markdown2
 
 # config
-TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "templates")  
-STATIC_PATH = os.path.join(os.path.dirname(__file__), "static")  
+import sys
+sys.path.append('/var/www/tornconfig/1jingdian')
+import config
+
+TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "templates")
+STATIC_PATH = os.path.join(os.path.dirname(__file__), "static")
 
 # db
 db = torndb.Connection(
-    host="localhost",
-    database="1jingdian",
-    user="root",
-    password="xiaowangzi"
+    host=config.DB_HOST,
+    database=config.DB_NAME,
+    user=config.DB_USER,
+    password=config.DB_PWD
 )
 
 # handles
@@ -57,12 +63,13 @@ class BookHandler(tornado.web.RequestHandler):
         #book
         book = db.get("select * from book where id = %d" % int(book_id))
         book['intro'] = markdown2.markdown(book['intro'])
-        book['author_intro'] = markdown2.markdown(book['author_intro'])
 
         # notes
         notes = db.query("select * from note where book_id = %d order by page_start" % int(book_id))
         for n in notes:
             n['quote'] = n['quote'][0:100] + "..."
+            n['start_percentage'] = n['page_start'] * 100 / book['pages_num']
+            n['width_percentage'] = ((n['page_end'] - n['page_start'] + 1) * 100 / book['pages_num'])
         self.render("book.html", book=book, notes=notes)
 
 # app
@@ -77,7 +84,7 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=TEMPLATE_PATH,
             static_path=STATIC_PATH,
-            debug=True
+            debug=config.DEBUG
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
