@@ -6,22 +6,22 @@ import config
 env.host_string = config.HOST_STRING
 
 def start():
-    run('supervisor start 1jingdian')
+    run('supervisorctl start 1jingdian')
 
 def restart():
-    run('supervisor restart 1jingdian')
+    run('supervisorctl restart 1jingdian')
 
 def deploy():
-    with cd('/var/www/xichuangzhu'):
+    with cd('/var/www/1jingdian'):
         run('git pull')
-        run('supervisor restart 1jingdian')
+        run('supervisorctl restart 1jingdian')
 
 def ldeploy():
-    with cd('/var/www/xichuangzhu'):
+    with cd('/var/www/1jingdian'):
         run('git pull')
 
 def stop():
-    run('supervisor stop 1jingdian')
+    run('supervisorctl stop 1jingdian')
 
 def status():
-    run('supervisor status 1jingdian')
+    run('supervisorctl status 1jingdian')

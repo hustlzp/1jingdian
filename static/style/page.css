@@ -9,8 +9,8 @@ html body #copyright{float:left}
 html body #links{float:right;margin:0;list-style-type:none}html body #links li{display:inline-block;margin-right:15px}
 #page-index .wx-qrcode{width:100px}
 #page-note .note-book-info{margin-bottom:20px}
-#page-note .note-quote p{margin-bottom:18px;line-height:24px}#page-note .note-quote p:last-child{margin-bottom:0}
-#page-note .note-note p{margin-bottom:20px;line-height:26px;text-indent:2em}
+#page-note .note-quote p{margin-bottom:20px;line-height:26px;text-indent:2em}#page-note .note-quote p:last-child{margin-bottom:0}
+#page-note .note-note p{margin-bottom:18px;line-height:24px}
 #page-note .book-cover{width:140px;margin-bottom:10px}
 #page-note .book-author{color:#808080}
 #page-books .book-tags{list-style-type:none;padding:0}#page-books .book-tags li{margin-bottom:2px}#page-books .book-tags li a{display:block;padding:7px 15px;background-color:#f0f0f0;text-decoration:none;color:#555}#page-books .book-tags li a:hover{background-color:#eaeaea}
