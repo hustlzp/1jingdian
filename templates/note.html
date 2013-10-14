@@ -4,13 +4,37 @@
 {% block page_id %}page-note{% end %}
 
 {% block body %}
+<script type="text/javascript">
+$(function(){
+   $('.note-note').hide();
+
+   $('.btn-show-note').click(function(){
+      $('.tooltip').hide();
+      $('.note-note').fadeIn('fast');
+      $(this).parent().removeClass('on').addClass('off');
+   }).tooltip();
+
+   $('.btn-hide-note').click(function(){
+      $('.note-note').fadeOut('fast');
+      $(this).parent().removeClass('off').addClass('on');
+   });
+});
+</script>
+
 <h1>{{ note.title }}</h1>
 <div class='note-book-info'>摘自《<a href="/book/{{ note.book_id }}">{{ note.book_title }}</a>》P{{ note.page_start }}-P{{ note.page_end }}</div>
 
 <div class='row'>
    <div class='col-md-8'>
       <div class='well note-quote'>{% raw note.quote %}</div>
-      <h2>编者记：</h2>
+      <h2>
+         编者记
+         <div class='btn-group btn-group-xs btn-group-toggle-note on'>
+            <button class='btn btn-default btn-show-note' data-container="body" data-placement="right" title='他人的观点永远只是参考，希望你能保持对经典的独立思考'><i class='glyphicon glyphicon-chevron-down'></i> 展开</button>
+            <button class='btn btn-default btn-hide-note'><i class='glyphicon glyphicon-chevron-up'></i> 隐藏</button>
+         </div>
+      </h2>
+      
       <div class='note-note'>{% raw note.note %}</div>
       <div class='note-time'>{{ note.create_time }}</div>
    </div>

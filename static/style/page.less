@@ -39,6 +39,8 @@ html{
     }
 }
 
+// page - index
+//-----------------------------------------------------
 #page-index{
     .label-note-foreshow{
         margin-left: 10px;
@@ -49,6 +51,8 @@ html{
     }
 }
 
+// page - single note
+//-----------------------------------------------------
 #page-note{
     .note-book-info{
         margin-bottom: 20px;
@@ -66,16 +70,43 @@ html{
         }
     }
 
+    .btn-group-toggle-note{
+        margin-left: 8px;
+
+        .btn-show-note,
+        .btn-hide-note{
+            border-radius: 3px;
+            border-color: #aaa;
+        }
+
+        &.on{
+            .btn-show-note{display: block;}
+            .btn-hide-note{display: none;}
+        }
+
+        &.off{
+            .btn-show-note{display: none;}
+            .btn-hide-note{display: block;}            
+        }
+    }
+
+    .tooltip-inner{
+        line-height: 18px;
+    }
+
     .note-note{
+        margin-bottom: 40px;
+
         p{
             margin-bottom: 18px;
             line-height: 24px;
-        }        
+        }     
     }
 
     .note-time{
         text-align: right;
         color: #888;
+        margin-bottom: 20px;
     }
 
     .book-cover{
@@ -89,6 +120,8 @@ html{
     }
 }
 
+// page - all books
+//-----------------------------------------------------
 #page-books{
     .book-tags{
         list-style-type: none;
@@ -116,6 +149,8 @@ html{
     }
 }
 
+// page - single book
+//-----------------------------------------------------
 #page-book{
     .book-header{
         margin-bottom: 25px;

@@ -1,6 +1,6 @@
 {% extends layout.html %}
 
-{% block page_title %}壹经典{% end %}
+{% block page_title %}壹经典 | 摘录与点评经典书籍{% end %}
 {% block page_id %}page-index{% end %}
 
 scr
@@ -11,8 +11,11 @@ $(function)
 <script type="text/javascript">
 $(function(){
    var firstNote = $('.note-item').first();
+   var secondNote = firstNote.next();
+
    firstNote.find('.note-title').append("<sup><span class='label-note-foreshow label label-primary'>预告</span><sup>");
    firstNote.find('.note-time').text('明天');
+   secondNote.find('.note-time').text('今天');
 });
 </script>
 
