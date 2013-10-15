@@ -4,6 +4,13 @@
 {% block page_id %}page-index{% end %}
 
 {% block body %}
+<script type="text/javascript">
+$(function(){
+   var firstNote = $('.note-item').first();
+   firstNote.find('.note-title').append("<sup><span class='label-note-foreshow label label-primary'>预告</span><sup>");
+});
+</script>
+
 <div class='row'>
    <div class='col-md-8'>
       {% for n in notes %}
