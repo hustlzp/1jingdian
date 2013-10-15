@@ -1,6 +1,6 @@
 {% extends layout.html %}
 
-{% block page_title %}{{ note.title }} (摘自: {{ note.book_title }}) - 壹经典{% end %}
+{% block page_title %}{{ note.title }} - {{ note.book_title }} - 壹经典{% end %}
 {% block page_id %}page-note{% end %}
 
 {% block body %}
@@ -12,10 +12,6 @@ $(function(){
    $('.btn-show-note').click(function(){
       $('.note-note').fadeIn('fast');
       $(this).parent().removeClass('on').addClass('off');
-
-      // just show tooltip once
-      // $('.tooltip').hide();
-      // $(this).removeAttr('title').removeAttr('data-original-title');
    }).tooltip();
 
    // hide note
