@@ -29,7 +29,7 @@ class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         """display the latest note"""
         notes = db.query("""
-            select note.id, note.title, note.quote, note.page_start, note.page_end, note.create_time, book.id, book.cover_image, book.title as book_title, book.id as book_id
+            select note.id, note.title, note.quote, note.page_start, note.page_end, note.create_time, book.cover_image, book.title as book_title, book.id as book_id
             from note, book
             where note.book_id = book.id
             order by note.create_time desc
