@@ -44,7 +44,7 @@ class NoteHandler(tornado.web.RequestHandler):
         note = db.get("""
             select note.id, note.title, note.quote, note.note, note.page_start, note.page_end, note.create_time, book.id, book.cover_image, book.title as book_title, book.id as book_id, book.author
             from note, book
-            where note.book_id = %d
+            where note.id = %d
             and note.book_id = book.id         
         """ % int(note_id))
         note['quote'] = markdown2.markdown(note['quote'])
