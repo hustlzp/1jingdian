@@ -44,7 +44,10 @@ $(function(){
       <a href="/book/{{ note.book_id }}">
          <img class='book-cover' src="{{ note.cover_image }}" title="{{ note.book_title }}" alt="{{ note.book_title }}">
       </a>
-      <p class='book-author'>{{ note.author }}</p>
+      <!-- <p class='book-author'>{{ note.author }}</p> -->
+
+      <h2>微信公众号：jingdian_001</h2>
+      <img class='wx-qrcode' src="{{ static_url('imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001' alt="微信公众号：jingdian_001">
    </div>
 </div>
 {% end %}

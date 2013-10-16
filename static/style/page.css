@@ -3,13 +3,12 @@
 .font-song{font-family:"NSimSun","SimSun","STSong","AR PL SungtiL GB","TW\-Sung","WenQuanYi Bitmap Song"}
 .font-fang-song{font-family:"FangSong","FangSong_GB2312","STFangsong","CWTEX\-F"}
 .font-ming{font-family:"AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","PMingLiU","MingLiU"}
-html{position:relative;min-height:100%}html body nav .weibo-follow-wap{margin-top:15px}
-html body #main-wap{padding-bottom:10em}
+html{position:relative;min-height:100%}html body nav .weibo-follow-wap{margin-top:15px}html body nav .weibo-follow-wap .WB_follow_ex .status_followed .follow_text{padding:4px 0 0 0}
+html body #main-wap{padding-bottom:10em}html body #main-wap .wx-qrcode{width:100px}
 html body #footer{position:absolute;left:0;bottom:0;width:100%;height:2.5em;z-index:10;text-align:center;font-size:12px;color:#666}
 html body #copyright{float:left}
 html body #links{float:right;margin:0;list-style-type:none}html body #links li{display:inline-block}
 #page-index .label-note-foreshow{margin-left:10px}
-#page-index .wx-qrcode{width:100px}
 #page-note .note-book-info{margin-bottom:20px}
 #page-note .note-quote p{margin-bottom:20px;line-height:26px;text-indent:2em}#page-note .note-quote p:last-child{margin-bottom:0}
 #page-note .btn-group-toggle-note{margin-left:8px}#page-note .btn-group-toggle-note .btn-show-note,#page-note .btn-group-toggle-note .btn-hide-note{border-radius:3px;border-color:#aaa}
