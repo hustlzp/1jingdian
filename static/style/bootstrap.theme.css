@@ -3,12 +3,13 @@
 .font-song{font-family:"NSimSun","SimSun","STSong","AR PL SungtiL GB","TW\-Sung","WenQuanYi Bitmap Song"}
 .font-fang-song{font-family:"FangSong","FangSong_GB2312","STFangsong","CWTEX\-F"}
 .font-ming{font-family:"AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","PMingLiU","MingLiU"}
-@media (min-width:1200px){.container{max-width:970px}}.navbar{margin-bottom:30px}
-.navbar-brand{padding:14px 15px;font-size:22px;line-height:22px}.navbar-brand small{font-size:12px;color:#999;padding-left:5px}
-h1{margin:0 0 15px 0;font-size:30px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
+@media (min-width:1200px){.container{max-width:970px}}h1{margin:0 0 15px 0;font-size:30px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
 h2{font-size:18px;margin-bottom:15px;font-family:"Hiragino Sans GB","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei","Apple LiGothic Medium","SimHei","ST Heiti","WenQuanYi Zen Hei Sharp"}
+ol{margin-bottom:15px}ol li{margin-bottom:8px}
+.navbar{margin-bottom:30px}
+.navbar-brand{padding:14px 15px;font-size:22px;line-height:22px}.navbar-brand small{font-size:12px;color:#999;padding-left:5px}
 .col-md-4 h2:first-child{margin-top:0}
-.well{background-color:#f6f6f2;box-shadow:none;border-radius:0;padding:22px 25px;color:#4a4a4a;border:0}
+.well{background-color:#f5f5e8;box-shadow:none;border-radius:0;padding:25px 25px;color:#4a4a4a;border:0}
 .progress{height:10px;box-shadow:inset 1px 1px 1px rgba(0,0,0,0.2);border-radius:0;position:relative}.progress .progress-bar{position:absolute;top:0;cursor:pointer}
 .tooltip-inner{font-size:12px;line-height:12px;padding:6px 8px;border-radius:2px}
 .label{font-size:12px;font-weight:normal;border-radius:0;line-height:100%;padding:2px 5px}
