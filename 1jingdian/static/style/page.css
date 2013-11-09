@@ -1,0 +1,161 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+.font-hei {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "SimHei", "ST Heiti", "WenQuanYi Zen Hei Sharp";
+}
+.font-kai {
+  font-family: "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", "TW\-Kai", "KaiTi", "KaiTi_GB2312", "STKaiti";
+}
+.font-song {
+  font-family: "NSimSun", "SimSun", "STSong", "AR PL SungtiL GB", "TW\-Sung", "WenQuanYi Bitmap Song";
+}
+.font-fang-song {
+  font-family: "FangSong", "FangSong_GB2312", "STFangsong", "CWTEX\-F";
+}
+.font-ming {
+  font-family: "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", "PMingLiU", "MingLiU";
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+html body #main-wap {
+  padding-bottom: 10em;
+}
+html body #main-wap .wx-qrcode {
+  width: 100px;
+}
+html body #footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2.5em;
+  z-index: 10;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+html body #copyright {
+  float: left;
+}
+html body #links {
+  float: right;
+  margin: 0;
+  list-style-type: none;
+}
+html body #links li {
+  display: inline-block;
+}
+#page-index .label-note-foreshow {
+  margin-left: 10px;
+}
+#page-note .note-book-info {
+  margin-bottom: 20px;
+}
+#page-note .note-quote p {
+  margin-bottom: 20px;
+  line-height: 25px;
+  text-indent: 2em;
+}
+#page-note .note-quote p:last-child {
+  margin-bottom: 0;
+}
+#page-note .note-note {
+  margin-bottom: 40px;
+}
+#page-note .note-note p {
+  margin-bottom: 18px;
+  line-height: 24px;
+}
+#page-note .btn-group-toggle-note {
+  margin-left: 8px;
+}
+#page-note .btn-group-toggle-note .btn-show-note,
+#page-note .btn-group-toggle-note .btn-hide-note {
+  border-radius: 3px;
+  border-color: #afafaf;
+}
+#page-note .btn-group-toggle-note.on .btn-show-note {
+  display: block;
+}
+#page-note .btn-group-toggle-note.on .btn-hide-note {
+  display: none;
+}
+#page-note .btn-group-toggle-note.off .btn-show-note {
+  display: none;
+}
+#page-note .btn-group-toggle-note.off .btn-hide-note {
+  display: block;
+}
+#page-note .tooltip-inner {
+  line-height: 18px;
+}
+#page-note .note-time {
+  text-align: right;
+  color: #888;
+  margin-bottom: 20px;
+}
+#page-note .book-cover {
+  width: 140px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+#page-note .book-author {
+  color: gray;
+}
+#page-books .book-tags {
+  list-style-type: none;
+  padding: 0;
+}
+#page-books .book-tags li {
+  margin-bottom: 2px;
+}
+#page-books .book-tags li a {
+  display: block;
+  padding: 7px 15px;
+  background-color: #f0f0f0;
+  text-decoration: none;
+  color: #333;
+}
+#page-books .book-tags li a:hover {
+  background-color: #eaeaea;
+}
+#page-books .books-wap {
+  margin-top: 5px;
+}
+#page-book .book-header {
+  margin-bottom: 25px;
+}
+#page-book .book-header .book-cover {
+  float: left;
+  width: 120px;
+  margin-right: 25px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+#page-book .book-header .book-info-wap {
+  overflow: hidden;
+}
+#page-book .book-header .book-info-wap .book-author {
+  color: gray;
+}
+#page-book .book-intro {
+  line-height: 24px;
+}
+#page-book .author-intro {
+  line-height: 24px;
+}
+#page-book .book-external-link a {
+  text-decoration: none;
+  margin-right: 8px;
+}
+#page-book .book-external-link a img {
+  width: 32px;
+}
