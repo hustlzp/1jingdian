@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-from 1jingdian import app
+from jd import app
 import config
 
 # Send error log to admin's mailbox by smtp

@@ -1,6 +1,7 @@
 from flask import render_template
-from 1jingdian import app, db
+from jd import app, db
 import markdown2
+
 
 @app.route('/')
 def index():
@@ -15,6 +16,7 @@ def index():
         n['quote'] = n['quote'][0:115] + "..."
     render_template("index.html", notes=notes)
 
+
 @app.route('/excerpt/<int:excerpt_id>')
 def excerpt(excerpt_id):
     """Single excerpt page"""
@@ -28,11 +30,13 @@ def excerpt(excerpt_id):
     excerpt['note'] = markdown2.markdown(excerpt['note'])
     render_template("excerpt.html", excerpt=excerpt)
 
+
 @app.route('/books')
 def books():
     """All books"""
     books = db.query("select * from book")
     render_template("books.html", books=books)
+
 
 @app.route('/book/<int:book_id>')
 def book(book_id):
