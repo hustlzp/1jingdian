@@ -22,7 +22,9 @@
          <div class='book-item'>
             <a href="{{ url_for('book', book_id=book.id) }}">
                <img class='cover' src="{{ book.cover_image }}" title="{{ book.title }}" alt="{{ book.title }}">
+
                <p class='title'>{{ book.title }}</p>
+
                <p class='author'>{{ book.author }}</p>
             </a>
          </div>

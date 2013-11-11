@@ -91,3 +91,13 @@ ol li {
   line-height: 100%;
   padding: 2px 5px;
 }
+.pagination li a,
+.pagination li span {
+  margin-right: 10px;
+}
+.pagination li a.current {
+  background-color: blue;
+}
+.pagination li a.ellipsis {
+  color: #333;
+}

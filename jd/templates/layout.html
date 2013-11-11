@@ -1,79 +1,81 @@
 <!doctype html>
 <html>
-   <head>
-      <title>{% block page_title %}{% endblock %}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <meta name='description' content="{% block description %}{% endblock %}" />
-      {% block meta %}{% endblock %}
-      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-      <link rel="Shortcut Icon" href="#">
-      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.min.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.theme.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/module.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/page.css') }}">
-      <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-      <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-   </head>
+<head>
+   <title>{% block page_title %}{% endblock %}</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <meta name='description' content="{% block description %}{% endblock %}"/>
+   {% block meta %}{% endblock %}
+   <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+   <link rel="Shortcut Icon" href="#">
+   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.min.css') }}">
+   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.theme.css') }}">
+   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/module.css') }}">
+   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/page.css') }}">
+   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
 
-   <body id="{% block page_id %}{% endblock %}">
-      <nav class="navbar navbar-default navbar-static-top" role="navigation">
-         <div class='container'>
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-               </button>
-               <a class="navbar-brand" href="/">壹经典 <small>摘录与点评经典书籍</small></a>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-               <ul class="nav navbar-nav ">
-                  <li><a href="/">摘录</a></li>
-                  <li><a href="/books">书架</a></li>
-                  <!-- <li><a href="/contribute">投稿</a></li> -->
-               </ul>
-            </div>
-         </div>
-      </nav>
-
-      <div id="main-wap" class="container">
-      {% block body %}{% endblock %}
+<body id="{% block page_id %}{% endblock %}">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+   <div class='container'>
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="/">壹经典
+            <small>摘录与点评经典书籍</small>
+         </a>
       </div>
 
-      <div id="footer">
-         <div class='container'>
-            <div id='copyright'>壹经典 ©2013 by <a href="http://hustlzp.com" target="_blank">hustlzp</a></div>
-            
-            <ul id='links'>
-               <!-- <li><a href="#">关于</a></li> -->
-               <!-- <li><a target="_blank" href="https://github.com/hustlzp/1jingdian">GitHub</a></li> -->
-               <li class='footer-slogan'></li>
-               <script type="text/javascript">
-               // get random num which >= start and <= end
-               function rangeBetween(start, end){
-                  return Math.floor(Math.random() * (end - start + 1) + start);
-               }
-
-               // get random item from array
-               function getRandomItem(array){
-                  var randomIndex = rangeBetween(0, slogans.length - 1);
-                  return array[randomIndex];
-               }
-
-               var slogans = [
-                  '经典，不惧火炼。',
-                  '经典，时间考验。',
-                  '经典，常读常新。',
-                  '经典，经久不衰。'
-               ];
-
-               // display random footer slogan
-               $('.footer-slogan').text(getRandomItem(slogans));
-               </script>
-            </ul>
-         </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+         <ul class="nav navbar-nav ">
+            <li><a href="/">摘录</a></li>
+            <li><a href="/books">书架</a></li>
+            <!-- <li><a href="/contribute">投稿</a></li> -->
+         </ul>
       </div>
-   </body>
+   </div>
+</nav>
+
+<div id="main-wap" class="container">
+   {% block body %}{% endblock %}
+</div>
+
+<div id="footer">
+   <div class='container'>
+      <div id='copyright'>壹经典 ©2013 by <a href="http://hustlzp.com" target="_blank">hustlzp</a></div>
+
+      <ul id='links'>
+         <!-- <li><a href="#">关于</a></li> -->
+         <!-- <li><a target="_blank" href="https://github.com/hustlzp/1jingdian">GitHub</a></li> -->
+         <li class='footer-slogan'></li>
+         <script type="text/javascript">
+            // get random num which >= start and <= end
+            function rangeBetween(start, end) {
+               return Math.floor(Math.random() * (end - start + 1) + start);
+            }
+
+            // get random item from array
+            function getRandomItem(array) {
+               var randomIndex = rangeBetween(0, slogans.length - 1);
+               return array[randomIndex];
+            }
+
+            var slogans = [
+               '经典，不惧火炼。',
+               '经典，时间考验。',
+               '经典，常读常新。',
+               '经典，经久不衰。'
+            ];
+
+            // display random footer slogan
+            $('.footer-slogan').text(getRandomItem(slogans));
+         </script>
+      </ul>
+   </div>
+</div>
+</body>
 </html>

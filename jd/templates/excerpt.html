@@ -5,25 +5,27 @@
 
 {% block body %}
 <script type="text/javascript">
-$(function(){
-   $('.excerpt-review').hide();
+   $(function () {
+      $('.excerpt-review').hide();
 
-   // show note
-   $('.btn-show-review').click(function(){
-      $('.excerpt-review').fadeIn('fast');
-      $(this).parent().removeClass('on').addClass('off');
-   }).tooltip();
+      // show note
+      $('.btn-show-review').click(function () {
+         $('.excerpt-review').fadeIn('fast');
+         $(this).parent().removeClass('on').addClass('off');
+      }).tooltip();
 
-   // hide note
-   $('.btn-hide-review').click(function(){
-      $('.excerpt-review').fadeOut('fast');
-      $(this).parent().removeClass('off').addClass('on');
+      // hide note
+      $('.btn-hide-review').click(function () {
+         $('.excerpt-review').fadeOut('fast');
+         $(this).parent().removeClass('off').addClass('on');
+      });
    });
-});
 </script>
 
 <h1>{{ excerpt.title }}</h1>
-<div class='book-info'>摘自《<a href="url_for('book', book_id=excerpt.book_id) }}">{{ excerpt.book.title }}</a>》P{{ excerpt.page_start }}-P{{ excerpt.page_end }}</div>
+<div class='book-info'>摘自《<a href="url_for('book', book_id=excerpt.book_id) }}">{{ excerpt.book.title }}</a>》P{{
+   excerpt.page_start }}-P{{ excerpt.page_end }}
+</div>
 
 <div class='row'>
    <div class='col-md-8'>
@@ -31,11 +33,12 @@ $(function(){
       <h2>
          编者记
          <div class='btn-group btn-group-xs btn-group-toggle-review on'>
-            <button class='btn btn-default btn-show-review' data-container="body" data-placement="right" title='他人的观点只是参考，请保持对经典的独立体验'>
-                <i class='glyphicon glyphicon-chevron-down'></i> 展开
+            <button class='btn btn-default btn-show-review' data-container="body" data-placement="right"
+                    title='他人的观点只是参考，请保持对经典的独立体验'>
+               <i class='glyphicon glyphicon-chevron-down'></i> 展开
             </button>
             <button class='btn btn-default btn-hide-review'>
-                <i class='glyphicon glyphicon-chevron-up'></i> 隐藏
+               <i class='glyphicon glyphicon-chevron-up'></i> 隐藏
             </button>
          </div>
       </h2>
@@ -46,11 +49,13 @@ $(function(){
 
    <div class='col-md-4'>
       <a href="{{ url_for('book', book_id=excerpt.book_id) }}">
-         <img class='book-cover' src="{{ excerpt.book.cover_image }}" title="{{ excerpt.book.title }}" alt="{{ excerpt.book.title }}">
+         <img class='book-cover' src="{{ excerpt.book.cover_image }}" title="{{ excerpt.book.title }}"
+              alt="{{ excerpt.book.title }}">
       </a>
 
       <h2>微信公众号：jingdian_001</h2>
-      <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001' alt="微信公众号：jingdian_001">
+      <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001'
+           alt="微信公众号：jingdian_001">
    </div>
 </div>
 {% endblock %}

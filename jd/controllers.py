@@ -5,11 +5,13 @@ from jd import app, db
 from jd.models import Book, Excerpt
 
 
-@app.route('/')
-def index():
+@app.route('/', defaults={'page': 1})
+@app.route('/page/<int:page>')
+def index(page):
     """Display the latest excerpts"""
-    excerpts = Excerpt.query.all()
-    return render_template("index.html", excerpts=excerpts)
+    pagination = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 1)
+    excerpts = pagination.items
+    return render_template("index.html", pagination=pagination, excerpts=excerpts)
 
 
 @app.route('/excerpt/<int:excerpt_id>')
