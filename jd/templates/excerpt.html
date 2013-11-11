@@ -1,53 +1,56 @@
-{% extends layout.html %}
+{% extends 'layout.html' %}
 
-{% block page_title %}{{ note.title }} - {{ note.book_title }} - 壹经典{% end %}
-{% block page_id %}page-note{% end %}
+{% block page_title %}{{ excerpt.title }} - {{ excerpt.book.title }} - 壹经典{% endblock %}
+{% block page_id %}page-excerpt{% endblock %}
 
 {% block body %}
 <script type="text/javascript">
 $(function(){
-   $('.note-note').hide();
+   $('.excerpt-review').hide();
 
    // show note
-   $('.btn-show-note').click(function(){
-      $('.note-note').fadeIn('fast');
+   $('.btn-show-review').click(function(){
+      $('.excerpt-review').fadeIn('fast');
       $(this).parent().removeClass('on').addClass('off');
    }).tooltip();
 
    // hide note
-   $('.btn-hide-note').click(function(){
-      $('.note-note').fadeOut('fast');
+   $('.btn-hide-review').click(function(){
+      $('.excerpt-review').fadeOut('fast');
       $(this).parent().removeClass('off').addClass('on');
    });
 });
 </script>
 
-<h1>{{ note.title }}</h1>
-<div class='note-book-info'>摘自《<a href="/book/{{ note.book_id }}">{{ note.book_title }}</a>》P{{ note.page_start }}-P{{ note.page_end }}</div>
+<h1>{{ excerpt.title }}</h1>
+<div class='book-info'>摘自《<a href="url_for('book', book_id=excerpt.book_id) }}">{{ excerpt.book.title }}</a>》P{{ excerpt.page_start }}-P{{ excerpt.page_end }}</div>
 
 <div class='row'>
    <div class='col-md-8'>
-      <div class='well note-quote'>{% raw note.quote %}</div>
+      <div class='well excerpt-content'>{{ excerpt.friendly_content|safe }}</div>
       <h2>
          编者记
-         <div class='btn-group btn-group-xs btn-group-toggle-note on'>
-            <button class='btn btn-default btn-show-note' data-container="body" data-placement="right" title='他人的观点只是参考，请保持对经典的独立体验'><i class='glyphicon glyphicon-chevron-down'></i> 展开</button>
-            <button class='btn btn-default btn-hide-note'><i class='glyphicon glyphicon-chevron-up'></i> 隐藏</button>
+         <div class='btn-group btn-group-xs btn-group-toggle-review on'>
+            <button class='btn btn-default btn-show-review' data-container="body" data-placement="right" title='他人的观点只是参考，请保持对经典的独立体验'>
+                <i class='glyphicon glyphicon-chevron-down'></i> 展开
+            </button>
+            <button class='btn btn-default btn-hide-review'>
+                <i class='glyphicon glyphicon-chevron-up'></i> 隐藏
+            </button>
          </div>
       </h2>
 
-      <div class='note-note'>{% raw note.note %}</div>
-      <div class='note-time'>{{ note.create_time }}</div>
+      <div class='excerpt-review'>{{ excerpt.friendly_review|safe }}</div>
+      <div class='create-time'>{{ excerpt.create_time }}</div>
    </div>
 
    <div class='col-md-4'>
-      <a href="/book/{{ note.book_id }}">
-         <img class='book-cover' src="{{ note.cover_image }}" title="{{ note.book_title }}" alt="{{ note.book_title }}">
+      <a href="{{ url_for('book', book_id=excerpt.book_id) }}">
+         <img class='book-cover' src="{{ excerpt.book.cover_image }}" title="{{ excerpt.book.title }}" alt="{{ excerpt.book.title }}">
       </a>
-      <!-- <p class='book-author'>{{ note.author }}</p> -->
 
       <h2>微信公众号：jingdian_001</h2>
-      <img class='wx-qrcode' src="{{ static_url('imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001' alt="微信公众号：jingdian_001">
+      <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001' alt="微信公众号：jingdian_001">
    </div>
 </div>
-{% end %}
+{% endblock %}

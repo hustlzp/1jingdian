@@ -43,22 +43,14 @@ html{
     }
 }
 
-// page - index
+// page - single excerpt
 //-----------------------------------------------------
-#page-index{
-    .label-note-foreshow{
-        margin-left: 10px;
-    }
-}
-
-// page - single note
-//-----------------------------------------------------
-#page-note{
-    .note-book-info{
+#page-excerpt{
+    .book-info{
         margin-bottom: 20px;
     }
 
-    .note-quote{
+    .excerpt-content{
         p{
             margin-bottom: 20px;
             line-height: 25px;
@@ -70,7 +62,7 @@ html{
         }
     }
 
-    .note-note{
+    .excerpt-review{
         margin-bottom: 40px;
 
         p{
@@ -79,23 +71,23 @@ html{
         }
     }
 
-    .btn-group-toggle-note{
+    .btn-group-toggle-review{
         margin-left: 8px;
 
-        .btn-show-note,
-        .btn-hide-note{
+        .btn-show-review,
+        .btn-hide-review{
             border-radius: 3px;
             border-color: #afafaf;
         }
 
         &.on{
-            .btn-show-note{display: block;}
-            .btn-hide-note{display: none;}
+            .btn-show-review{display: block;}
+            .btn-hide-review{display: none;}
         }
 
         &.off{
-            .btn-show-note{display: none;}
-            .btn-hide-note{display: block;}            
+            .btn-show-review{display: none;}
+            .btn-hide-review{display: block;}
         }
     }
 
@@ -103,7 +95,7 @@ html{
         line-height: 18px;
     }
 
-    .note-time{
+    .create-time{
         text-align: right;
         color: #888;
         margin-bottom: 20px;

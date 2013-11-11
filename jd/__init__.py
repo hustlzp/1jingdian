@@ -31,11 +31,6 @@ def url_for_other_page(page):
     return url_for(request.endpoint, **view_args)
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 
-# before every request
-@app.before_request
-def before_request():
-    g.user_id = session['user_id'] if 'user_id' in session else None
-
 import log
 import controllers
 import models

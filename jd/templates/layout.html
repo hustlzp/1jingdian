@@ -1,22 +1,21 @@
 <!doctype html>
 <html>
    <head>
-      <title>{% block page_title %}{% end %}</title>
+      <title>{% block page_title %}{% endblock %}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <meta name='description' content="{% block description %}{% end %}" />
-      {% block meta %}{% end %}
+      <meta name='description' content="{% block description %}{% endblock %}" />
+      {% block meta %}{% endblock %}
       <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
       <link rel="Shortcut Icon" href="#">
-      <link type="text/css" rel="stylesheet" href="{{ static_url('style/bootstrap.min.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ static_url('style/bootstrap.theme.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ static_url('style/module.css') }}">
-      <link type="text/css" rel="stylesheet" href="{{ static_url('style/page.css') }}">
-      <script type="text/javascript" src="{{ static_url('js/jquery.min.js') }}"></script>
-      <script type="text/javascript" src="{{ static_url('js/bootstrap.min.js') }}"></script>
-      <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.min.css') }}">
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.theme.css') }}">
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/module.css') }}">
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/page.css') }}">
+      <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
    </head>
 
-   <body id="{% block page_id %}{% end %}">
+   <body id="{% block page_id %}{% endblock %}">
       <nav class="navbar navbar-default navbar-static-top" role="navigation">
          <div class='container'>
             <div class="navbar-header">
@@ -40,7 +39,7 @@
       </nav>
 
       <div id="main-wap" class="container">
-      {% block body %}{% end %}
+      {% block body %}{% endblock %}
       </div>
 
       <div id="footer">

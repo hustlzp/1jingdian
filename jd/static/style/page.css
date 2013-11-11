@@ -53,61 +53,58 @@ html body #links {
 html body #links li {
   display: inline-block;
 }
-#page-index .label-note-foreshow {
-  margin-left: 10px;
-}
-#page-note .note-book-info {
+#page-excerpt .book-info {
   margin-bottom: 20px;
 }
-#page-note .note-quote p {
+#page-excerpt .excerpt-content p {
   margin-bottom: 20px;
   line-height: 25px;
   text-indent: 2em;
 }
-#page-note .note-quote p:last-child {
+#page-excerpt .excerpt-content p:last-child {
   margin-bottom: 0;
 }
-#page-note .note-note {
+#page-excerpt .excerpt-review {
   margin-bottom: 40px;
 }
-#page-note .note-note p {
+#page-excerpt .excerpt-review p {
   margin-bottom: 18px;
   line-height: 24px;
 }
-#page-note .btn-group-toggle-note {
+#page-excerpt .btn-group-toggle-review {
   margin-left: 8px;
 }
-#page-note .btn-group-toggle-note .btn-show-note,
-#page-note .btn-group-toggle-note .btn-hide-note {
+#page-excerpt .btn-group-toggle-review .btn-show-review,
+#page-excerpt .btn-group-toggle-review .btn-hide-review {
   border-radius: 3px;
   border-color: #afafaf;
 }
-#page-note .btn-group-toggle-note.on .btn-show-note {
+#page-excerpt .btn-group-toggle-review.on .btn-show-review {
   display: block;
 }
-#page-note .btn-group-toggle-note.on .btn-hide-note {
+#page-excerpt .btn-group-toggle-review.on .btn-hide-review {
   display: none;
 }
-#page-note .btn-group-toggle-note.off .btn-show-note {
+#page-excerpt .btn-group-toggle-review.off .btn-show-review {
   display: none;
 }
-#page-note .btn-group-toggle-note.off .btn-hide-note {
+#page-excerpt .btn-group-toggle-review.off .btn-hide-review {
   display: block;
 }
-#page-note .tooltip-inner {
+#page-excerpt .tooltip-inner {
   line-height: 18px;
 }
-#page-note .note-time {
+#page-excerpt .create-time {
   text-align: right;
   color: #888;
   margin-bottom: 20px;
 }
-#page-note .book-cover {
+#page-excerpt .book-cover {
   width: 140px;
   margin-bottom: 10px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
-#page-note .book-author {
+#page-excerpt .book-author {
   color: gray;
 }
 #page-books .book-tags {
