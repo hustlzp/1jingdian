@@ -40,7 +40,7 @@
 
       {% for e in book.excerpts %}
       <div class='book-excerpt-item'>
-         <div class='excerpt-title'><a href="{{ url_for('excerpt', excerpt_id=e.id) }} )">{{ e.title }}</a>
+         <div class='excerpt-title'><a href="{{ url_for('excerpt', excerpt_id=e.id) }}">{{ e.title }}</a>
             <small>P{{ e.page_start }}-P{{ e.page_end }}</small>
          </div>
          <div class='excerpt-content'>{{ e.content|truncate(100, '...') }}</div>

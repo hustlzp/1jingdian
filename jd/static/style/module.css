@@ -22,11 +22,7 @@
   font-family: "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", "PMingLiU", "MingLiU";
 }
 .book-item {
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 20px;
-  margin-right: 40px;
-  width: 130px;
+  padding-bottom: 20px;
 }
 .book-item a {
   text-decoration: none;
