@@ -1,3 +1,5 @@
 MySQL-python
 Flask
+Flask-SQLAlchemy
 markdown2
+gunicorn
