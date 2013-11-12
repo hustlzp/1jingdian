@@ -4,22 +4,6 @@
 {% block page_id %}page-books{% endblock %}
 
 {% block body %}
-<script type="text/javascript">
-   $(function () {
-      var container = document.querySelector('.books-wap');
-      $('.book-item').hide();
-
-      imagesLoaded(container, function () {
-         $('.book-item').show();
-
-         msnry = new Masonry(container, {
-           itemSelector: '.book-item',
-           columnWidth: 160
-         });
-      });
-   });
-</script>
-
 <div class='row'>
    <!-- <div class='col-md-3'>
       <ul class='book-tags'>
