@@ -9,7 +9,7 @@ from jd.models import Book, Excerpt
 @app.route('/page/<int:page>')
 def index(page):
     """Display the latest excerpts"""
-    pagination = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 1)
+    pagination = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 12)
     excerpts = pagination.items
     return render_template("index.html", pagination=pagination, excerpts=excerpts)
 
