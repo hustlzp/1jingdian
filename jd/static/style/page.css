@@ -64,12 +64,18 @@ html body #links li {
 #page-excerpt .excerpt-content p:last-child {
   margin-bottom: 0;
 }
+#page-excerpt .excerpt-content p img {
+  max-width: 80%;
+}
 #page-excerpt .excerpt-review {
   margin-bottom: 40px;
 }
 #page-excerpt .excerpt-review p {
   margin-bottom: 18px;
   line-height: 24px;
+}
+#page-excerpt .excerpt-review img {
+  max-width: 80%;
 }
 #page-excerpt .btn-group-toggle-review {
   margin-left: 8px;
