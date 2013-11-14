@@ -6,7 +6,7 @@
    <meta name='description' content="{% block description %}{% endblock %}"/>
    {% block meta %}{% endblock %}
    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-   <link rel="Shortcut Icon" href="#">
+   <link rel="Shortcut Icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}">
    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.min.css') }}">
    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.theme.css') }}">
    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/module.css') }}">

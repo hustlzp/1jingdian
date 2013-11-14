@@ -12,7 +12,7 @@
       $('.btn-show-review').click(function () {
          $('.excerpt-review').fadeIn('fast');
          $(this).parent().removeClass('on').addClass('off');
-      }).tooltip();
+      });
 
       // hide note
       $('.btn-hide-review').click(function () {
@@ -33,8 +33,7 @@
       <h2>
          编者记
          <div class='btn-group btn-group-xs btn-group-toggle-review on'>
-            <button class='btn btn-default btn-show-review' data-container="body" data-placement="right"
-                    title='他人的观点只是参考，请保持对经典的独立体验'>
+            <button class='btn btn-default btn-show-review' data-container="body" data-placement="right">
                <i class='glyphicon glyphicon-chevron-down'></i> 展开
             </button>
             <button class='btn btn-default btn-hide-review'>
