@@ -2,7 +2,9 @@
 from __future__ import division
 import datetime
 import markdown2
-from .jd import db
+from flask.ext.sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 
 class Book(db.Model):
@@ -36,7 +38,7 @@ class Excerpt(db.Model):
     review = db.Column(db.Text)
     page_start = db.Column(db.Integer)
     page_end = db.Column(db.Integer)
-    create_time = db.Column(db.Date, default=datetime.date.today())
+    create_time = db.Column(db.Date, default=datetime.date.today)
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('excerpts', lazy='dynamic'))
