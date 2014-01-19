@@ -13,37 +13,41 @@ def first():
     with cd('/var/www/'):
         run('git clone https://github.com/hustlzp/1jingdian.git')
 
+    # cp config file
     env.host_string = "localhost"
-    with lcd('/var/www/1jingdian/jd'):
-        run('scp config_remote.py %s:/var/www/1jingdian/jd/config.py' % host_string)
+    run('scp /var/www/1jingdian/jd/config_remote.py %s:/var/www/1jingdian/jd/config.py'
+        % host_string)
 
     env.host_string = host_string
     with cd('/var/www/1jingdian'):
-        # virtualenv
-        run('virtualenv venv')
-        with prefix('source venv/bin/activate'):
-            run('pip install -r requirements.txt')
-
         # mysql
         run('mysql -uroot -poptico2014 < create_db.sql')
-        run('python manage.py syncdb')
+
+        # virtualenv
+        run('virtualenv venv')
+
+        with prefix('source venv/bin/activate'):
+            run('pip install -r requirements.txt')
+            run('python manage.py syncdb')
 
         # nginx
         run('cp nginx.conf /etc/nginx/sites-available/1jingdian')
         run('ln -sf /etc/nginx/sites-available/1jingdian /etc/nginx/sites-enabled/')
         run('nginx -s reload')
 
-        # # supervisor
+        # supervisor
         run('cp supervisor.conf /etc/supervisor/conf.d/1jingdian.conf')
         run('supervisorctl reread')
         run('supervisorctl update')
 
 
 def restart():
+    env.host_string = host_string
     run('supervisorctl restart 1jingdian')
 
 
 def deploy():
+    env.host_string = host_string
     with cd('/var/www/1jingdian'):
         run('git pull')
         run('supervisorctl restart 1jingdian')
