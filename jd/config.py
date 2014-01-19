@@ -1,7 +1,7 @@
 # coding: utf-8
 
 # IP
-HOST_STRING = 'root@173.208.227.86'
+HOST_STRING = 'root@192.241.159.34'
 
 # app config
 DEBUG = True
@@ -14,6 +14,7 @@ DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASSWORD = ""
 DB_NAME = "1jingdian"
+SQLALCHEMY_DATABASE_URI = "mysql://%s:%s@%s/%s" % (DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 # SMTP config
 SMTP_SERVER = "smtp.qq.com"

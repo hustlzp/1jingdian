@@ -8,6 +8,7 @@ from . import config
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
@@ -36,7 +37,7 @@ def register_jinja(app):
     # inject vars into template context
     @app.context_processor
     def inject_vars():
-        pass
+        return dict()
 
     # url generator for pagination
     def url_for_other_page(page):
@@ -67,15 +68,14 @@ def register_db(app):
 
 
 def register_routes(app):
-    from .models import Excerpt, Book
+    from .models import Book, Excerpt
 
     @app.route('/', defaults={'page': 1})
     @app.route('/page/<int:page>')
     def index(page):
         """Display the latest excerpts"""
-        pagination = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 12)
-        excerpts = pagination.items
-        return render_template("index.html", pagination=pagination, excerpts=excerpts)
+        paginator = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 12)
+        return render_template("index.html", paginator=paginator)
 
     @app.route('/excerpt/<int:excerpt_id>')
     def excerpt(excerpt_id):
@@ -86,9 +86,8 @@ def register_routes(app):
     @app.route('/books')
     def books():
         """All books"""
-        books = Book.query.all()
+        books = Book.query
         return render_template("books.html", books=books)
-
 
     @app.route('/book/<int:book_id>')
     def book(book_id):

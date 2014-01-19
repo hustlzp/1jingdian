@@ -41,7 +41,8 @@ class Excerpt(db.Model):
     create_time = db.Column(db.Date, default=datetime.date.today)
 
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    book = db.relationship('Book', backref=db.backref('excerpts', lazy='dynamic'))
+    book = db.relationship('Book', backref=db.backref('excerpts', lazy='dynamic',
+                                                      order_by='asc(Excerpt.page_start)'))
 
     @property
     def friendly_content(self):
