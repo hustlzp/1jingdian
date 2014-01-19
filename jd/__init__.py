@@ -1,10 +1,8 @@
-#-*- coding: UTF-8 -*-
+# coding: utf-8
 import sys
-from flask import Flask, request, url_for, session, g
+from flask import Flask, request, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
-
-sys.path.append('/var/www/flaskconfig/1jingdian')
-import config
+from . import config
 
 # convert python's encoding to utf8
 reload(sys)

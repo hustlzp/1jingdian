@@ -4,32 +4,33 @@
 {% block page_id %}page-books{% endblock %}
 
 {% block body %}
-<div class='row'>
-   <!-- <div class='col-md-3'>
-      <ul class='book-tags'>
-         <li><a href="#">哲学</a></li>
-         <li><a href="#">设计</a></li>
-         <li><a href="#">小说</a></li>
-         <li><a href="#">散文</a></li>
-         <li><a href="#">社科</a></li>
-      </ul>
-   </div> -->
+   <div class='row'>
+      <!-- <div class='col-md-3'>
+         <ul class='book-tags'>
+            <li><a href="#">哲学</a></li>
+            <li><a href="#">设计</a></li>
+            <li><a href="#">小说</a></li>
+            <li><a href="#">散文</a></li>
+            <li><a href="#">社科</a></li>
+         </ul>
+      </div> -->
 
-   <div class='col-md-9'>
-      <!-- <h2>书架</h2> -->
-      <div class='books-wap'>
-         {% for book in books %}
-         <div class='book-item'>
-            <a href="{{ url_for('book', book_id=book.id) }}">
-               <img class='cover' src="{{ book.cover_image }}" title="{{ book.title }}" alt="{{ book.title }}">
+      <div class='col-md-9'>
+         <!-- <h2>书架</h2> -->
+         <div class='books-wap'>
+            {% for book in books %}
+               <div class='book-item'>
+                  <a href="{{ url_for('book', book_id=book.id) }}">
+                     <img class='cover' src="{{ book.cover_image }}" title="{{ book.title }}"
+                          alt="{{ book.title }}">
 
-               <p class='title'>{{ book.title }}</p>
+                     <p class='title'>{{ book.title }}</p>
 
-               <p class='author'>{{ book.author }}</p>
-            </a>
+                     <p class='author'>{{ book.author }}</p>
+                  </a>
+               </div>
+            {% endfor %}
          </div>
-         {% endfor %}
       </div>
    </div>
-</div>
 {% endblock %}

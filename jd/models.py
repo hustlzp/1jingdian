@@ -1,8 +1,8 @@
-#-*- coding: UTF-8 -*-
+# coding: utf-8
 from __future__ import division
 import datetime
 import markdown2
-from jd import db
+from .jd import db
 
 
 class Book(db.Model):

@@ -1,7 +1,6 @@
-#-*- coding: UTF-8 -*-
-import markdown2
+# coding: utf-8
 from flask import render_template
-from jd import app, db
+from jd import app
 from jd.models import Book, Excerpt
 
 

@@ -4,53 +4,56 @@
 {% block page_id %}page-index{% endblock %}
 
 {% block body %}
-<div class='row'>
-   <div class='col-md-8'>
-      {% for e in excerpts %}
-      <div class='excerpt-item clearfix'>
-         <a href="{{ url_for('book', book_id=e.book_id) }}">
-            <img class='book-cover' src="{{ e.book.cover_image }}" title="{{ e.book.title }}"
-                 alt="{{ e.book.title }}">
-         </a>
+   <div class='row'>
+      <div class='col-md-8'>
+         {% for e in excerpts %}
+            <div class='excerpt-item clearfix'>
+               <a href="{{ url_for('book', book_id=e.book_id) }}">
+                  <img class='book-cover' src="{{ e.book.cover_image }}" title="{{ e.book.title }}"
+                       alt="{{ e.book.title }}">
+               </a>
 
-         <div class='excerpt-wap'>
-            <div class='excerpt-title'><a href="{{ url_for('excerpt', excerpt_id=e.id) }}">{{ e.title }}</a></div>
-            <div class='excerpt-book-info'>《<a href="{{ url_for('book', book_id=e.book_id) }}">{{ e.book.title
-               }}</a>》P{{ e.page_start }} - P{{ e.page_end }}
+               <div class='excerpt-wap'>
+                  <div class='excerpt-title'><a
+                        href="{{ url_for('excerpt', excerpt_id=e.id) }}">{{ e.title }}</a></div>
+                  <div class='excerpt-book-info'>《<a
+                        href="{{ url_for('book', book_id=e.book_id) }}">{{ e.book.title }}</a>》P{{ e.page_start }}
+                     - P{{ e.page_end }}
+                  </div>
+                  <div class='excerpt-content'>{{ e.content|truncate(118, '...') }}</div>
+                  <div class='create-time'>{{ e.create_time }}</div>
+               </div>
             </div>
-            <div class='excerpt-content'>{{ e.content|truncate(118, '...') }}</div>
-            <div class='create-time'>{{ e.create_time }}</div>
-         </div>
-      </div>
-      {% endfor %}
-
-      <ul class='pagination pagination-sm'>
-         {% if pagination.has_prev %}
-            <li><a href="{{ url_for_other_page(pagination.prev_num) }}">上一页</a></li>
-         {% endif %}
-
-         {% for page in pagination.iter_pages() %}
-            {% if page %}
-               {% if page != pagination.page %}
-               <li><a href="{{ url_for_other_page(page) }}">{{ page }}</a></li>
-               {% else %}
-               <li class="active"><span>{{ page }}</span></li>
-               {% endif %}
-            {% else %}
-               <li class="ellipsis"><span>...</span></li>
-            {% endif %}
          {% endfor %}
 
-         {% if pagination.has_next %}
-            <li><a href="{{ url_for_other_page(pagination.next_num) }}">下一页</a></li>
-         {% endif %}
-      </ul>
-   </div>
+         <ul class='pagination pagination-sm'>
+            {% if pagination.has_prev %}
+               <li><a href="{{ url_for_other_page(pagination.prev_num) }}">上一页</a></li>
+            {% endif %}
 
-   <div class='col-md-4'>
-      <h2>微信公众号：jingdian_001</h2>
-      <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}" title='微信公众号：jingdian_001'
-           alt="微信公众号：jingdian_001">
+            {% for page in pagination.iter_pages() %}
+               {% if page %}
+                  {% if page != pagination.page %}
+                     <li><a href="{{ url_for_other_page(page) }}">{{ page }}</a></li>
+                  {% else %}
+                     <li class="active"><span>{{ page }}</span></li>
+                  {% endif %}
+               {% else %}
+                  <li class="ellipsis"><span>...</span></li>
+               {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+               <li><a href="{{ url_for_other_page(pagination.next_num) }}">下一页</a></li>
+            {% endif %}
+         </ul>
+      </div>
+
+      <div class='col-md-4'>
+         <h2>微信公众号：jingdian_001</h2>
+         <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}"
+              title='微信公众号：jingdian_001'
+              alt="微信公众号：jingdian_001">
+      </div>
    </div>
-</div>
 {% endblock %}

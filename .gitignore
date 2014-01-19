@@ -1,3 +1,5 @@
 venv/
 .idea/
 *.pyc
+*/config.py
+*/config_remote.py
