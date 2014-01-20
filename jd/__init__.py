@@ -31,8 +31,8 @@ def create_app():
 
 
 def register_jinja(app):
-    #from . import filters
-    #app.jinja_env.filters[''] = filters.
+    from . import filters
+    app.jinja_env.filters['markdown'] = filters.markdown
 
     # inject vars into template context
     @app.context_processor

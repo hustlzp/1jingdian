@@ -30,7 +30,7 @@
 
    <div class='row'>
       <div class='col-md-8'>
-         <div class='well excerpt-content'>{{ excerpt.friendly_content|safe }}</div>
+         <div class='well excerpt-content'>{{ excerpt.content|markdown|safe }}</div>
          <h2>
             编者记
             <span class='btn-group btn-group-xs btn-group-toggle-review on'>
@@ -44,7 +44,7 @@
             </span>
          </h2>
 
-         <div class='excerpt-review'>{{ excerpt.friendly_review|safe }}</div>
+         <div class='excerpt-review'>{{ excerpt.review|markdown|safe }}</div>
          <div class='create-time'>{{ excerpt.create_time }}</div>
       </div>
 

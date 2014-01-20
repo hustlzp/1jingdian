@@ -20,12 +20,13 @@ def first():
 
     env.host_string = host_string
     with cd('/var/www/1jingdian'):
-        # mysql
+        # create db
         run('mysql -uroot -poptico2014 < create_db.sql')
 
         # virtualenv
         run('virtualenv venv')
 
+        # install packages & create tables
         with prefix('source venv/bin/activate'):
             run('pip install -r requirements.txt')
             run('python manage.py syncdb')

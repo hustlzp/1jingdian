@@ -22,10 +22,6 @@ class Book(db.Model):
     price = db.Column(db.String(50))
     isbn = db.Column(db.String(50))
 
-    @property
-    def friendly_intro(self):
-        return markdown2.markdown(self.intro)
-
     def __repr__(self):
         return '<Book %s>' % self.title
 
@@ -45,19 +41,13 @@ class Excerpt(db.Model):
                                                       order_by='asc(Excerpt.page_start)'))
 
     @property
-    def friendly_content(self):
-        return markdown2.markdown(self.content)
-
-    @property
-    def friendly_review(self):
-        return markdown2.markdown(self.review)
-
-    @property
     def start_percentage(self):
+        """起始页百分比"""
         return self.page_start * 100 / self.book.pages_num
 
     @property
     def width_percentage(self):
+        """页面范围百分比"""
         return (self.page_end - self.page_start + 1) * 100 / self.book.pages_num
 
     def __repr__(self):

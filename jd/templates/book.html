@@ -25,7 +25,7 @@
 
          <h2>内容简介</h2>
 
-         <div class='book-intro'>{{ book.friendly_intro|safe }}</div>
+         <div class='book-intro'>{{ book.intro|markdown|safe }}</div>
 
          <h2>摘录 / {{ book.excerpts.count() }}</h2>
 
@@ -44,7 +44,7 @@
             <div class='book-excerpt-item'>
                <div class='excerpt-title'><a
                      href="{{ url_for('excerpt', excerpt_id=e.id) }}">{{ e.title }}</a>
-                  <small>P{{ e.page_start }}-P{{ e.page_end }}</small>
+                  <small>P{{ e.page_start }} - P{{ e.page_end }}</small>
                </div>
                <div class='excerpt-content'>{{ e.content|truncate(100, '...') }}</div>
                <div class='create-time'>{{ e.create_time }}</div>
