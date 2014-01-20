@@ -17,9 +17,9 @@ DB_NAME = "1jingdian"
 SQLALCHEMY_DATABASE_URI = "mysql://%s:%s@%s/%s" % (DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 # SMTP config
-SMTP_SERVER = "smtp.qq.com"
+SMTP_SERVER = ""
 SMTP_PORT = 25
-SMTP_USER = "admin@xichuangzhu.com"
-SMTP_PASSWORD = "xiaowang2013qmailzi"
-SMTP_FROM = "admin@xichuangzhu.com"
-SMTP_ADMIN = "hustlzp@qq.com"
+SMTP_USER = ""
+SMTP_PASSWORD = ""
+SMTP_FROM = ""
+SMTP_ADMIN = ""
