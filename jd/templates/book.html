@@ -54,15 +54,19 @@
 
       <div class='col-md-4'>
          <div class='book-external-link'>
-            <a href="{{ book.douban_url }}" target="_blank">
-               <img src="http://img3.douban.com/pics/douban-icons/favicon_32x32.png"
-                    title="《{{ book.title }}》豆瓣主页">
-            </a>
+            {% if book.douban_url %}
+               <a href="{{ book.douban_url }}" target="_blank">
+                  <img src="http://img3.douban.com/pics/douban-icons/favicon_32x32.png"
+                       title="《{{ book.title }}》豆瓣主页">
+               </a>
+            {% endif %}
 
-            <a href="{{ book.amazon_url }}" target="_blank">
-               <img src="https://cdn1.iconfinder.com/data/icons/D_Social_Icon_Set/128/amazonpx.png"
-                    title="《{{ book.title }}》Amazon主页">
-            </a>
+            {% if book.amazon_url %}
+               <a href="{{ book.amazon_url }}" target="_blank">
+                  <img src="https://cdn1.iconfinder.com/data/icons/D_Social_Icon_Set/128/amazonpx.png"
+                       title="《{{ book.title }}》Amazon主页">
+               </a>
+            {% endif %}
          </div>
 
          <h2>微信公众号：jingdian_001</h2>
