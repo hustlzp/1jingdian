@@ -31,21 +31,21 @@
    <div class='row'>
       <div class='col-md-8'>
          <div class='well excerpt-content'>{{ excerpt.content|markdown|safe }}</div>
-         <h2>
-            编者记
-            <span class='btn-group btn-group-xs btn-group-toggle-review on'>
-               <button class='btn btn-default btn-show-review' data-container="body"
-                       data-placement="right">
-                  <i class='glyphicon glyphicon-chevron-down'></i> 展开
-               </button>
-               <button class='btn btn-default btn-hide-review'>
-                  <i class='glyphicon glyphicon-chevron-up'></i> 隐藏
-               </button>
-            </span>
-         </h2>
-
-         <div class='excerpt-review'>{{ excerpt.review|markdown|safe }}</div>
-         <div class='create-time'>{{ excerpt.create_time }}</div>
+         {#         <h2>#}
+         {#            编者记#}
+         {#            <span class='btn-group btn-group-xs btn-group-toggle-review on'>#}
+         {#               <button class='btn btn-default btn-show-review' data-container="body"#}
+         {#                       data-placement="right">#}
+         {#                  <i class='glyphicon glyphicon-chevron-down'></i> 展开#}
+         {#               </button>#}
+         {#               <button class='btn btn-default btn-hide-review'>#}
+         {#                  <i class='glyphicon glyphicon-chevron-up'></i> 隐藏#}
+         {#               </button>#}
+         {#            </span>#}
+         {#         </h2>#}
+         {##}
+         {#         <div class='excerpt-review'>{{ excerpt.review|markdown|safe }}</div>#}
+         {#         <div class='create-time'>{{ excerpt.create_time }}</div>#}
       </div>
 
       <div class='col-md-4'>
