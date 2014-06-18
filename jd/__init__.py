@@ -70,12 +70,12 @@ def register_db(app):
 def register_routes(app):
     from .models import Book, Excerpt
 
-    @app.route('/', defaults={'page': 1})
-    @app.route('/page/<int:page>')
-    def index(page):
-        """Display the latest excerpts"""
-        paginator = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 12)
-        return render_template("index.html", paginator=paginator)
+    # @app.route('/', defaults={'page': 1})
+    # @app.route('/page/<int:page>')
+    # def index(page):
+    #     """Display the latest excerpts"""
+    #     paginator = Excerpt.query.order_by(Excerpt.create_time.desc()).paginate(page, 12)
+    #     return render_template("index.html", paginator=paginator)
 
     @app.route('/excerpt/<int:excerpt_id>')
     def excerpt(excerpt_id):
@@ -83,7 +83,7 @@ def register_routes(app):
         excerpt = Excerpt.query.get_or_404(excerpt_id)
         return render_template("excerpt.html", excerpt=excerpt)
 
-    @app.route('/books')
+    @app.route('/')
     def books():
         """All books"""
         books = Book.query
