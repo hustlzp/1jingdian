@@ -1,0 +1,15 @@
+{
+    "name": "1jingdian",
+    "version": "0.0.1",
+    "homepage": "",
+    "authors": [],
+    "description": "",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "bootstrap": "3.3.2",
+        "font-awesome": "4.3.0",
+        "respond": "1.4.2",
+        "jquery": "1.11.2"
+    }
+}
