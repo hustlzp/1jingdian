@@ -14,6 +14,11 @@ class Piece(db.Model):
     votes_count = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('created_pieces',
+                                                      lazy='dynamic',
+                                                      order_by='desc(Piece.created_at)'))
+
     page = db.Column(db.Integer)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',

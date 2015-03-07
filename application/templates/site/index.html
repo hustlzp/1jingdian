@@ -1,46 +1,14 @@
 {% extends "layout.html" %}
+{% from "macro/ui.html" import modal, render_pieces_wap %}
 
 {% block page_title %}首页{% endblock %}
 {% block page_content %}
+   <div class="piece-modal-wap">
+      {{ modal(first_piece) }}
+   </div>
+
    <div class="container">
-      <div class="pieces-wap">
-         <div class="date">今天</div>
-
-         {% for piece in today_pieces %}
-            <div class="piece">
-               <div class="media">
-                  <div class="media-left">
-                     <div class="vote">
-                        <div class="vote-icon">
-                           <span class="fa fa-angle-up"></span>
-                        </div>
-                        <div class="votes-count">{{ piece.votes_count }}</div>
-                     </div>
-                  </div>
-
-                  <div class="media-body">
-                     <div class="pull-right">
-                        <img src="http://xiaoliupai.xichuangzhu.com/uploads/avatars/default.png"
-                             class="user-avatar img-circle" alt=""/>
-
-                        <div class="comments-count text-right">
-                           {{ piece.comments.count() }} <span class="fa fa-comment"></span>
-                        </div>
-                     </div>
-
-                     <div class="content">
-                        {{ piece.content }}
-                     </div>
-
-                     <div class="meta">
-                        {#                     <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>#}
-                        <a href="{{ piece.source_url }}" class="source" target="_blank">
-                           {{ piece.source }}</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         {% endfor %}
-      </div>
+      {{ render_pieces_wap('今天', today_pieces) }}
+      {{ render_pieces_wap('昨天', yesterday_pieces) }}
    </div>
 {% endblock %}

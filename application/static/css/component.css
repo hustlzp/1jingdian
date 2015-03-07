@@ -6,68 +6,55 @@
  * 
  *  Github: https://github.com/zenozeng/fonts.css
  */
-.book-item {
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 20px;
-  margin-right: 40px;
-  width: 130px;
+.piece-modal {
+  position: fixed;
+  top: 0;
+  right: -503px;
+  bottom: 0;
+  background-color: #fff;
+  width: 500px;
+  z-index: 1000;
+  padding: 30px 20px;
+  overflow-y: scroll;
+  box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
-.book-item a {
-  text-decoration: none;
-  color: #333;
+.piece-modal .piece-wap {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
 }
-.book-item .cover {
-  width: 120px;
-  margin-bottom: 12px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  border-radius: 3px;
+.piece-modal .piece-wap .media-left {
+  padding-right: 18px;
 }
-.book-item .title {
-  margin-bottom: 5px;
-  color: #333;
+.piece-modal .piece-wap .vote {
+  background-color: #ffffff;
+  border: 1px solid #E0E3E6;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
 }
-.book-item .author {
-  font-size: 13px;
+.piece-modal .piece-wap .vote:hover {
+  border-color: #bbb;
+}
+.piece-modal .piece-wap .vote .votes-count {
+  line-height: 1;
+  padding-bottom: 4px;
+}
+.piece-modal .piece-wap .vote .vote-icon {
+  line-height: 1;
+}
+.piece-modal .piece-wap .content {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+.piece-modal .piece-wap .source {
   color: #aaa;
-}
-.piece-item {
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  position: relative;
-}
-.piece-item .book-cover {
-  float: left;
-  width: 100px;
-  margin: 0 20px 10px 0;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  border-radius: 3px;
-}
-.piece-item .piece-wap {
-  overflow: hidden;
-}
-.piece-item .piece-wap .piece-title {
-  font-size: 22px;
-  margin-bottom: 5px;
-}
-.piece-item .piece-wap .piece-title a {
-  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
-  color: #333;
-}
-.piece-item .piece-wap .piece-book-info {
-  color: #666;
-  margin-bottom: 6px;
-}
-.piece-item .piece-wap .piece-content {
-  line-height: 23px;
-  margin-bottom: 30px;
-  color: #666;
-}
-.piece-item .piece-wap .create-time {
-  color: #888;
   font-size: 12px;
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
+}
+.piece-modal .piece-wap .source_favicon {
+  vertical-align: text-bottom;
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
 }

@@ -15,10 +15,19 @@ def index():
     yesterday_pieces = get_pieces_by_day(yesterday)
     the_day_before_yesterday = today - timedelta(days=2)
     the_day_before_yesterday_pieces = get_pieces_by_day(the_day_before_yesterday)
+    if today_pieces.count():
+        first_piece = today_pieces.first()
+    elif yesterday_pieces.count():
+        first_piece = yesterday_pieces.first()
+    elif the_day_before_yesterday_pieces.count():
+        first_piece = the_day_before_yesterday_pieces.first()
+    else:
+        first_piece = None
     return render_template('site/index.html', today_pieces=today_pieces,
                            yesterday_pieces=yesterday_pieces,
                            the_day_before_yesterday=the_day_before_yesterday,
-                           the_day_before_yesterday_pieces=the_day_before_yesterday_pieces)
+                           the_day_before_yesterday_pieces=the_day_before_yesterday_pieces,
+                           first_piece=first_piece)
 
 
 def get_pieces_by_day(day):
