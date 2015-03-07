@@ -1,4 +1,5 @@
 # coding: utf-8
+from urlparse import urlparse
 from datetime import datetime, date
 from ._base import db
 
@@ -20,7 +21,9 @@ class Piece(db.Model):
 
     @property
     def source_favicon(self):
-        return "http://g.soz.im/%s" % self.source_url
+        result = urlparse(self.source_url)
+        host = "%s://%s" % (result.scheme or "http", result.netloc)
+        return "http://g.soz.im/%s" % host
 
     def __repr__(self):
         return '<Piece %s>' % self.id

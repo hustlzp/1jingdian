@@ -34,10 +34,14 @@ ol li {
   line-height: 22px;
 }
 .navbar {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+.navbar-default {
+  background-color: #FFF;
+  border-color: #e7e7e7;
 }
 .navbar-brand {
-  padding: 14px 15px;
+  padding: 18px 20px;
   font-size: 22px;
   line-height: 22px;
 }
@@ -45,6 +49,14 @@ ol li {
   font-size: 12px;
   color: #999;
   padding-left: 5px;
+}
+.navbar-nav > li > a {
+  padding-top: 19px;
+  padding-bottom: 19px;
+}
+.navbar-btn {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 .col-md-4 h2:first-child {
   margin-top: 0;
