@@ -1,17 +1,49 @@
+.pieces-wap {
+  background-color: #FFF;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+}
 .date {
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 25px;
-  margin-bottom: 25px;
+  font-size: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 0px;
+  line-height: 1;
+  background-color: #1e88a8;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #ffffff;
 }
 .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 15px;
-  margin-bottom: 30px;
+  padding: 25px 20px 20px 20px;
+  cursor: pointer;
+}
+.piece:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.piece:hover {
+  background-color: #f8f8f8;
+}
+.piece .media-left {
+  padding-right: 18px;
+}
+.piece .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.piece .comments-count {
+  text-align: center;
+  margin-top: 8px;
+  color: #aaa;
 }
 .piece .content {
-  padding-right: 150px;
-  margin-bottom: 25px;
+  padding-right: 100px;
+  margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
@@ -24,4 +56,22 @@
   margin-right: 5px;
   width: 16px;
   height: 16px;
+}
+.piece .vote {
+  background-color: #ffffff;
+  border: 1px solid #E0E3E6;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.piece .vote:hover {
+  border-color: #bbb;
+}
+.piece .vote .votes-count {
+  line-height: 1;
+  padding-bottom: 4px;
+}
+.piece .vote .vote-icon {
+  line-height: 1;
 }

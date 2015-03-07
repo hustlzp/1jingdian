@@ -3,6 +3,7 @@ html {
   min-height: 100%;
 }
 body {
+  background-color: #f0f0f0;
   margin-bottom: 60px;
   font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
