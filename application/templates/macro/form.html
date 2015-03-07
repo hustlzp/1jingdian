@@ -5,18 +5,14 @@
 {% endmacro %}
 
 
-{% macro horizontal_field(field, length=6, label=True, static=False) %}
+{% macro vertical_field(field, label=True) %}
    <div class="form-group">
       {% if label %}
-         {{ field.label(class="col-md-2 control-label") }}
+         {{ field.label() }}
       {% endif %}
 
-      <div class="col-md-{{ length }}
-         {% if not label %}col-md-offset-2{% endif %}
-         {% if static %}form-control-static{% endif %}">
-         {{ field(class="form-control", placeholder=field.description, **kwargs) }}
-         {{ field_errors(field) }}
-      </div>
+      {{ field(class="form-control", placeholder=field.description, **kwargs) }}
+      {{ field_errors(field) }}
    </div>
 {% endmacro %}
 
@@ -35,8 +31,6 @@
 
 {% macro form_submit(btn_text) %}
    <div class="form-group">
-      <div class="col-sm-6 col-sm-offset-2">
-         <button type="submit" class="btn btn-sm btn-primary">{{ btn_text }}</button>
-      </div>
+      <button type="submit" class="btn btn-sm btn-primary">{{ btn_text }}</button>
    </div>
 {% endmacro %}

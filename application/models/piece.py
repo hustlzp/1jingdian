@@ -11,12 +11,12 @@ class Piece(db.Model):
     source_url = db.Column(db.String(200))
     clicks_count = db.Column(db.Integer, default=0)
     votes_count = db.Column(db.Integer, default=0)
-    create_at = db.Column(db.DateTime, default=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
     page = db.Column(db.Integer)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
-                                                      order_by='asc(Piece.page_start)'))
+                                                      order_by='desc(Piece.created_at)'))
 
     @property
     def source_favicon(self):

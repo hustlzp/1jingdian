@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from 'macro/form.html' import horizontal_field, form_submit %}
+{% from 'macro/form.html' import vertical_field, form_submit %}
 
 {% block page_title %}注册{% endblock %}
 {% block page_content %}
@@ -8,17 +8,14 @@
          <div class="col-sm-8">
             <h1>注册</h1>
 
-            <form id="form-login" method="post" class="form-horizontal" autocomplete="off"
+            <form id="form-login" method="post" autocomplete="off"
                   action="{{ url_for('account.signup') }}">
                {{ form.csrf_token() }}
 
-               {{ horizontal_field(form.name) }}
-
-               {{ horizontal_field(form.email) }}
-
-               {{ horizontal_field(form.password) }}
-
-               {{ horizontal_field(form.repassword) }}
+               {{ vertical_field(form.name) }}
+               {{ vertical_field(form.email) }}
+               {{ vertical_field(form.password) }}
+               {{ vertical_field(form.repassword) }}
 
                {{ form_submit('注册') }}
             </form>

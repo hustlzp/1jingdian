@@ -1,20 +1,19 @@
 {% extends "layout.html" %}
 {% from 'macro/form.html' import vertical_field, form_submit %}
 
-{% block page_title %}登陆{% endblock %}
+{% block page_title %}添加片段{% endblock %}
 {% block page_content %}
    <div class="container">
       <div class="row">
          <div class="col-sm-8">
-            <h1>登陆</h1>
-
-            <form method="post" action="{{ url_for('account.signin') }}">
+            <form action="" method="post">
                {{ form.csrf_token() }}
 
-               {{ vertical_field(form.email) }}
-               {{ vertical_field(form.password) }}
+               {{ vertical_field(form.content, rows=5) }}
+               {{ vertical_field(form.source) }}
+               {{ vertical_field(form.source_url) }}
 
-               {{ form_submit('登陆') }}
+               {{ form_submit('分享') }}
             </form>
          </div>
       </div>
