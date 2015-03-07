@@ -4,6 +4,7 @@ html {
 }
 body {
   margin-bottom: 60px;
+  font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
 .flash-message {
   background-color: #3fa7cb;

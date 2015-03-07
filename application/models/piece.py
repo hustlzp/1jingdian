@@ -7,24 +7,71 @@ class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    review = db.Column(db.Text)
-    page_start = db.Column(db.Integer)
-    page_end = db.Column(db.Integer)
+    source = db.Column(db.String(100))
+    source_url = db.Column(db.String(200))
+    clicks_count = db.Column(db.Integer, default=0)
+    votes_count = db.Column(db.Integer, default=0)
     create_at = db.Column(db.DateTime, default=datetime.now)
 
+    page = db.Column(db.Integer)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
                                                       order_by='asc(Piece.page_start)'))
 
     @property
-    def start_percentage(self):
-        """起始页百分比"""
-        return self.page_start * 100 / self.book.pages_num
-
-    @property
-    def width_percentage(self):
-        """页面范围百分比"""
-        return (self.page_end - self.page_start + 1) * 100 / self.book.pages_num
+    def source_favicon(self):
+        return "http://g.soz.im/%s" % self.source_url
 
     def __repr__(self):
         return '<Piece %s>' % self.id
+
+
+class PieceVote(db.Model):
+    """每日文字的投票（顶）"""
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('vote_pieces',
+                                                      lazy='dynamic',
+                                                      order_by='desc(PieceVote.created_at)'))
+
+    piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    piece = db.relationship('Piece', backref=db.backref('votes',
+                                                        lazy='dynamic',
+                                                        order_by='asc(PieceVote.created_at)'))
+
+
+class PieceComment(db.Model):
+    """文字评论"""
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    likes_count = db.Column(db.Integer, default=0)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('piece_comments',
+                                                      lazy='dynamic',
+                                                      order_by='desc(PieceComment.created_at)'))
+
+    piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    piece = db.relationship('Piece', backref=db.backref('comments',
+                                                        lazy='dynamic',
+                                                        order_by='asc(PieceComment.created_at)'))
+
+
+class PieceCommentLike(db.Model):
+    """针对文字评论的赞"""
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('piece_comment_likes',
+                                                      lazy='dynamic',
+                                                      order_by='desc(PieceCommentLike.created_at)'))
+
+    piece_comment_id = db.Column(db.Integer, db.ForeignKey('piece_comment.id'))
+    piece_comment = db.relationship('PieceComment',
+                                    backref=db.backref('likes',
+                                                       lazy='dynamic',
+                                                       order_by='asc(PieceCommentLike.created_at)'))

@@ -6,7 +6,7 @@ from ._base import db
 class Book(db.Model):
     """Model for book"""
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), unique=True)
+    title = db.Column(db.String(50))
     author = db.Column(db.String(50))
     intro = db.Column(db.Text)
     cover_image = db.Column(db.String(200))
