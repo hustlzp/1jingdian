@@ -1,0 +1,73 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+.book-item {
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 20px;
+  margin-right: 40px;
+  width: 130px;
+}
+.book-item a {
+  text-decoration: none;
+  color: #333;
+}
+.book-item .cover {
+  width: 120px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+.book-item .title {
+  margin-bottom: 5px;
+  color: #333;
+}
+.book-item .author {
+  font-size: 13px;
+  color: #aaa;
+}
+.piece-item {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.piece-item .book-cover {
+  float: left;
+  width: 100px;
+  margin: 0 20px 10px 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+.piece-item .piece-wap {
+  overflow: hidden;
+}
+.piece-item .piece-wap .piece-title {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+.piece-item .piece-wap .piece-title a {
+  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+  color: #333;
+}
+.piece-item .piece-wap .piece-book-info {
+  color: #666;
+  margin-bottom: 6px;
+}
+.piece-item .piece-wap .piece-content {
+  line-height: 23px;
+  margin-bottom: 30px;
+  color: #666;
+}
+.piece-item .piece-wap .create-time {
+  color: #888;
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}

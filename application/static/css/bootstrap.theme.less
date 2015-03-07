@@ -1,0 +1,115 @@
+@import "utils";
+@import "fonts.less";
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 970px;
+  }
+}
+
+h1 {
+  margin: 0 0 15px 0;
+  font-size: 30px;
+  .font-hei;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  .font-hei;
+}
+
+ol {
+  margin-bottom: 15px;
+
+  li {
+    margin-bottom: 8px;
+    line-height: 22px;
+  }
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.navbar-brand {
+  padding: 14px 15px;
+  font-size: 22px;
+  line-height: 22px;
+
+  small {
+    font-size: 12px;
+    color: #999;
+    padding-left: 5px;
+  }
+}
+
+.col-md-4 {
+  h2:first-child {
+    margin-top: 0;
+  }
+}
+
+.well {
+  background-color: #F2F2F2;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 25px 25px;
+  color: #4a4a4a;
+  border: 0;
+}
+
+.progress {
+  height: 10px;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  position: relative;
+
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+  }
+}
+
+.tooltip-inner {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 6px 8px;
+  border-radius: 2px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: normal;
+  border-radius: 0px;
+  line-height: 100%;
+  padding: 2px 5px;
+}
+
+.pagination {
+  li {
+    a, span {
+      margin-right: 10px;
+      border-color: #CCCCCC;
+    }
+
+    a {
+      &.current {
+        background-color: blue;
+      }
+
+      &.ellipsis {
+        color: #333;
+      }
+    }
+  }
+
+}
+
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span,
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+  border-radius: 0;
+}

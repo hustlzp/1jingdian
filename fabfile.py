@@ -1,54 +1,25 @@
 # coding: utf-8
-from fabric.api import run, env, cd, lcd, prefix
-from jd import config
+from fabric.api import run, env, cd, prefix, shell_env
+from config import load_config
 
+config = load_config()
 host_string = config.HOST_STRING
 
 
-def first():
-    env.host_string = host_string
-    run('apt-get update')
-    run('apt-get dist-upgrade')
-
-    with cd('/var/www/'):
-        run('git clone https://github.com/hustlzp/1jingdian.git')
-
-    # cp config file
-    env.host_string = "localhost"
-    run('scp /var/www/1jingdian/jd/config_remote.py %s:/var/www/1jingdian/jd/config.py'
-        % host_string)
-
-    env.host_string = host_string
+def deploy():
+    """部署"""
+    env.host_string = config.HOST_STRING
     with cd('/var/www/1jingdian'):
-        # create db
-        run('mysql -uroot -poptico2014 < create_db.sql')
-
-        # virtualenv
-        run('virtualenv venv')
-
-        # install packages & create tables
-        with prefix('source venv/bin/activate'):
-            run('pip install -r requirements.txt')
-            run('python manage.py syncdb')
-
-        # nginx
-        run('cp nginx.conf /etc/nginx/sites-available/1jingdian')
-        run('ln -sf /etc/nginx/sites-available/1jingdian /etc/nginx/sites-enabled/')
-        run('nginx -s reload')
-
-        # supervisor
-        run('cp supervisor.conf /etc/supervisor/conf.d/1jingdian.conf')
-        run('supervisorctl reread')
-        run('supervisorctl update')
+        with shell_env(MODE='PRODUCTION'):
+            run('git reset --hard HEAD')
+            run('git pull')
+            with prefix('source venv/bin/activate'):
+                run('pip install -r requirements.txt')
+                run('python manage.py db upgrade')
+            run('supervisorctl restart 1jingdian')
 
 
 def restart():
-    env.host_string = host_string
+    """重启"""
+    env.host_string = config.HOST_STRING
     run('supervisorctl restart 1jingdian')
-
-
-def deploy():
-    env.host_string = host_string
-    with cd('/var/www/1jingdian'):
-        run('git pull')
-        run('supervisorctl restart 1jingdian')

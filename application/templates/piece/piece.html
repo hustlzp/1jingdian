@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}{{ piece.title }} - {{ piece.book.title }} - 壹经典{% endblock %}
+{% block page_content %}
+   <script type="text/javascript">
+      $(function () {
+         $('.piece-review').hide();
+
+         // show note
+         $('.btn-show-review').click(function () {
+            $('.piece-review').fadeIn('fast');
+            $(this).parent().removeClass('on').addClass('off');
+         });
+
+         // hide note
+         $('.btn-hide-review').click(function () {
+            $('.piece-review').fadeOut('fast');
+            $(this).parent().removeClass('off').addClass('on');
+         });
+      });
+   </script>
+
+   <h1>{{ piece.title }}</h1>
+   <div class='book-info'>
+      摘自《<a href="{{ url_for('book', book_id=piece.book_id) }}">{{ piece.book.title }}</a
+         >》P{{ piece.page_start }} - P{{ piece.page_end }}
+   </div>
+
+   <div class='row'>
+      <div class='col-md-8'>
+         <div class='well piece-content'>{{ piece.content|markdown|safe }}</div>
+         {#         <h2>#}
+         {#            编者记#}
+         {#            <span class='btn-group btn-group-xs btn-group-toggle-review on'>#}
+         {#               <button class='btn btn-default btn-show-review' data-container="body"#}
+         {#                       data-placement="right">#}
+         {#                  <i class='glyphicon glyphicon-chevron-down'></i> 展开#}
+         {#               </button>#}
+         {#               <button class='btn btn-default btn-hide-review'>#}
+         {#                  <i class='glyphicon glyphicon-chevron-up'></i> 隐藏#}
+         {#               </button>#}
+         {#            </span>#}
+         {#         </h2>#}
+         {##}
+         {#         <div class='piece-review'>{{ piece.review|markdown|safe }}</div>#}
+         {#         <div class='create-time'>{{ piece.create_time }}</div>#}
+      </div>
+
+      <div class='col-md-4'>
+         <a href="{{ url_for('book', book_id=piece.book_id) }}">
+            <img class='book-cover' src="{{ piece.book.cover_image }}"
+                 title="{{ piece.book.title }}"
+                 alt="{{ piece.book.title }}">
+         </a>
+
+         {#         <h2>微信公众号：jingdian_001</h2>#}
+         {#         <img class='wx-qrcode' src="{{ url_for('static', filename='imgs/wx_qrcode.png') }}"#}
+         {#              title='微信公众号：jingdian_001'#}
+         {#              alt="微信公众号：jingdian_001">#}
+      </div>
+   </div>
+{% endblock %}

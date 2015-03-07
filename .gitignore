@@ -1,5 +1,7 @@
-venv/
-.idea/
 *.pyc
-*/config.py
-*/config_remote.py
+.idea
+venv
+config/production.py
+config/development.py
+uploads/*
+!uploads/avatars/default.png

@@ -1,0 +1,29 @@
+.book-header {
+  margin-bottom: 25px;
+}
+.book-header .book-cover {
+  float: left;
+  width: 120px;
+  margin-right: 25px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+.book-header .book-info-wap {
+  overflow: hidden;
+}
+.book-header .book-info-wap .book-author {
+  color: gray;
+}
+.book-intro {
+  line-height: 24px;
+}
+.author-intro {
+  line-height: 24px;
+}
+.book-external-link a {
+  text-decoration: none;
+  margin-right: 8px;
+}
+.book-external-link a img {
+  width: 32px;
+}

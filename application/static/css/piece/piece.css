@@ -1,0 +1,60 @@
+.book-info {
+  margin-bottom: 20px;
+}
+.piece-content p {
+  margin-bottom: 20px;
+  line-height: 25px;
+  text-indent: 2em;
+}
+.piece-content p:last-child {
+  margin-bottom: 0;
+}
+.piece-content p img {
+  max-width: 80%;
+}
+.piece-review {
+  margin-bottom: 40px;
+}
+.piece-review p {
+  margin-bottom: 18px;
+  line-height: 24px;
+}
+.piece-review img {
+  max-width: 80%;
+}
+.btn-group-toggle-review {
+  margin-left: 8px;
+}
+.btn-group-toggle-review .btn-show-review,
+.btn-group-toggle-review .btn-hide-review {
+  border-radius: 3px;
+  border-color: #afafaf;
+}
+.btn-group-toggle-review.on .btn-show-review {
+  display: block;
+}
+.btn-group-toggle-review.on .btn-hide-review {
+  display: none;
+}
+.btn-group-toggle-review.off .btn-show-review {
+  display: none;
+}
+.btn-group-toggle-review.off .btn-hide-review {
+  display: block;
+}
+.tooltip-inner {
+  line-height: 18px;
+}
+.create-time {
+  text-align: right;
+  color: #888;
+  margin-bottom: 20px;
+}
+.book-cover {
+  width: 140px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+.book-author {
+  color: gray;
+}
