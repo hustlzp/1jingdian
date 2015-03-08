@@ -51,7 +51,7 @@ class PieceVote(db.Model):
                                                       order_by='desc(PieceVote.created_at)'))
 
     piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
-    piece = db.relationship('Piece', backref=db.backref('votes',
+    piece = db.relationship('Piece', backref=db.backref('voters',
                                                         lazy='dynamic',
                                                         order_by='asc(PieceVote.created_at)'))
 

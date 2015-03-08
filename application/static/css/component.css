@@ -55,11 +55,52 @@
 }
 .piece-modal .piece-wap .source {
   color: #aaa;
-  font-size: 12px;
 }
 .piece-modal .piece-wap .source_favicon {
   vertical-align: text-bottom;
   margin-right: 5px;
   width: 16px;
   height: 16px;
+}
+.piece-modal .created-info {
+  padding: 10px 0;
+  line-height: 32px;
+  border-bottom: 1px solid #ddd;
+}
+.piece-modal .created-info .user-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+.piece-modal .created-info .created-time {
+  color: #aaa;
+}
+.piece-modal .subtitle {
+  font-size: 16px;
+  color: #aaa;
+  margin: 20px 0 15px 0;
+}
+.piece-modal .voters img {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 0 8px 8px 0;
+}
+.piece-modal .comment {
+  margin-bottom: 15px;
+}
+.piece-modal .comment .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.piece-modal .comment .comment-user {
+  margin-bottom: 4px;
+}
+.piece-modal .comment .comment-user .comment-time {
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 8px;
+}
+.piece-modal #comment-textarea {
+  margin-top: 5px;
 }

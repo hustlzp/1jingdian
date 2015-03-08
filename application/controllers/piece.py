@@ -1,10 +1,10 @@
 # coding: utf-8
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
-    get_template_attribute, json
+    get_template_attribute, json, abort
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Book, Piece, PieceVote
+from ..models import db, User, Book, Piece, PieceVote, PieceComment
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -72,3 +72,19 @@ def unvote(uid):
         db.session.add(piece)
         db.session.commit()
         return json.dumps({'result': True})
+
+
+@bp.route('/<int:uid>/comment', methods=['POST'])
+@UserPermission()
+def comment(uid):
+    """评论"""
+    piece = Piece.query.get_or_404(uid)
+    content = request.form.get('comment')
+    if content:
+        comment = PieceComment(content=content, piece_id=uid, user_id=g.user.id)
+        db.session.add(comment)
+        db.session.commit()
+        comment_macro = get_template_attribute('macro/ui.html', 'render_comment')
+        return comment_macro(comment)
+    else:
+        abort(500)

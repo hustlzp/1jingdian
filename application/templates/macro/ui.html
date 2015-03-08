@@ -25,6 +25,29 @@
 {% endmacro %}
 
 
+{% macro render_comment(comment) %}
+   <div class="comment">
+      <div class="media">
+         <div class="media-left">
+            <img src="{{ comment.user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         </div>
+         <div class="media-body">
+            <div class="comment-user">
+               {{ comment.user.name }}
+               <span class="comment-time">
+                  {{ comment.created_at|timesince }}
+               </span>
+            </div>
+
+            <div class="comment-content">
+               {{ comment.content }}
+            </div>
+         </div>
+      </div>
+   </div>
+{% endmacro %}
+
+
 {% macro modal(piece) %}
    <div class="media piece-wap">
       <div class="media-left">
@@ -50,15 +73,63 @@
       </div>
    </div>
 
-   <div class="clearfix">
-      <div class="piece-user pull-left">
-         <img src="" class="user-avatar" alt=""/>
+   <div class="created-info clearfix">
+      <div class="pull-left">
+         <img src="{{ piece.user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
       </div>
 
-      <div class="actions">
-
+      <div class="actions pull-right">
+         <a href="">分享到微信</a>
       </div>
    </div>
+
+   <div class="subtitle">{{ piece.votes_count }} 顶</div>
+
+   <div class="voters">
+      {% for voter in piece.voters %}
+         <img src="{{ voter.user.avatar_url }}" class="img-circle" alt=""/>
+      {% endfor %}
+   </div>
+
+   <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+
+   <div class="comments-wap">
+      {% for comment in piece.comments %}
+         {{ render_comment(comment) }}
+      {% endfor %}
+   </div>
+
+   <form action="">
+      <div class="form-group">
+         <textarea name="" id="comment-textarea" rows="5" class="form-control"
+                   placeholder="说点什么"></textarea>
+      </div>
+      <button type="button" data-piece-id="{{ piece.id }}"
+              class="btn btn-default btn-sm btn-comment">评论
+      </button>
+   </form>
+
+   <script type="text/javascript">
+      $('.btn-comment').click(function () {
+         var pieceId = parseInt($(this).attr('data-piece-id')),
+               comment = $.trim($('#comment-textarea').val());
+
+         if (comment !== "") {
+            $.ajax({
+               url: urlFor('piece.comment', {uid: pieceId}),
+               method: 'post',
+               data: {
+                  comment: comment
+               },
+               success: function (comment) {
+                  $('.comments-wap').append(comment);
+                  $('#comment-textarea').val('');
+               }
+            });
+         }
+      });
+   </script>
 {% endmacro %}
 
 
