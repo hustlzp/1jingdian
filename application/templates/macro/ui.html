@@ -26,27 +26,25 @@
 
 
 {% macro modal(piece) %}
-   <div class="piece-modal" data-piece-id={{ piece.id }}>
-      <div class="media piece-wap">
-         <div class="media-left">
-            <div class="vote">
-               <div class="vote-icon">
-                  <span class="fa fa-angle-up"></span>
-               </div>
-               <div class="votes-count">{{ piece.votes_count }}</div>
+   <div class="media piece-wap">
+      <div class="media-left">
+         <div class="vote">
+            <div class="vote-icon">
+               <span class="fa fa-angle-up"></span>
             </div>
+            <div class="votes-count">{{ piece.votes_count }}</div>
+         </div>
+      </div>
+
+      <div class="media-body">
+         <div class="content">
+            {{ piece.content }}
          </div>
 
-         <div class="media-body">
-            <div class="content">
-               {{ piece.content }}
-            </div>
-
-            <div class="meta">
-               <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-               <a href="{{ piece.source_url }}" class="source" target="_blank">
-                  {{ piece.source }}</a>
-            </div>
+         <div class="meta">
+            <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
+            <a href="{{ piece.source_url }}" class="source" target="_blank">
+               {{ piece.source }}</a>
          </div>
       </div>
    </div>
@@ -61,6 +59,7 @@
       </div>
    </div>
 {% endmacro %}
+
 
 {% macro render_pieces_wap(date, pieces) %}
    <div class="pieces-wap">

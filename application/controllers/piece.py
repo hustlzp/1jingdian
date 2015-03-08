@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for, g
+from flask import render_template, Blueprint, redirect, request, url_for, g, get_template_attribute
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
@@ -14,6 +14,13 @@ def view(uid):
     """Single piece page"""
     piece = Piece.query.get_or_404(uid)
     return render_template("piece/piece.html", piece=piece)
+
+
+@bp.route('/<int:uid>/modal')
+def modal(uid):
+    piece = Piece.query.get_or_404(uid)
+    modal = get_template_attribute('macro/ui.html', 'modal')
+    return modal(piece)
 
 
 @bp.route('/add', methods=['GET', 'POST'])
