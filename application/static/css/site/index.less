@@ -23,7 +23,7 @@
 
 .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 25px 22px 20px 22px;
+  padding: 25px 20px 20px 20px;
   cursor: pointer;
 
   &:last-child {
@@ -49,6 +49,11 @@
     text-align: center;
     margin-top: 8px;
     color: #bbb;
+
+    .fa {
+      font-size: 12px;
+      margin-left: 1px;
+    }
   }
 
   .content {
@@ -61,6 +66,10 @@
   .source {
     color: #aaa;
     font-size: 12px;
+
+    &:hover {
+      color: @main-color;
+    }
   }
 
   .source_favicon {
