@@ -14,6 +14,8 @@ def index():
     yesterday = today - timedelta(days=1)
     yesterday_pieces = get_pieces_by_day(yesterday)
     the_day_before_yesterday = today - timedelta(days=2)
+    the_day_before_yesterday_string = "%s年%s月%s日" % (
+        the_day_before_yesterday.year, the_day_before_yesterday.month, the_day_before_yesterday.day)
     the_day_before_yesterday_pieces = get_pieces_by_day(the_day_before_yesterday)
     if today_pieces.count():
         first_piece = today_pieces.first()
@@ -25,7 +27,7 @@ def index():
         first_piece = None
     return render_template('site/index.html', today_pieces=today_pieces,
                            yesterday_pieces=yesterday_pieces,
-                           the_day_before_yesterday=the_day_before_yesterday,
+                           the_day_before_yesterday_string=the_day_before_yesterday_string,
                            the_day_before_yesterday_pieces=the_day_before_yesterday_pieces,
                            first_piece=first_piece)
 
