@@ -2,6 +2,7 @@ $('.pieces-wap').on('click', '.piece', function (event) {
     // 链接和vote不触发此事件
     if (event.target.tagName.toLowerCase() === 'a'
         || $(event.target).hasClass('vote')
+        || $(event.target).hasClass('user-avatar')
         || $(event.target).parents('.vote').length) {
         return true;
     }

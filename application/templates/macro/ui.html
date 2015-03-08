@@ -25,11 +25,23 @@
 {% endmacro %}
 
 
+{% macro render_user_avatar(user) %}
+   <img src="{{ user.avatar_url }}" class="user-avatar img-circle"
+        data-user-id="{{ user.id }}" alt=""/>
+   <div class="popover-content-wap">
+      <div class="user-card">
+         <img src="{{ user.avatar_url }}" class="user-avatar-in-card img-circle" alt=""/>
+
+         <div class="user-name">{{ user.name }}</div>
+      </div>
+   </div>
+{% endmacro %}
+
 {% macro render_comment(comment) %}
    <div class="comment">
       <div class="media">
          <div class="media-left">
-            <img src="{{ comment.user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+            {{ render_user_avatar(comment.user) }}
          </div>
          <div class="media-body">
             <div class="comment-user">
@@ -75,7 +87,7 @@
 
    <div class="created-info clearfix">
       <div class="pull-left">
-         <img src="{{ piece.user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         {{ render_user_avatar(piece.user) }}
          <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
       </div>
 
@@ -88,7 +100,7 @@
 
    <div class="voters">
       {% for voter in piece.voters %}
-         <img src="{{ voter.user.avatar_url }}" class="img-circle" alt=""/>
+         {{ render_user_avatar(voter.user) }}
       {% endfor %}
    </div>
 
@@ -152,8 +164,7 @@
 
                <div class="media-body">
                   <div class="pull-right">
-                     <img src="{{ piece.user.avatar_url }}"
-                          class="user-avatar img-circle" alt=""/>
+                     {{ render_user_avatar(piece.user) }}
 
                      <div class="comments-count text-right">
                         {{ piece.comments.count() }} <span class="fa fa-comment"></span>

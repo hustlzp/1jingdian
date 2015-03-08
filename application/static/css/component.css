@@ -104,3 +104,6 @@
 .piece-modal #comment-textarea {
   margin-top: 5px;
 }
+.popover-content-wap {
+  display: none;
+}

@@ -22,7 +22,6 @@
     "commit": "b31e084e0058904f68507e1dfcebe6890c2ca48d"
   },
   "_source": "git://github.com/zenozeng/fonts.css.git",
-  "_target": "~1.3.1",
-  "_originalSource": "fonts.css",
-  "_direct": true
+  "_target": "1.3.1",
+  "_originalSource": "fonts.css"
 }
