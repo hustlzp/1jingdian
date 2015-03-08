@@ -21,8 +21,7 @@ $('.pieces-wap').on('click', '.piece', function (event) {
             });
         }
     } else {
-        pieceModal.animate({'right': '0'}, function () {
-            pieceModal.addClass('open');
+        if (pieceModal.hasClass('open')) {
             pieceModal.attr('data-piece-id', pieceId);
             $.ajax({
                 url: urlFor('piece.modal', {uid: pieceId}),
@@ -30,7 +29,19 @@ $('.pieces-wap').on('click', '.piece', function (event) {
                     $('.piece-modal').html(modal);
                 }
             });
-        });
+        } else {
+            pieceModal.animate({'right': '0'}, function () {
+                pieceModal.addClass('open');
+                pieceModal.attr('data-piece-id', pieceId);
+                $.ajax({
+                    url: urlFor('piece.modal', {uid: pieceId}),
+                    success: function (modal) {
+                        $('.piece-modal').html(modal);
+                    }
+                });
+            });
+        }
+
     }
 });
 
