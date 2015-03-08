@@ -42,9 +42,6 @@
             {#            <li id="nav-index">#}
             {#               <a href="{{ url_for('site.index') }}">首页</a>#}
             {#            </li>#}
-            {#            <li>#}
-            {#               <a href="{{ url_for('book.books') }}">书架</a>#}
-            {#            </li>#}
             {#            <li id="nav-about">#}
             {#               <a href="{{ url_for('site.about') }}">关于</a>#}
             {#            </li>#}
@@ -64,12 +61,19 @@
 
 
          <ul class="nav navbar-nav navbar-right">
+            <li>
+               <a href="{{ url_for('piece.add') }}">
+                  <span class="fa fa-plus"></span> 分享文字
+               </a>
+            </li>
             {% if g.user %}
-               <li id="nav-settings">
-                  <a href="#">{{ g.user.name }}</a>
-               </li>
-               <li>
-                  <a href="{{ url_for('account.signout') }}">登出</a>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     {{ g.user.name }} <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                     <li><a href="{{ url_for('account.signout') }}">登出</a></li>
+                  </ul>
                </li>
             {% else %}
                <li id="nav-signin">
@@ -81,10 +85,10 @@
             {% endif %}
          </ul>
 
-         <a class="btn btn-default navbar-btn navbar-right"
-            href="{{ url_for('piece.add') }}">
-            分享文字
-         </a>
+         {#         <a class="btn btn-default navbar-btn navbar-right"#}
+         {#            href="{{ url_for('piece.add') }}">#}
+         {#            分享文字#}
+         {#         </a>#}
       </div>
    </div>
 </nav>
@@ -92,19 +96,6 @@
 <div id="main-wap">
    {% block page_content %}{% endblock %}
 </div>
-
-{#<div id="footer">#}
-{#   <div class='container'>#}
-{#      <div id='copyright' class="pull-left">#}
-{#         © 2015 壹经典 by <a href="http://hustlzp.com" target="_blank">hustlzp</a>#}
-{#      </div>#}
-{##}
-{#      <ul id='links' class="pull-right list-unstyled list-inline">#}
-{#         <li><a href="{{ url_for('site.about') }}">关于</a></li>#}
-{#         <li class='footer-slogan'></li>#}
-{#      </ul>#}
-{#   </div>#}
-{#</div>#}
 
 {# JavaScript init codes #}
 <script type="text/javascript">
