@@ -32,9 +32,14 @@
   padding: 5px 10px;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 .piece-modal .piece-wap .vote:hover {
   border-color: #bbb;
+}
+.piece-modal .piece-wap .vote.voted {
+  border-color: #1e88a8;
+  color: #1e88a8;
 }
 .piece-modal .piece-wap .vote .votes-count {
   line-height: 1;

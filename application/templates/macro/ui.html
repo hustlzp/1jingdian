@@ -28,7 +28,8 @@
 {% macro modal(piece) %}
    <div class="media piece-wap">
       <div class="media-left">
-         <div class="vote">
+         <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+              data-piece-id={{ piece.id }}>
             <div class="vote-icon">
                <span class="fa fa-angle-up"></span>
             </div>
@@ -69,7 +70,8 @@
          <div class="piece" data-piece-id={{ piece.id }}>
             <div class="media">
                <div class="media-left">
-                  <div class="vote">
+                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                       data-piece-id={{ piece.id }}>
                      <div class="vote-icon">
                         <span class="fa fa-angle-up"></span>
                      </div>

@@ -19,7 +19,7 @@
 }
 .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 25px 20px 20px 20px;
+  padding: 25px 22px 20px 22px;
   cursor: pointer;
 }
 .piece:last-child {
@@ -65,9 +65,14 @@
   padding: 5px 10px;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 .piece .vote:hover {
   border-color: #bbb;
+}
+.piece .vote.voted {
+  border-color: #1e88a8;
+  color: #1e88a8;
 }
 .piece .vote .votes-count {
   line-height: 1;

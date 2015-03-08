@@ -1,4 +1,5 @@
 # coding: utf-8
+from flask import g
 from urlparse import urlparse
 from datetime import datetime, date
 from ._base import db
@@ -23,6 +24,11 @@ class Piece(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
+
+    def voted_by_user(self):
+        if not g.user:
+            return False
+        return g.user.vote_pieces.filter(PieceVote.piece_id == self.id).count() > 0
 
     @property
     def source_favicon(self):

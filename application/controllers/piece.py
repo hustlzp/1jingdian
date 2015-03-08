@@ -1,9 +1,10 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for, g, get_template_attribute
+from flask import render_template, Blueprint, redirect, request, url_for, g, \
+    get_template_attribute, json
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Book, Piece
+from ..models import db, User, Book, Piece, PieceVote
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -19,6 +20,9 @@ def view(uid):
 @bp.route('/<int:uid>/modal')
 def modal(uid):
     piece = Piece.query.get_or_404(uid)
+    piece.clicks_count += 1
+    db.session.add(piece)
+    db.session.commit()
     modal = get_template_attribute('macro/ui.html', 'modal')
     return modal(piece)
 
@@ -34,3 +38,37 @@ def add():
         db.session.commit()
         return redirect(url_for('site.index'))
     return render_template('piece/add.html', form=form)
+
+
+@bp.route('/<int:uid>/vote', methods=['POST'])
+@UserPermission()
+def vote(uid):
+    piece = Piece.query.get_or_404(uid)
+    vote = g.user.vote_pieces.filter(PieceVote.piece_id == uid).first()
+    if not vote:
+        vote = PieceVote(piece_id=uid)
+        g.user.vote_pieces.append(vote)
+        piece.votes_count += 1
+        db.session.add(g.user)
+        db.session.add(piece)
+        db.session.commit()
+        return json.dumps({'result': True})
+    else:
+        return json.dumps({'result': False})
+
+
+@bp.route('/<int:uid>/unvote', methods=['POST'])
+@UserPermission()
+def unvote(uid):
+    piece = Piece.query.get_or_404(uid)
+    votes = g.user.vote_pieces.filter(PieceVote.piece_id == uid)
+    if not votes.count():
+        return json.dumps({'result': False})
+    else:
+        for vote in votes:
+            db.session.delete(vote)
+            if piece.votes_count > 0:
+                piece.votes_count -= 1
+        db.session.add(piece)
+        db.session.commit()
+        return json.dumps({'result': True})

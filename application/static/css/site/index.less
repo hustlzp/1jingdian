@@ -1,3 +1,5 @@
+@import "../utils";
+
 .pieces-wap {
   background-color: #FFF;
   border-radius: 5px;
@@ -13,7 +15,7 @@
   padding-bottom: 16px;
   margin-bottom: 0px;
   line-height: 1;
-  background-color: rgb(30, 136, 168);
+  background-color: @main-color;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   color: #ffffff;
@@ -21,7 +23,7 @@
 
 .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 25px 20px 20px 20px;
+  padding: 25px 22px 20px 22px;
   cursor: pointer;
 
   &:last-child {
@@ -75,9 +77,15 @@
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+    text-align: center;
 
     &:hover {
       border-color: #bbb;
+    }
+
+    &.voted {
+      border-color: @main-color;
+      color: @main-color;
     }
 
     .votes-count {
