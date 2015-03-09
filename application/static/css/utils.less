@@ -1,7 +1,7 @@
 // Colors
 @main-color: rgb(30, 136, 168);
-@dark-main: darken(@main-color, 20%);
-@light-main: lighten(@main-color, 40%);
+@dark-main: darken(@main-color, 5%);
+@light-main: lighten(@main-color, 5%);
 
 .border-radius( @radius:5px ) {
   -webkit-border-radius: @radius;
@@ -13,4 +13,12 @@
 
 .default-font-family () {
   font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+}
+
+.clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }

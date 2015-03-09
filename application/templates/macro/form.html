@@ -1,7 +1,9 @@
-{% macro field_errors(field) %}
-   <ul class="list-form-errors text-danger list-unstyled">
-      <li>{{ field.errors[0] }}</li>
-   </ul>
+{% macro field_error(field) %}
+   {% if field.errors[0] %}
+      <div class="text-danger form-error">
+         {{ field.errors[0] }}
+      </div>
+   {% endif %}
 {% endmacro %}
 
 
@@ -12,7 +14,7 @@
       {% endif %}
 
       {{ field(class="form-control", placeholder=field.description, **kwargs) }}
-      {{ field_errors(field) }}
+      {{ field_error(field) }}
    </div>
 {% endmacro %}
 
@@ -30,7 +32,7 @@
 
 
 {% macro form_submit(btn_text) %}
-   <div class="form-group">
-      <button type="submit" class="btn btn-sm btn-primary">{{ btn_text }}</button>
+   <div class="submit-wap">
+      <button type="submit" class="btn btn-primary">{{ btn_text }}</button>
    </div>
 {% endmacro %}

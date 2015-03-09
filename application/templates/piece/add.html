@@ -4,17 +4,27 @@
 {% block page_title %}添加片段{% endblock %}
 {% block page_content %}
    <div class="container">
-      <div class="row">
-         <div class="col-sm-8">
-            <form action="" method="post">
+      <div class="panel panel-primary">
+         <div class="panel-heading">分享文字</div>
+         <div class="panel-body">
+            <form action="" id="form-add-piece" method="post">
                {{ form.csrf_token() }}
 
                {{ vertical_field(form.content, rows=5) }}
                {{ vertical_field(form.source) }}
                {{ vertical_field(form.source_url) }}
 
-               {{ form_submit('分享') }}
+               <div class="submit-wap submit-right">
+                  <button type="submit" class="btn btn-submit btn-primary">分享</button>
+               </div>
             </form>
+         </div>
+         <div class="panel-footer">
+            {#            <p>分享规则：</p>#}
+            <ul>
+               <li>每位用户每天最多分享 2 个文字片段。</li>
+               <li>分享的文字在 10 分钟内可编辑，超出时间则无法更改。</li>
+            </ul>
          </div>
       </div>
    </div>

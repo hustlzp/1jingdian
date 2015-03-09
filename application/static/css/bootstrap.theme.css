@@ -138,3 +138,23 @@ ol li {
 .panel-primary .panel-body {
   padding: 0;
 }
+.panel-primary .panel-footer {
+  padding: 0;
+  background-color: #fff;
+}
+.btn-primary {
+  background-color: #1e88a8;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #1a7692;
+}
+.form-control {
+  box-shadow: none;
+  border-color: #ddd;
+  outline: 0;
+}
+.form-control:focus {
+  border-color: #ccc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.175);
+}

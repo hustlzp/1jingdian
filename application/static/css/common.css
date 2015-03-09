@@ -26,3 +26,15 @@
 .col-top-gap {
   margin-top: 20px;
 }
+.submit-wap.submit-right:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.submit-wap.submit-right button[type='submit'] {
+  float: right;
+}
+.form-error {
+  margin-top: 5px;
+  font-size: 12px;
+}
