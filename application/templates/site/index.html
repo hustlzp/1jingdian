@@ -9,7 +9,9 @@
 {% endblock %}
 {% block page_content %}
    <div class="piece-modal" data-piece-id={{ first_piece.id }}>
-      {{ modal(first_piece) }}
+      {% if first_piece %}
+         {{ modal(first_piece) }}
+      {% endif %}
    </div>
 
    <div class="container">
