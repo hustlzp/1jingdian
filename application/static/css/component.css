@@ -47,6 +47,7 @@
 }
 .piece-modal .piece-wap .source {
   color: #aaa;
+  font-size: 12px;
 }
 .piece-modal .piece-wap .source_favicon {
   vertical-align: text-bottom;
@@ -58,6 +59,7 @@
   padding: 10px 0;
   line-height: 32px;
   border-bottom: 1px solid #ddd;
+  font-size: 12px;
 }
 .piece-modal .created-info .user-avatar {
   width: 32px;
