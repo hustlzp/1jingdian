@@ -2,15 +2,19 @@
 setTimeout(showFlash, 200);
 setTimeout(hideFlash, 2000);
 
+// TODO: Need to stay popover when hovered.
 $(document).popover({
     content: function () {
-        return $(this).nextAll('.popover-content-wap').first().html()
+        return $(this).parent().nextAll('.popover-content-wap').first().html()
     },
     html: true,
     container: 'body',
     trigger: 'hover',
     placement: 'bottom',
-    selector: '.user-avatar'
+    selector: '.user-avatar',
+    delay: {
+        'hide': 100
+    }
 });
 
 /**

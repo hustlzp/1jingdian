@@ -1,11 +1,3 @@
-/*!
- *  Fonts.css -- Cross-platform Chinese fonts solution
- * 
- *  Copyright (C) 2013-2014 Zeno Zeng
- *  Released under the MIT license
- * 
- *  Github: https://github.com/zenozeng/fonts.css
- */
 .piece-modal {
   position: fixed;
   top: 0;
@@ -106,4 +98,21 @@
 }
 .popover-content-wap {
   display: none;
+}
+.user-avatar {
+  cursor: pointer;
+}
+.user-card {
+  padding: 20px 15px;
+  font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+}
+.user-card .user-avatar-in-card {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 10px;
+}
+.user-card .user-name {
+  font-size: 16px;
+  text-align: center;
 }
