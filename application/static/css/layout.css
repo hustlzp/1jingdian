@@ -21,13 +21,6 @@ body {
   text-align: center;
   display: none;
 }
-.page-site-index #nav-index a,
-.page-site-about #nav-about a,
-.page-account-signin #nav-signin a,
-.page-account-signup #nav-signup a {
-  color: #555;
-  background-color: #e7e7e7;
-}
 .navbar-form {
   margin: 10px 0;
 }
