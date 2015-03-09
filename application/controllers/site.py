@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 from flask import render_template, Blueprint
 from ..models import db, Piece
+from ..utils.helper import get_pieces_data_by_day
 
 bp = Blueprint('site', __name__)
 
@@ -23,36 +24,11 @@ def index():
         first_piece = the_day_before_yesterday_pieces['pieces'].first()
     else:
         first_piece = None
+    start_date = (the_day_before_yesterday - timedelta(days=1)).strftime("%Y-%m-%d")
     return render_template('site/index.html', today_pieces=today_pieces,
                            yesterday_pieces=yesterday_pieces,
                            the_day_before_yesterday_pieces=the_day_before_yesterday_pieces,
-                           first_piece=first_piece)
-
-
-def get_pieces_data_by_day(day):
-    """获取某天的pieces"""
-    SHOW_PIECES_COUNT = 2
-    pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == day).count()
-    hide_pieces_count = pieces_count - SHOW_PIECES_COUNT if pieces_count > SHOW_PIECES_COUNT else 0
-    if hide_pieces_count:
-        hide_pieces = pieces = Piece.query.filter(db.func.date(Piece.created_at) == day).order_by(
-            Piece.votes_count.desc()).offset(SHOW_PIECES_COUNT)
-    else:
-        hide_pieces = None
-    pieces = Piece.query.filter(db.func.date(Piece.created_at) == day).order_by(
-        Piece.votes_count.desc()).limit(SHOW_PIECES_COUNT)
-    if day == date.today():
-        date_string = '今天'
-    elif day == date.today() - timedelta(days=1):
-        date_string = '昨天'
-    else:
-        date_string = "%s年%s月%s日" % (day.year, day.month, day.day)
-    return {
-        'date': date_string,
-        'pieces': pieces,
-        'hide_pieces': hide_pieces,
-        'hide_pieces_count': hide_pieces_count
-    }
+                           first_piece=first_piece, start_date=start_date)
 
 
 @bp.route('/about')

@@ -185,7 +185,7 @@
 
 {% macro render_pieces_wap(pieces_data) %}
    <div class="panel panel-primary pieces-wap">
-      <div class="panel-heading date">{{ pieces_data.date }}</div>
+      <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
       <div class="panel-body">
          {{ render_pieces(pieces_data.pieces) }}

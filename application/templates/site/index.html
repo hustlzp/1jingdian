@@ -2,14 +2,24 @@
 {% from "macro/ui.html" import modal, render_pieces_wap %}
 
 {% block page_title %}首页{% endblock %}
+{% block page_vars %}
+   <script type="text/javascript">
+      g.startDate = "{{ start_date }}";
+   </script>
+{% endblock %}
 {% block page_content %}
    <div class="piece-modal" data-piece-id={{ first_piece.id }}>
       {{ modal(first_piece) }}
    </div>
 
    <div class="container">
-      {{ render_pieces_wap(today_pieces) }}
-      {{ render_pieces_wap(yesterday_pieces) }}
-      {{ render_pieces_wap(the_day_before_yesterday_pieces) }}
+      <div class="pieces-container">
+         {{ render_pieces_wap(today_pieces) }}
+         {{ render_pieces_wap(yesterday_pieces) }}
+         {{ render_pieces_wap(the_day_before_yesterday_pieces) }}
+      </div>
+      <div class="text-center loading-flag">
+         正在加载
+      </div>
    </div>
 {% endblock %}

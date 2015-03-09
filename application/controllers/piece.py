@@ -1,13 +1,33 @@
 # coding: utf-8
+from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
 from ..models import db, User, Book, Piece, PieceVote, PieceComment
+from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
+
+
+@bp.route('/json', methods=['POST'])
+def pieces_by_date():
+    """获取从指定date开始的指定天数的pieces"""
+    start = request.form.get('start')
+    if start:
+        start_date = datetime.strptime(start, '%Y-%m-%d').date()
+    else:
+        start_date = date.today() - timedelta(days=3)
+    days = request.form.get('days', 2, type=int)
+    html = ""
+    for i in xrange(days):
+        target_day = start_date - timedelta(days=i)
+        pieces_data = get_pieces_data_by_day(target_day)
+        pieces_wap_macro = get_template_attribute('macro/ui.html', 'render_pieces_wap')
+        html += pieces_wap_macro(pieces_data)
+    return html
 
 
 @bp.route('/<int:uid>')
