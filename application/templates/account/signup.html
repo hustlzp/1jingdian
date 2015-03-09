@@ -4,12 +4,10 @@
 {% block page_title %}注册{% endblock %}
 {% block page_content %}
    <div class="container">
-      <div class="row">
-         <div class="col-sm-8">
-            <h1>注册</h1>
-
-            <form id="form-login" method="post" autocomplete="off"
-                  action="{{ url_for('account.signup') }}">
+      <div class="panel panel-primary">
+         <div class="panel-heading">注册</div>
+         <div class="panel-body">
+            <form method="post" action="{{ url_for('account.signup') }}">
                {{ form.csrf_token() }}
 
                {{ vertical_field(form.name) }}
@@ -17,7 +15,9 @@
                {{ vertical_field(form.password) }}
                {{ vertical_field(form.repassword) }}
 
-               {{ form_submit('注册') }}
+               <div class="submit-wap submit-right">
+                  <button type="submit" class="btn btn-submit btn-primary">注册</button>
+               </div>
             </form>
          </div>
       </div>

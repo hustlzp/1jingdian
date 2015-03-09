@@ -136,10 +136,10 @@ ol li {
   color: #ffffff;
 }
 .panel-primary .panel-body {
-  padding: 0;
+  padding: 25px;
 }
 .panel-primary .panel-footer {
-  padding: 0;
+  padding: 25px;
   background-color: #fff;
 }
 .btn-primary {
@@ -149,12 +149,15 @@ ol li {
 .btn-primary:hover {
   background-color: #229abe;
 }
-.form-control {
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group .form-control {
   box-shadow: none;
   border-color: #ddd;
   outline: 0;
 }
-.form-control:focus {
+.form-group .form-control:focus {
   border-color: #ccc;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.175);
 }

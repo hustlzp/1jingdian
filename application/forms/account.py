@@ -36,26 +36,22 @@ class SigninForm(Form):
 class SignupForm(Form):
     """Form for signin"""
     name = StringField('用户名',
-                       validators=[DataRequired('用户名不能为空')],
-                       description='用户名')
+                       validators=[DataRequired('用户名不能为空')])
 
     email = StringField('邮箱',
                         validators=[
                             DataRequired(message="邮箱不能为空"),
                             Email(message="无效的邮箱")
-                        ],
-                        description='邮箱')
+                        ])
 
     password = PasswordField('密码',
-                             validators=[DataRequired('密码不能为空')],
-                             description='密码')
+                             validators=[DataRequired('密码不能为空')])
 
-    repassword = PasswordField('重复密码',
+    repassword = PasswordField('再次确认',
                                validators=[
-                                   DataRequired('重复密码不能为空'),
+                                   DataRequired('再次确认你的密码'),
                                    EqualTo('password', message='两次输入密码不一致')
-                               ],
-                               description='重复密码')
+                               ])
 
     def validate_name(self, field):
         user = User.query.filter(User.name == self.name.data).first()

@@ -4,17 +4,18 @@
 {% block page_title %}登陆{% endblock %}
 {% block page_content %}
    <div class="container">
-      <div class="row">
-         <div class="col-sm-8">
-            <h1>登陆</h1>
-
+      <div class="panel panel-primary">
+         <div class="panel-heading">登陆</div>
+         <div class="panel-body">
             <form method="post" action="{{ url_for('account.signin') }}">
                {{ form.csrf_token() }}
 
                {{ vertical_field(form.email) }}
                {{ vertical_field(form.password) }}
 
-               {{ form_submit('登陆') }}
+               <div class="submit-wap submit-right">
+                  <button type="submit" class="btn btn-submit btn-primary">登陆</button>
+               </div>
             </form>
          </div>
       </div>

@@ -148,3 +148,86 @@
     text-align: center;
   }
 }
+
+.piece {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 25px 20px 20px 20px;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+
+  .media-left {
+    padding-right: 18px;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .comments-count {
+    text-align: center;
+    margin-top: 8px;
+    color: #bbb;
+
+    .fa {
+      font-size: 12px;
+      margin-left: 1px;
+    }
+  }
+
+  .content {
+    padding-right: 100px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .source {
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  .source_favicon {
+    vertical-align: text-bottom;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .vote {
+    background-color: #ffffff;
+    border: 1px solid #E0E3E6;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      border-color: #bbb;
+    }
+
+    &.voted {
+      border-color: @main-color;
+      color: @main-color;
+    }
+
+    .votes-count {
+      line-height: 1;
+      padding-bottom: 4px;
+    }
+
+    .vote-icon {
+      line-height: 1;
+    }
+  }
+}
