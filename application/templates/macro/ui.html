@@ -119,9 +119,11 @@
          <textarea name="" id="comment-textarea" rows="5" class="form-control"
                    placeholder="说点什么"></textarea>
       </div>
-      <button type="button" data-piece-id="{{ piece.id }}"
-              class="btn btn-default btn-sm btn-comment">评论
-      </button>
+      <div class="submit-wap submit-right">
+         <button type="button" class="btn btn-sm btn-comment btn-primary"
+                 data-piece-id="{{ piece.id }}">评论
+         </button>
+      </div>
    </form>
 
    <script type="text/javascript">

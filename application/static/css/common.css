@@ -31,7 +31,7 @@
   display: table;
   clear: both;
 }
-.submit-wap.submit-right button[type='submit'] {
+.submit-wap.submit-right button {
   float: right;
 }
 .form-error {
