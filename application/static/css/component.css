@@ -118,52 +118,52 @@
   font-size: 16px;
   text-align: center;
 }
-.piece {
+.pieces-wap .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px 20px 20px 20px;
   cursor: pointer;
 }
-.piece:last-child {
+.pieces-wap .piece:last-child {
   border-bottom: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.piece:hover {
+.pieces-wap .piece:hover {
   background-color: #f8f8f8;
 }
-.piece .media-left {
+.pieces-wap .piece .media-left {
   padding-right: 18px;
 }
-.piece .user-avatar {
+.pieces-wap .piece .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece .comments-count {
+.pieces-wap .piece .comments-count {
   text-align: center;
   margin-top: 8px;
   color: #bbb;
 }
-.piece .comments-count .fa {
+.pieces-wap .piece .comments-count .fa {
   font-size: 12px;
   margin-left: 1px;
 }
-.piece .content {
+.pieces-wap .piece .content {
   padding-right: 100px;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece .source {
+.pieces-wap .piece .source {
   color: #aaa;
   font-size: 12px;
 }
-.piece .source_favicon {
+.pieces-wap .piece .source_favicon {
   vertical-align: text-bottom;
   margin-right: 5px;
   width: 16px;
   height: 16px;
 }
-.piece .vote {
+.pieces-wap .piece .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -172,17 +172,29 @@
   cursor: pointer;
   text-align: center;
 }
-.piece .vote:hover {
+.pieces-wap .piece .vote:hover {
   border-color: #bbb;
 }
-.piece .vote.voted {
+.pieces-wap .piece .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece .vote .votes-count {
+.pieces-wap .piece .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece .vote .vote-icon {
+.pieces-wap .piece .vote .vote-icon {
   line-height: 1;
+}
+.pieces-wap .panel-footer {
+  border-top: none;
+}
+.pieces-wap .panel-footer .btn-show-hide-pieces {
+  cursor: pointer;
+}
+.pieces-wap .panel-footer .btn-show-hide-pieces:hover {
+  color: #1e88a8;
+}
+.pieces-wap .hide-pieces {
+  display: none;
 }

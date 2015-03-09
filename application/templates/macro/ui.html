@@ -146,46 +146,69 @@
    </script>
 {% endmacro %}
 
-
-{% macro render_pieces_wap(date, pieces) %}
-   <div class="panel panel-primary pieces-wap">
-      <div class="panel-heading date">{{ date }}</div>
-
-      <div class="panel-body">
-         {% for piece in pieces %}
-            <div class="piece" data-piece-id={{ piece.id }}>
-               <div class="media">
-                  <div class="media-left">
-                     <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
-                          data-piece-id={{ piece.id }}>
-                        <div class="vote-icon">
-                           <span class="fa fa-angle-up"></span>
-                        </div>
-                        <div class="votes-count">{{ piece.votes_count }}</div>
-                     </div>
+{% macro render_pieces(pieces) %}
+   {% for piece in pieces %}
+      <div class="piece" data-piece-id={{ piece.id }}>
+         <div class="media">
+            <div class="media-left">
+               <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                    data-piece-id={{ piece.id }}>
+                  <div class="vote-icon">
+                     <span class="fa fa-angle-up"></span>
                   </div>
-
-                  <div class="media-body">
-                     <div class="pull-right">
-                        {{ render_user_avatar(piece.user) }}
-
-                        <div class="comments-count text-right">
-                           {{ piece.comments.count() }} <span class="fa fa-comment"></span>
-                        </div>
-                     </div>
-
-                     <div class="content">
-                        {{ piece.content }}
-                     </div>
-
-                     <div class="meta">
-                        <a href="{{ piece.source_url }}" class="source" target="_blank">
-                           {{ piece.source }}</a>
-                     </div>
-                  </div>
+                  <div class="votes-count">{{ piece.votes_count }}</div>
                </div>
             </div>
-         {% endfor %}
+
+            <div class="media-body">
+               <div class="pull-right">
+                  {{ render_user_avatar(piece.user) }}
+
+                  <div class="comments-count text-right">
+                     {{ piece.comments.count() }} <span class="fa fa-comment"></span>
+                  </div>
+               </div>
+
+               <div class="content">
+                  {{ piece.content }}
+               </div>
+
+               <div class="meta">
+                  <a href="{{ piece.source_url }}" class="source" target="_blank">
+                     {{ piece.source }}</a>
+               </div>
+            </div>
+         </div>
       </div>
+   {% endfor %}
+{% endmacro %}
+
+{% macro render_pieces_wap(pieces_data) %}
+   <div class="panel panel-primary pieces-wap">
+      <div class="panel-heading date">{{ pieces_data.date }}</div>
+
+      <div class="panel-body">
+         {{ render_pieces(pieces_data.pieces) }}
+         {% if pieces_data.hide_pieces_count %}
+            <div class="hide-pieces">
+               {{ render_pieces(pieces_data.hide_pieces) }}
+            </div>
+         {% endif %}
+      </div>
+
+      {% if pieces_data.hide_pieces_count %}
+         <div class="panel-footer text-center">
+            <span class="btn-show-hide-pieces">
+               展开其余 {{ pieces_data.hide_pieces_count }} 段文字
+            </span>
+         </div>
+      {% endif %}
    </div>
+
+   <script>
+      $(document).one('click', '.btn-show-hide-pieces', function () {
+         $(this).parents('.pieces-wap').first().find('.hide-pieces').show();
+         $(this).parents('.panel-footer').first().detach();
+      });
+   </script>
 {% endmacro %}
