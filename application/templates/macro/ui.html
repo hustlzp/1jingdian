@@ -148,42 +148,44 @@
 
 
 {% macro render_pieces_wap(date, pieces) %}
-   <div class="pieces-wap">
-      <div class="date">{{ date }}</div>
+   <div class="panel panel-primary pieces-wap">
+      <div class="panel-heading date">{{ date }}</div>
 
-      {% for piece in pieces %}
-         <div class="piece" data-piece-id={{ piece.id }}>
-            <div class="media">
-               <div class="media-left">
-                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
-                       data-piece-id={{ piece.id }}>
-                     <div class="vote-icon">
-                        <span class="fa fa-angle-up"></span>
-                     </div>
-                     <div class="votes-count">{{ piece.votes_count }}</div>
-                  </div>
-               </div>
-
-               <div class="media-body">
-                  <div class="pull-right">
-                     {{ render_user_avatar(piece.user) }}
-
-                     <div class="comments-count text-right">
-                        {{ piece.comments.count() }} <span class="fa fa-comment"></span>
+      <div class="panel-body">
+         {% for piece in pieces %}
+            <div class="piece" data-piece-id={{ piece.id }}>
+               <div class="media">
+                  <div class="media-left">
+                     <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                          data-piece-id={{ piece.id }}>
+                        <div class="vote-icon">
+                           <span class="fa fa-angle-up"></span>
+                        </div>
+                        <div class="votes-count">{{ piece.votes_count }}</div>
                      </div>
                   </div>
 
-                  <div class="content">
-                     {{ piece.content }}
-                  </div>
+                  <div class="media-body">
+                     <div class="pull-right">
+                        {{ render_user_avatar(piece.user) }}
 
-                  <div class="meta">
-                     <a href="{{ piece.source_url }}" class="source" target="_blank">
-                        {{ piece.source }}</a>
+                        <div class="comments-count text-right">
+                           {{ piece.comments.count() }} <span class="fa fa-comment"></span>
+                        </div>
+                     </div>
+
+                     <div class="content">
+                        {{ piece.content }}
+                     </div>
+
+                     <div class="meta">
+                        <a href="{{ piece.source_url }}" class="source" target="_blank">
+                           {{ piece.source }}</a>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-      {% endfor %}
+         {% endfor %}
+      </div>
    </div>
 {% endmacro %}
