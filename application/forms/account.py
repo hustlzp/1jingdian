@@ -12,12 +12,10 @@ class SigninForm(Form):
                         validators=[
                             DataRequired('邮箱不能为空'),
                             Email('邮箱格式错误')
-                        ],
-                        description='Email')
+                        ])
 
     password = PasswordField('密码',
-                             validators=[DataRequired('密码不能为空')],
-                             description='Password')
+                             validators=[DataRequired('密码不能为空')])
 
     def validate_email(self, field):
         user = User.query.filter(User.email == self.email.data).first()
