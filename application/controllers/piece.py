@@ -5,7 +5,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Book, Piece, PieceVote, PieceComment
+from ..models import db, User, Piece, PieceVote, PieceComment
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 

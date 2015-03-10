@@ -72,9 +72,9 @@
                      {{ g.user.name }} <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">
-                     <li><a href="#">个人主页</a></li>
+                     <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">个人主页</a></li>
                      <li><a href="#">我的收藏</a></li>
-                     <li><a href="#">设置</a></li>
+                     <li><a href="{{ url_for('user.settings') }}">设置</a></li>
                      <li><a href="{{ url_for('account.signout') }}">登出</a></li>
                   </ul>
                </li>

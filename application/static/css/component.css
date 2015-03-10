@@ -108,14 +108,14 @@
 .user-avatar-link:hover {
   text-decoration: none;
 }
-.user-avatar-link .user-avatar {
+.user-avatar-link .user-avatar-popover {
   cursor: pointer;
 }
 .user-card {
   padding: 20px 15px;
   font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
-.user-card .user-avatar-in-card {
+.user-card .user-avatar {
   width: 80px;
   height: 80px;
   display: block;

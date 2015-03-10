@@ -26,12 +26,12 @@
 
 
 {% macro render_user_avatar(user) %}
-   <a href="#" class="user-avatar-link">
-      <img src="{{ user.avatar_url }}" class="user-avatar img-circle"
+   <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
+      <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
            data-user-id="{{ user.id }}" alt=""/></a>
    <div class="popover-content-wap">
       <div class="user-card">
-         <img src="{{ user.avatar_url }}" class="user-avatar-in-card img-circle" alt=""/>
+         <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
 
          <div class="user-name">{{ user.name }}</div>
       </div>

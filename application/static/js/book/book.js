@@ -1,1 +1,0 @@
-$('.excerpt-position-bar').tooltip();

@@ -11,7 +11,7 @@ $(document).popover({
     container: 'body',
     trigger: 'hover',
     placement: 'bottom',
-    selector: '.user-avatar',
+    selector: '.user-avatar.user-avatar-popover',
     delay: {
         'hide': 100
     }

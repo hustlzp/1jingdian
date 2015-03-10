@@ -20,11 +20,6 @@ class Piece(db.Model):
                                                       lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
 
-    page = db.Column(db.Integer)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
-                                                      order_by='desc(Piece.created_at)'))
-
     def voted_by_user(self):
         if not g.user:
             return False
