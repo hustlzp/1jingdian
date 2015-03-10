@@ -98,10 +98,14 @@
 .piece-modal #comment-textarea {
   margin-top: 5px;
 }
+/* 弹出的用户卡片 */
 .popover-content-wap {
   display: none;
 }
-.user-avatar {
+.user-avatar-link {
+  text-decoration: none;
+}
+.user-avatar-link .user-avatar {
   cursor: pointer;
 }
 .user-card {
