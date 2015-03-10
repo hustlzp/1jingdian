@@ -14,6 +14,12 @@ def profile(uid):
     return render_template('user/profile.html', user=user)
 
 
+@bp.route('/people/<int:uid>/votes')
+def votes(uid):
+    user = User.query.get_or_404(uid)
+    return render_template('user/votes.html', user=user)
+
+
 @bp.route('/my/settings', methods=['GET', 'POST'])
 @UserPermission()
 def settings():
