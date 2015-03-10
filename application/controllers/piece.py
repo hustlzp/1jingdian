@@ -12,7 +12,7 @@ from ..forms import PieceForm
 bp = Blueprint('piece', __name__)
 
 
-@bp.route('/json', methods=['POST'])
+@bp.route('/pieces_by_date', methods=['POST'])
 def pieces_by_date():
     """获取从指定date开始的指定天数的pieces"""
     start = request.form.get('start')
@@ -30,14 +30,14 @@ def pieces_by_date():
     return html
 
 
-@bp.route('/<int:uid>')
+@bp.route('/piece/<int:uid>')
 def view(uid):
     """Single piece page"""
     piece = Piece.query.get_or_404(uid)
     return render_template("piece/piece.html", piece=piece)
 
 
-@bp.route('/<int:uid>/modal')
+@bp.route('/piece/<int:uid>/modal')
 def modal(uid):
     piece = Piece.query.get_or_404(uid)
     piece.clicks_count += 1
@@ -47,7 +47,7 @@ def modal(uid):
     return modal(piece)
 
 
-@bp.route('/add', methods=['GET', 'POST'])
+@bp.route('/piece/add', methods=['GET', 'POST'])
 @UserPermission()
 def add():
     form = PieceForm()
@@ -60,7 +60,7 @@ def add():
     return render_template('piece/add.html', form=form)
 
 
-@bp.route('/<int:uid>/vote', methods=['POST'])
+@bp.route('/piece/<int:uid>/vote', methods=['POST'])
 @UserPermission()
 def vote(uid):
     piece = Piece.query.get_or_404(uid)
@@ -77,7 +77,7 @@ def vote(uid):
         return json.dumps({'result': False})
 
 
-@bp.route('/<int:uid>/unvote', methods=['POST'])
+@bp.route('/piece/<int:uid>/unvote', methods=['POST'])
 @UserPermission()
 def unvote(uid):
     piece = Piece.query.get_or_404(uid)
@@ -94,7 +94,7 @@ def unvote(uid):
         return json.dumps({'result': True})
 
 
-@bp.route('/<int:uid>/comment', methods=['POST'])
+@bp.route('/piece/<int:uid>/comment', methods=['POST'])
 @UserPermission()
 def comment(uid):
     """评论"""

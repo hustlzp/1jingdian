@@ -167,8 +167,8 @@ def register_routes(app):
     from .controllers import site, account, piece, user
 
     app.register_blueprint(site.bp)
-    app.register_blueprint(account.bp, url_prefix='/account')
-    app.register_blueprint(piece.bp, url_prefix='/piece')
+    app.register_blueprint(account.bp)
+    app.register_blueprint(piece.bp)
     app.register_blueprint(user.bp)
 
 
