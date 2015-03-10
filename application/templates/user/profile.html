@@ -1,15 +1,12 @@
 {% extends "layout.html" %}
+{% from "macro/ui.html" import render_user_profile_header %}
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body">
-            <div class="user-info">
-               <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
-
-               <div class="username text-center">{{ user.name }}</div>
-            </div>
+            {{ render_user_profile_header(user, active="creates") }}
          </div>
       </div>
    </div>

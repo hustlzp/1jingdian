@@ -205,3 +205,34 @@
 .pieces-wap .hide-pieces {
   display: none;
 }
+.user-profile-header .user-info {
+  text-align: center;
+}
+.user-profile-header .user-info .user-avatar {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.user-profile-header .user-info .user-name {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.user-profile-header .tab {
+  text-align: center;
+}
+.user-profile-header .tab .tab-item {
+  text-decoration: none;
+  float: left;
+  display: block;
+  line-height: 1;
+  padding: 17px 0;
+  width: 33.33333333%;
+  background-color: #eee;
+  color: #333;
+}
+.user-profile-header .tab .tab-item.active,
+.user-profile-header .tab .tab-item:hover {
+  background-color: #1e88a8;
+  color: #ffffff;
+}

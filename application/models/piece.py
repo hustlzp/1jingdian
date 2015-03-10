@@ -23,7 +23,7 @@ class Piece(db.Model):
     def voted_by_user(self):
         if not g.user:
             return False
-        return g.user.vote_pieces.filter(PieceVote.piece_id == self.id).count() > 0
+        return g.user.voted_pieces.filter(PieceVote.piece_id == self.id).count() > 0
 
     @property
     def source_favicon(self):
@@ -41,7 +41,7 @@ class PieceVote(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('vote_pieces',
+    user = db.relationship('User', backref=db.backref('voted_pieces',
                                                       lazy='dynamic',
                                                       order_by='desc(PieceVote.created_at)'))
 

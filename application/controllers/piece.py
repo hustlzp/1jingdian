@@ -25,8 +25,8 @@ def pieces_by_date():
     for i in xrange(days):
         target_day = start_date - timedelta(days=i)
         pieces_data = get_pieces_data_by_day(target_day)
-        pieces_wap_macro = get_template_attribute('macro/ui.html', 'render_pieces_wap')
-        html += pieces_wap_macro(pieces_data)
+        pieces_macro = get_template_attribute('macro/ui.html', 'render_pieces_by_date')
+        html += pieces_macro(pieces_data)
     return html
 
 

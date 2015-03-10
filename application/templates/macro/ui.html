@@ -38,6 +38,7 @@
    </div>
 {% endmacro %}
 
+
 {% macro render_comment(comment) %}
    <div class="comment">
       <div class="media">
@@ -147,6 +148,7 @@
    </script>
 {% endmacro %}
 
+
 {% macro render_pieces(pieces) %}
    {% for piece in pieces %}
       <div class="piece" data-piece-id={{ piece.id }}>
@@ -184,7 +186,8 @@
    {% endfor %}
 {% endmacro %}
 
-{% macro render_pieces_wap(pieces_data) %}
+
+{% macro render_pieces_by_date(pieces_data) %}
    <div class="panel panel-primary pieces-wap">
       <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
@@ -206,10 +209,33 @@
       {% endif %}
    </div>
 
-   <script>
+   <script type="text/javascript">
       $(document).one('click', '.btn-show-hide-pieces', function () {
          $(this).parents('.pieces-wap').first().find('.hide-pieces').show();
          $(this).parents('.panel-footer').first().detach();
       });
    </script>
+{% endmacro %}
+
+
+{% macro render_user_profile_header(user, active="creates") %}
+   <div class="user-profile-header">
+      <div class="user-info">
+         <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+
+         <div class="user-name">{{ user.name }}</div>
+      </div>
+
+      <div class="tab clearfix">
+         <a class="tab-item {% if active == "creates" %}active{% endif %}" href="#">
+            {{ user.created_pieces.count() }} 文字
+         </a>
+         <a class="tab-item {% if active == "votes" %}active{% endif %}" href="#">
+            {{ user.voted_pieces.count() }} 顶
+         </a>
+         <a class="tab-item {% if active == "collects" %}active{% endif %}" href="#">
+            10 收藏
+         </a>
+      </div>
+   </div>
 {% endmacro %}

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import modal, render_pieces_wap %}
+{% from "macro/ui.html" import modal, render_pieces_by_date %}
 
 {% block page_title %}首页{% endblock %}
 {% block page_vars %}
@@ -16,9 +16,9 @@
 
    <div class="container">
       <div class="pieces-container">
-         {{ render_pieces_wap(today_pieces) }}
-         {{ render_pieces_wap(yesterday_pieces) }}
-         {{ render_pieces_wap(the_day_before_yesterday_pieces) }}
+         {{ render_pieces_by_date(today_pieces) }}
+         {{ render_pieces_by_date(yesterday_pieces) }}
+         {{ render_pieces_by_date(the_day_before_yesterday_pieces) }}
       </div>
       <div class="text-center loading-flag">
          正在加载
