@@ -1,4 +1,4 @@
-.piece-modal {
+.piece-modal-wap {
   position: fixed;
   top: 0;
   right: -503px;
@@ -10,14 +10,14 @@
   overflow-y: scroll;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
-.piece-modal .piece-wap {
+.piece-modal-wap .piece-wap {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
 }
-.piece-modal .piece-wap .media-left {
+.piece-modal-wap .piece-wap .media-left {
   padding-right: 18px;
 }
-.piece-modal .piece-wap .vote {
+.piece-modal-wap .piece-wap .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -26,78 +26,78 @@
   cursor: pointer;
   text-align: center;
 }
-.piece-modal .piece-wap .vote:hover {
+.piece-modal-wap .piece-wap .vote:hover {
   border-color: #bbb;
 }
-.piece-modal .piece-wap .vote.voted {
+.piece-modal-wap .piece-wap .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece-modal .piece-wap .vote .votes-count {
+.piece-modal-wap .piece-wap .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece-modal .piece-wap .vote .vote-icon {
+.piece-modal-wap .piece-wap .vote .vote-icon {
   line-height: 1;
 }
-.piece-modal .piece-wap .content {
+.piece-modal-wap .piece-wap .content {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-modal .piece-wap .source {
+.piece-modal-wap .piece-wap .source {
   color: #aaa;
   font-size: 12px;
 }
-.piece-modal .piece-wap .source_favicon {
+.piece-modal-wap .piece-wap .source_favicon {
   vertical-align: text-bottom;
   margin-right: 5px;
   width: 16px;
   height: 16px;
 }
-.piece-modal .created-info {
+.piece-modal-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 }
-.piece-modal .created-info .user-avatar-link {
+.piece-modal-wap .created-info .user-avatar-link {
   margin-right: 8px;
 }
-.piece-modal .created-info .user-avatar-link .user-avatar {
+.piece-modal-wap .created-info .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-modal .created-info .created-time {
+.piece-modal-wap .created-info .created-time {
   color: #aaa;
 }
-.piece-modal .subtitle {
+.piece-modal-wap .subtitle {
   font-size: 16px;
   color: #aaa;
   margin: 20px 0 15px 0;
 }
-.piece-modal .voters img {
+.piece-modal-wap .voters img {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-modal .comment {
+.piece-modal-wap .comment {
   margin-bottom: 15px;
 }
-.piece-modal .comment .user-avatar {
+.piece-modal-wap .comment .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-modal .comment .comment-user {
+.piece-modal-wap .comment .comment-user {
   margin-bottom: 4px;
 }
-.piece-modal .comment .comment-user .comment-time {
+.piece-modal-wap .comment .comment-user .comment-time {
   font-size: 12px;
   color: #aaa;
   margin-left: 8px;
 }
-.piece-modal #comment-textarea {
+.piece-modal-wap #comment-textarea {
   margin-top: 5px;
 }
 /* 弹出的用户卡片 */
@@ -125,52 +125,70 @@
   font-size: 16px;
   text-align: center;
 }
-.pieces-wap .piece {
+.pieces-by-date-wap .hide-pieces {
+  display: none;
+}
+.pieces-by-date-wap {
+  margin-bottom: 40px;
+}
+.pieces-by-date-wap .panel-body {
+  padding: 0;
+}
+.pieces-by-date-wap .panel-footer {
+  border-top: none;
+}
+.pieces-by-date-wap .panel-footer .btn-show-hide-pieces {
+  cursor: pointer;
+}
+.pieces-by-date-wap .panel-footer .btn-show-hide-pieces:hover {
+  color: #1e88a8;
+}
+.piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 25px 20px 20px 20px;
   cursor: pointer;
 }
-.pieces-wap .piece:last-child {
+.piece:last-child {
   border-bottom: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.pieces-wap .piece:hover {
+.piece:hover {
   background-color: #f8f8f8;
 }
-.pieces-wap .piece .media-left {
+.piece .media-left {
   padding-right: 18px;
 }
-.pieces-wap .piece .user-avatar {
+.piece .user-avatar {
   width: 32px;
   height: 32px;
 }
-.pieces-wap .piece .comments-count {
+.piece .comments-count {
   text-align: center;
   margin-top: 8px;
   color: #bbb;
 }
-.pieces-wap .piece .comments-count .fa {
+.piece .comments-count .fa {
   font-size: 12px;
   margin-left: 1px;
 }
-.pieces-wap .piece .content {
+.piece .content {
   padding-right: 100px;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.pieces-wap .piece .source {
+.piece .source {
   color: #aaa;
   font-size: 12px;
 }
-.pieces-wap .piece .source_favicon {
+.piece .source_favicon {
   vertical-align: text-bottom;
   margin-right: 5px;
   width: 16px;
   height: 16px;
 }
-.pieces-wap .piece .vote {
+.piece .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -179,31 +197,19 @@
   cursor: pointer;
   text-align: center;
 }
-.pieces-wap .piece .vote:hover {
+.piece .vote:hover {
   border-color: #bbb;
 }
-.pieces-wap .piece .vote.voted {
+.piece .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.pieces-wap .piece .vote .votes-count {
+.piece .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.pieces-wap .piece .vote .vote-icon {
+.piece .vote .vote-icon {
   line-height: 1;
-}
-.pieces-wap .panel-footer {
-  border-top: none;
-}
-.pieces-wap .panel-footer .btn-show-hide-pieces {
-  cursor: pointer;
-}
-.pieces-wap .panel-footer .btn-show-hide-pieces:hover {
-  color: #1e88a8;
-}
-.pieces-wap .hide-pieces {
-  display: none;
 }
 .user-profile-header .user-info {
   text-align: center;

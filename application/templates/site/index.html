@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import modal, render_pieces_by_date %}
+{% from "macro/ui.html" import render_piece_modal_wap, render_pieces_by_date %}
 
 {% block page_title %}首页{% endblock %}
 {% block page_vars %}
@@ -8,11 +8,7 @@
    </script>
 {% endblock %}
 {% block page_content %}
-   <div class="piece-modal" data-piece-id={{ first_piece.id }}>
-      {% if first_piece %}
-         {{ modal(first_piece) }}
-      {% endif %}
-   </div>
+   {{ render_piece_modal_wap(first_piece) }}
 
    <div class="container">
       <div class="pieces-container">

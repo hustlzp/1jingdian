@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_user_profile_header %}
+{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap %}
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
+   {{ render_piece_modal_wap(user.created_pieces.first()) }}
+
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body">
             {{ render_user_profile_header(user, active="creates") }}
+            {{ render_pieces(user.created_pieces) }}
          </div>
       </div>
    </div>

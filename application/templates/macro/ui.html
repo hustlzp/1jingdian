@@ -62,7 +62,7 @@
 {% endmacro %}
 
 
-{% macro modal(piece) %}
+{% macro render_piece_modal(piece) %}
    <div class="media piece-wap">
       <div class="media-left">
          <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
@@ -127,6 +127,7 @@
    </form>
 
    <script type="text/javascript">
+      // 评论
       $('.btn-comment').click(function () {
          var pieceId = parseInt($(this).attr('data-piece-id')),
                comment = $.trim($('#comment-textarea').val());
@@ -149,46 +150,107 @@
 {% endmacro %}
 
 
+{% macro render_piece_modal_wap(piece) %}
+   <div class="piece-modal-wap" data-piece-id={{ piece.id }}>
+      {% if piece %}
+         {{ render_piece_modal(piece) }}
+      {% endif %}
+   </div>
+
+   <script type="text/javascript">
+      // 弹出侧边栏
+      $(document).on('click', '.pieces-wap .piece', function (event) {
+         // 链接和vote不触发此事件
+         if (event.target.tagName.toLowerCase() === 'a'
+               || $(event.target).hasClass('vote')
+               || $(event.target).hasClass('user-avatar')
+               || $(event.target).parents('.vote').length) {
+            return true;
+         }
+
+         var pieceId = parseInt($(this).attr('data-piece-id')),
+               pieceModal = $('.piece-modal-wap').first(),
+               pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
+
+         if (pieceId === pieceIdOfModal) {
+            if (pieceModal.hasClass('open')) {
+               pieceModal.animate({'right': '-503px'}, function () {
+                  pieceModal.removeClass('open');
+               });
+            } else {
+               pieceModal.animate({'right': '0'}, function () {
+                  pieceModal.addClass('open');
+               });
+            }
+         } else {
+            if (pieceModal.hasClass('open')) {
+               pieceModal.attr('data-piece-id', pieceId);
+               $.ajax({
+                  url: urlFor('piece.modal', {uid: pieceId}),
+                  success: function (modal) {
+                     $('.piece-modal-wap').html(modal);
+                  }
+               });
+            } else {
+               pieceModal.animate({'right': '0'}, function () {
+                  pieceModal.addClass('open');
+                  pieceModal.attr('data-piece-id', pieceId);
+                  $.ajax({
+                     url: urlFor('piece.modal', {uid: pieceId}),
+                     success: function (modal) {
+                        $('.piece-modal-wap').html(modal);
+                     }
+                  });
+               });
+            }
+         }
+      });
+   </script>
+{% endmacro %}
+
+
 {% macro render_pieces(pieces) %}
-   {% for piece in pieces %}
-      <div class="piece" data-piece-id={{ piece.id }}>
-         <div class="media">
-            <div class="media-left">
-               <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
-                    data-piece-id={{ piece.id }}>
-                  <div class="vote-icon">
-                     <span class="fa fa-angle-up"></span>
-                  </div>
-                  <div class="votes-count">{{ piece.votes_count }}</div>
-               </div>
-            </div>
-
-            <div class="media-body">
-               <div class="pull-right">
-                  {{ render_user_avatar(piece.user) }}
-
-                  <div class="comments-count text-right">
-                     {{ piece.comments.count() }} <span class="fa fa-comment"></span>
+   <div class="pieces-wap">
+      {% for piece in pieces %}
+         <div class="piece" data-piece-id={{ piece.id }}>
+            <div class="media">
+               <div class="media-left">
+                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                       data-piece-id={{ piece.id }}>
+                     <div class="vote-icon">
+                        <span class="fa fa-angle-up"></span>
+                     </div>
+                     <div class="votes-count">{{ piece.votes_count }}</div>
                   </div>
                </div>
 
-               <div class="content">
-                  {{ piece.content }}
-               </div>
+               <div class="media-body">
+                  <div class="pull-right">
+                     {{ render_user_avatar(piece.user) }}
 
-               <div class="meta">
-                  <a href="{{ piece.source_url }}" class="source" target="_blank">
-                     {{ piece.source }}</a>
+                     <div class="comments-count text-right">
+                        {{ piece.comments.count() }} <span class="fa fa-comment"></span>
+                     </div>
+                  </div>
+
+                  <div class="content">
+                     {{ piece.content }}
+                  </div>
+
+                  <div class="meta">
+                     <a href="{{ piece.source_url }}" class="source" target="_blank">
+                        {{ piece.source }}</a>
+                  </div>
                </div>
             </div>
          </div>
-      </div>
-   {% endfor %}
+      {% endfor %}
+   </div>
 {% endmacro %}
 
 
 {% macro render_pieces_by_date(pieces_data) %}
-   <div class="panel panel-primary pieces-wap">
+   <div class="panel panel-primary pieces-by-date-wap">
       <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
       <div class="panel-body">
@@ -211,7 +273,7 @@
 
    <script type="text/javascript">
       $(document).one('click', '.btn-show-hide-pieces', function () {
-         $(this).parents('.pieces-wap').first().find('.hide-pieces').show();
+         $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
          $(this).parents('.panel-footer').first().detach();
       });
    </script>
