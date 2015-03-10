@@ -64,10 +64,10 @@ def add():
 @UserPermission()
 def vote(uid):
     piece = Piece.query.get_or_404(uid)
-    vote = g.user.vote_pieces.filter(PieceVote.piece_id == uid).first()
+    vote = g.user.voted_pieces.filter(PieceVote.piece_id == uid).first()
     if not vote:
         vote = PieceVote(piece_id=uid)
-        g.user.vote_pieces.append(vote)
+        g.user.voted_pieces.append(vote)
         piece.votes_count += 1
         db.session.add(g.user)
         db.session.add(piece)
@@ -81,7 +81,7 @@ def vote(uid):
 @UserPermission()
 def unvote(uid):
     piece = Piece.query.get_or_404(uid)
-    votes = g.user.vote_pieces.filter(PieceVote.piece_id == uid)
+    votes = g.user.voted_pieces.filter(PieceVote.piece_id == uid)
     if not votes.count():
         return json.dumps({'result': False})
     else:
