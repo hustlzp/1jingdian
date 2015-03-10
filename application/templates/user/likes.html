@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% from "macro/ui.html" import render_user_profile_header, render_pieces %}
+
+{% block page_title %}{{ user.name }}{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-body panel-body-no-padding">
+            {{ render_user_profile_header(user, active="likes") }}
+         </div>
+      </div>
+   </div>
+{% endblock %}

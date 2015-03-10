@@ -301,8 +301,8 @@
             href="{{ url_for('user.votes', uid=user.id) }}">
             {{ user.voted_pieces.count() }} 顶
          </a>
-         <a class="tab-item {% if active == "collects" %}active{% endif %}"
-            href="#">
+         <a class="tab-item {% if active == "likes" %}active{% endif %}"
+            href="{{ url_for('user.likes', uid=user.id) }}">
             10 收藏
          </a>
       </div>

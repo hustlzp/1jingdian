@@ -211,6 +211,9 @@
 .piece .vote .vote-icon {
   line-height: 1;
 }
+.user-profile-header {
+  padding-top: 60px;
+}
 .user-profile-header .user-info {
   text-align: center;
 }

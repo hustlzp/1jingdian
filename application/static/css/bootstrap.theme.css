@@ -138,6 +138,9 @@ ol li {
 .panel-primary .panel-body {
   padding: 25px;
 }
+.panel-primary .panel-body.panel-body-no-padding {
+  padding: 0;
+}
 .panel-primary .panel-footer {
   padding: 16px 25px;
   background-color: #fff;
