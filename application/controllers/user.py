@@ -1,9 +1,10 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for
+from flask import render_template, Blueprint, redirect, request, url_for, flash, g
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
 from ..models import db, User
+from ..forms import SettingsForm
 
 bp = Blueprint('user', __name__)
 
@@ -23,4 +24,12 @@ def votes(uid):
 @bp.route('/my/settings', methods=['GET', 'POST'])
 @UserPermission()
 def settings():
-    return render_template('user/settings.html')
+    """个人设置"""
+    form = SettingsForm(obj=g.user)
+    if form.validate_on_submit():
+        form.populate_obj(g.user)
+        db.session.add(g.user)
+        db.session.commit()
+        flash('设置已保存')
+        return redirect(url_for('.settings'))
+    return render_template('user/settings.html', form=form)

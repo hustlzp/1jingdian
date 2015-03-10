@@ -10,9 +10,16 @@ class User(db.Model):
     name = db.Column(db.String(50), unique=True)
     email = db.Column(db.String(50), unique=True)
     avatar = db.Column(db.String(200), default='default.png')
+    motto = db.Column(db.String(100))
     password = db.Column(db.String(200))
     is_admin = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
+
+    # 社交媒体
+    weibo = db.Column(db.String(100))
+    zhihu = db.Column(db.String(100))
+    douban = db.Column(db.String(100))
+    blog = db.Column(db.String(100))
 
     def __setattr__(self, name, value):
         # Hash password when set it.
