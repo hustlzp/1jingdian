@@ -54,10 +54,6 @@ def add():
     if form.validate_on_submit():
         piece = Piece(**form.data)
         piece.user_id = g.user.id
-        # 发布者自动投一票
-        vote = PieceVote(user_id=g.user.id)
-        piece.voters.append(vote)
-        piece.votes_count = 1
         db.session.add(piece)
         db.session.commit()
         return redirect(url_for('site.index'))
