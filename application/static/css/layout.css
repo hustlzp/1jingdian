@@ -20,6 +20,9 @@ body {
   border-radius: 0;
   text-align: center;
   display: none;
+  padding: 0;
+  height: 58px;
+  line-height: 58px;
 }
 .navbar-form {
   margin: 10px 0;
