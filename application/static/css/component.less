@@ -73,15 +73,16 @@
     border-bottom: 1px solid #ddd;
     font-size: 12px;
 
-    .user-avatar {
-      width: 32px;
-      height: 32px;
+    .user-avatar-link {
       margin-right: 8px;
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     .created-time {
       color: #aaa;
-
     }
   }
 
@@ -131,7 +132,10 @@
 }
 
 .user-avatar-link {
-  text-decoration: none;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
 
   .user-avatar {
     cursor: pointer;

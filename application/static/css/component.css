@@ -61,10 +61,12 @@
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 }
-.piece-modal .created-info .user-avatar {
+.piece-modal .created-info .user-avatar-link {
+  margin-right: 8px;
+}
+.piece-modal .created-info .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
-  margin-right: 8px;
 }
 .piece-modal .created-info .created-time {
   color: #aaa;
@@ -102,7 +104,8 @@
 .popover-content-wap {
   display: none;
 }
-.user-avatar-link {
+.user-avatar-link:focus,
+.user-avatar-link:hover {
   text-decoration: none;
 }
 .user-avatar-link .user-avatar {
