@@ -269,10 +269,12 @@
 }
 
 .user-profile-header {
-  padding-top: 60px;
+  padding-top: 50px;
+  position: relative;
 
   .user-info {
     text-align: center;
+    margin-bottom: 35px;
 
     .user-avatar {
       width: 80px;
@@ -281,9 +283,38 @@
     }
 
     .user-name {
-      font-size: 16px;
+      font-size: 20px;
       text-align: center;
-      margin-bottom: 30px;
+    }
+
+    .motto {
+      margin-top: 12px;
+      color: #999;
+    }
+
+    .media-icons {
+      text-align: center;
+      margin-top: 12px;
+      top: 20px;
+      right: 20px;
+
+      a {
+        margin-right: 6px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:focus,
+        &:hover {
+          text-decoration: none;
+        }
+
+        img {
+          border-radius: 2px;
+          height: 20px;
+        }
+      }
     }
   }
 

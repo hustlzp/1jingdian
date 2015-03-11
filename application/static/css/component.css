@@ -212,10 +212,12 @@
   line-height: 1;
 }
 .user-profile-header {
-  padding-top: 60px;
+  padding-top: 50px;
+  position: relative;
 }
 .user-profile-header .user-info {
   text-align: center;
+  margin-bottom: 35px;
 }
 .user-profile-header .user-info .user-avatar {
   width: 80px;
@@ -223,9 +225,32 @@
   margin-bottom: 20px;
 }
 .user-profile-header .user-info .user-name {
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
-  margin-bottom: 30px;
+}
+.user-profile-header .user-info .motto {
+  margin-top: 12px;
+  color: #999;
+}
+.user-profile-header .user-info .media-icons {
+  text-align: center;
+  margin-top: 12px;
+  top: 20px;
+  right: 20px;
+}
+.user-profile-header .user-info .media-icons a {
+  margin-right: 6px;
+}
+.user-profile-header .user-info .media-icons a:last-child {
+  margin-right: 0;
+}
+.user-profile-header .user-info .media-icons a:focus,
+.user-profile-header .user-info .media-icons a:hover {
+  text-decoration: none;
+}
+.user-profile-header .user-info .media-icons a img {
+  border-radius: 2px;
+  height: 20px;
 }
 .user-profile-header .tab {
   text-align: center;
