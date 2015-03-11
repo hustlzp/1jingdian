@@ -158,6 +158,8 @@
    </div>
 
    <script type="text/javascript">
+      g.originalUrl = window.location.href;
+
       // 弹出侧边栏
       $(document).on('click', '.pieces-wap .piece', function (event) {
          // 链接和vote不触发此事件
@@ -174,13 +176,9 @@
 
          if (pieceId === pieceIdOfModal) {
             if (pieceModal.hasClass('open')) {
-               pieceModal.animate({'right': '-503px'}, function () {
-                  pieceModal.removeClass('open');
-               });
+               closeModal(pieceId);
             } else {
-               pieceModal.animate({'right': '0'}, function () {
-                  pieceModal.addClass('open');
-               });
+               openModal(pieceId);
             }
          } else {
             if (pieceModal.hasClass('open')) {
@@ -192,8 +190,7 @@
                   }
                });
             } else {
-               pieceModal.animate({'right': '0'}, function () {
-                  pieceModal.addClass('open');
+               openModal(pieceId, function () {
                   pieceModal.attr('data-piece-id', pieceId);
                   $.ajax({
                      url: urlFor('piece.modal', {uid: pieceId}),
@@ -202,9 +199,46 @@
                      }
                   });
                });
+               {#               pieceModal.animate({'right': '0'}, function () {#}
+               {#                  pieceModal.addClass('open');#}
+               {##}
+               {#               });#}
             }
          }
       });
+
+      function openModal(pieceId, callback) {
+         if (window.history.replaceState) {
+            window.history.replaceState('', '', g.domain + urlFor('piece.view', {uid: pieceId}));
+         }
+
+         $('.piece-modal-wap').animate({'right': '0'}, function () {
+            $(this).addClass('open');
+
+            if (isFunction(callback)) {
+               callback();
+            }
+         });
+      }
+
+      function closeModal(callback) {
+         if (window.history.replaceState) {
+            window.history.replaceState('', '', g.originalUrl);
+         }
+
+         $('.piece-modal-wap').animate({'right': '-503px'}, function () {
+            $(this).removeClass('open');
+
+            if (isFunction(callback)) {
+               callback();
+            }
+         });
+      }
+
+      function isFunction(functionToCheck) {
+         var getType = {};
+         return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+      }
    </script>
 {% endmacro %}
 
