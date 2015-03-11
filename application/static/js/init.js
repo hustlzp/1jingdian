@@ -24,13 +24,25 @@ $.each(g.rules, function (endpoint, rules) {
  * Generate url for the endpoint.
  * @param endpoint
  * @param values
+ * @param external
  * @returns url for the endpoint.
  */
-function urlFor(endpoint, values) {
+function urlFor(endpoint, values, external) {
     var url = null,
         params = [],
         maxMatchDegree = 0.0,
         keys;
+
+    if ($.type(values) === "undefined") {
+        values = {};
+        external = false;
+    } else if ($.isFunction(values)) {
+        if ($.type(external) === "undefined") {
+            external = false;
+        }
+    } else {
+        external = values;
+    }
 
     values = (typeof values !== 'undefined') ? values : {};
 
@@ -80,6 +92,10 @@ function urlFor(endpoint, values) {
                 url += key + "=" + values[key];
             }
         });
+    }
+
+    if (external) {
+        url = g.domain + url
     }
 
     return url;

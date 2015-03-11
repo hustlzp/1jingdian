@@ -205,7 +205,7 @@
 
       function openModal(pieceId, callback) {
          if (window.history.replaceState) {
-            window.history.replaceState('', '', g.domain + urlFor('piece.view', {uid: pieceId}));
+            window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
          }
 
          $('.piece-modal-wap').animate({'right': '0'}, function () {
