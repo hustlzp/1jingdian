@@ -347,7 +347,7 @@
       <div class="tab clearfix">
          <a class="tab-item {% if active == "creates" %}active{% endif %}"
             href="{{ url_for('user.profile', uid=user.id) }}">
-            {{ user.created_pieces.count() }} 文字
+            {{ user.created_pieces.count() }} 分享
          </a>
          <a class="tab-item {% if active == "votes" %}active{% endif %}"
             href="{{ url_for('user.votes', uid=user.id) }}">
