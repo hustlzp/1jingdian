@@ -1,0 +1,39 @@
+.avatar-wap {
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    #btn-upload-avatar {
+      visibility: visible;
+    }
+  }
+
+  #btn-upload-avatar {
+    visibility: hidden;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .6);
+    text-align: center;
+    line-height: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.upload-error-info {
+  display: none;
+  font-size: 12px;
+  line-height: 20px;
+  margin-left: 5px;
+}

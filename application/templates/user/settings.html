@@ -10,6 +10,20 @@
             <form method="post" action="{{ url_for('user.settings') }}">
                {{ form.csrf_token() }}
 
+               <div class="form-group">
+                  <label for="avatar">头像</label>
+
+                  <div>
+                     <div class="avatar-wap">
+                        <img class="user-avatar img-circle" src="{{ g.user.avatar_url }}" alt=""/>
+
+                        <div id="btn-upload-avatar">更换头像</div>
+                     </div>
+
+                     <span class="upload-error-info text-danger">上传失败，请稍后再试。</span>
+                  </div>
+               </div>
+
                {{ vertical_field(form.motto) }}
                {{ vertical_field(form.weibo) }}
                {{ vertical_field(form.zhihu) }}

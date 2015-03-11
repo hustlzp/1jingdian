@@ -1,8 +1,9 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for, flash, g
+from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
+from ..utils.uploadsets import avatars, process_avatar
 from ..models import db, User
 from ..forms import SettingsForm
 
@@ -39,3 +40,17 @@ def settings():
         flash('设置已保存')
         return redirect(url_for('.settings'))
     return render_template('user/settings.html', form=form)
+
+
+@bp.route('/upload_avatar', methods=['POST'])
+@UserPermission()
+def upload_avatar():
+    try:
+        filename = process_avatar(request.files['file'], avatars, 160)
+    except Exception, e:
+        return json.dumps({'result': False, 'error': e.__repr__()})
+    else:
+        g.user.avatar = filename
+        db.session.add(g.user)
+        db.session.commit()
+        return json.dumps({'result': True, 'avatar_url': avatars.url(filename)})
