@@ -3,4 +3,4 @@
 
 http://www.1jingdian.com
 
-每天都有精彩书摘。
+每天分享精彩书摘。
