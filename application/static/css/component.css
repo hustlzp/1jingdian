@@ -45,15 +45,9 @@
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-modal-wap .piece-wap .source {
+.piece-modal-wap .piece-wap .book-title {
   color: #aaa;
   font-size: 12px;
-}
-.piece-modal-wap .piece-wap .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 5px;
-  width: 16px;
-  height: 16px;
 }
 .piece-modal-wap .created-info {
   padding: 10px 0;
@@ -178,15 +172,9 @@
   line-height: 1.6;
   font-size: 16px;
 }
-.piece .source {
+.piece .book-title {
   color: #aaa;
   font-size: 12px;
-}
-.piece .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 5px;
-  width: 16px;
-  height: 16px;
 }
 .piece .vote {
   background-color: #ffffff;

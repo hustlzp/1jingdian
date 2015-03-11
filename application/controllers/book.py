@@ -8,14 +8,14 @@ from ..models import db, User, Book
 bp = Blueprint('book', __name__)
 
 
-@bp.route('/')
+@bp.route('/books')
 def books():
     """All books"""
     books = Book.query
     return render_template("book/books.html", books=books)
 
 
-@bp.route('/<int:uid>')
+@bp.route('/book/<int:uid>')
 def view(uid):
     """Single book page"""
     book = Book.query.get_or_404(uid)

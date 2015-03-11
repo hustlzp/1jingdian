@@ -6,12 +6,5 @@ from ..models import User
 
 
 class PieceForm(Form):
-    content = TextAreaField('句子', validators=[DataRequired('内容不能为空')])
-    source = StringField('出处', validators=[DataRequired('出处不能为空')])
-    source_url = StringField('链接', validators=[Optional(), URL(message='链接格式不正确')])
-
-
-class PieceCommentForm(Form):
-    content = TextAreaField('评论',
-                            validators=[DataRequired('评论内容不能为空')],
-                            description='评论内容')
+    content = TextAreaField('文字', validators=[DataRequired('文字不能为空')])
+    book = StringField('书籍', validators=[DataRequired('书籍不能为空')])

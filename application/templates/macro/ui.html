@@ -80,9 +80,10 @@
          </div>
 
          <div class="meta">
-            <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-            <a href="{{ piece.source_url }}" class="source" target="_blank">
-               {{ piece.source }}</a>
+            <a href="{{ url_for('book.view', uid=piece.book_id) }}" class="book-title"
+               target="_blank">
+               {{ piece.book.title }}
+            </a>
          </div>
       </div>
    </div>
@@ -267,8 +268,10 @@
                   </div>
 
                   <div class="meta">
-                     <a href="{{ piece.source_url }}" class="source" target="_blank">
-                        {{ piece.source }}</a>
+                     <a href="{{ url_for('book.view', uid=piece.book_id) }}" class="book-title"
+                        target="_blank">
+                        {{ piece.book.title }}
+                     </a>
                   </div>
                </div>
             </div>

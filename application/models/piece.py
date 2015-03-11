@@ -9,31 +9,24 @@ class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    source = db.Column(db.String(100))
-    source_url = db.Column(db.String(200))
     clicks_count = db.Column(db.Integer, default=0)
     votes_count = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.now)
+    page = db.Column(db.Integer)
+
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
+                                                      order_by='desc(Piece.created_at)'))
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('created_pieces',
                                                       lazy='dynamic',
-                                                      order_by='desc(Piece.created_at)'))
-    page = db.Column(db.Integer)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    book = db.relationship('Book', backref=db.backref('pieces', lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
 
     def voted_by_user(self):
         if not g.user:
             return False
         return g.user.voted_pieces.filter(PieceVote.piece_id == self.id).count() > 0
-
-    @property
-    def source_favicon(self):
-        result = urlparse(self.source_url)
-        host = "%s://%s" % (result.scheme or "http", result.netloc)
-        return "http://g.soz.im/%s" % host
 
     def __repr__(self):
         return '<Piece %s>' % self.id

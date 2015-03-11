@@ -1,18 +1,17 @@
 {% extends "layout.html" %}
 {% from 'macro/form.html' import vertical_field, form_submit %}
 
-{% block page_title %}分享句子{% endblock %}
+{% block page_title %}分享书摘{% endblock %}
 {% block page_content %}
    <div class="container">
       <div class="panel panel-primary">
-         <div class="panel-heading">分享句子</div>
+         <div class="panel-heading">分享书摘</div>
          <div class="panel-body">
             <form action="" id="form-add-piece" method="post">
                {{ form.csrf_token() }}
 
                {{ vertical_field(form.content, rows=5) }}
-               {{ vertical_field(form.source) }}
-               {{ vertical_field(form.source_url) }}
+               {{ vertical_field(form.book) }}
 
                <div class="submit-wap submit-right">
                   <button type="submit" class="btn btn-submit btn-primary">分享</button>
@@ -20,10 +19,10 @@
             </form>
          </div>
          <div class="panel-footer">
-            {#            <p>分享规则：</p>#}
             <ul>
-               <li>每位用户每天最多分享 2 个句子。</li>
-               <li>分享的句子在 10 分钟内可编辑，超出时间则无法更改。</li>
+               <li>每位用户每天最多分享 2 段书摘。</li>
+               <li>每本书籍每天最多发布 2 段书摘。</li>
+               <li>分享的书摘在 10 分钟内可编辑，超出时间则无法更改。</li>
             </ul>
          </div>
       </div>
