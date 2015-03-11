@@ -199,10 +199,6 @@
                      }
                   });
                });
-               {#               pieceModal.animate({'right': '0'}, function () {#}
-               {#                  pieceModal.addClass('open');#}
-               {##}
-               {#               });#}
             }
          }
       });
@@ -215,7 +211,7 @@
          $('.piece-modal-wap').animate({'right': '0'}, function () {
             $(this).addClass('open');
 
-            if (isFunction(callback)) {
+            if ($.isFunction(callback)) {
                callback();
             }
          });
@@ -229,15 +225,10 @@
          $('.piece-modal-wap').animate({'right': '-503px'}, function () {
             $(this).removeClass('open');
 
-            if (isFunction(callback)) {
+            if ($.isFunction(callback)) {
                callback();
             }
          });
-      }
-
-      function isFunction(functionToCheck) {
-         var getType = {};
-         return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
       }
    </script>
 {% endmacro %}
