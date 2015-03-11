@@ -270,3 +270,93 @@
   background-color: #1e88a8;
   color: #ffffff;
 }
+.piece-panel .piece-wap {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.piece-panel .piece-wap .media-left {
+  padding-right: 18px;
+}
+.piece-panel .piece-wap .vote {
+  background-color: #ffffff;
+  border: 1px solid #E0E3E6;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.piece-panel .piece-wap .vote:hover {
+  border-color: #bbb;
+}
+.piece-panel .piece-wap .vote.voted {
+  border-color: #1e88a8;
+  color: #1e88a8;
+}
+.piece-panel .piece-wap .vote .votes-count {
+  line-height: 1;
+  padding-bottom: 4px;
+}
+.piece-panel .piece-wap .vote .vote-icon {
+  line-height: 1;
+}
+.piece-panel .piece-wap .content {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+.piece-panel .piece-wap .source {
+  color: #aaa;
+  font-size: 12px;
+}
+.piece-panel .piece-wap .source_favicon {
+  vertical-align: text-bottom;
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+}
+.piece-panel .created-info {
+  padding: 10px 0;
+  line-height: 32px;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+}
+.piece-panel .created-info .user-avatar-link {
+  margin-right: 8px;
+}
+.piece-panel .created-info .user-avatar-link .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.piece-panel .created-info .created-time {
+  color: #aaa;
+}
+.piece-panel .subtitle {
+  font-size: 16px;
+  color: #aaa;
+  margin: 20px 0 15px 0;
+}
+.piece-panel .voters img {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 0 8px 8px 0;
+}
+.piece-panel .comment {
+  margin-bottom: 15px;
+}
+.piece-panel .comment .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.piece-panel .comment .comment-user {
+  margin-bottom: 4px;
+}
+.piece-panel .comment .comment-user .comment-time {
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 8px;
+}
+.piece-panel #comment-textarea {
+  margin-top: 5px;
+}

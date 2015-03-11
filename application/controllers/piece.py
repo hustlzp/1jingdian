@@ -2,8 +2,6 @@
 from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
-from ..forms import SigninForm, SignupForm
-from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission, UserPermission
 from ..models import db, User, Piece, PieceVote, PieceComment
 from ..utils.helper import get_pieces_data_by_day
@@ -34,7 +32,7 @@ def pieces_by_date():
 def view(uid):
     """Single piece page"""
     piece = Piece.query.get_or_404(uid)
-    return render_template("piece/piece.html", piece=piece)
+    return render_template("piece/view.html", piece=piece)
 
 
 @bp.route('/piece/<int:uid>/modal')

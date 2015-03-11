@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% from 'macro/ui.html' import render_user_avatar, render_comment %}
+
+{% block page_title %}文字片段{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary piece-panel">
+         <div class="panel-body">
+            <div class="media piece-wap">
+               <div class="media-left">
+                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                       data-piece-id={{ piece.id }}>
+                     <div class="vote-icon">
+                        <span class="fa fa-angle-up"></span>
+                     </div>
+                     <div class="votes-count">{{ piece.votes_count }}</div>
+                  </div>
+               </div>
+
+               <div class="media-body">
+                  <div class="content">
+                     {{ piece.content }}
+                  </div>
+
+                  <div class="meta">
+                     <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
+                     <a href="{{ piece.source_url }}" class="source" target="_blank">
+                        {{ piece.source }}</a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="created-info clearfix">
+               <div class="pull-left">
+                  {{ render_user_avatar(piece.user) }}
+                  <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
+               </div>
+
+               <div class="actions pull-right">
+                  <a href="">分享到微信</a>
+               </div>
+            </div>
+
+            <div class="subtitle">{{ piece.votes_count }} 顶</div>
+
+            <div class="voters">
+               {% for voter in piece.voters %}
+                  {{ render_user_avatar(voter.user) }}
+               {% endfor %}
+            </div>
+
+            <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+
+            <div class="comments-wap">
+               {% for comment in piece.comments %}
+                  {{ render_comment(comment) }}
+               {% endfor %}
+            </div>
+
+            <form action="">
+               <div class="form-group">
+                  <textarea name="" id="comment-textarea" rows="5" class="form-control"
+                            placeholder="说点什么"></textarea>
+               </div>
+               <div class="submit-wap submit-right">
+                  <button type="button" class="btn btn-sm btn-comment btn-primary"
+                          data-piece-id="{{ piece.id }}">评论
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+{% endblock %}
