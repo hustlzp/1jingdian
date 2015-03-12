@@ -207,7 +207,9 @@ textarea {
 a {
   color: @main-color;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    text-decoration: none;
     color: @dark-main;
   }
 }

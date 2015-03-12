@@ -170,6 +170,8 @@ textarea {
 a {
   color: #1e88a8;
 }
-a:hover {
+a:hover,
+a:focus {
+  text-decoration: none;
   color: #1a7692;
 }
