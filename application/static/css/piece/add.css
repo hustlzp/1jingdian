@@ -1,3 +1,14 @@
+.source-help {
+  color: #aaa;
+  margin-left: 3px;
+  cursor: pointer;
+}
+.source-help:hover {
+  color: #999;
+}
+.popover-content {
+  font-size: 12px;
+}
 .panel .panel-footer ul {
   padding-left: 20px;
   margin-bottom: 0;

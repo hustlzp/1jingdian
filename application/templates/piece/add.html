@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from 'macro/form.html' import vertical_field, form_submit %}
+{% from 'macro/form.html' import vertical_field, field_error, form_submit %}
 
 {% block page_title %}分享句子{% endblock %}
 {% block page_content %}
@@ -11,7 +11,16 @@
                {{ form.csrf_token() }}
 
                {{ vertical_field(form.content, rows=5) }}
-               {{ vertical_field(form.source) }}
+
+               <div class="form-group">
+                  <label for="source">
+                     出处 <span class="fa fa-question-circle source-help"></span>
+                  </label>
+                  <input class="form-control" id="source" name="source" placeholder="选填"
+                         type="text" value="{{ form.source.data or "" }}">
+                  {{ field_error(form.source) }}
+               </div>
+
                {{ vertical_field(form.source_url) }}
 
                <div class="submit-wap submit-right">
@@ -20,7 +29,6 @@
             </form>
          </div>
          <div class="panel-footer">
-            {#            <p>分享规则：</p>#}
             <ul>
                <li>每位用户每天最多分享 2 个句子。</li>
                <li>分享的句子在 10 分钟内可编辑，超出时间则无法更改。</li>

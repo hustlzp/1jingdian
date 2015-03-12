@@ -80,16 +80,18 @@
          </div>
 
          <div class="meta">
-            {% if piece.source_url %}
-               <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-            {% endif %}
+            {% if piece.source %}
+               {% if piece.source_url %}
+                  <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
+               {% endif %}
 
-            {% if piece.source_url %}
-               <a href="{{ piece.source_url }}" class="source" target="_blank">
-                  {{ piece.source }}
-               </a>
-            {% else %}
-               <span class="source">{{ piece.source }}</span>
+               {% if piece.source_url %}
+                  <a href="{{ piece.source_url }}" class="source" target="_blank">
+                     {{ piece.source }}
+                  </a>
+               {% else %}
+                  <span class="source">{{ piece.source }}</span>
+               {% endif %}
             {% endif %}
          </div>
       </div>
@@ -275,12 +277,14 @@
                   </div>
 
                   <div class="meta">
-                     {% if piece.source_url %}
-                        <a href="{{ piece.source_url }}" class="source" target="_blank">
-                           {{ piece.source }}
-                        </a>
-                     {% else %}
-                        <span class="source">{{ piece.source }}</span>
+                     {% if piece.source %}
+                        {% if piece.source_url %}
+                           <a href="{{ piece.source_url }}" class="source" target="_blank">
+                              {{ piece.source }}
+                           </a>
+                        {% else %}
+                           <span class="source">{{ piece.source }}</span>
+                        {% endif %}
                      {% endif %}
                   </div>
                </div>
