@@ -25,3 +25,16 @@
 .panel .panel-footer ul li:last-child {
   padding-bottom: 0;
 }
+.form-group {
+  position: relative;
+}
+.form-group .source-favicon {
+  display: none;
+  border: none;
+  border-style: none;
+  position: absolute;
+  right: 10px;
+  bottom: 9px;
+  width: 16px;
+  height: 16px;
+}

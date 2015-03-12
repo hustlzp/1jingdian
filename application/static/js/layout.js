@@ -56,6 +56,14 @@ $(document).on('click', '.vote', function () {
     });
 });
 
+// 点击input或textare，隐藏placeholder
+$("input, textarea").focus(function () {
+    $(this).data('placeholder', $(this).attr('placeholder'))
+    $(this).attr('placeholder', '');
+}).blur(function () {
+    $(this).attr('placeholder', $(this).data('placeholder'));
+});
+
 /**
  * Show flash message.
  */

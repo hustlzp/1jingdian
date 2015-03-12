@@ -30,7 +30,13 @@
                      {{ field_error(form.source) }}
                   </div>
 
-                  {{ vertical_field(form.source_url) }}
+                  <div class="form-group">
+                     <label for="source">链接</label>
+                     <input class="form-control" id="source_url" name="source_url"
+                            placeholder="选填" type="text" value="{{ form.source_url.data or "" }}">
+                     <img class="source-favicon" src="" alt=""/>
+                     {{ field_error(form.source_url) }}
+                  </div>
                </div>
 
                <div class="submit-wap submit-right">
