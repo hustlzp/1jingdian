@@ -22,10 +22,10 @@ def votes(uid):
     return render_template('user/votes.html', user=user)
 
 
-@bp.route('/people/<int:uid>/likes')
-def likes(uid):
+@bp.route('/people/<int:uid>/collections')
+def collections(uid):
     user = User.query.get_or_404(uid)
-    return render_template('user/likes.html', user=user)
+    return render_template('user/collections.html', user=user)
 
 
 @bp.route('/my/settings', methods=['GET', 'POST'])
