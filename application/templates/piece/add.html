@@ -13,6 +13,12 @@
                {{ vertical_field(form.content, rows=5) }}
 
                <div class="form-group">
+                  <label for="original">原创</label>
+
+                  {{ form.original() }}
+               </div>
+
+               <div class="form-group">
                   <label for="source">
                      出处 <span class="fa fa-question-circle source-help"></span>
                   </label>

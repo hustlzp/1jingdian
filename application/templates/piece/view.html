@@ -36,6 +36,14 @@
                            <span class="source">{{ piece.source }}</span>
                         {% endif %}
                      {% endif %}
+
+                     {% if piece.source and piece.original %}
+                        <span class="divider">/</span>
+                     {% endif %}
+
+                     {% if piece.original %}
+                        <span class="original-flag">原创</span>
+                     {% endif %}
                   </div>
                </div>
             </div>

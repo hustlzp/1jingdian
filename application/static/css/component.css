@@ -45,13 +45,20 @@
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-modal-wap .piece-wap .source {
+.piece-modal-wap .piece-wap .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece-modal-wap .piece-wap .source_favicon {
+.piece-modal-wap .piece-wap .meta .divider {
+  margin: 0 2px;
+}
+.piece-modal-wap .piece-wap .meta .source {
+  color: #aaa;
+  font-size: 12px;
+}
+.piece-modal-wap .piece-wap .meta .source_favicon {
   vertical-align: text-bottom;
-  margin-right: 5px;
+  margin-right: 3px;
   width: 16px;
   height: 16px;
 }
@@ -125,7 +132,20 @@
   font-size: 16px;
   text-align: center;
 }
+.pieces-by-date-wap {
+  margin-bottom: 40px;
+}
+.pieces-by-date-wap .panel-body {
+  padding: 0;
+}
+.pieces-by-date-wap .panel-footer .btn-show-hide-pieces {
+  cursor: pointer;
+}
+.pieces-by-date-wap .panel-footer .btn-show-hide-pieces:hover {
+  color: #1e88a8;
+}
 .pieces-by-date-wap .hide-pieces {
+  border-top: 1px solid #ddd;
   display: none;
 }
 .pieces-by-date-wap .pieces-pager {
@@ -156,7 +176,7 @@
 }
 .pieces-by-date-wap .pieces-pager .pre-page:hover,
 .pieces-by-date-wap .pieces-pager .next-page:hover {
-  background-color: #f2f2f2;
+  background-color: #f6f6f6;
 }
 .pieces-by-date-wap .pieces-pager .pre-page {
   float: left;
@@ -168,6 +188,7 @@
 }
 .pieces-by-date-wap .share-piece {
   padding: 20px 0;
+  color: #999;
 }
 .pieces-by-date-wap .share-piece a {
   color: #999;
@@ -176,21 +197,6 @@
 .pieces-by-date-wap .share-piece a:hover {
   text-decoration: none;
   color: #333;
-}
-.pieces-by-date-wap {
-  margin-bottom: 40px;
-}
-.pieces-by-date-wap .panel-body {
-  padding: 0;
-}
-.pieces-by-date-wap .panel-footer {
-  border-top: none;
-}
-.pieces-by-date-wap .panel-footer .btn-show-hide-pieces {
-  cursor: pointer;
-}
-.pieces-by-date-wap .panel-footer .btn-show-hide-pieces:hover {
-  color: #1e88a8;
 }
 .piece {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -222,20 +228,21 @@
   margin-left: 1px;
 }
 .piece .content {
-  padding-right: 100px;
+  padding-right: 85px;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece .source {
+.piece .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 5px;
-  width: 16px;
-  height: 16px;
+.piece .meta .divider {
+  margin: 0 2px;
+}
+.piece .meta .source {
+  color: #aaa;
+  font-size: 12px;
 }
 .piece .vote {
   background-color: #ffffff;
@@ -354,13 +361,20 @@
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-panel .piece-wap .source {
+.piece-panel .piece-wap .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece-panel .piece-wap .source_favicon {
+.piece-panel .piece-wap .meta .divider {
+  margin: 0 2px;
+}
+.piece-panel .piece-wap .meta .source {
+  color: #aaa;
+  font-size: 12px;
+}
+.piece-panel .piece-wap .meta .source_favicon {
   vertical-align: text-bottom;
-  margin-right: 5px;
+  margin-right: 3px;
   width: 16px;
   height: 16px;
 }

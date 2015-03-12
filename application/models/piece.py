@@ -9,6 +9,7 @@ class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
+    original = db.Column(db.Boolean, default=False)
     source = db.Column(db.String(100))
     source_url = db.Column(db.String(200))
     clicks_count = db.Column(db.Integer, default=0)

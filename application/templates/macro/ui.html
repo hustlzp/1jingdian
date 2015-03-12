@@ -93,6 +93,14 @@
                   <span class="source">{{ piece.source }}</span>
                {% endif %}
             {% endif %}
+
+            {% if piece.source and piece.original %}
+               <span class="divider">/</span>
+            {% endif %}
+
+            {% if piece.original %}
+               <span class="original-flag">原创</span>
+            {% endif %}
          </div>
       </div>
    </div>
@@ -286,6 +294,14 @@
                            <span class="source">{{ piece.source }}</span>
                         {% endif %}
                      {% endif %}
+
+                     {% if piece.source and piece.original %}
+                        <span class="divider">/</span>
+                     {% endif %}
+
+                     {% if piece.original %}
+                        <span class="original-flag">原创</span>
+                     {% endif %}
                   </div>
                </div>
             </div>
@@ -304,9 +320,13 @@
             {{ render_pieces(pieces_data.pieces) }}
          {% else %}
             <div class="text-center share-piece">
-               <a href="{{ url_for('piece.add') }}">
-                  <span class="fa fa-plus"></span> 分享
-               </a>
+               {% if page == 1 %}
+                  <a href="{{ url_for('piece.add') }}">
+                     <span class="fa fa-plus"></span> 分享
+                  </a>
+               {% else %}
+                  无
+               {% endif %}
             </div>
          {% endif %}
 
