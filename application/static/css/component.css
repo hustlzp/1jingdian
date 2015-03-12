@@ -49,16 +49,6 @@
   color: #aaa;
   font-size: 12px;
 }
-.piece-modal-wap .piece-wap .meta .source {
-  color: #aaa;
-  font-size: 12px;
-}
-.piece-modal-wap .piece-wap .meta .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 3px;
-  width: 16px;
-  height: 16px;
-}
 .piece-modal-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
@@ -234,10 +224,6 @@
   color: #aaa;
   font-size: 12px;
 }
-.piece .meta .source {
-  color: #aaa;
-  font-size: 12px;
-}
 .piece .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
@@ -359,16 +345,6 @@
   color: #aaa;
   font-size: 12px;
 }
-.piece-panel .piece-wap .meta .source {
-  color: #aaa;
-  font-size: 12px;
-}
-.piece-panel .piece-wap .meta .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 3px;
-  width: 16px;
-  height: 16px;
-}
 .piece-panel .created-info {
   padding: 10px 0;
   line-height: 32px;
@@ -413,4 +389,19 @@
 }
 .piece-panel #comment-textarea {
   margin-top: 5px;
+}
+.source-wap .source_favicon {
+  vertical-align: text-bottom;
+  margin-right: 3px;
+  width: 16px;
+  height: 16px;
+}
+.source-wap .source {
+  line-height: 16px;
+  color: #aaa;
+}
+.source-wap a.source:hover,
+.source-wap a.source:focus {
+  text-decoration: none;
+  color: #1e88a8;
 }

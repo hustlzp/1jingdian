@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_user_avatar, render_comment %}
+{% from 'macro/ui.html' import render_user_avatar, render_comment, render_piece_source %}
 
 {% block page_title %}句子 #{{ piece.id }}{% endblock %}
 {% block page_content %}
@@ -23,20 +23,7 @@
                   </div>
 
                   <div class="meta">
-                     {% if piece.original %}
-                        <span class="source">原创</span>
-                     {% elif piece.source %}
-                        {% if piece.source_url %}
-                           <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-                        {% endif %}
-
-                        {% if piece.source_url %}
-                           <a href="{{ piece.source_url }}" class="source" target="_blank">
-                              {{ piece.source }}</a>
-                        {% else %}
-                           <span class="source">{{ piece.source }}</span>
-                        {% endif %}
-                     {% endif %}
+                     {{ render_piece_source(piece) }}
                   </div>
                </div>
             </div>

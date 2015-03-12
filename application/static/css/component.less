@@ -57,18 +57,6 @@
     .meta {
       color: #aaa;
       font-size: 12px;
-
-      .source {
-        color: #aaa;
-        font-size: 12px;
-      }
-
-      .source_favicon {
-        vertical-align: text-bottom;
-        margin-right: 3px;
-        width: 16px;
-        height: 16px;
-      }
     }
   }
 
@@ -288,11 +276,6 @@
   .meta {
     color: #aaa;
     font-size: 12px;
-
-    .source {
-      color: #aaa;
-      font-size: 12px;
-    }
   }
 
   .vote {
@@ -442,18 +425,6 @@
     .meta {
       color: #aaa;
       font-size: 12px;
-
-      .source {
-        color: #aaa;
-        font-size: 12px;
-      }
-
-      .source_favicon {
-        vertical-align: text-bottom;
-        margin-right: 3px;
-        width: 16px;
-        height: 16px;
-      }
     }
   }
 
@@ -512,5 +483,27 @@
 
   #comment-textarea {
     margin-top: 5px;
+  }
+}
+
+.source-wap {
+  .source_favicon {
+    vertical-align: text-bottom;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .source {
+    line-height: 16px;
+    color: #aaa;
+  }
+
+  a.source {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: @main-color;
+    }
   }
 }

@@ -25,6 +25,29 @@
 {% endmacro %}
 
 
+{% macro render_piece_source(piece, with_favicon=True) %}
+   <span class="source-wap">
+      {% if piece.original %}
+         <span class="source">原创</span>
+      {% else %}
+         {% if piece.source_url %}
+            {% if with_favicon %}
+               <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
+            {% endif %}
+
+            <a href="{{ piece.source_url }}" class="source" target="_blank">
+               {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
+            </a>
+         {% else %}
+            <span class="source">
+               {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
+            </span>
+         {% endif %}
+      {% endif %}
+   </span>
+{% endmacro %}
+
+
 {% macro render_user_avatar(user) %}
    <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
       <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
@@ -80,20 +103,7 @@
          </div>
 
          <div class="meta">
-            {% if piece.original %}
-               <span class="source">原创</span>
-            {% elif piece.source %}
-               {% if piece.source_url %}
-                  <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-               {% endif %}
-
-               {% if piece.source_url %}
-                  <a href="{{ piece.source_url }}" class="source" target="_blank">
-                     {{ piece.source }}</a>
-               {% else %}
-                  <span class="source">{{ piece.source }}</span>
-               {% endif %}
-            {% endif %}
+            {{ render_piece_source(piece) }}
          </div>
       </div>
    </div>
@@ -278,16 +288,7 @@
                   </div>
 
                   <div class="meta">
-                     {% if piece.original %}
-                        <span class="source">原创</span>
-                     {% elif piece.source %}
-                        {% if piece.source_url %}
-                           <a href="{{ piece.source_url }}" class="source" target="_blank">
-                              {{ piece.source }}</a>
-                        {% else %}
-                           <span class="source">{{ piece.source }}</span>
-                        {% endif %}
-                     {% endif %}
+                     {{ render_piece_source(piece, false) }}
                   </div>
                </div>
             </div>

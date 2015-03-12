@@ -1,3 +1,6 @@
+#form-add-piece label[for='original'] {
+  margin-bottom: 0px;
+}
 #form-add-piece #original {
   margin-left: 5px;
 }
