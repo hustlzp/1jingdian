@@ -54,7 +54,7 @@ def add():
         piece.user_id = g.user.id
         db.session.add(piece)
         db.session.commit()
-        return redirect(url_for('site.index'))
+        return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)
 
 

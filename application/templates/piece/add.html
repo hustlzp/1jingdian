@@ -32,9 +32,13 @@
 
                   <div class="form-group">
                      <label for="source">链接</label>
-                     <input class="form-control" id="source_url" name="source_url"
-                            placeholder="选填" type="text" value="{{ form.source_url.data or "" }}">
-                     <img class="source-favicon" src="" alt=""/>
+
+                     <div class="source-url-wap">
+                        <input class="form-control" id="source_url" name="source_url"
+                               placeholder="选填" type="text"
+                               value="{{ form.source_url.data or "" }}">
+                        <img class="source-favicon" src="" alt=""/>
+                     </div>
                      {{ field_error(form.source_url) }}
                   </div>
                </div>

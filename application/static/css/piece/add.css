@@ -25,10 +25,10 @@
 .panel .panel-footer ul li:last-child {
   padding-bottom: 0;
 }
-.form-group {
+.source-url-wap {
   position: relative;
 }
-.form-group .source-favicon {
+.source-url-wap .source-favicon {
   display: none;
   border: none;
   border-style: none;

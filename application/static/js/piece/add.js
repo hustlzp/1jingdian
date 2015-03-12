@@ -12,18 +12,26 @@ $('#original').change(function () {
     }
 });
 
+var timer = null,
+    sourceFavicon = $('.source-favicon'),
+    sourceUrlInput = $('#source_url');
+
+if ($.trim(sourceUrlInput.val()) !== "") {
+    sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
+}
+
 // 输入source url时，加载favicon
 g.timer = null;
-$('#source_url').keyup(function () {
+sourceUrlInput.keyup(function () {
     var input = $(this);
     clearTimeout(g.timer);
     g.timer = setTimeout(function () {
-        $('.source-favicon').attr('src', 'http://g.soz.im/' + input.val());
+        sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
     }, 500);
 });
 
 // 图片加载失败时，隐藏
-$('.source-favicon').load(function () {
+sourceFavicon.load(function () {
     $(this).fadeIn('fast');
 }).error(function () {
     $(this).hide();
