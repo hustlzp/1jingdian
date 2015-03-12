@@ -50,7 +50,7 @@
   font-size: 12px;
 }
 .piece-modal-wap .piece-wap .meta .divider {
-  margin: 0 2px;
+  margin: 0 1px;
 }
 .piece-modal-wap .piece-wap .meta .source {
   color: #aaa;
@@ -238,7 +238,7 @@
   font-size: 12px;
 }
 .piece .meta .divider {
-  margin: 0 2px;
+  margin: 0 1px;
 }
 .piece .meta .source {
   color: #aaa;
@@ -366,7 +366,7 @@
   font-size: 12px;
 }
 .piece-panel .piece-wap .meta .divider {
-  margin: 0 2px;
+  margin: 0 1px;
 }
 .piece-panel .piece-wap .meta .source {
   color: #aaa;
