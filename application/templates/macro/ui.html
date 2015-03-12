@@ -295,12 +295,21 @@
 {% endmacro %}
 
 
-{% macro render_pieces_by_date(pieces_data) %}
+{% macro render_pieces_by_date(pieces_data, page, pre_page, next_page) %}
    <div class="panel panel-primary pieces-by-date-wap">
       <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
       <div class="panel-body">
-         {{ render_pieces(pieces_data.pieces) }}
+         {% if pieces_data.pieces.count() %}
+            {{ render_pieces(pieces_data.pieces) }}
+         {% else %}
+            <div class="text-center share-piece">
+               <a href="{{ url_for('piece.add') }}">
+                  <span class="fa fa-plus"></span> 分享
+               </a>
+            </div>
+         {% endif %}
+
          {% if pieces_data.hide_pieces_count %}
             <div class="hide-pieces">
                {{ render_pieces(pieces_data.hide_pieces) }}
@@ -310,11 +319,21 @@
 
       {% if pieces_data.hide_pieces_count %}
          <div class="panel-footer text-center">
-            <span class="btn-show-hide-pieces">
+            <div class="btn-show-hide-pieces">
                展开其余 {{ pieces_data.hide_pieces_count }} 段文字
-            </span>
+            </div>
          </div>
       {% endif %}
+
+      <div class="pieces-pager clearfix">
+         <a class="pre-page {% if not pre_page %}disabled{% endif %}"
+            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>
+            <span class="fa fa-angle-left"></span>
+         </a>
+         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">
+            <span class="fa fa-angle-right"></span>
+         </a>
+      </div>
    </div>
 
    <script type="text/javascript">

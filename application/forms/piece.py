@@ -6,7 +6,7 @@ from ..models import User
 
 
 class PieceForm(Form):
-    content = TextAreaField('句子', validators=[DataRequired('内容不能为空')])
+    content = TextAreaField('句子', validators=[DataRequired('句子不能为空')])
     source = StringField('出处', validators=[Optional()])
     source_url = StringField('链接', validators=[Optional(), URL(message='链接格式不正确')],
                              description='选填')

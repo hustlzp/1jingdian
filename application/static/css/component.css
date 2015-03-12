@@ -128,6 +128,55 @@
 .pieces-by-date-wap .hide-pieces {
   display: none;
 }
+.pieces-by-date-wap .pieces-pager {
+  border-top: 1px solid #eee;
+}
+.pieces-by-date-wap .pieces-pager .pre-page,
+.pieces-by-date-wap .pieces-pager .next-page {
+  text-align: center;
+  width: 50%;
+  padding: 10px 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+.pieces-by-date-wap .pieces-pager .pre-page.disabled,
+.pieces-by-date-wap .pieces-pager .next-page.disabled {
+  color: #aaa;
+}
+.pieces-by-date-wap .pieces-pager .pre-page.disabled:hover,
+.pieces-by-date-wap .pieces-pager .next-page.disabled:hover {
+  background-color: #ffffff;
+  cursor: default;
+}
+.pieces-by-date-wap .pieces-pager .pre-page:hover,
+.pieces-by-date-wap .pieces-pager .next-page:hover,
+.pieces-by-date-wap .pieces-pager .pre-page:focus,
+.pieces-by-date-wap .pieces-pager .next-page:focus {
+  text-decoration: none;
+}
+.pieces-by-date-wap .pieces-pager .pre-page:hover,
+.pieces-by-date-wap .pieces-pager .next-page:hover {
+  background-color: #f2f2f2;
+}
+.pieces-by-date-wap .pieces-pager .pre-page {
+  float: left;
+  border-bottom-left-radius: 5px;
+}
+.pieces-by-date-wap .pieces-pager .next-page {
+  float: right;
+  border-bottom-right-radius: 5px;
+}
+.pieces-by-date-wap .share-piece {
+  padding: 20px 0;
+}
+.pieces-by-date-wap .share-piece a {
+  color: #999;
+}
+.pieces-by-date-wap .share-piece a:focus,
+.pieces-by-date-wap .share-piece a:hover {
+  text-decoration: none;
+  color: #333;
+}
 .pieces-by-date-wap {
   margin-bottom: 40px;
 }
