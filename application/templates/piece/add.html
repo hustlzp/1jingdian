@@ -18,16 +18,18 @@
                   {{ form.original() }}
                </div>
 
-               <div class="form-group">
-                  <label for="source">
-                     出处 <span class="fa fa-question-circle source-help"></span>
-                  </label>
-                  <input class="form-control" id="source" name="source" placeholder="选填"
-                         type="text" value="{{ form.source.data or "" }}">
-                  {{ field_error(form.source) }}
-               </div>
+               <div class="external">
+                  <div class="form-group">
+                     <label for="source">
+                        出处 <span class="fa fa-question-circle source-help"></span>
+                     </label>
+                     <input class="form-control" id="source" name="source" placeholder="选填"
+                            type="text" value="{{ form.source.data or "" }}">
+                     {{ field_error(form.source) }}
+                  </div>
 
-               {{ vertical_field(form.source_url) }}
+                  {{ vertical_field(form.source_url) }}
+               </div>
 
                <div class="submit-wap submit-right">
                   <button type="submit" class="btn btn-submit btn-primary">分享</button>

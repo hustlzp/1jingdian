@@ -23,7 +23,9 @@
                   </div>
 
                   <div class="meta">
-                     {% if piece.source %}
+                     {% if piece.original %}
+                        <span class="source">原创</span>
+                     {% elif piece.source %}
                         {% if piece.source_url %}
                            <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
                         {% endif %}
@@ -34,14 +36,6 @@
                         {% else %}
                            <span class="source">{{ piece.source }}</span>
                         {% endif %}
-                     {% endif %}
-
-                     {% if piece.source and piece.original %}
-                        <span class="divider">/</span>
-                     {% endif %}
-
-                     {% if piece.original %}
-                        <span class="original-flag">原创</span>
                      {% endif %}
                   </div>
                </div>
