@@ -49,6 +49,19 @@
   color: #aaa;
   font-size: 12px;
 }
+.piece-modal-wap .piece-wap .meta .collect {
+  margin-left: 10px;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+}
+.piece-modal-wap .piece-wap .meta .collect .collect-text {
+  font-size: 12px;
+}
+.piece-modal-wap .piece-wap .meta .collect.collected,
+.piece-modal-wap .piece-wap .meta .collect:hover {
+  color: #1e88a8;
+}
 .piece-modal-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
@@ -237,9 +250,17 @@
   margin-left: 10px;
   color: #aaa;
   font-size: 14px;
+  cursor: pointer;
 }
+.piece .meta .collect .collect-text {
+  font-size: 12px;
+}
+.piece .meta .collect.collected,
 .piece .meta .collect:hover {
   color: #1e88a8;
+}
+.piece .meta .collect.collected {
+  visibility: visible !important;
 }
 .piece .vote {
   background-color: #ffffff;
@@ -337,4 +358,53 @@
 .source-wap a.source:focus {
   text-decoration: none;
   color: #1e88a8;
+}
+@media (min-width: 768px) {
+  #collect-modal .modal-dialog {
+    width: 400px;
+  }
+}
+#collect-modal .modal-body {
+  padding: 20px 20px 15px 20px;
+  height: 300px;
+  overflow: auto;
+}
+#collect-modal .modal-footer {
+  padding: 15px 20px;
+}
+#collect-modal .collection-bar {
+  border: 1px solid #ddd;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px 0;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+#collect-modal .collection-bar:hover {
+  background-color: #f2f2f2;
+}
+#collect-modal .collection-bar.collected .collected-flag {
+  visibility: visible;
+}
+#collect-modal .collection-bar .collected-flag {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+  color: #1e88a8;
+  visibility: hidden;
+}
+#collect-modal .btn-add-collection {
+  color: #999;
+  cursor: pointer;
+  float: left;
+  line-height: 30px;
+}
+#collect-modal .btn-add-collection:hover {
+  color: #333;
+}
+#collect-modal .btn-close {
+  display: block;
+  float: right;
+  padding: 4px 10px;
 }

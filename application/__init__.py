@@ -164,12 +164,13 @@ def register_db(app):
 
 def register_routes(app):
     """Register routes."""
-    from .controllers import site, account, piece, user
+    from .controllers import site, account, piece, user, collection
 
     app.register_blueprint(site.bp)
     app.register_blueprint(account.bp)
     app.register_blueprint(piece.bp)
     app.register_blueprint(user.bp)
+    app.register_blueprint(collection.bp)
 
 
 def register_error_handle(app):

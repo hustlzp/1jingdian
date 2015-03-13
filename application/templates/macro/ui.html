@@ -104,6 +104,14 @@
 
          <div class="meta">
             {{ render_piece_source(piece) }}
+            <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+               title="收藏到句集" data-toggle="modal"
+               data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+               <span class="fa fa-star"></span>
+               <span class="collect-text">
+                  {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
+               </span>
+            </a>
          </div>
       </div>
    </div>
@@ -306,8 +314,9 @@
                   <div class="meta">
                      {{ render_piece_source(piece, false) }}
 
-                     <a class="collect" title="将句子收藏到句集" data-toggle="modal"
-                        data-target="#collect-modal">
+                     <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+                        title="收藏到句集" data-toggle="modal"
+                        data-target="#collect-modal" data-piece-id="{{ piece.id }}">
                         <span class="fa fa-star"></span>
                      </a>
                   </div>
@@ -436,10 +445,15 @@
                <h4 class="modal-title">收藏到句集</h4>
             </div>
             <div class="modal-body">
-               <p>One fine body&hellip;</p>
+
             </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <div class="modal-footer clearfix">
+               <div class="btn-add-collection">
+                  <span class="fa fa-plus"></span> 新建句集
+               </div>
+               <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
+                  关闭
+               </button>
             </div>
          </div>
       </div>
@@ -449,7 +463,59 @@
       $(document).on('click', '.collect', function () {
          var pieceId = $(this).data('piece-id');
 
-         $('#collect-modal').data('piece-id', pieceId);
+         $.ajax({
+            url: urlFor('collection.collection_bars', {piece_id: pieceId}),
+            method: 'post'
+         }).done(function (html) {
+            $('#collect-modal .modal-body').html(html);
+         });
+      }).on('click', '.collection-bar', function () {
+         var url = "",
+               pieceId = $(this).data('piece-id'),
+               collectionId = $(this).data('collection-id'),
+               collected = $(this).hasClass('collected'),
+               collectionBar = $(this);
+
+         if (collected) {
+            url = urlFor('piece.uncollect', {uid: pieceId, collection_id: collectionId});
+         } else {
+            url = urlFor('piece.collect', {uid: pieceId, collection_id: collectionId});
+         }
+
+         $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'json'
+         }).done(function (response) {
+            if (response.result) {
+               if (collected) {
+                  collectionBar.removeClass('collected');
+               } else {
+                  collectionBar.addClass('collected');
+               }
+            }
+
+            if ($('.collection-bar.collected').length) {
+               $(".collect[data-piece-id='" + pieceId + "']")
+                     .addClass('collected')
+                     .find('.collect-text').text('已收藏');
+            } else {
+               $(".collect[data-piece-id='" + pieceId + "']")
+                     .removeClass('collected')
+                     .find('.collect-text').text('收藏');
+            }
+         });
       });
    </script>
+{% endmacro %}
+
+
+{% macro render_collection_bars(collections, piece_id) %}
+   {% for collection in g.user.collections %}
+      <div class="collection-bar {% if collection.has_piece(piece_id) %}collected{% endif %}"
+           data-piece-id="{{ piece_id }}" data-collection-id="{{ collection.id }}">
+         {{ collection.title }}
+         <span class="collected-flag fa fa-check"></span>
+      </div>
+   {% endfor %}
 {% endmacro %}

@@ -3,6 +3,7 @@ from flask import g
 from urlparse import urlparse
 from datetime import datetime, date
 from ._base import db
+from .collection import CollectionPiece
 
 
 class Piece(db.Model):
@@ -26,6 +27,11 @@ class Piece(db.Model):
         if not g.user:
             return False
         return g.user.voted_pieces.filter(PieceVote.piece_id == self.id).count() > 0
+
+    def collected_by_user(self):
+        if not g.user:
+            return False
+        return g.user.colleced_pieces.filter(CollectionPiece.piece_id == self.id).count() > 0
 
     @property
     def source_favicon(self):

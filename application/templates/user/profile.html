@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap %}
+{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
+      render_collect_modal %}
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
    {{ render_piece_modal_wap(user.created_pieces.first()) }}
+   {{ render_collect_modal() }}
 
    <div class="container">
       <div class="panel panel-primary">

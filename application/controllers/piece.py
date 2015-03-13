@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Piece, PieceVote, PieceComment
+from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
@@ -106,3 +106,35 @@ def comment(uid):
         return comment_macro(comment)
     else:
         abort(500)
+
+
+@bp.route('/piece/<int:uid>/collect_to/<int:collection_id>', methods=['POST'])
+@UserPermission()
+def collect(uid, collection_id):
+    piece = Piece.query.get_or_404(uid)
+    collection = Collection.query.get_or_404(collection_id)
+    collect = g.user.colleced_pieces.filter(CollectionPiece.collection_id == collection_id,
+                                            CollectionPiece.piece_id == uid).first()
+    if not collect:
+        collect = CollectionPiece(collection_id=collection_id, piece_id=uid)
+        g.user.colleced_pieces.append(collect)
+        db.session.add(g.user)
+        db.session.commit()
+        return json.dumps({'result': True})
+    else:
+        return json.dumps({'result': False})
+
+
+@bp.route('/piece/<int:uid>/uncollect_from/<int:collection_id>', methods=['POST'])
+@UserPermission()
+def uncollect(uid, collection_id):
+    piece = Piece.query.get_or_404(uid)
+    collects = g.user.colleced_pieces.filter(CollectionPiece.collection_id == collection_id,
+                                             CollectionPiece.piece_id == uid)
+    if not collects.count():
+        return json.dumps({'result': False})
+    else:
+        for collect in collects:
+            db.session.delete(collect)
+        db.session.commit()
+        return json.dumps({'result': True})

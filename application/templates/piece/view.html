@@ -1,8 +1,11 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_user_avatar, render_comment, render_piece_source %}
+{% from 'macro/ui.html' import render_user_avatar, render_comment, render_piece_source,
+      render_collect_modal %}
 
 {% block page_title %}句子 #{{ piece.id }}{% endblock %}
 {% block page_content %}
+   {{ render_collect_modal() }}
+
    <div class="container">
       <div class="panel panel-primary piece-panel">
          <div class="panel-body">
@@ -24,6 +27,14 @@
 
                   <div class="meta">
                      {{ render_piece_source(piece) }}
+                     <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+                        title="收藏到句集" data-toggle="modal"
+                        data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                        <span class="fa fa-star"></span>
+                        <span class="collect-text">
+                           {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
+                        </span>
+                     </a>
                   </div>
                </div>
             </div>

@@ -48,7 +48,8 @@ function urlFor(endpoint, values, external) {
     values = (typeof values !== 'undefined') ? values : {};
 
     if (g.rules[endpoint] === undefined) {
-        throw "Uncorrect endpoint.";
+        throw new Error("Uncorrect endpoint in " + "urlFor(\"" + endpoint + "\", " +
+            JSON.stringify(values) + ")");
     }
 
     keys = $.map(values, function (value, key) {
@@ -93,6 +94,9 @@ function urlFor(endpoint, values, external) {
                 url += key + "=" + values[key];
             }
         });
+    } else {
+        throw new Error("Uncorrect parameters in " + "urlFor(\"" + endpoint + "\", " +
+            JSON.stringify(values) + ")");
     }
 
     if (external) {

@@ -49,6 +49,22 @@
   .meta {
     color: #aaa;
     font-size: 12px;
+
+    .collect {
+      margin-left: 10px;
+      color: #aaa;
+      font-size: 14px;
+      cursor: pointer;
+
+      .collect-text {
+        font-size: 12px;
+      }
+
+      &.collected,
+      &:hover {
+        color: @main-color;
+      }
+    }
   }
 }
 
