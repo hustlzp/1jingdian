@@ -250,6 +250,10 @@
 
   &:hover {
     background-color: #f8f8f8;
+
+    .meta .collect {
+      visibility: visible;
+    }
   }
 
   .media-left {
@@ -282,6 +286,17 @@
   .meta {
     color: #aaa;
     font-size: 12px;
+
+    .collect {
+      visibility: hidden;
+      margin-left: 10px;
+      color: #aaa;
+      font-size: 14px;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
   }
 
   .vote {

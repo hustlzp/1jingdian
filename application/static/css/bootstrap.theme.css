@@ -175,3 +175,24 @@ a:focus {
   text-decoration: none;
   color: #1a7692;
 }
+.modal-header {
+  background-color: #1e88a8;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+.modal-header .close {
+  opacity: .8;
+  color: #ffffff;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.modal-header .close:focus,
+.modal-header .close:hover {
+  opacity: 1;
+  color: #fff;
+  outline: none;
+}

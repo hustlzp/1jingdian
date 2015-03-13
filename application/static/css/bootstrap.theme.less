@@ -213,3 +213,27 @@ a {
     color: @dark-main;
   }
 }
+
+.modal-header {
+  background-color: @main-color;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  position: relative;
+
+  .close {
+    opacity: .8;
+    color: #ffffff;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    &:focus,
+    &:hover {
+      opacity: 1;
+      color: #fff;
+      outline: none;
+    }
+  }
+}

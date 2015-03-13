@@ -191,6 +191,7 @@
       $(document).on('click', '.pieces-wap .piece', function (event) {
          // 链接和vote不触发此事件
          if (event.target.tagName.toLowerCase() === 'a'
+               || $(event.target).parent('a').length
                || $(event.target).hasClass('vote')
                || $(event.target).hasClass('user-avatar')
                || $(event.target).parents('.vote').length) {
@@ -304,6 +305,11 @@
 
                   <div class="meta">
                      {{ render_piece_source(piece, false) }}
+
+                     <a class="collect" title="将句子收藏到句集" data-toggle="modal"
+                        data-target="#collect-modal">
+                        <span class="fa fa-star"></span>
+                     </a>
                   </div>
                </div>
             </div>
@@ -417,4 +423,33 @@
          </a>
       </div>
    </div>
+{% endmacro %}
+
+
+{% macro render_collect_modal() %}
+   <div class="modal fade" id="collect-modal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                     aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title">收藏到句集</h4>
+            </div>
+            <div class="modal-body">
+               <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script type="text/javascript">
+      $(document).on('click', '.collect', function () {
+         var pieceId = $(this).data('piece-id');
+
+         $('#collect-modal').data('piece-id', pieceId);
+      });
+   </script>
 {% endmacro %}

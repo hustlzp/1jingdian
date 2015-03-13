@@ -203,6 +203,9 @@
 .piece:hover {
   background-color: #f8f8f8;
 }
+.piece:hover .meta .collect {
+  visibility: visible;
+}
 .piece .media-left {
   padding-right: 18px;
 }
@@ -228,6 +231,15 @@
 .piece .meta {
   color: #aaa;
   font-size: 12px;
+}
+.piece .meta .collect {
+  visibility: hidden;
+  margin-left: 10px;
+  color: #aaa;
+  font-size: 14px;
+}
+.piece .meta .collect:hover {
+  color: #1e88a8;
 }
 .piece .vote {
   background-color: #ffffff;

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_piece_modal_wap, render_pieces_by_date %}
+{% from "macro/ui.html" import render_piece_modal_wap, render_pieces_by_date, render_collect_modal %}
 
 {% block page_title %}首页{% endblock %}
 {% block page_vars %}
@@ -9,6 +9,7 @@
 {% endblock %}
 {% block page_content %}
    {{ render_piece_modal_wap(first_piece) }}
+   {{ render_collect_modal() }}
 
    <div class="container">
       <div class="pieces-container">
