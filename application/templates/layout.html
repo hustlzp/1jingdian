@@ -30,7 +30,7 @@
    {{ script('js/init.js') }}
 </head>
 
-<body id="page" class="{{ page_name(self) }}">
+<body id="page" class="{{ page_name(self) }} {% if g.user %}signed-in{% endif %}">
 
 {# Flash message #}
 {% with message = get_flashed_messages()[0] %}
@@ -72,7 +72,7 @@
 
          <ul class="nav navbar-nav navbar-right">
             <li>
-               <a href="{{ url_for('piece.add') }}">
+               <a href="{{ url_for('piece.add') }}" class="need-signed-in">
                   <span class="fa fa-plus"></span> 分享句子
                </a>
             </li>

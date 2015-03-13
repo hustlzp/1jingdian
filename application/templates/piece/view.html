@@ -8,7 +8,7 @@
          <div class="panel-body">
             <div class="media piece-wap">
                <div class="media-left">
-                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
                        data-piece-id={{ piece.id }}>
                      <div class="vote-icon">
                         <span class="fa fa-angle-up"></span>

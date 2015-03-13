@@ -88,7 +88,7 @@
 {% macro render_piece_modal(piece) %}
    <div class="media piece-wap">
       <div class="media-left">
-         <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+         <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
               data-piece-id={{ piece.id }}>
             <div class="vote-icon">
                <span class="fa fa-angle-up"></span>
@@ -224,6 +224,11 @@
          }
       });
 
+      /**
+       * Open the piece modal.
+       * @param pieceId
+       * @param callback
+       */
       function openModal(pieceId, callback) {
          if (window.history.replaceState) {
             window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
@@ -238,6 +243,10 @@
          });
       }
 
+      /**
+       * Close the piece modal.
+       * @param callback
+       */
       function closeModal(callback) {
          if (window.history.replaceState) {
             window.history.replaceState('', '', g.originalUrl);
@@ -265,7 +274,7 @@
          <div class="piece" data-piece-id={{ piece.id }}>
             <div class="media">
                <div class="media-left">
-                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %}"
+                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
                        data-piece-id={{ piece.id }}>
                      <div class="vote-icon">
                         <span class="fa fa-angle-up"></span>
@@ -308,7 +317,7 @@
          {% else %}
             <div class="text-center share-piece">
                {% if page == 1 %}
-                  <a href="{{ url_for('piece.add') }}">
+                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">
                      <span class="fa fa-plus"></span> 分享句子
                   </a>
                {% else %}
