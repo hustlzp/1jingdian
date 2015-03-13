@@ -135,17 +135,23 @@
       {% endfor %}
    </div>
 
-   <form action="">
-      <div class="form-group">
-         <textarea name="" id="comment-textarea" rows="5" class="form-control"
-                   placeholder="说点什么"></textarea>
+   {% if g.user %}
+      <form action="">
+         <div class="form-group">
+            <textarea name="" id="comment-textarea" rows="5" class="form-control"
+                      placeholder="说点什么"></textarea>
+         </div>
+         <div class="submit-wap submit-right">
+            <button type="button" class="btn btn-sm btn-comment btn-primary"
+                    data-piece-id="{{ piece.id }}">评论
+            </button>
+         </div>
+      </form>
+   {% else %}
+      <div class="comment-after-signed-in-wap">
+         <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
       </div>
-      <div class="submit-wap submit-right">
-         <button type="button" class="btn btn-sm btn-comment btn-primary"
-                 data-piece-id="{{ piece.id }}">评论
-         </button>
-      </div>
-   </form>
+   {% endif %}
 
    <script type="text/javascript">
       // 评论
