@@ -175,10 +175,9 @@
 }
 .pieces-by-date-wap .share-piece {
   padding: 20px 0;
-  color: #999;
 }
 .pieces-by-date-wap .share-piece a {
-  color: #999;
+  color: #777;
 }
 .pieces-by-date-wap .share-piece a:focus,
 .pieces-by-date-wap .share-piece a:hover {
