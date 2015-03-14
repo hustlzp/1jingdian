@@ -442,18 +442,46 @@
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                      aria-hidden="true">&times;</span></button>
-               <h4 class="modal-title">收藏到句集</h4>
+               {# 收藏句子 #}
+               <h4 class="modal-title for-collect-piece">收藏到句集</h4>
+               {# 新建句集 #}
+               <h4 class="modal-title for-add-collection">新建句集</h4>
             </div>
-            <div class="modal-body">
 
+            {# 收藏句子 #}
+            <div class="modal-body for-collect-piece"></div>
+            {# 新建句集 #}
+            <div class="modal-body for-add-collection">
+               <form action="" id="form-add-collection">
+                  <div class="form-group">
+                     <label for="title">标题</label>
+                     <input class="form-control" id="title" name="title" type="text" value="">
+
+                     <div class="text-danger form-error" id="title-form-error"></div>
+                  </div>
+                  <div class="form-group">
+                     <label for="desc">描述</label>
+                     <textarea class="form-control" id="desc" name="desc" rows="2"
+                               placeholder="选填"></textarea>
+                  </div>
+               </form>
             </div>
+
             <div class="modal-footer clearfix">
-               <div class="btn-add-collection">
-                  <span class="fa fa-plus"></span> 新建句集
+               {# 收藏句子 #}
+               <div class="for-collect-piece">
+                  <div class="btn-add-collection">
+                     <span class="fa fa-plus"></span> 新建句集
+                  </div>
+                  <button type="button" class="btn btn-primary btn-close" data-dismiss="modal">
+                     关闭
+                  </button>
                </div>
-               <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
-                  关闭
-               </button>
+               {# 新建句集 #}
+               <div class="for-add-collection">
+                  <span class="btn-cancle-add-collection">取消</span>
+                  <button type="button" class="btn btn-primary btn-submit-collection">创建</button>
+               </div>
             </div>
          </div>
       </div>
@@ -463,11 +491,13 @@
       $(document).on('click', '.collect', function () {
          var pieceId = $(this).data('piece-id');
 
+         $('#collect-modal').data('piece-id', pieceId);
+
          $.ajax({
             url: urlFor('collection.collection_bars', {piece_id: pieceId}),
             method: 'post'
          }).done(function (html) {
-            $('#collect-modal .modal-body').html(html);
+            $('#collect-modal .modal-body.for-collect-piece').html(html);
          });
       }).on('click', '.collection-bar', function () {
          var url = "",
@@ -506,6 +536,58 @@
             }
          });
       });
+
+      $('.btn-add-collection').click(function () {
+         switchToAddCollection();
+      });
+
+      $('.btn-cancle-add-collection').click(function () {
+         switchToCollectPiece();
+      });
+
+      $('.btn-submit-collection').click(function () {
+         var form = $('#form-add-collection'),
+               titleInput = form.find('#title'),
+               title = $.trim(titleInput.val()),
+               desc = $.trim(form.find('#desc').val()),
+               pieceId = $('#collect-modal').data('piece-id');
+
+         if (title === "") {
+            $('#title-form-error').text('标题不能为空').fadeIn();
+            return;
+         } else {
+            $('#title-form-error').text('').hide();
+         }
+
+         $.ajax({
+            url: urlFor('collection.add_and_collect', {'piece_id': pieceId}),
+            method: 'post',
+            dataType: 'json',
+            data: {
+               title: title,
+               desc: desc
+            },
+            success: function (response) {
+               if (response.result) {
+                  $('#collect-modal .modal-body.for-collect-piece')
+                        .html(response.collection_bars_html);
+                  switchToCollectPiece();
+               } else if (response.error === 'repeat') {
+                  $('#title-form-error').text('标题重复').fadeIn();
+               }
+            }
+         });
+      });
+
+      function switchToCollectPiece() {
+         $('#collect-modal .for-collect-piece').show();
+         $('#collect-modal .for-add-collection').hide();
+      }
+
+      function switchToAddCollection() {
+         $('#collect-modal .for-collect-piece').hide();
+         $('#collect-modal .for-add-collection').show();
+      }
    </script>
 {% endmacro %}
 

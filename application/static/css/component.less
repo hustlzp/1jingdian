@@ -455,10 +455,20 @@
     }
   }
 
+  //  .for-add-collection {
+  //    display: none;
+  //  }
+  .for-collect-piece {
+    display: none;
+  }
+
   .modal-body {
     padding: 20px 20px 15px 20px;
-    height: 300px;
-    overflow: auto;
+
+    &.for-collect-piece {
+      height: 300px;
+      overflow: auto;
+    }
   }
 
   .modal-footer {
@@ -493,21 +503,41 @@
     }
   }
 
+  #form-add-collection {
+    #title-form-error {
+      display: none;
+    }
+  }
+
   .btn-add-collection {
     color: #999;
     cursor: pointer;
     float: left;
-    line-height: 30px;
+    line-height: 34px;
 
     &:hover {
       color: #333;
     }
   }
 
+  .btn-cancle-add-collection {
+    color: #999;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+      color: #333;
+    }
+  }
+
+  .btn-submit-collection {
+    vertical-align: baseline;
+  }
+
   .btn-close {
     display: block;
     float: right;
-    padding: 4px 10px;
+    vertical-align: baseline;
   }
 }
 

@@ -7,7 +7,7 @@ from ..utils.uploadsets import collection_covers, collection_sm_covers
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
     cover = db.Column(db.String(200))
     sm_cover = db.Column(db.String(200))
     desc = db.Column(db.Text)

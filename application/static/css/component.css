@@ -364,8 +364,13 @@
     width: 400px;
   }
 }
+#collect-modal .for-collect-piece {
+  display: none;
+}
 #collect-modal .modal-body {
   padding: 20px 20px 15px 20px;
+}
+#collect-modal .modal-body.for-collect-piece {
   height: 300px;
   overflow: auto;
 }
@@ -394,17 +399,31 @@
   color: #1e88a8;
   visibility: hidden;
 }
+#collect-modal #form-add-collection #title-form-error {
+  display: none;
+}
 #collect-modal .btn-add-collection {
   color: #999;
   cursor: pointer;
   float: left;
-  line-height: 30px;
+  line-height: 34px;
 }
 #collect-modal .btn-add-collection:hover {
   color: #333;
 }
+#collect-modal .btn-cancle-add-collection {
+  color: #999;
+  cursor: pointer;
+  margin-right: 10px;
+}
+#collect-modal .btn-cancle-add-collection:hover {
+  color: #333;
+}
+#collect-modal .btn-submit-collection {
+  vertical-align: baseline;
+}
 #collect-modal .btn-close {
   display: block;
   float: right;
-  padding: 4px 10px;
+  vertical-align: baseline;
 }

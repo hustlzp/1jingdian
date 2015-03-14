@@ -37,3 +37,27 @@ def edit(uid):
         db.session.commit()
         return redirect(url_for('collection.view', uid=uid))
     return render_template('collection/edit.html', form=form)
+
+
+@bp.route('/collection/add_and_collect/<int:piece_id>', methods=['POST'])
+@UserPermission()
+def add_and_collect(piece_id):
+    piece = Piece.query.get_or_404(piece_id)
+    title = request.form.get('title')
+    desc = request.form.get('desc')
+
+    if not title:
+        return json.dumps({'result': False})
+    collection = g.user.collections.filter(Collection.title == title).first()
+    if collection:
+        return json.dumps({'result': False, 'error': 'repeat'})
+
+    collection = Collection(title=title, desc=desc, user_id=g.user.id)
+    db.session.add(collection)
+    collect = CollectionPiece(collection_owner_id=g.user.id, piece_id=piece_id)
+    collection.pieces.append(collect)
+    db.session.commit()
+
+    collection_bars_macro = get_template_attribute('macro/ui.html', 'render_collection_bars')
+    collection_bars_html = collection_bars_macro(g.user.collections, piece_id)
+    return json.dumps({'result': True, 'collection_bars_html': collection_bars_html})
