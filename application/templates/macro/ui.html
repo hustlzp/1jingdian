@@ -671,6 +671,11 @@
          content: '如：书籍、电影、歌曲、文章标题等。'
       });
 
+      // 若为原创，则无需填写其他内容
+      if ($('#original').is(":checked")) {
+         $('.external').hide();
+      }
+
       $('#original').change(function () {
          if ($(this).is(":checked")) {
             $('.external').slideUp('fast');
