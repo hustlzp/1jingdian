@@ -65,6 +65,10 @@ def edit(uid):
     form = PieceForm(obj=piece)
     if form.validate_on_submit():
         form.populate_obj(piece)
+        if piece.original:
+            piece.author = ""
+            piece.source = ""
+            piece.source_url = ""
         db.session.add(piece)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
