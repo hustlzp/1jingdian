@@ -38,4 +38,4 @@ class PieceEditPermission(Permission):
 
 class PieceAddPermission(Permission):
     def rule(self):
-        return AdminRule() | PieceAddRule()
+        return PieceAddRule()
