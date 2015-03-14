@@ -21,8 +21,17 @@
   right: 20px;
   top: 20px;
   color: #999;
-  font-size: 20px;
+  font-size: 16px;
 }
 .collection-header .btn-edit-collection:hover {
+  color: #333;
+}
+.collection-header .back-to-collections {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #999;
+}
+.collection-header .back-to-collections:hover {
   color: #333;
 }

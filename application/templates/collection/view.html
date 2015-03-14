@@ -32,6 +32,11 @@
                      <span class="fa fa-edit"></span>
                   </a>
                {% endif %}
+
+               <a href="{{ url_for('user.collections', uid=collection.user.id) }}"
+                  class="back-to-collections">
+                  <span class="fa fa-angle-left"></span>&nbsp;&nbsp;返回
+               </a>
             </div>
 
             {{ render_pieces(collection.pieces, attr="piece") }}
