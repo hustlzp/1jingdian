@@ -31,8 +31,8 @@
 {% endmacro %}
 
 
-{% macro form_submit(btn_text) %}
-   <div class="submit-wap">
+{% macro form_submit(btn_text, right=True) %}
+   <div class="submit-wap {% if right %}submit-right{% endif %}">
       <button type="submit" class="btn btn-primary">{{ btn_text }}</button>
    </div>
 {% endmacro %}

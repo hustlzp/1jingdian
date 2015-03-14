@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import session, abort, flash, redirect, url_for
+from flask import session, abort, flash, redirect, url_for, g
 from permission import Rule
 from ..models import User
 
@@ -28,6 +28,21 @@ class AdminRule(Rule):
         user_id = int(session['user_id'])
         user = User.query.filter(User.id == user_id).first()
         return user and user.is_admin
+
+    def deny(self):
+        abort(403)
+
+
+class CollectionOwnerRule(Rule):
+    def __init__(self, collection):
+        self.collection = collection
+        super(CollectionOwnerRule, self).__init__()
+
+    def base(self):
+        return UserRule()
+
+    def check(self):
+        return self.collection and self.collection.user_id == g.user.id
 
     def deny(self):
         abort(403)

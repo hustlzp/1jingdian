@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% from 'macro/form.html' import vertical_field, form_submit %}
+
+{% block page_title %}编辑句集{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">编辑句集</div>
+         <div class="panel-body">
+            <form method="post">
+               {{ form.csrf_token() }}
+
+               {{ vertical_field(form.title) }}
+               {{ vertical_field(form.desc) }}
+
+               {{ form_submit('保存') }}
+            </form>
+         </div>
+      </div>
+   </div>
+{% endblock %}

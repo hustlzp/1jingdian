@@ -16,13 +16,22 @@
                <div class="title">
                   <span class="fa fa-book"></span>&nbsp;&nbsp;{{ collection.title }}
                </div>
+
                {% if collection.desc %}
                   <div class="desc">{{ collection.desc }}</div>
                {% endif %}
+
                <a href="{{ url_for('user.profile', uid=collection.user.id) }}">
                   <img src="{{ collection.user.avatar_url }}" alt=""
                        class="img-circle user-avatar"/>
                </a>
+
+               {% if permissions.CollectionOwnerPermission(collection).check() %}
+                  <a href="{{ url_for('collection.edit', uid=collection.id) }}"
+                     class="btn-edit-collection" title="编辑句集">
+                     <span class="fa fa-edit"></span>
+                  </a>
+               {% endif %}
             </div>
 
             {{ render_pieces(collection.pieces, attr="piece") }}
