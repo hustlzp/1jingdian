@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% from 'macro/ui.html' import render_piece_modal_wap, render_pieces, render_collect_modal %}
+
+{% block page_title %}句集 - {{ collection.title }}{% endblock %}
+{% block page_content %}
+   {{ render_collect_modal() }}
+
+   {% if collection.pieces.count() %}
+      {{ render_piece_modal_wap(collection.pieces.first().piece) }}
+   {% endif %}
+
+   <div class="container">
+      <div class="panel panel-primary piece-panel">
+         <div class="panel-body panel-body-no-padding">
+            <div class="collection-header">
+               <div class="title">
+                  <span class="fa fa-book"></span>&nbsp;&nbsp;{{ collection.title }}
+               </div>
+               {% if collection.desc %}
+                  <div class="desc">{{ collection.desc }}</div>
+               {% endif %}
+               <a href="{{ url_for('user.profile', uid=collection.user.id) }}">
+                  <img src="{{ collection.user.avatar_url }}" alt=""
+                       class="img-circle user-avatar"/>
+               </a>
+            </div>
+
+            {{ render_pieces(collection.pieces, attr="piece") }}
+         </div>
+      </div>
+   </div>
+{% endblock %}

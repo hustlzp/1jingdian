@@ -12,7 +12,11 @@
                {% for collection in user.collections %}
                   <div class="collection" data-collection-id="{{ collection.id }}">
                      <div class="title">{{ collection.title }}</div>
-                     <div class="desc">{{ collection.desc or "" }}</div>
+
+                     {% if collection.desc %}
+                        <div class="desc">{{ collection.desc }}</div>
+                     {% endif %}
+
                      <div class="pieces-count">
                         {{ collection.pieces.count() }} 句子
                      </div>

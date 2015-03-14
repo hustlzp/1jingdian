@@ -50,7 +50,7 @@
   font-size: 12px;
 }
 .piece-modal-wap .piece-wap .meta .collect {
-  margin-left: 10px;
+  margin-left: 15px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
@@ -247,7 +247,7 @@
 }
 .piece .meta .collect {
   visibility: hidden;
-  margin-left: 10px;
+  margin-left: 15px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;

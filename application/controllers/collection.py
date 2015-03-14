@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import VisitorPermission, UserPermission
-from ..models import db, User, Piece, PieceVote, PieceComment
+from ..models import db, User, Piece, PieceVote, PieceComment, Collection, CollectionPiece
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
@@ -12,7 +12,8 @@ bp = Blueprint('collection', __name__)
 
 @bp.route('/collection/<int:uid>')
 def view(uid):
-    pass
+    collection = Collection.query.get_or_404(uid)
+    return render_template('collection/view.html', collection=collection)
 
 
 @bp.route('/collection_bars/<int:piece_id>', methods=['POST'])
