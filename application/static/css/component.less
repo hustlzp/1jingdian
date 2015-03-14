@@ -11,8 +11,10 @@
   padding: 30px 20px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
+}
 
-  .piece-wap {
+.piece-detail-wap {
+  .piece-header {
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
 
@@ -59,7 +61,7 @@
       font-size: 12px;
 
       .collect {
-        margin-left: 15px;
+        margin-left: 20px;
         color: #aaa;
         font-size: 14px;
         cursor: pointer;
@@ -71,6 +73,20 @@
         &.collected,
         &:hover {
           color: @main-color;
+        }
+      }
+
+      .btn-edit-piece {
+        font-size: 14px;
+        margin-left: 20px;
+        color: #aaa;
+
+        &:hover {
+          color: @main-color;
+        }
+
+        .btn-text {
+          font-size: 12px;
         }
       }
     }
@@ -267,8 +283,11 @@
   &:hover {
     background-color: #f8f8f8;
 
-    .meta .collect {
-      visibility: visible;
+    .meta {
+      .collect,
+      .btn-edit-piece {
+        visibility: visible;
+      }
     }
   }
 
@@ -305,7 +324,7 @@
 
     .collect {
       visibility: hidden;
-      margin-left: 15px;
+      margin-left: 20px;
       color: #aaa;
       font-size: 14px;
       cursor: pointer;
@@ -321,6 +340,17 @@
 
       &.collected {
         visibility: visible !important;
+      }
+    }
+
+    .btn-edit-piece {
+      visibility: hidden;
+      font-size: 14px;
+      margin-left: 20px;
+      color: #aaa;
+
+      &:hover {
+        color: @main-color;
       }
     }
   }
@@ -538,3 +568,41 @@
   }
 }
 
+.form-piece {
+  label[for='original'] {
+    margin-bottom: 0px;
+  }
+
+  #original {
+    margin-left: 5px;
+  }
+
+  .source-url-wap {
+    position: relative;
+
+    .source-favicon {
+      display: none;
+      border: none;
+      border-style: none;
+      position: absolute;
+      right: 10px;
+      bottom: 9px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .source-help {
+    color: #aaa;
+    margin-left: 3px;
+    cursor: pointer;
+
+    &:hover {
+      color: #999;
+    }
+  }
+
+  .popover-content {
+    font-size: 12px;
+  }
+}

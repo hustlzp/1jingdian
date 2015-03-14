@@ -46,3 +46,18 @@ class CollectionOwnerRule(Rule):
 
     def deny(self):
         abort(403)
+
+
+class PieceOwnerRule(Rule):
+    def __init__(self, piece):
+        self.piece = piece
+        super(PieceOwnerRule, self).__init__()
+
+    def base(self):
+        return UserRule()
+
+    def check(self):
+        return self.piece and self.piece.user_id == g.user.id
+
+    def deny(self):
+        abort(403)

@@ -41,7 +41,7 @@ def modal(uid):
     piece.clicks_count += 1
     db.session.add(piece)
     db.session.commit()
-    modal = get_template_attribute('macro/ui.html', 'render_piece_modal')
+    modal = get_template_attribute('macro/ui.html', 'render_piece_detail_wap')
     return modal(piece)
 
 
@@ -56,6 +56,19 @@ def add():
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)
+
+
+@bp.route('/piece/<int:uid>/edit', methods=['GET', 'POST'])
+@UserPermission()
+def edit(uid):
+    piece = Piece.query.get_or_404(uid)
+    form = PieceForm(obj=piece)
+    if form.validate_on_submit():
+        form.populate(piece)
+        db.session.add(piece)
+        db.session.commit()
+        return redirect(url_for('.view', uid=piece.id))
+    return render_template('piece/edit.html', piece=piece, form=form)
 
 
 @bp.route('/piece/<int:uid>/vote', methods=['POST'])

@@ -2,7 +2,7 @@
 from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
-from ..utils.permissions import VisitorPermission, UserPermission, CollectionOwnerPermission
+from ..utils.permissions import VisitorPermission, UserPermission, CollectionEditPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, Collection, CollectionPiece
 from ..forms import CollectionForm
 
@@ -26,7 +26,7 @@ def collection_bars(piece_id):
 @bp.route('/collection/<int:uid>/edit', methods=['GET', 'POST'])
 def edit(uid):
     collection = Collection.query.get_or_404(uid)
-    permission = CollectionOwnerPermission(collection)
+    permission = CollectionEditPermission(collection)
     if not permission.check():
         return permission.deny()
 

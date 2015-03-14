@@ -1,3 +1,5 @@
+{% from 'macro/form.html' import vertical_field, field_error, form_submit %}
+
 {% macro pagination(paginator) %}
    {% if paginator.pages > 1 %}
       <ul class='pagination pagination-sm'>
@@ -85,110 +87,119 @@
 {% endmacro %}
 
 
-{% macro render_piece_modal(piece) %}
-   <div class="media piece-wap">
-      <div class="media-left">
-         <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
-              data-piece-id={{ piece.id }}>
-            <div class="vote-icon">
-               <span class="fa fa-angle-up"></span>
+{% macro render_piece_detail_wap(piece) %}
+   <div class="piece-detail-wap">
+      <div class="media piece-header">
+         <div class="media-left">
+            <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
+                 data-piece-id={{ piece.id }}>
+               <div class="vote-icon">
+                  <span class="fa fa-angle-up"></span>
+               </div>
+               <div class="votes-count">{{ piece.votes_count }}</div>
             </div>
-            <div class="votes-count">{{ piece.votes_count }}</div>
-         </div>
-      </div>
-
-      <div class="media-body">
-         <div class="content">
-            {{ piece.content }}
          </div>
 
-         <div class="meta">
-            {{ render_piece_source(piece) }}
-            <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-               title="收藏到句集" data-toggle="modal"
-               data-target="#collect-modal" data-piece-id="{{ piece.id }}">
-               <span class="fa fa-star"></span>
+         <div class="media-body">
+            <div class="content">
+               {{ piece.content }}
+            </div>
+
+            <div class="meta">
+               {{ render_piece_source(piece) }}
+
+               <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+                  title="收藏到句集" data-toggle="modal"
+                  data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                  <span class="fa fa-star"></span>
                <span class="collect-text">
                   {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
                </span>
-            </a>
+               </a>
+
+               {% if permissions.PieceEditPermission(piece).check() %}
+                  <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
+                     <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
+                  </a>
+               {% endif %}
+            </div>
          </div>
       </div>
-   </div>
 
-   <div class="created-info clearfix">
-      <div class="pull-left">
-         {{ render_user_avatar(piece.user) }}
-         <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
-      </div>
-
-      <div class="actions pull-right">
-         <a href="">分享到微信</a>
-      </div>
-   </div>
-
-   <div class="subtitle">{{ piece.votes_count }} 顶</div>
-
-   <div class="voters">
-      {% for voter in piece.voters %}
-         {{ render_user_avatar(voter.user) }}
-      {% endfor %}
-   </div>
-
-   <div class="subtitle">{{ piece.comments.count() }} 评论</div>
-
-   <div class="comments-wap">
-      {% for comment in piece.comments %}
-         {{ render_comment(comment) }}
-      {% endfor %}
-   </div>
-
-   {% if g.user %}
-      <form action="">
-         <div class="form-group">
-            <textarea name="" id="comment-textarea" rows="5" class="form-control"
-                      placeholder="说点什么"></textarea>
+      <div class="created-info clearfix">
+         <div class="pull-left">
+            {{ render_user_avatar(piece.user) }}
+            <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
          </div>
-         <div class="submit-wap submit-right">
-            <button type="button" class="btn btn-sm btn-comment btn-primary"
-                    data-piece-id="{{ piece.id }}">评论
-            </button>
+
+         <div class="actions pull-right">
+            <a href="">分享到微信</a>
          </div>
-      </form>
-   {% else %}
-      <div class="comment-after-signed-in-wap">
-         <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
       </div>
-   {% endif %}
 
-   <script type="text/javascript">
-      // 评论
-      $('.btn-comment').click(function () {
-         var pieceId = parseInt($(this).attr('data-piece-id')),
-               comment = $.trim($('#comment-textarea').val());
+      <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
-         if (comment !== "") {
-            $.ajax({
-               url: urlFor('piece.comment', {uid: pieceId}),
-               method: 'post',
-               data: {
-                  comment: comment
-               },
-               success: function (comment) {
-                  $('.comments-wap').append(comment);
-                  $('#comment-textarea').val('');
-               }
-            });
-         }
-      });
-   </script>
+      <div class="voters">
+         {% for voter in piece.voters %}
+            {{ render_user_avatar(voter.user) }}
+         {% endfor %}
+      </div>
+
+      <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+
+      <div class="comments-wap">
+         {% for comment in piece.comments %}
+            {{ render_comment(comment) }}
+         {% endfor %}
+      </div>
+
+      {% if g.user %}
+         <form action="">
+            <div class="form-group">
+               <textarea name="" id="comment-textarea" rows="5" class="form-control"
+                         placeholder="说点什么"></textarea>
+            </div>
+            <div class="submit-wap submit-right">
+               <button type="button" class="btn btn-sm btn-comment btn-primary"
+                       data-piece-id="{{ piece.id }}">评论
+               </button>
+            </div>
+         </form>
+      {% else %}
+         <div class="comment-after-signed-in-wap">
+            <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
+         </div>
+      {% endif %}
+
+      <script type="text/javascript">
+         // 评论
+         $('.btn-comment').click(function () {
+            var pieceId = parseInt($(this).attr('data-piece-id')),
+                  comment = $.trim($('#comment-textarea').val());
+
+            if (comment !== "") {
+               $.ajax({
+                  url: urlFor('piece.comment', {uid: pieceId}),
+                  method: 'post',
+                  data: {
+                     comment: comment
+                  },
+                  success: function (comment) {
+                     $('.comments-wap').append(comment);
+                     $('#comment-textarea').val('');
+                  }
+               });
+            }
+         });
+      </script>
+   </div>
 {% endmacro %}
 
 
 {% macro render_piece_modal_wap(piece) %}
    <div class="piece-modal-wap" data-piece-id={{ piece.id }}>
       {% if piece %}
-         {{ render_piece_modal(piece) }}
+         {{ render_piece_detail_wap(piece) }}
       {% endif %}
    </div>
 
@@ -319,6 +330,12 @@
                         data-target="#collect-modal" data-piece-id="{{ piece.id }}">
                         <span class="fa fa-star"></span>
                      </a>
+
+                     {% if permissions.PieceEditPermission(piece).check() %}
+                        <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
+                           <span class="fa fa-pencil"></span>
+                        </a>
+                     {% endif %}
                   </div>
                </div>
             </div>
@@ -600,4 +617,90 @@
          <span class="collected-flag fa fa-check"></span>
       </div>
    {% endfor %}
+{% endmacro %}
+
+
+{% macro render_piece_form(form, add=True) %}
+   <form method="post" class="form-piece">
+      {{ form.csrf_token() }}
+
+      {{ vertical_field(form.content, rows=5) }}
+
+      <div class="form-group">
+         <label for="original">原创</label>
+
+         {{ form.original() }}
+      </div>
+
+      <div class="external">
+         {{ vertical_field(form.author) }}
+
+         <div class="form-group">
+            <label for="source">
+               出处 <span class="fa fa-question-circle source-help"></span>
+            </label>
+            <input class="form-control" id="source" name="source" placeholder="选填"
+                   type="text" value="{{ form.source.data or "" }}">
+            {{ field_error(form.source) }}
+         </div>
+
+         <div class="form-group">
+            <label for="source_url">链接</label>
+
+            <div class="source-url-wap">
+               <input class="form-control" id="source_url" name="source_url"
+                      placeholder="选填" type="text"
+                      value="{{ form.source_url.data or "" }}">
+               <img class="source-favicon" src="" alt=""/>
+            </div>
+            {{ field_error(form.source_url) }}
+         </div>
+      </div>
+
+      <div class="submit-wap submit-right">
+         <button type="submit" class="btn btn-submit btn-primary">
+            {% if add %}分享{% else %}保存{% endif %}
+         </button>
+      </div>
+   </form>
+
+   <script type="text/javascript">
+      $('.source-help').popover({
+         trigger: 'hover',
+         container: 'body',
+         content: '如：书籍、电影、歌曲、文章标题等。'
+      });
+
+      $('#original').change(function () {
+         if ($(this).is(":checked")) {
+            $('.external').slideUp('fast');
+         } else {
+            $('.external').slideDown('fast');
+         }
+      });
+
+      var timer = null,
+            sourceFavicon = $('.source-favicon'),
+            sourceUrlInput = $('#source_url');
+
+      if ($.trim(sourceUrlInput.val()) !== "") {
+         sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
+      }
+
+      // 输入source url时，加载favicon
+      sourceUrlInput.keyup(function () {
+         var input = $(this);
+         clearTimeout(timer);
+         timer = setTimeout(function () {
+            sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
+         }, 500);
+      });
+
+      // 图片加载失败时，隐藏
+      sourceFavicon.load(function () {
+         $(this).fadeIn('fast');
+      }).error(function () {
+         $(this).hide();
+      });
+   </script>
 {% endmacro %}

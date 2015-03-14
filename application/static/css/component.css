@@ -10,14 +10,14 @@
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
-.piece-modal-wap .piece-wap {
+.piece-detail-wap .piece-header {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
 }
-.piece-modal-wap .piece-wap .media-left {
+.piece-detail-wap .piece-header .media-left {
   padding-right: 18px;
 }
-.piece-modal-wap .piece-wap .vote {
+.piece-detail-wap .piece-header .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -26,88 +26,99 @@
   cursor: pointer;
   text-align: center;
 }
-.piece-modal-wap .piece-wap .vote:hover {
+.piece-detail-wap .piece-header .vote:hover {
   border-color: #bbb;
 }
-.piece-modal-wap .piece-wap .vote.voted {
+.piece-detail-wap .piece-header .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece-modal-wap .piece-wap .vote .votes-count {
+.piece-detail-wap .piece-header .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece-modal-wap .piece-wap .vote .vote-icon {
+.piece-detail-wap .piece-header .vote .vote-icon {
   line-height: 1;
 }
-.piece-modal-wap .piece-wap .content {
+.piece-detail-wap .piece-header .content {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-modal-wap .piece-wap .meta {
+.piece-detail-wap .piece-header .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece-modal-wap .piece-wap .meta .collect {
-  margin-left: 15px;
+.piece-detail-wap .piece-header .meta .collect {
+  margin-left: 20px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
 }
-.piece-modal-wap .piece-wap .meta .collect .collect-text {
+.piece-detail-wap .piece-header .meta .collect .collect-text {
   font-size: 12px;
 }
-.piece-modal-wap .piece-wap .meta .collect.collected,
-.piece-modal-wap .piece-wap .meta .collect:hover {
+.piece-detail-wap .piece-header .meta .collect.collected,
+.piece-detail-wap .piece-header .meta .collect:hover {
   color: #1e88a8;
 }
-.piece-modal-wap .created-info {
+.piece-detail-wap .piece-header .meta .btn-edit-piece {
+  font-size: 14px;
+  margin-left: 20px;
+  color: #aaa;
+}
+.piece-detail-wap .piece-header .meta .btn-edit-piece:hover {
+  color: #1e88a8;
+}
+.piece-detail-wap .piece-header .meta .btn-edit-piece .btn-text {
+  font-size: 12px;
+}
+.piece-detail-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 }
-.piece-modal-wap .created-info .user-avatar-link {
+.piece-detail-wap .created-info .user-avatar-link {
   margin-right: 8px;
 }
-.piece-modal-wap .created-info .user-avatar-link .user-avatar {
+.piece-detail-wap .created-info .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-modal-wap .created-info .created-time {
+.piece-detail-wap .created-info .created-time {
   color: #aaa;
 }
-.piece-modal-wap .subtitle {
+.piece-detail-wap .subtitle {
   font-size: 16px;
   color: #aaa;
   margin: 20px 0 15px 0;
 }
-.piece-modal-wap .voters img {
+.piece-detail-wap .voters img {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-modal-wap .comment {
+.piece-detail-wap .comment {
   margin-bottom: 15px;
 }
-.piece-modal-wap .comment .user-avatar {
+.piece-detail-wap .comment .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-modal-wap .comment .comment-user {
+.piece-detail-wap .comment .comment-user {
   margin-bottom: 4px;
 }
-.piece-modal-wap .comment .comment-user .comment-time {
+.piece-detail-wap .comment .comment-user .comment-time {
   font-size: 12px;
   color: #aaa;
   margin-left: 8px;
 }
-.piece-modal-wap #comment-textarea {
+.piece-detail-wap #comment-textarea {
   margin-top: 5px;
 }
-.piece-modal-wap .comment-after-signed-in-wap {
+.piece-detail-wap .comment-after-signed-in-wap {
   padding: 12px;
   text-align: center;
   border-top: 1px solid #ddd;
@@ -216,7 +227,8 @@
 .piece:hover {
   background-color: #f8f8f8;
 }
-.piece:hover .meta .collect {
+.piece:hover .meta .collect,
+.piece:hover .meta .btn-edit-piece {
   visibility: visible;
 }
 .piece .media-left {
@@ -247,7 +259,7 @@
 }
 .piece .meta .collect {
   visibility: hidden;
-  margin-left: 15px;
+  margin-left: 20px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
@@ -261,6 +273,15 @@
 }
 .piece .meta .collect.collected {
   visibility: visible !important;
+}
+.piece .meta .btn-edit-piece {
+  visibility: hidden;
+  font-size: 14px;
+  margin-left: 20px;
+  color: #aaa;
+}
+.piece .meta .btn-edit-piece:hover {
+  color: #1e88a8;
 }
 .piece .vote {
   background-color: #ffffff;
@@ -426,4 +447,34 @@
   display: block;
   float: right;
   vertical-align: baseline;
+}
+.form-piece label[for='original'] {
+  margin-bottom: 0px;
+}
+.form-piece #original {
+  margin-left: 5px;
+}
+.form-piece .source-url-wap {
+  position: relative;
+}
+.form-piece .source-url-wap .source-favicon {
+  display: none;
+  border: none;
+  border-style: none;
+  position: absolute;
+  right: 10px;
+  bottom: 9px;
+  width: 16px;
+  height: 16px;
+}
+.form-piece .source-help {
+  color: #aaa;
+  margin-left: 3px;
+  cursor: pointer;
+}
+.form-piece .source-help:hover {
+  color: #999;
+}
+.form-piece .popover-content {
+  font-size: 12px;
 }

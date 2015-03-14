@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from 'macro/form.html' import vertical_field, field_error, form_submit %}
+{% from 'macro/ui.html' import render_piece_form %}
 
 {% block page_title %}分享句子{% endblock %}
 {% block page_content %}
@@ -7,46 +7,7 @@
       <div class="panel panel-primary">
          <div class="panel-heading">分享句子</div>
          <div class="panel-body">
-            <form action="" id="form-add-piece" method="post">
-               {{ form.csrf_token() }}
-
-               {{ vertical_field(form.content, rows=5) }}
-
-               <div class="form-group">
-                  <label for="original">原创</label>
-
-                  {{ form.original() }}
-               </div>
-
-               <div class="external">
-                  {{ vertical_field(form.author) }}
-
-                  <div class="form-group">
-                     <label for="source">
-                        出处 <span class="fa fa-question-circle source-help"></span>
-                     </label>
-                     <input class="form-control" id="source" name="source" placeholder="选填"
-                            type="text" value="{{ form.source.data or "" }}">
-                     {{ field_error(form.source) }}
-                  </div>
-
-                  <div class="form-group">
-                     <label for="source_url">链接</label>
-
-                     <div class="source-url-wap">
-                        <input class="form-control" id="source_url" name="source_url"
-                               placeholder="选填" type="text"
-                               value="{{ form.source_url.data or "" }}">
-                        <img class="source-favicon" src="" alt=""/>
-                     </div>
-                     {{ field_error(form.source_url) }}
-                  </div>
-               </div>
-
-               <div class="submit-wap submit-right">
-                  <button type="submit" class="btn btn-submit btn-primary">分享</button>
-               </div>
-            </form>
+            {{ render_piece_form(form, add=True) }}
          </div>
          <div class="panel-footer">
             <ul>

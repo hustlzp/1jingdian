@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_user_avatar, render_comment, render_piece_source,
-      render_collect_modal %}
+{% from 'macro/ui.html' import render_piece_detail_wap,render_collect_modal %}
 
 {% block page_title %}句子 #{{ piece.id }}{% endblock %}
 {% block page_content %}
@@ -9,79 +8,7 @@
    <div class="container">
       <div class="panel panel-primary piece-panel">
          <div class="panel-body">
-            <div class="media piece-wap">
-               <div class="media-left">
-                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
-                       data-piece-id={{ piece.id }}>
-                     <div class="vote-icon">
-                        <span class="fa fa-angle-up"></span>
-                     </div>
-                     <div class="votes-count">{{ piece.votes_count }}</div>
-                  </div>
-               </div>
-
-               <div class="media-body">
-                  <div class="content">
-                     {{ piece.content }}
-                  </div>
-
-                  <div class="meta">
-                     {{ render_piece_source(piece) }}
-                     <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                        title="收藏到句集" data-toggle="modal"
-                        data-target="#collect-modal" data-piece-id="{{ piece.id }}">
-                        <span class="fa fa-star"></span>
-                        <span class="collect-text">
-                           {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
-                        </span>
-                     </a>
-                  </div>
-               </div>
-            </div>
-
-            <div class="created-info clearfix">
-               <div class="pull-left">
-                  {{ render_user_avatar(piece.user) }}
-                  <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
-               </div>
-
-               <div class="actions pull-right">
-                  <a href="">分享到微信</a>
-               </div>
-            </div>
-
-            <div class="subtitle">{{ piece.votes_count }} 顶</div>
-
-            <div class="voters">
-               {% for voter in piece.voters %}
-                  {{ render_user_avatar(voter.user) }}
-               {% endfor %}
-            </div>
-
-            <div class="subtitle">{{ piece.comments.count() }} 评论</div>
-
-            <div class="comments-wap">
-               {% for comment in piece.comments %}
-                  {{ render_comment(comment) }}
-               {% endfor %}
-            </div>
-            {% if g.user %}
-               <form action="">
-                  <div class="form-group">
-                     <textarea name="" id="comment-textarea" rows="5" class="form-control"
-                               placeholder="说点什么"></textarea>
-                  </div>
-                  <div class="submit-wap submit-right">
-                     <button type="button" class="btn btn-sm btn-comment btn-primary"
-                             data-piece-id="{{ piece.id }}">评论
-                     </button>
-                  </div>
-               </form>
-            {% else %}
-               <div class="comment-after-signed-in-wap">
-                  <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
-               </div>
-            {% endif %}
+            {{ render_piece_detail_wap(piece) }}
          </div>
       </div>
    </div>

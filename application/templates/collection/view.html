@@ -26,10 +26,10 @@
                        class="img-circle user-avatar"/>
                </a>
 
-               {% if permissions.CollectionOwnerPermission(collection).check() %}
+               {% if permissions.CollectionEditPermission(collection).check() %}
                   <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                      class="btn-edit-collection" title="编辑句集">
-                     <span class="fa fa-edit"></span>
+                     <span class="fa fa-pencil"></span>
                   </a>
                {% endif %}
 

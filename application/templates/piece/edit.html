@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from 'macro/ui.html' import render_piece_form %}
+
+{% block page_title %}编辑句子{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">编辑句子</div>
+         <div class="panel-body">
+            {{ render_piece_form(form, add=False) }}
+         </div>
+      </div>
+   </div>
+{% endblock %}
