@@ -64,7 +64,7 @@ def edit(uid):
     piece = Piece.query.get_or_404(uid)
     form = PieceForm(obj=piece)
     if form.validate_on_submit():
-        form.populate(piece)
+        form.populate_obj(piece)
         db.session.add(piece)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
