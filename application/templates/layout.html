@@ -76,6 +76,8 @@
                   <a href="{{ url_for('piece.add') }}" class="need-signed-in">
                      <span class="fa fa-plus"></span> 分享句子
                   </a>
+               {% else %}
+                  <p class="navbar-text">今日已分享 2 个句子</p>
                {% endif %}
             </li>
 
