@@ -2,7 +2,7 @@
 from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
-from ..utils.permissions import VisitorPermission, UserPermission
+from ..utils.permissions import VisitorPermission, UserPermission, PieceAddPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
@@ -48,6 +48,10 @@ def modal(uid):
 @bp.route('/piece/add', methods=['GET', 'POST'])
 @UserPermission()
 def add():
+    permission = PieceAddPermission()
+    if not permission.check():
+        return permission.deny()
+
     form = PieceForm()
     if form.validate_on_submit():
         piece = Piece(**form.data)

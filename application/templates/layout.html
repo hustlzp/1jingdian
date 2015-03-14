@@ -72,10 +72,13 @@
 
          <ul class="nav navbar-nav navbar-right">
             <li>
-               <a href="{{ url_for('piece.add') }}" class="need-signed-in">
-                  <span class="fa fa-plus"></span> 分享句子
-               </a>
+               {% if not g.user or permissions.PieceAddPermission().check() %}
+                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">
+                     <span class="fa fa-plus"></span> 分享句子
+                  </a>
+               {% endif %}
             </li>
+
             {% if g.user %}
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">

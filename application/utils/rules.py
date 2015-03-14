@@ -1,7 +1,8 @@
 # coding: utf-8
+from datetime import timedelta, datetime, date
 from flask import session, abort, flash, redirect, url_for, g
 from permission import Rule
-from ..models import User
+from ..models import db, User, Piece
 
 
 class VisitorRule(Rule):
@@ -58,6 +59,34 @@ class PieceOwnerRule(Rule):
 
     def check(self):
         return self.piece and self.piece.user_id == g.user.id
+
+    def deny(self):
+        abort(403)
+
+
+class PieceAddRule(Rule):
+    def base(self):
+        return UserRule()
+
+    def check(self):
+        today_pieces_count = g.user.created_pieces.filter(
+            db.func.date(Piece.created_at) == date.today()).count()
+        return today_pieces_count < 2
+
+    def deny(self):
+        abort(403)
+
+
+class PieceOwnerEditRule(Rule):
+    def __init__(self, piece):
+        self.piece = piece
+        super(PieceOwnerEditRule, self).__init__()
+
+    def base(self):
+        return PieceOwnerRule(self.piece)
+
+    def check(self):
+        return self.piece.created_at > datetime.now() - timedelta(minutes=20)
 
     def deny(self):
         abort(403)

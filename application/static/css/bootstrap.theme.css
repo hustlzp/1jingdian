@@ -51,6 +51,10 @@ ol li {
   color: #999;
   padding-left: 5px;
 }
+.navbar-text {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
 .navbar-nav > li > a {
   padding-top: 19px;
   padding-bottom: 19px;
