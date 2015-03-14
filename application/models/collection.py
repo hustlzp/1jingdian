@@ -19,11 +19,11 @@ class Collection(db.Model):
 
     @property
     def cover_url(self):
-        return collection_covers.url(self.cover)
+        return collection_covers.url(self.cover) if self.cover else ""
 
     @property
     def sm_cover_url(self):
-        return collection_sm_covers.url(self.sm_cover)
+        return collection_sm_covers.url(self.sm_cover) if self.sm_cover else ""
 
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0

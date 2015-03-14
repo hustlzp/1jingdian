@@ -7,6 +7,18 @@
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
             {{ render_user_profile_header(user, active="collections") }}
+
+            <div class="collections-wap clearfix">
+               {% for collection in user.collections %}
+                  <div class="collection" data-collection-id="{{ collection.id }}">
+                     <div class="title">{{ collection.title }}</div>
+                     <div class="desc">{{ collection.desc or "" }}</div>
+                     <div class="pieces-count">
+                        {{ collection.pieces.count() }} 句子
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
          </div>
       </div>
    </div>
