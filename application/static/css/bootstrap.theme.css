@@ -98,22 +98,21 @@ ol li {
   line-height: 100%;
   padding: 2px 5px;
 }
-.pagination li a,
-.pagination li span {
-  margin-right: 10px;
-  border-color: #CCCCCC;
+.pagination {
+  margin: 0;
+  display: block;
 }
-.pagination li a.current {
-  background-color: blue;
+.pagination .active a,
+.pagination .active span {
+  background-color: #1e88a8;
+  border-color: #1e88a8;
 }
-.pagination li a.ellipsis {
-  color: #333;
-}
-.pagination-sm > li:first-child > a,
-.pagination-sm > li:first-child > span,
-.pagination-sm > li:last-child > a,
-.pagination-sm > li:last-child > span {
-  border-radius: 0;
+.pagination .active a:focus,
+.pagination .active span:focus,
+.pagination .active a:hover,
+.pagination .active span:hover {
+  background-color: #1e88a8;
+  border-color: #1e88a8;
 }
 .popover {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -148,6 +147,9 @@ ol li {
 .panel-primary .panel-footer {
   padding: 16px 25px;
   background-color: #fff;
+}
+.panel-primary .panel-footer.panel-footer-no-padding {
+  padding: 0;
 }
 .btn-primary {
   background-color: #1e88a8;

@@ -1,8 +1,6 @@
 # coding: utf-8
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
-from ..forms import SigninForm, SignupForm
-from ..utils.account import signin_user, signout_user
-from ..utils.permissions import VisitorPermission, UserPermission
+from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, process_avatar
 from ..models import db, User
 from ..forms import SettingsForm
@@ -10,16 +8,20 @@ from ..forms import SettingsForm
 bp = Blueprint('user', __name__)
 
 
-@bp.route('/people/<int:uid>')
-def profile(uid):
+@bp.route('/people/<int:uid>', defaults={'page': 1})
+@bp.route('/people/<int:uid>/page/<int:page>')
+def profile(uid, page):
     user = User.query.get_or_404(uid)
-    return render_template('user/profile.html', user=user)
+    pieces = user.created_pieces.paginate(page, 20)
+    return render_template('user/profile.html', user=user, pieces=pieces)
 
 
-@bp.route('/people/<int:uid>/votes')
-def votes(uid):
+@bp.route('/people/<int:uid>/votes', defaults={'page': 1})
+@bp.route('/people/<int:uid>/votes/page/<int:page>')
+def votes(uid, page):
     user = User.query.get_or_404(uid)
-    return render_template('user/votes.html', user=user)
+    votes = user.voted_pieces.paginate(page, 20)
+    return render_template('user/votes.html', user=user, votes=votes)
 
 
 @bp.route('/people/<int:uid>/collections')

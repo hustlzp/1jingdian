@@ -2,7 +2,7 @@
 
 {% macro pagination(paginator) %}
    {% if paginator.pages > 1 %}
-      <ul class='pagination pagination-sm'>
+      <ul class='pagination pagination-sm clearfix'>
          {% if paginator.has_prev %}
             <li><a href="{{ url_for_other_page(paginator.prev_num) }}">上一页</a></li>
          {% endif %}

@@ -1,18 +1,26 @@
 {% extends "layout.html" %}
 {% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
-      render_collect_modal %}
+      render_collect_modal, pagination %}
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
-   {{ render_piece_modal_wap(user.created_pieces.first()) }}
+   {% if pieces.items %}
+      {{ render_piece_modal_wap(pieces.items[0]) }}
+   {% endif %}
    {{ render_collect_modal() }}
 
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
             {{ render_user_profile_header(user, active="creates") }}
-            {{ render_pieces(user.created_pieces) }}
+            {{ render_pieces(pieces.items) }}
          </div>
+
+         {% if pieces.page > 1 %}
+            <div class="panel-footer">
+               {{ pagination(pieces) }}
+            </div>
+         {% endif %}
       </div>
    </div>
 {% endblock %}

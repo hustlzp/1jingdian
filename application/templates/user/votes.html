@@ -1,18 +1,26 @@
 {% extends "layout.html" %}
 {% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
-      render_collect_modal %}
+      render_collect_modal, pagination %}
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
-   {{ render_piece_modal_wap(user.voted_pieces.first().piece) }}
+   {% if votes.items %}
+      {{ render_piece_modal_wap(votes.items[0].piece) }}
+   {% endif %}
    {{ render_collect_modal() }}
 
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
             {{ render_user_profile_header(user, active="votes") }}
-            {{ render_pieces(user.voted_pieces, attr="piece") }}
+            {{ render_pieces(votes.items, attr="piece") }}
          </div>
+
+         {% if votes.page > 1 %}
+            <div class="panel-footer">
+               {{ pagination(votes) }}
+            </div>
+         {% endif %}
       </div>
    </div>
 {% endblock %}
