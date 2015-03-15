@@ -66,6 +66,7 @@ ol li {
 }
 .navbar-nav > li > a.disabled {
   color: #aaa;
+  cursor: default;
 }
 .navbar-nav > li > a.disabled:focus,
 .navbar-nav > li > a.disabled:hover {

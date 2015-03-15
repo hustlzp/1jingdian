@@ -50,21 +50,6 @@
       </div>
 
       <div class="collapse navbar-collapse">
-         <ul class="nav navbar-nav">
-         </ul>
-
-         {#         <form class="navbar-form navbar-left" role="search" method="get" action="#">#}
-         {#            <div class="input-group">#}
-         {#               <input type="text" name="keyword" class="form-control input-sm"#}
-         {#                      placeholder="">#}
-         {#               <span class="input-group-btn">#}
-         {#                  <button class="btn btn-default btn-sm" type="submit">#}
-         {#                     <span class="fa fa-search"></span>#}
-         {#                  </button>#}
-         {#               </span>#}
-         {#            </div>#}
-         {#         </form>#}
-
          <ul class="nav navbar-nav navbar-right">
             <li>
                {% if not g.user or permissions.PieceAddPermission().check() %}
@@ -76,6 +61,10 @@
                      <span class="fa fa-plus"></span> 分享句子
                   </a>
                {% endif %}
+            </li>
+
+            <li>
+               <a href="http://blog.1jingdian.com" target="_blank">博客</a>
             </li>
 
             {% if g.user %}
@@ -91,6 +80,7 @@
                      <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">个人主页</a></li>
                      <li><a href="{{ url_for('user.collections', uid=g.user.id) }}">我的句集</a></li>
                      <li><a href="{{ url_for('user.settings') }}">设置</a></li>
+                     <li><a href="#">反馈</a></li>
                      <li><a href="{{ url_for('account.signout') }}">登出</a></li>
                   </ul>
                </li>

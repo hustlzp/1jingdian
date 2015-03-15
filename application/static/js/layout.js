@@ -71,6 +71,8 @@ $(document).on('click', '.need-signed-in', function () {
     }
 });
 
+$('[data-toggle="tooltip"]').tooltip();
+
 /**
  * Show flash message.
  */
