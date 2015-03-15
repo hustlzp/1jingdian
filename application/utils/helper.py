@@ -5,7 +5,7 @@ from ..models import db, Piece
 
 def get_pieces_data_by_day(day):
     """获取某天的pieces"""
-    SHOW_PIECES_COUNT = 2
+    SHOW_PIECES_COUNT = 20
     pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == day).count()
     hide_pieces_count = pieces_count - SHOW_PIECES_COUNT if pieces_count > SHOW_PIECES_COUNT else 0
     if hide_pieces_count:
