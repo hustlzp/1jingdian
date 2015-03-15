@@ -52,6 +52,7 @@ ol li {
 }
 .navbar-brand small {
   font-size: 12px;
+  padding-left: 5px;
   color: #999;
   vertical-align: bottom;
 }
