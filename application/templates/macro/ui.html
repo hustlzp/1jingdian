@@ -87,8 +87,8 @@
 {% endmacro %}
 
 
-{% macro render_piece_detail_wap(piece) %}
-   <div class="piece-detail-wap">
+{% macro render_piece_details_wap(piece) %}
+   <div class="piece-details-wap">
       <div class="media piece-header">
          <div class="media-left">
             <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
@@ -108,20 +108,22 @@
             <div class="meta">
                {{ render_piece_source(piece) }}
 
-               <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                  title="收藏到句集" data-toggle="modal"
-                  data-target="#collect-modal" data-piece-id="{{ piece.id }}">
-                  <span class="fa fa-star"></span>
-               <span class="collect-text">
-                  {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
-               </span>
-               </a>
-
-               {% if permissions.PieceEditPermission(piece).check() %}
-                  <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
-                     <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
+               <div class="options">
+                  <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+                     title="收藏到句集" data-toggle="modal"
+                     data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                     <span class="fa fa-star"></span>
+                  <span class="collect-text">
+                     {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
+                  </span>
                   </a>
-               {% endif %}
+
+                  {% if permissions.PieceEditPermission(piece).check() %}
+                     <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
+                        <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
+                     </a>
+                  {% endif %}
+               </div>
             </div>
          </div>
       </div>
@@ -199,7 +201,7 @@
 {% macro render_piece_modal_wap(piece) %}
    <div class="piece-modal-wap" data-piece-id={{ piece.id }}>
       {% if piece %}
-         {{ render_piece_detail_wap(piece) }}
+         {{ render_piece_details_wap(piece) }}
       {% endif %}
    </div>
 
@@ -310,7 +312,7 @@
                </div>
 
                <div class="media-body">
-                  <div class="pull-right">
+                  <div class="pull-right text-right">
                      {{ render_user_avatar(piece.user) }}
 
                      <div class="comments-count text-right">
@@ -325,17 +327,20 @@
                   <div class="meta">
                      {{ render_piece_source(piece, false) }}
 
-                     <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                        title="收藏到句集" data-toggle="modal"
-                        data-target="#collect-modal" data-piece-id="{{ piece.id }}">
-                        <span class="fa fa-star"></span>
-                     </a>
-
-                     {% if permissions.PieceEditPermission(piece).check() %}
-                        <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
-                           <span class="fa fa-pencil"></span>
+                     <div class="options">
+                        <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
+                           title="收藏到句集" data-toggle="modal"
+                           data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                           <span class="fa fa-star"></span>
                         </a>
-                     {% endif %}
+
+                        {% if permissions.PieceEditPermission(piece).check() %}
+                           <a href="{{ url_for('piece.edit', uid=piece.id) }}"
+                              class="btn-edit-piece" title="编辑">
+                              <span class="fa fa-pencil"></span>
+                           </a>
+                        {% endif %}
+                     </div>
                   </div>
                </div>
             </div>

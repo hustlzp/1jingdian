@@ -10,14 +10,14 @@
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
-.piece-detail-wap .piece-header {
+.piece-details-wap .piece-header {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
 }
-.piece-detail-wap .piece-header .media-left {
+.piece-details-wap .piece-header .media-left {
   padding-right: 18px;
 }
-.piece-detail-wap .piece-header .vote {
+.piece-details-wap .piece-header .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -26,99 +26,102 @@
   cursor: pointer;
   text-align: center;
 }
-.piece-detail-wap .piece-header .vote:hover {
+.piece-details-wap .piece-header .vote:hover {
   border-color: #bbb;
 }
-.piece-detail-wap .piece-header .vote.voted {
+.piece-details-wap .piece-header .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece-detail-wap .piece-header .vote .votes-count {
+.piece-details-wap .piece-header .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece-detail-wap .piece-header .vote .vote-icon {
+.piece-details-wap .piece-header .vote .vote-icon {
   line-height: 1;
 }
-.piece-detail-wap .piece-header .content {
+.piece-details-wap .piece-header .content {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-detail-wap .piece-header .meta {
+.piece-details-wap .piece-header .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece-detail-wap .piece-header .meta .collect {
-  margin-left: 20px;
+.piece-details-wap .piece-header .meta .options {
+  display: inline-block;
+  margin-left: 30px;
+}
+.piece-details-wap .piece-header .meta .options .collect {
+  margin-right: 15px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
 }
-.piece-detail-wap .piece-header .meta .collect .collect-text {
+.piece-details-wap .piece-header .meta .options .collect .collect-text {
   font-size: 12px;
 }
-.piece-detail-wap .piece-header .meta .collect.collected,
-.piece-detail-wap .piece-header .meta .collect:hover {
+.piece-details-wap .piece-header .meta .options .collect.collected,
+.piece-details-wap .piece-header .meta .options .collect:hover {
   color: #1e88a8;
 }
-.piece-detail-wap .piece-header .meta .btn-edit-piece {
+.piece-details-wap .piece-header .meta .options .btn-edit-piece {
   font-size: 14px;
-  margin-left: 20px;
   color: #aaa;
 }
-.piece-detail-wap .piece-header .meta .btn-edit-piece:hover {
+.piece-details-wap .piece-header .meta .options .btn-edit-piece:hover {
   color: #1e88a8;
 }
-.piece-detail-wap .piece-header .meta .btn-edit-piece .btn-text {
+.piece-details-wap .piece-header .meta .options .btn-edit-piece .btn-text {
   font-size: 12px;
 }
-.piece-detail-wap .created-info {
+.piece-details-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
   border-bottom: 1px solid #ddd;
   font-size: 12px;
 }
-.piece-detail-wap .created-info .user-avatar-link {
+.piece-details-wap .created-info .user-avatar-link {
   margin-right: 8px;
 }
-.piece-detail-wap .created-info .user-avatar-link .user-avatar {
+.piece-details-wap .created-info .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-detail-wap .created-info .created-time {
+.piece-details-wap .created-info .created-time {
   color: #aaa;
 }
-.piece-detail-wap .subtitle {
+.piece-details-wap .subtitle {
   font-size: 16px;
   color: #aaa;
   margin: 20px 0 15px 0;
 }
-.piece-detail-wap .voters img {
+.piece-details-wap .voters img {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-detail-wap .comment {
+.piece-details-wap .comment {
   margin-bottom: 15px;
 }
-.piece-detail-wap .comment .user-avatar {
+.piece-details-wap .comment .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-detail-wap .comment .comment-user {
+.piece-details-wap .comment .comment-user {
   margin-bottom: 4px;
 }
-.piece-detail-wap .comment .comment-user .comment-time {
+.piece-details-wap .comment .comment-user .comment-time {
   font-size: 12px;
   color: #aaa;
   margin-left: 8px;
 }
-.piece-detail-wap #comment-textarea {
+.piece-details-wap #comment-textarea {
   margin-top: 5px;
 }
-.piece-detail-wap .comment-after-signed-in-wap {
+.piece-details-wap .comment-after-signed-in-wap {
   padding: 12px;
   text-align: center;
   border-top: 1px solid #ddd;
@@ -227,8 +230,8 @@
 .piece:hover {
   background-color: #f8f8f8;
 }
-.piece:hover .meta .collect,
-.piece:hover .meta .btn-edit-piece {
+.piece:hover .meta .options .collect,
+.piece:hover .meta .options .btn-edit-piece {
   visibility: visible;
 }
 .piece .media-left {
@@ -257,30 +260,33 @@
   color: #aaa;
   font-size: 12px;
 }
-.piece .meta .collect {
+.piece .meta .options {
+  display: inline-block;
+  margin-left: 25px;
+}
+.piece .meta .options .collect {
   visibility: hidden;
-  margin-left: 20px;
+  margin-right: 15px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
 }
-.piece .meta .collect .collect-text {
+.piece .meta .options .collect .collect-text {
   font-size: 12px;
 }
-.piece .meta .collect.collected,
-.piece .meta .collect:hover {
+.piece .meta .options .collect.collected,
+.piece .meta .options .collect:hover {
   color: #1e88a8;
 }
-.piece .meta .collect.collected {
+.piece .meta .options .collect.collected {
   visibility: visible !important;
 }
-.piece .meta .btn-edit-piece {
+.piece .meta .options .btn-edit-piece {
   visibility: hidden;
   font-size: 14px;
-  margin-left: 20px;
   color: #aaa;
 }
-.piece .meta .btn-edit-piece:hover {
+.piece .meta .options .btn-edit-piece:hover {
   color: #1e88a8;
 }
 .piece .vote {

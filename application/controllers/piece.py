@@ -41,7 +41,7 @@ def modal(uid):
     piece.clicks_count += 1
     db.session.add(piece)
     db.session.commit()
-    modal = get_template_attribute('macro/ui.html', 'render_piece_detail_wap')
+    modal = get_template_attribute('macro/ui.html', 'render_piece_details_wap')
     return modal(piece)
 
 

@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_piece_detail_wap,render_collect_modal %}
+{% from 'macro/ui.html' import render_piece_details_wap,render_collect_modal %}
 
 {% block page_title %}句子 #{{ piece.id }}{% endblock %}
 {% block page_content %}
@@ -8,7 +8,7 @@
    <div class="container">
       <div class="panel panel-primary piece-panel">
          <div class="panel-body">
-            {{ render_piece_detail_wap(piece) }}
+            {{ render_piece_details_wap(piece) }}
          </div>
       </div>
    </div>

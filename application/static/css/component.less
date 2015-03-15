@@ -13,7 +13,7 @@
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
-.piece-detail-wap {
+.piece-details-wap {
   .piece-header {
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
@@ -60,33 +60,37 @@
       color: #aaa;
       font-size: 12px;
 
-      .collect {
-        margin-left: 20px;
-        color: #aaa;
-        font-size: 14px;
-        cursor: pointer;
+      .options {
+        display: inline-block;
+        margin-left: 30px;
 
-        .collect-text {
-          font-size: 12px;
+        .collect {
+          margin-right: 15px;
+          color: #aaa;
+          font-size: 14px;
+          cursor: pointer;
+
+          .collect-text {
+            font-size: 12px;
+          }
+
+          &.collected,
+          &:hover {
+            color: @main-color;
+          }
         }
 
-        &.collected,
-        &:hover {
-          color: @main-color;
-        }
-      }
+        .btn-edit-piece {
+          font-size: 14px;
+          color: #aaa;
 
-      .btn-edit-piece {
-        font-size: 14px;
-        margin-left: 20px;
-        color: #aaa;
+          &:hover {
+            color: @main-color;
+          }
 
-        &:hover {
-          color: @main-color;
-        }
-
-        .btn-text {
-          font-size: 12px;
+          .btn-text {
+            font-size: 12px;
+          }
         }
       }
     }
@@ -283,7 +287,7 @@
   &:hover {
     background-color: #f8f8f8;
 
-    .meta {
+    .meta .options {
       .collect,
       .btn-edit-piece {
         visibility: visible;
@@ -322,35 +326,39 @@
     color: #aaa;
     font-size: 12px;
 
-    .collect {
-      visibility: hidden;
-      margin-left: 20px;
-      color: #aaa;
-      font-size: 14px;
-      cursor: pointer;
+    .options {
+      display: inline-block;
+      margin-left: 25px;
 
-      .collect-text {
-        font-size: 12px;
+      .collect {
+        visibility: hidden;
+        margin-right: 15px;
+        color: #aaa;
+        font-size: 14px;
+        cursor: pointer;
+
+        .collect-text {
+          font-size: 12px;
+        }
+
+        &.collected,
+        &:hover {
+          color: @main-color;
+        }
+
+        &.collected {
+          visibility: visible !important;
+        }
       }
 
-      &.collected,
-      &:hover {
-        color: @main-color;
-      }
+      .btn-edit-piece {
+        visibility: hidden;
+        font-size: 14px;
+        color: #aaa;
 
-      &.collected {
-        visibility: visible !important;
-      }
-    }
-
-    .btn-edit-piece {
-      visibility: hidden;
-      font-size: 14px;
-      margin-left: 20px;
-      color: #aaa;
-
-      &:hover {
-        color: @main-color;
+        &:hover {
+          color: @main-color;
+        }
       }
     }
   }
