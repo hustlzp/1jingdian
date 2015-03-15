@@ -232,6 +232,8 @@
          } else {
             if (pieceModal.hasClass('open')) {
                pieceModal.attr('data-piece-id', pieceId);
+               changeUrl(pieceId);
+
                $.ajax({
                   url: urlFor('piece.modal', {uid: pieceId}),
                   success: function (modal) {
@@ -258,9 +260,7 @@
        * @param callback
        */
       function openModal(pieceId, callback) {
-         if (window.history.replaceState) {
-            window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
-         }
+         changeUrl(pieceId);
 
          $('.piece-modal-wap').animate({'right': '0'}, function () {
             $(this).addClass('open');
@@ -287,6 +287,13 @@
                callback();
             }
          });
+      }
+
+
+      function changeUrl(pieceId) {
+         if (window.history.replaceState) {
+            window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
+         }
       }
    </script>
 {% endmacro %}
