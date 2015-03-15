@@ -599,6 +599,17 @@
          });
       });
 
+      // 调整Modal的上间距
+      $('.modal').on('show.bs.modal', function () {
+         centerModal($(this));
+      });
+
+      $(window).on("resize", function () {
+         $('.modal:visible').each(function () {
+            centerModal($(this));
+         });
+      });
+
       function switchToCollectPiece() {
          $('#collect-modal .for-collect-piece').show();
          $('#collect-modal .for-add-collection').hide();
@@ -607,6 +618,16 @@
       function switchToAddCollection() {
          $('#collect-modal .for-collect-piece').hide();
          $('#collect-modal .for-add-collection').show();
+      }
+
+      function centerModal($modal) {
+         $modal.css('display', 'block');
+         var $dialog = $modal.find(".modal-dialog");
+         var offset = ($(window).height() - $dialog.height()) * 0.3;
+
+         if (offset > 0) {
+            $dialog.css('margin-top', offset);
+         }
       }
    </script>
 {% endmacro %}
