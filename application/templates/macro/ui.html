@@ -556,10 +556,13 @@
 
       $('.btn-add-collection').click(function () {
          switchToAddCollection();
+         $('#title').focus();
       });
 
       $('.btn-cancle-add-collection').click(function () {
          switchToCollectPiece();
+         $('#title').val('');
+         $('#desc').val('');
       });
 
       $('.btn-submit-collection').click(function () {

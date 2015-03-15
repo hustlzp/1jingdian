@@ -22,9 +22,10 @@
    {{ script('bower_components/plupload/js/plupload.full.min.js') }}
    <script type="text/javascript">
       var g = {
-         'domain': "{{ config.SITE_DOMAIN }}",
-         'csrfToken': "{{ csrf_token() }}",
-         'rules':{{ rules|safe }}
+         domain: "{{ config.SITE_DOMAIN }}",
+         csrfToken: "{{ csrf_token() }}",
+         rules: {{ rules|safe }},
+         method: "{{ request.method }}"
       };
    </script>
    {{ script('js/init.js') }}
