@@ -10,18 +10,16 @@
             <form method="post" action="{{ url_for('user.settings') }}">
                {{ form.csrf_token() }}
 
-               <div class="form-group">
-                  <label for="avatar">头像</label>
-
-                  <div>
-                     <div class="avatar-wap">
-                        <img class="user-avatar img-circle" src="{{ g.user.avatar_url }}" alt=""/>
-
-                        <div id="btn-upload-avatar">更换头像</div>
-                     </div>
-
-                     <span class="upload-error-info text-danger">上传失败，请稍后再试。</span>
+               <div class="form-group form-group-avatar">
+                  <div class="avatar-wap">
+                     <img class="user-avatar img-circle" src="{{ g.user.avatar_url }}" alt=""/>
                   </div>
+
+                  <button type="button" class="btn btn-primary btn-xs" id="btn-upload-avatar">
+                     更换头像
+                  </button>
+
+                  <div class="upload-error-info text-danger">上传失败，请稍后再试。</div>
                </div>
 
                {{ vertical_field(form.motto) }}
