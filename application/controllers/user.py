@@ -56,3 +56,9 @@ def upload_avatar():
         db.session.add(g.user)
         db.session.commit()
         return json.dumps({'result': True, 'avatar_url': avatars.url(filename)})
+
+
+@bp.route('/my/notifications')
+@UserPermission()
+def notifications():
+    return render_template('user/notifications.html')
