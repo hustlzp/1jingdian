@@ -51,12 +51,6 @@
 
       <div class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-            {#            <li id="nav-index">#}
-            {#               <a href="{{ url_for('site.index') }}">首页</a>#}
-            {#            </li>#}
-            {#            <li id="nav-about">#}
-            {#               <a href="{{ url_for('site.about') }}">关于</a>#}
-            {#            </li>#}
          </ul>
 
          {#         <form class="navbar-form navbar-left" role="search" method="get" action="#">#}
@@ -78,11 +72,14 @@
                      <span class="fa fa-plus"></span> 分享句子
                   </a>
                {% else %}
-                  <p class="navbar-text">今日已分享 2 个句子</p>
+                  <a title="今日已分享 2 个句子" class="disabled">
+                     <span class="fa fa-plus"></span> 分享句子
+                  </a>
                {% endif %}
             </li>
 
             {% if g.user %}
+               <li><a href="#">通知</a></li>
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                      {{ g.user.name }} <span class="fa fa-angle-down"></span>

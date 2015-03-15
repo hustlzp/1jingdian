@@ -63,6 +63,13 @@ ol li {
   padding-top: 19px;
   padding-bottom: 19px;
 }
+.navbar-nav > li > a.disabled {
+  color: #aaa;
+}
+.navbar-nav > li > a.disabled:focus,
+.navbar-nav > li > a.disabled:hover {
+  color: #aaa;
+}
 .navbar-btn {
   margin-top: 12px;
   margin-bottom: 12px;
