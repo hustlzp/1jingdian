@@ -48,11 +48,12 @@ ol li {
 }
 .navbar-brand img {
   height: 28px;
+  display: inline-block;
 }
 .navbar-brand small {
   font-size: 12px;
   color: #999;
-  padding-left: 5px;
+  vertical-align: bottom;
 }
 .navbar-text {
   margin-top: 18px;
