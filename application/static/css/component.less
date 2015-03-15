@@ -61,18 +61,13 @@
       font-size: 12px;
 
       .options {
-        display: inline-block;
-        margin-left: 30px;
+        float: right;
+        line-height: 1;
 
         .collect {
-          margin-right: 15px;
           color: #aaa;
           font-size: 14px;
           cursor: pointer;
-
-          .collect-text {
-            font-size: 12px;
-          }
 
           &.collected,
           &:hover {
@@ -81,16 +76,17 @@
         }
 
         .btn-edit-piece {
+          margin-left: 20px;
           font-size: 14px;
           color: #aaa;
 
           &:hover {
             color: @main-color;
           }
+        }
 
-          .btn-text {
-            font-size: 12px;
-          }
+        .btn-text {
+          font-size: 12px;
         }
       }
     }
@@ -465,6 +461,8 @@
 }
 
 .source-wap {
+  display: inline-block;
+
   .source_favicon {
     vertical-align: text-bottom;
     margin-right: 3px;
