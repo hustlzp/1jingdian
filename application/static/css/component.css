@@ -259,11 +259,12 @@
 }
 .piece .meta .options {
   display: inline-block;
-  margin-left: 25px;
+  margin-left: 20px;
 }
 .piece .meta .options .collect {
   visibility: hidden;
-  margin-right: 15px;
+  margin-right: 10px;
+  padding: 0 5px;
   color: #aaa;
   font-size: 14px;
   cursor: pointer;
@@ -280,6 +281,8 @@
 }
 .piece .meta .options .btn-edit-piece {
   visibility: hidden;
+  display: inline-block;
+  padding: 0 5px;
   font-size: 14px;
   color: #aaa;
 }

@@ -341,14 +341,12 @@
                         <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
                            title="收藏到句集" data-toggle="modal"
                            data-target="#collect-modal" data-piece-id="{{ piece.id }}">
-                           <span class="fa fa-star"></span>
-                        </a>
+                           <span class="fa fa-star"></span></a>
 
                         {% if permissions.PieceEditPermission(piece).check() %}
                            <a href="{{ url_for('piece.edit', uid=piece.id) }}"
                               class="btn-edit-piece" title="编辑">
-                              <span class="fa fa-pencil"></span>
-                           </a>
+                              <span class="fa fa-pencil"></span></a>
                         {% endif %}
                      </div>
                   </div>
