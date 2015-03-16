@@ -32,6 +32,9 @@ def pieces_by_date():
 def view(uid):
     """Single piece page"""
     piece = Piece.query.get_or_404(uid)
+    piece.clicks_count += 1
+    db.session.add(piece)
+    db.session.commit()
     return render_template("piece/view.html", piece=piece)
 
 
