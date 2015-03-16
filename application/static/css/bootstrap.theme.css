@@ -42,12 +42,11 @@ ol li {
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
 }
 .navbar-brand {
-  padding: 15px 0 0 15px;
-  font-size: 22px;
-  line-height: 22px;
+  height: auto;
 }
 .navbar-brand img {
   height: 28px;
+  width: 74px;
   display: inline-block;
 }
 .navbar-brand small {
