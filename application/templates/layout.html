@@ -63,6 +63,12 @@
                {% endif %}
             </li>
 
+            {#            <li>#}
+            {#               <a href="{{ url_for('site.search') }}">#}
+            {#                  <span class="fa fa-search"></span> 搜索#}
+            {#               </a>#}
+            {#            </li>#}
+
             <li>
                <a href="http://blog.1jingdian.com" target="_blank">博客</a>
             </li>
@@ -80,7 +86,7 @@
                      <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">个人主页</a></li>
                      <li><a href="{{ url_for('user.collections', uid=g.user.id) }}">我的句集</a></li>
                      <li><a href="{{ url_for('user.settings') }}">设置</a></li>
-                     <li><a href="#">反馈</a></li>
+                     <li><a href="{{ url_for('feedback.index') }}">反馈</a></li>
                      <li><a href="{{ url_for('account.signout') }}">登出</a></li>
                   </ul>
                </li>
@@ -93,11 +99,6 @@
                </li>
             {% endif %}
          </ul>
-
-         {#         <a class="btn btn-default navbar-btn navbar-right"#}
-         {#            href="{{ url_for('piece.add') }}">#}
-         {#            分享文字#}
-         {#         </a>#}
       </div>
    </div>
 </nav>

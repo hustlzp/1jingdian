@@ -27,3 +27,8 @@ def index(page):
 def about():
     """About page."""
     return render_template('site/about.html')
+
+
+@bp.route('/search')
+def search():
+    return render_template('site/search.html')
