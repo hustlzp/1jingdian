@@ -167,6 +167,7 @@ ol li {
   background-color: #1e88a8;
   border: none;
 }
+.btn-primary:focus,
 .btn-primary:hover {
   background-color: #229abe;
 }
