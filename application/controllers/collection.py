@@ -53,9 +53,9 @@ def add_and_collect(piece_id):
         return json.dumps({'result': False, 'error': 'repeat'})
 
     collection = Collection(title=title, desc=desc, user_id=g.user.id)
-    db.session.add(collection)
     collect = CollectionPiece(collection_owner_id=g.user.id, piece_id=piece_id)
     collection.pieces.append(collect)
+    db.session.add(collection)
     db.session.commit()
 
     collection_bars_macro = get_template_attribute('macro/ui.html', 'render_collection_bars')
