@@ -112,7 +112,7 @@
 
                <div class="options">
                   <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                     title="收藏到句集" data-toggle="modal"
+                     title="收藏到句集" {% if g.user %}data-toggle="modal"{% endif %}
                      data-target="#collect-modal" data-piece-id="{{ piece.id }}">
                      <span class="fa fa-star"></span>
                      <span class="btn-text">
@@ -339,8 +339,9 @@
 
                      <div class="options">
                         <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                           title="收藏到句集" data-toggle="modal"
-                           data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                           title="收藏到句集" data-piece-id="{{ piece.id }}"
+                           {% if g.user %}data-toggle="modal"{% endif %}
+                           data-target="#collect-modal">
                            <span class="fa fa-star"></span></a>
 
                         {% if permissions.PieceEditPermission(piece).check() %}
