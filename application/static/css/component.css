@@ -258,14 +258,15 @@
   font-size: 12px;
 }
 .piece .meta .source-wap {
-  margin-right: 20px;
+  margin-right: 25px;
 }
 .piece .meta .options {
   display: inline-block;
+  margin-left: -5px;
 }
 .piece .meta .options .collect {
   visibility: hidden;
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 0 5px;
   color: #aaa;
   font-size: 14px;
