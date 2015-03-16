@@ -223,6 +223,7 @@
                pieceModal = $('.piece-modal-wap').first(),
                pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
 
+         // 点击的piece与modal的piece一致
          if (pieceId === pieceIdOfModal) {
             if (pieceModal.hasClass('open')) {
                closeModal(pieceId);
@@ -233,6 +234,7 @@
             if (pieceModal.hasClass('open')) {
                pieceModal.attr('data-piece-id', pieceId);
                changeUrl(pieceId);
+               addClicksCount(pieceId);
 
                $.ajax({
                   url: urlFor('piece.modal', {uid: pieceId}),
@@ -261,6 +263,7 @@
        */
       function openModal(pieceId, callback) {
          changeUrl(pieceId);
+         addClicksCount(pieceId);
 
          $('.piece-modal-wap').animate({'right': '0'}, function () {
             $(this).addClass('open');
@@ -297,6 +300,17 @@
          if (window.history.replaceState) {
             window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
          }
+      }
+
+      /**
+       * Add piece's clicks count.
+       * @param pieceId
+       */
+      function addClicksCount(pieceId) {
+         $.ajax({
+            url: urlFor('piece.add_clicks_count', {uid: pieceId}),
+            method: 'post'
+         });
       }
    </script>
 {% endmacro %}
