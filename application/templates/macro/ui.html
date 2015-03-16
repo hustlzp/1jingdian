@@ -653,8 +653,8 @@
    {% for collection in g.user.collections %}
       <div class="collection-bar {% if collection.has_piece(piece_id) %}collected{% endif %}"
            data-piece-id="{{ piece_id }}" data-collection-id="{{ collection.id }}">
-         {{ collection.title }}
-         <span class="collected-flag fa fa-check"></span>
+         <span>{{ collection.title }}</span>
+{#         <span class="collected-flag fa fa-check"></span>#}
       </div>
    {% endfor %}
 {% endmacro %}

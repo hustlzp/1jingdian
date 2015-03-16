@@ -522,14 +522,9 @@
     margin-bottom: 12px;
     border-radius: 4px;
     cursor: pointer;
-    position: relative;
 
     &:hover {
       background-color: #f2f2f2;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
     }
 
     &.collected {
@@ -539,11 +534,13 @@
     }
 
     .collected-flag {
-      position: absolute;
-      right: 13px;
-      top: 13px;
+      float: right;
+      margin-top: 3px;
+      margin-right: -2px;
       color: @main-color;
       visibility: hidden;
+      // To fix the scroll bar position bug.
+      transform: none;
     }
   }
 

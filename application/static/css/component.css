@@ -417,23 +417,20 @@
   margin-bottom: 12px;
   border-radius: 4px;
   cursor: pointer;
-  position: relative;
 }
 #collect-modal .collection-bar:hover {
   background-color: #f2f2f2;
-}
-#collect-modal .collection-bar:last-child {
-  margin-bottom: 0;
 }
 #collect-modal .collection-bar.collected .collected-flag {
   visibility: visible;
 }
 #collect-modal .collection-bar .collected-flag {
-  position: absolute;
-  right: 13px;
-  top: 13px;
+  float: right;
+  margin-top: 3px;
+  margin-right: -2px;
   color: #1e88a8;
   visibility: hidden;
+  transform: none;
 }
 #collect-modal #form-add-collection #title-form-error {
   display: none;
