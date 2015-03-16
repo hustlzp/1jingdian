@@ -422,6 +422,9 @@
 #collect-modal .collection-bar:hover {
   background-color: #f2f2f2;
 }
+#collect-modal .collection-bar:last-child {
+  margin-bottom: 0;
+}
 #collect-modal .collection-bar.collected .collected-flag {
   visibility: visible;
 }

@@ -115,10 +115,8 @@
                      title="收藏到句集" data-toggle="modal"
                      data-target="#collect-modal" data-piece-id="{{ piece.id }}">
                      <span class="fa fa-star"></span>
-                  <span class="btn-text">
-                     {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}
-                  </span>
-                  </a>
+                     <span class="btn-text">
+                        {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}</span></a>
 
                   {% if permissions.PieceEditPermission(piece).check() %}
                      <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
