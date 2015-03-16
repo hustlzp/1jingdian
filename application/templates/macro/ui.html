@@ -289,7 +289,10 @@
          });
       }
 
-
+      /**
+       * Change browser url without redirecting.
+       * @param pieceId
+       */
       function changeUrl(pieceId) {
          if (window.history.replaceState) {
             window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
@@ -557,11 +560,11 @@
             if ($('.collection-bar.collected').length) {
                $(".collect[data-piece-id='" + pieceId + "']")
                      .addClass('collected')
-                     .find('.collect-text').text('已收藏');
+                     .find('.btn-text').text('已收藏');
             } else {
                $(".collect[data-piece-id='" + pieceId + "']")
                      .removeClass('collected')
-                     .find('.collect-text').text('收藏');
+                     .find('.btn-text').text('收藏');
             }
          });
       });
@@ -604,6 +607,9 @@
                   $('#collect-modal .modal-body.for-collect-piece')
                         .html(response.collection_bars_html);
                   switchToCollectPiece();
+                  $(".collect[data-piece-id='" + pieceId + "']")
+                        .addClass('collected')
+                        .find('.btn-text').text('已收藏');
                } else if (response.error === 'repeat') {
                   $('#title-form-error').text('标题重复').fadeIn();
                }
