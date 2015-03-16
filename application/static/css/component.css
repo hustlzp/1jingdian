@@ -257,9 +257,11 @@
   color: #aaa;
   font-size: 12px;
 }
+.piece .meta .source-wap {
+  margin-right: 20px;
+}
 .piece .meta .options {
   display: inline-block;
-  margin-left: 20px;
 }
 .piece .meta .options .collect {
   visibility: hidden;

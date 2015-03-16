@@ -28,25 +28,27 @@
 
 
 {% macro render_piece_source(piece, with_favicon=True) %}
-   <div class="source-wap">
-      {% if piece.original %}
-         <span class="source">原创</span>
-      {% else %}
-         {% if piece.source_url %}
-            {% if with_favicon %}
-               <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-            {% endif %}
-
-            <a href="{{ piece.source_url }}" class="source" target="_blank">
-               {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
-            </a>
+   {% if piece.original or piece.author or piece.source %}
+      <div class="source-wap">
+         {% if piece.original %}
+            <span class="source">原创</span>
          {% else %}
-            <span class="source">
+            {% if piece.source_url %}
+               {% if with_favicon %}
+                  <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
+               {% endif %}
+
+               <a href="{{ piece.source_url }}" class="source" target="_blank">
+                  {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
+               </a>
+            {% else %}
+               <span class="source">
                {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
             </span>
+            {% endif %}
          {% endif %}
-      {% endif %}
-   </div>
+      </div>
+   {% endif %}
 {% endmacro %}
 
 
