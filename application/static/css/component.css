@@ -263,6 +263,8 @@
 .piece .meta .options {
   display: inline-block;
   margin-left: -5px;
+  line-height: 1;
+  vertical-align: text-bottom;
 }
 .piece .meta .options .collect {
   visibility: hidden;
