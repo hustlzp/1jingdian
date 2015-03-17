@@ -52,6 +52,7 @@
 .piece-details-wap .piece-header .meta .options {
   float: right;
   line-height: 1;
+  margin-top: 1px;
 }
 .piece-details-wap .piece-header .meta .options .collect {
   color: #aaa;
