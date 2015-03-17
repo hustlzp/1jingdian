@@ -91,11 +91,14 @@
                   </ul>
                </li>
             {% else %}
-               <li id="nav-signin">
-                  <a href="{{ url_for('account.signin') }}">登录</a>
-               </li>
-               <li id="nav-signup">
-                  <a href="{{ url_for('account.signup') }}">注册</a>
+               <li id="nav-account" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     账户 <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                     <li><a href="{{ url_for('account.signin') }}">登录</a></li>
+                     <li><a href="{{ url_for('account.signup') }}">注册</a></li>
+                  </ul>
                </li>
             {% endif %}
          </ul>
