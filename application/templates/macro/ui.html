@@ -681,10 +681,10 @@
 
       {{ vertical_field(form.content, rows=5) }}
 
-      <div class="form-group">
-         <label for="original">原创</label>
-
-         {{ form.original() }}
+      <div class="checkbox">
+         <label for="original">
+            {{ form.original() }} 原创
+         </label>
       </div>
 
       <div class="external">

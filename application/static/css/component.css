@@ -460,11 +460,16 @@
   float: right;
   vertical-align: baseline;
 }
-.form-piece label[for='original'] {
-  margin-bottom: 0px;
+.form-piece .checkbox {
+  margin-bottom: 20px;
 }
-.form-piece #original {
-  margin-left: 5px;
+.form-piece .checkbox label[for='original'] {
+  margin-bottom: 0px;
+  font-weight: bold;
+  padding-left: 0;
+}
+.form-piece .checkbox label[for='original'] #original {
+  margin-left: 35px;
 }
 .form-piece .source-url-wap {
   position: relative;
