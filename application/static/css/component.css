@@ -164,6 +164,7 @@
 .user-card .meta .count-wap > a {
   display: inline-block;
   color: #333;
+  padding: 0 5px;
 }
 .user-card .meta .count-wap > a .count-quantifier {
   font-size: 12px;

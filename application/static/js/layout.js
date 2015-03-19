@@ -32,7 +32,7 @@ $(document).on('mouseleave', '.user-avatar.user-avatar-popover', function () {
 
     setTimeout(function () {
         if (!$(".popover:hover").length) {
-            $(_this).popover("destroy")
+            $(_this).popover("destroy");
         }
     }, 200);
 });
