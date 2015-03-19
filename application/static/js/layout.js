@@ -15,6 +15,10 @@ $(document).on('mouseenter', '.user-avatar.user-avatar-popover', function () {
         trigger: 'manual',
         placement: 'bottom',
         animation: false,
+        viewport: {
+            selector: 'body',
+            padding: 15
+        },
         selector: '.user-avatar.user-avatar-popover'
     }).popover('show');
 
