@@ -56,6 +56,9 @@ def add_and_collect(piece_id):
     collect = CollectionPiece(collection_owner_id=g.user.id, piece_id=piece_id)
     collection.pieces.append(collect)
     db.session.add(collection)
+
+    g.user.collections_count += 1
+    db.session.add(g.user)
     db.session.commit()
 
     collection_bars_macro = get_template_attribute('macro/ui.html', 'render_collection_bars')

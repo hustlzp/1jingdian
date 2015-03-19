@@ -69,17 +69,17 @@
          <div class="meta clearfix">
             <div class="count-wap pieces-count">
                <a href="{{ url_for('user.profile', uid=user.id) }}">
-                  {{ user.created_pieces.count() }}<br/><span class="count-quantifier">分享</span>
+                  {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>
                </a>
             </div>
             <div class="count-wap votes-count">
                <a href="{{ url_for('user.votes', uid=user.id) }}">
-                  {{ user.voted_pieces.count() }}<br/><span class="count-quantifier">顶</span>
+                  {{ user.votes_count }}<br/><span class="count-quantifier">顶</span>
                </a>
             </div>
             <div class="count-wap collections-count">
                <a href="{{ url_for('user.collections', uid=user.id) }}">
-                  {{ user.collections.count() }}<br/><span class="count-quantifier">句集</span>
+                  {{ user.collections_count }}<br/><span class="count-quantifier">句集</span>
                </a>
             </div>
          </div>
@@ -487,15 +487,15 @@
       <div class="tab clearfix">
          <a class="tab-item {% if active == "creates" %}active{% endif %}"
             href="{{ url_for('user.profile', uid=user.id) }}">
-            {{ user.created_pieces.count() }} 分享
+            {{ user.pieces_count }} 分享
          </a>
          <a class="tab-item {% if active == "votes" %}active{% endif %}"
             href="{{ url_for('user.votes', uid=user.id) }}">
-            {{ user.voted_pieces.count() }} 顶
+            {{ user.votes_count }} 顶
          </a>
          <a class="tab-item {% if active == "collections" %}active{% endif %}"
             href="{{ url_for('user.collections', uid=user.id) }}">
-            {{ user.collections.count() }} 句集
+            {{ user.collections_count }} 句集
          </a>
       </div>
    </div>

@@ -15,6 +15,10 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
+    pieces_count = db.Column(db.Integer, default=0)
+    votes_count = db.Column(db.Integer, default=0)
+    collections_count = db.Column(db.Integer, default=0)
+
     # 社交媒体
     weibo = db.Column(db.String(100))
     zhihu = db.Column(db.String(100))

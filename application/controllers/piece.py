@@ -68,6 +68,8 @@ def add():
     if form.validate_on_submit():
         piece = Piece(**form.data)
         piece.user_id = g.user.id
+        g.user.pieces_count += 1
+        db.session.add(g.user)
         db.session.add(piece)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
@@ -99,6 +101,7 @@ def vote(uid):
     if not vote:
         vote = PieceVote(piece_id=uid)
         g.user.voted_pieces.append(vote)
+        g.user.votes_count += 1
         piece.votes_count += 1
         db.session.add(g.user)
         db.session.add(piece)
@@ -118,8 +121,11 @@ def unvote(uid):
     else:
         for vote in votes:
             db.session.delete(vote)
+            if g.user.votes_count > 0:
+                g.user.votes_count -= 1
             if piece.votes_count > 0:
                 piece.votes_count -= 1
+        db.session.add(g.user)
         db.session.add(piece)
         db.session.commit()
         return json.dumps({'result': True})
