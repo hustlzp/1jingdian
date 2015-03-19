@@ -137,18 +137,36 @@
   cursor: pointer;
 }
 .user-card {
-  padding: 20px 15px;
+  padding: 15px 0 2px 0;
+  text-align: center;
+  width: 130px;
   font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
-.user-card .user-avatar {
-  width: 80px;
-  height: 80px;
-  display: block;
-  margin-bottom: 10px;
+.user-card .user-link {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.user-card .user-link .user-avatar {
+  width: 70px;
+  height: 70px;
 }
 .user-card .user-name {
   font-size: 16px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
   text-align: center;
+  padding-bottom: 12px;
+}
+.user-card .meta .count-wap {
+  width: 33.333333333%;
+  float: left;
+}
+.user-card .meta .count-wap > a {
+  display: inline-block;
+  color: #333;
+}
+.user-card .meta .count-wap > a .count-quantifier {
+  font-size: 12px;
 }
 .pieces-by-date-wap {
   margin-bottom: 40px;

@@ -58,9 +58,31 @@
            data-user-id="{{ user.id }}" alt=""/></a>
    <div class="popover-content-wap">
       <div class="user-card">
-         <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-link">
+            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         </a>
 
-         <div class="user-name">{{ user.name }}</div>
+         <div class="user-name">
+            {{ user.name }}
+         </div>
+
+         <div class="meta clearfix">
+            <div class="count-wap pieces-count">
+               <a href="{{ url_for('user.profile', uid=user.id) }}">
+                  {{ user.created_pieces.count() }}<br/><span class="count-quantifier">分享</span>
+               </a>
+            </div>
+            <div class="count-wap votes-count">
+               <a href="{{ url_for('user.votes', uid=user.id) }}">
+                  {{ user.voted_pieces.count() }}<br/><span class="count-quantifier">顶</span>
+               </a>
+            </div>
+            <div class="count-wap collections-count">
+               <a href="{{ url_for('user.collections', uid=user.id) }}">
+                  {{ user.collections.count() }}<br/><span class="count-quantifier">句集</span>
+               </a>
+            </div>
+         </div>
       </div>
    </div>
 {% endmacro %}
