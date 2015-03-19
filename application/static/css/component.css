@@ -355,12 +355,12 @@
   text-align: center;
 }
 .user-profile-header .user-info .motto {
-  margin-top: 15px;
+  margin-top: 12px;
   color: #999;
 }
 .user-profile-header .user-info .media-icons {
   text-align: center;
-  margin-top: 12px;
+  margin-top: 15px;
   top: 20px;
   right: 20px;
 }
