@@ -643,6 +643,7 @@
             $('#title-form-error').text('').hide();
          }
 
+         switchToCollectPiece();
          $collectionBarsWap
                .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
 
@@ -656,8 +657,9 @@
             },
             success: function (response) {
                if (response.result) {
+                  $('#title').val('');
+                  $('#desc').val('');
                   $collectionBarsWap.html(response.collection_bars_html);
-                  switchToCollectPiece();
                   $(".collect[data-piece-id='" + pieceId + "']")
                         .addClass('collected')
                         .find('.btn-text').text('已收藏');
