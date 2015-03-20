@@ -210,10 +210,16 @@
                   },
                   success: function (comment) {
                      var $comment = $(comment);
+                     var $container = null;
 
                      $('#comment-textarea').val('');
                      $('.comments-wap').append($comment);
-                     $('.piece-modal-wap').scrollTo($comment, 400);
+                     if ($('.piece-modal-wap').length) {
+                        $container = $('.piece-modal-wap');
+                     } else {
+                        $container = $(window);
+                     }
+                     $container.scrollTo($comment, 500);
                   }
                });
             }
