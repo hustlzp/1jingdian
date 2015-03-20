@@ -292,7 +292,7 @@
          changeUrl(pieceId);
          addClicksCount(pieceId);
 
-         $('.piece-modal-wap').transition({'right': '0'}, function () {
+         $('.piece-modal-wap').animate({'right': '0'}, function () {
             $(this).addClass('open');
 
             if ($.isFunction(callback)) {
@@ -310,7 +310,7 @@
             window.history.replaceState('', '', g.originalUrl);
          }
 
-         $('.piece-modal-wap').transition({'right': '-503px'}, function () {
+         $('.piece-modal-wap').animate({'right': '-503px'}, function () {
             $(this).removeClass('open');
 
             if ($.isFunction(callback)) {
