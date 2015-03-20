@@ -109,3 +109,7 @@ function urlFor(endpoint, values, external) {
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
+
+if (!$('html').hasClass('csstransitions')) {
+    $.fn.transition = $.fn.animate;
+}
