@@ -209,11 +209,11 @@
                      comment: comment
                   },
                   success: function (comment) {
+                     var $comment = $(comment);
+
                      $('#comment-textarea').val('');
-                     $('.comments-wap').append(comment);
-                     $('.piece-modal-wap').animate({
-                        scrollTop: $(".piece-modal-wap")[0].scrollHeight
-                     });
+                     $('.comments-wap').append($comment);
+                     $('.piece-modal-wap').scrollTo($comment, 400);
                   }
                });
             }
