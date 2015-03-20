@@ -253,6 +253,8 @@
                openModal(pieceId);
             }
          } else {
+            showLoadingFlag(pieceModal);
+
             if (pieceModal.hasClass('open')) {
                pieceModal.attr('data-piece-id', pieceId);
                changeUrl(pieceId);
@@ -333,6 +335,14 @@
             url: urlFor('piece.add_clicks_count', {uid: pieceId}),
             method: 'post'
          });
+      }
+
+      /**
+       * Show the loading flag.
+       * @param pieceModal
+       */
+      function showLoadingFlag(pieceModal) {
+         pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
       }
    </script>
 {% endmacro %}

@@ -10,6 +10,15 @@
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
+.piece-modal-wap .flag-loading-piece {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 30px;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #999;
+}
 .piece-details-wap .piece-header {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
