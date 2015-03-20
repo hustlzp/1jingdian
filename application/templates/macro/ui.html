@@ -565,16 +565,20 @@
    </div>
 
    <script type="text/javascript">
+      var $collectionBarsWap = $('#collect-modal .modal-body.for-collect-piece');
+
       $(document).on('click', '.collect', function () {
          var pieceId = $(this).data('piece-id');
 
          $('#collect-modal').data('piece-id', pieceId);
+         $collectionBarsWap
+               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
 
          $.ajax({
             url: urlFor('collection.collection_bars', {piece_id: pieceId}),
             method: 'post'
          }).done(function (html) {
-            $('#collect-modal .modal-body.for-collect-piece').html(html);
+            $collectionBarsWap.html(html);
          });
       }).on('click', '.collection-bar', function () {
          var url = "",
@@ -639,6 +643,9 @@
             $('#title-form-error').text('').hide();
          }
 
+         $collectionBarsWap
+               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
+
          $.ajax({
             url: urlFor('collection.add_and_collect', {'piece_id': pieceId}),
             method: 'post',
@@ -649,8 +656,7 @@
             },
             success: function (response) {
                if (response.result) {
-                  $('#collect-modal .modal-body.for-collect-piece')
-                        .html(response.collection_bars_html);
+                  $collectionBarsWap.html(response.collection_bars_html);
                   switchToCollectPiece();
                   $(".collect[data-piece-id='" + pieceId + "']")
                         .addClass('collected')
@@ -664,12 +670,12 @@
 
       // 调整Modal的上间距
       $('.modal').on('show.bs.modal', function () {
-         centerModal($(this));
+         adjustModalHeight($(this));
       });
 
       $(window).on("resize", function () {
          $('.modal:visible').each(function () {
-            centerModal($(this));
+            adjustModalHeight($(this));
          });
       });
 
@@ -683,7 +689,7 @@
          $('#collect-modal .for-add-collection').show();
       }
 
-      function centerModal($modal) {
+      function adjustModalHeight($modal) {
          $modal.css('display', 'block');
          var $dialog = $modal.find(".modal-dialog");
          var offset = ($(window).height() - $dialog.height()) * 0.3;
