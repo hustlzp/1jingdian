@@ -298,7 +298,7 @@
          changeUrl(pieceId);
          addClicksCount(pieceId);
 
-         $('.piece-modal-wap').animate({'right': '0'}, function () {
+         $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
             $(this).addClass('open');
 
             if ($.isFunction(callback)) {
@@ -316,7 +316,9 @@
             window.history.replaceState('', '', g.originalUrl);
          }
 
-         $('.piece-modal-wap').animate({'right': '-503px'}, function () {
+         $('.piece-modal-wap').stop().transition({
+            'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
+         }, 400, function () {
             $(this).removeClass('open');
 
             if ($.isFunction(callback)) {
