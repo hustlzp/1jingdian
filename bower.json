@@ -12,6 +12,7 @@
     "respond": "1.4.2",
     "jquery": "1.11.2",
     "moment": "2.9.0",
-    "plupload": "~2.1.2"
+    "plupload": "~2.1.2",
+    "jquery.transit": "~0.9.12"
   }
 }

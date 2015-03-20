@@ -125,8 +125,9 @@
   color: #aaa;
   margin-left: 8px;
 }
-.piece-details-wap #comment-textarea {
+.piece-details-wap #form-comment .form-group {
   margin-top: 5px;
+  margin-bottom: 12px;
 }
 .piece-details-wap .comment-after-signed-in-wap {
   padding: 12px;

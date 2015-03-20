@@ -172,7 +172,7 @@
       <div class="subtitle">{{ piece.comments.count() }} 评论</div>
 
       {% if g.user %}
-         <form action="">
+         <form action="" id="form-comment">
             <div class="form-group">
                <textarea name="" id="comment-textarea" rows="5" class="form-control"
                          placeholder="说点什么"></textarea>
@@ -209,8 +209,11 @@
                      comment: comment
                   },
                   success: function (comment) {
-                     $('.comments-wap').append(comment);
                      $('#comment-textarea').val('');
+                     $('.comments-wap').append(comment);
+                     $('.piece-modal-wap').animate({
+                        scrollTop: $(".piece-modal-wap")[0].scrollHeight
+                     });
                   }
                });
             }
@@ -289,7 +292,7 @@
          changeUrl(pieceId);
          addClicksCount(pieceId);
 
-         $('.piece-modal-wap').animate({'right': '0'}, function () {
+         $('.piece-modal-wap').transition({'right': '0'}, function () {
             $(this).addClass('open');
 
             if ($.isFunction(callback)) {
@@ -307,7 +310,7 @@
             window.history.replaceState('', '', g.originalUrl);
          }
 
-         $('.piece-modal-wap').animate({'right': '-503px'}, function () {
+         $('.piece-modal-wap').transition({'right': '-503px'}, function () {
             $(this).removeClass('open');
 
             if ($.isFunction(callback)) {
