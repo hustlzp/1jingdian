@@ -171,12 +171,6 @@
 
       <div class="subtitle">{{ piece.comments.count() }} 评论</div>
 
-      <div class="comments-wap">
-         {% for comment in piece.comments %}
-            {{ render_comment(comment) }}
-         {% endfor %}
-      </div>
-
       {% if g.user %}
          <form action="">
             <div class="form-group">
@@ -194,6 +188,12 @@
             <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
          </div>
       {% endif %}
+
+      <div class="comments-wap">
+         {% for comment in piece.comments %}
+            {{ render_comment(comment) }}
+         {% endfor %}
+      </div>
 
       <script type="text/javascript">
          // 评论
