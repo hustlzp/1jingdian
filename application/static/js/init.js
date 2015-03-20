@@ -110,6 +110,7 @@ function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
+// Use $.fn.animate replace $.fn.transition when css3 transition not support.
 if (!$('html').hasClass('csstransitions')) {
     $.fn.transition = $.fn.animate;
 }
