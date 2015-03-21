@@ -495,7 +495,7 @@
   line-height: 34px;
 }
 #collect-modal .btn-add-collection:hover {
-  color: #333;
+  color: #1e88a8;
 }
 #collect-modal .btn-cancle-add-collection {
   color: #999;
@@ -503,7 +503,7 @@
   margin-right: 10px;
 }
 #collect-modal .btn-cancle-add-collection:hover {
-  color: #333;
+  color: #1e88a8;
 }
 #collect-modal .btn-submit-collection {
   vertical-align: baseline;
