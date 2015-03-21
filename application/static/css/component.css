@@ -360,7 +360,7 @@
 .piece-full-screen-backdrop .btn-close-backdrop {
   position: absolute;
   right: 20px;
-  top: 10px;
+  top: 0;
   font-size: 60px;
   cursor: pointer;
 }
