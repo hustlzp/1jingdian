@@ -17,8 +17,8 @@ class PieceForm(Form):
     def validate_content(self, field):
         content = self.content.data
         content = content.strip()  # 去除首尾的空格
+        content = re.sub('\r\n', '', content)  # 去掉换行符
         content = re.sub('\s+', ' ', content)  # 将多个空格替换为单个空格
-        content = re.sub('(\r\n)+', ' ', content)  # 将换行符替换为空格
         self.content.data = content
 
         cn_length = (len(bytes(content)) - len(content)) / 2
