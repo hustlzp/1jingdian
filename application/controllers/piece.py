@@ -2,8 +2,9 @@
 from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
-from ..utils.permissions import VisitorPermission, UserPermission, PieceAddPermission
-from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection
+from ..utils.permissions import UserPermission, PieceAddPermission
+from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
+    PieceSource, PieceAuthor
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
@@ -68,9 +69,15 @@ def add():
     if form.validate_on_submit():
         piece = Piece(**form.data)
         piece.user_id = g.user.id
-        g.user.pieces_count += 1
-        db.session.add(g.user)
         db.session.add(piece)
+
+        if piece.source:
+            _save_piece_source(piece.source)
+        if piece.author:
+            _save_piece_author(piece.author)
+        g.user.pieces_count += 1
+
+        db.session.add(g.user)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)
@@ -82,6 +89,13 @@ def edit(uid):
     piece = Piece.query.get_or_404(uid)
     form = PieceForm(obj=piece)
     if form.validate_on_submit():
+        source = form.source.data
+        author = form.author.data
+        if source and source != piece.source:
+            _save_piece_source(source)
+        if author and author != piece.author:
+            _save_piece_author(author)
+
         form.populate_obj(piece)
         if piece.original:
             piece.author = ""
@@ -177,3 +191,27 @@ def uncollect(uid, collection_id):
             db.session.delete(collect)
         db.session.commit()
         return json.dumps({'result': True})
+
+
+def _save_piece_source(source):
+    """存储Piece来源，若存在，则count加1"""
+    piece_source = PieceSource.query.filter(PieceSource.name == source).first()
+    if piece_source:
+        piece_source.count += 1
+    else:
+        piece_source = PieceSource(name=source)
+        db.session.add(piece_source)
+        db.session.commit()
+    return piece_source.id
+
+
+def _save_piece_author(author):
+    """存储Piece原作者，若存在，则count加1"""
+    piece_author = PieceAuthor.query.filter(PieceSource.name == author).first()
+    if piece_author:
+        piece_author.count += 1
+    else:
+        piece_author = PieceSource(name=author)
+        db.session.add(piece_author)
+        db.session.commit()
+    return piece_author.id

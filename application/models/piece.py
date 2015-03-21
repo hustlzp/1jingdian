@@ -92,3 +92,17 @@ class PieceCommentLike(db.Model):
                                     backref=db.backref('likes',
                                                        lazy='dynamic',
                                                        order_by='asc(PieceCommentLike.created_at)'))
+
+
+class PieceSource(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    count = db.Column(db.Integer, default=1)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+
+class PieceAuthor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    count = db.Column(db.Integer, default=1)
+    created_at = db.Column(db.DateTime, default=datetime.now)
