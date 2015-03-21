@@ -586,112 +586,112 @@
    </div>
 
    <script type="text/javascript">
-      var $collectionBarsWap = $('#collect-modal .modal-body.for-collect-piece');
+      (function () {
+         var $collectionBarsWap = $('#collect-modal .modal-body.for-collect-piece');
 
-      $(document).on('click', '.collect', function () {
-         var pieceId = $(this).data('piece-id');
+         // 弹出收藏modal
+         $(document).on('click', '.collect', function () {
+            var pieceId = $(this).data('piece-id');
 
-         $('#collect-modal').data('piece-id', pieceId);
-         {#         $collectionBarsWap#}
-         {#               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");#}
+            $('#collect-modal').data('piece-id', pieceId);
+            $collectionBarsWap
+                  .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
 
-         $collectionBarsWap
-               .html("");
-
-         $.ajax({
-            url: urlFor('collection.collection_bars', {piece_id: pieceId}),
-            method: 'post'
-         }).done(function (html) {
-            if (html === "") {
-               $collectionBarsWap.html("<div class='tip'>没有句集？<a class='tip-add-collection' href='javascript:void(0)'>新建</a>一个吧</div>");
-            } else {
-               $collectionBarsWap.html(html);
-            }
-         });
-      }).on('click', '.collection-bar', function () {
-         var url = "",
-               pieceId = $(this).data('piece-id'),
-               collectionId = $(this).data('collection-id'),
-               collected = $(this).hasClass('collected'),
-               collectionBar = $(this);
-
-         if (collected) {
-            url = urlFor('piece.uncollect', {uid: pieceId, collection_id: collectionId});
-         } else {
-            url = urlFor('piece.collect', {uid: pieceId, collection_id: collectionId});
-         }
-
-         $.ajax({
-            url: url,
-            method: 'post',
-            dataType: 'json'
-         }).done(function (response) {
-            if (response.result) {
-               if (collected) {
-                  collectionBar.removeClass('collected');
+            $.ajax({
+               url: urlFor('collection.collection_bars', {piece_id: pieceId}),
+               method: 'post'
+            }).done(function (html) {
+               if (html === "") {
+                  $collectionBarsWap.html("<div class='tip'>没有句集？<a class='tip-add-collection' href='javascript:void(0)'>新建</a>一个吧</div>");
                } else {
-                  collectionBar.addClass('collected');
+                  $collectionBarsWap.html(html);
                }
-            }
-
-            if ($('.collection-bar.collected').length) {
-               $(".collect[data-piece-id='" + pieceId + "']")
-                     .addClass('collected')
-                     .find('.btn-text').text('已收藏');
-            } else {
-               $(".collect[data-piece-id='" + pieceId + "']")
-                     .removeClass('collected')
-                     .find('.btn-text').text('收藏');
-            }
+            });
          });
-      });
 
-      $('.btn-add-collection').click(function () {
-         switchToAddCollection();
-         $('#title').focus();
-      });
+         // 收藏/取消收藏
+         $(document).on('click', '.collection-bar', function () {
+            var url = "",
+                  pieceId = $(this).data('piece-id'),
+                  collectionId = $(this).data('collection-id'),
+                  collected = $(this).hasClass('collected'),
+                  collectionBar = $(this);
 
-      $collectionBarsWap.on('click', '.tip-add-collection', function () {
-         switchToAddCollection();
-         $('#title').focus();
-      });
+            if (collected) {
+               url = urlFor('piece.uncollect', {uid: pieceId, collection_id: collectionId});
+            } else {
+               url = urlFor('piece.collect', {uid: pieceId, collection_id: collectionId});
+            }
 
-      $('.btn-cancle-add-collection').click(function () {
-         switchToCollectPiece();
-         $('#title').val('');
-         $('#desc').val('');
-      });
-
-      $('.btn-submit-collection').click(function () {
-         var form = $('#form-add-collection'),
-               titleInput = form.find('#title'),
-               title = $.trim(titleInput.val()),
-               desc = $.trim(form.find('#desc').val()),
-               pieceId = $('#collect-modal').data('piece-id');
-
-         if (title === "") {
-            $('#title-form-error').text('标题不能为空').fadeIn();
-            return;
-         } else {
-            $('#title-form-error').text('').hide();
-         }
-
-         switchToCollectPiece();
-         $collectionBarsWap
-               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
-
-         $.ajax({
-            url: urlFor('collection.add_and_collect', {'piece_id': pieceId}),
-            method: 'post',
-            dataType: 'json',
-            data: {
-               title: title,
-               desc: desc
-            },
-            success: function (response) {
+            $.ajax({
+               url: url,
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
                if (response.result) {
-                  $('#title').val('');
-                  $('#desc').val('');
+                  if (collected) {
+                     collectionBar.removeClass('collected');
+                  } else {
+                     collectionBar.addClass('collected');
+                  }
+               }
+
+               if ($('.collection-bar.collected').length) {
+                  $(".collect[data-piece-id='" + pieceId + "']")
+                        .addClass('collected')
+                        .find('.btn-text').text('已收藏');
+               } else {
+                  $(".collect[data-piece-id='" + pieceId + "']")
+                        .removeClass('collected')
+                        .find('.btn-text').text('收藏');
+               }
+            });
+         });
+
+         // 进入添加句集界面
+         $('.btn-add-collection').click(function () {
+            switchToAddCollection();
+            $('#title').focus();
+         });
+
+         $collectionBarsWap.on('click', '.tip-add-collection', function () {
+            switchToAddCollection();
+            $('#title').focus();
+         });
+
+         // 取消添加句集
+         $('.btn-cancle-add-collection').click(function () {
+            cleanAddCollectionForm();
+            switchToCollectPiece();
+         });
+
+         // 提交句集
+         $('.btn-submit-collection').click(function () {
+            var form = $('#form-add-collection'),
+                  titleInput = form.find('#title'),
+                  title = $.trim(titleInput.val()),
+                  desc = $.trim(form.find('#desc').val()),
+                  pieceId = $('#collect-modal').data('piece-id');
+
+            if (title === "") {
+               $('#title-form-error').text('标题不能为空').fadeIn();
+               return;
+            } else {
+               $('#title-form-error').text('').hide();
+            }
+
+            $.ajax({
+               url: urlFor('collection.add_and_collect', {'piece_id': pieceId}),
+               method: 'post',
+               dataType: 'json',
+               data: {
+                  title: title,
+                  desc: desc
+               }
+            }).done(function (response) {
+               if (response.result) {
+                  cleanAddCollectionForm();
+                  switchToCollectPiece();
                   $collectionBarsWap.html(response.collection_bars_html);
                   $(".collect[data-piece-id='" + pieceId + "']")
                         .addClass('collected')
@@ -699,40 +699,46 @@
                } else if (response.error === 'repeat') {
                   $('#title-form-error').text('标题重复').fadeIn();
                }
-            }
+            });
          });
-      });
 
-      // 调整Modal的上间距
-      $('.modal').on('show.bs.modal', function () {
-         adjustModalHeight($(this));
-      });
-
-      $(window).on("resize", function () {
-         $('.modal:visible').each(function () {
+         // 调整Modal的上间距
+         $('.modal').on('show.bs.modal', function () {
             adjustModalHeight($(this));
          });
-      });
 
-      function switchToCollectPiece() {
-         $('#collect-modal .for-collect-piece').show();
-         $('#collect-modal .for-add-collection').hide();
-      }
+         $(window).on("resize", function () {
+            $('.modal:visible').each(function () {
+               adjustModalHeight($(this));
+            });
+         });
 
-      function switchToAddCollection() {
-         $('#collect-modal .for-collect-piece').hide();
-         $('#collect-modal .for-add-collection').show();
-      }
-
-      function adjustModalHeight($modal) {
-         $modal.css('display', 'block');
-         var $dialog = $modal.find(".modal-dialog");
-         var offset = ($(window).height() - $dialog.height()) * 0.3;
-
-         if (offset > 0) {
-            $dialog.css('margin-top', offset);
+         function switchToCollectPiece() {
+            $('#collect-modal .for-collect-piece').show();
+            $('#collect-modal .for-add-collection').hide();
          }
-      }
+
+         function switchToAddCollection() {
+            $('#collect-modal .for-collect-piece').hide();
+            $('#collect-modal .for-add-collection').show();
+         }
+
+         function adjustModalHeight($modal) {
+            $modal.css('display', 'block');
+            var $dialog = $modal.find(".modal-dialog");
+            var offset = ($(window).height() - $dialog.height()) * 0.3;
+
+            if (offset > 0) {
+               $dialog.css('margin-top', offset);
+            }
+         }
+
+         function cleanAddCollectionForm() {
+            $('#title').val('');
+            $('#desc').val('');
+            $('#title-form-error').text('');
+         }
+      })();
    </script>
 {% endmacro %}
 
@@ -752,7 +758,18 @@
    <form method="post" class="form-piece">
       {{ form.csrf_token() }}
 
-      {{ vertical_field(form.content, rows=5) }}
+      <div class="form-group">
+         <label for="content">句子</label>
+
+         <span class="tip pull-right">
+            <span class="positive">还可以输入 <span class="content-length"></span> 字</span>
+            <span class="negative">已超出 <span class="content-length"></span> 字</span>
+         </span>
+
+         <textarea class="form-control" id="content" name="content" placeholder=""
+                   rows="5">{{ form.content.data or "" }}</textarea>
+         {{ field_error(form.content) }}
+      </div>
 
       <div class="checkbox">
          <label for="original">
@@ -793,47 +810,90 @@
    </form>
 
    <script type="text/javascript">
-      $('.source-help').popover({
-         trigger: 'hover',
-         container: 'body',
-         content: '如：书籍、电影、歌曲、文章标题等。'
-      });
+      (function () {
+         var timerForContent = null,
+               timerForSourceLink = null,
+               sourceFavicon = $('.source-favicon'),
+               sourceUrlInput = $('#source_link');
 
-      // 若为原创，则无需填写其他内容
-      if ($('#original').is(":checked")) {
-         $('.external').hide();
-      }
+         $('.source-help').popover({
+            trigger: 'hover',
+            container: 'body',
+            content: '如：书籍、电影、歌曲、文章标题等。'
+         });
 
-      $('#original').change(function () {
-         if ($(this).is(":checked")) {
-            $('.external').slideUp('fast');
-         } else {
-            $('.external').slideDown('fast');
+         updateWordCount();
+
+         $('#content').keyup(function () {
+            clearTimeout(timerForContent);
+            timerForContent = setTimeout(updateWordCount, 100);
+         });
+
+         // 若为原创，则无需填写其他内容
+         if ($('#original').is(":checked")) {
+            $('.external').hide();
          }
-      });
 
-      var timer = null,
-            sourceFavicon = $('.source-favicon'),
-            sourceUrlInput = $('#source_link');
+         $('#original').change(function () {
+            if ($(this).is(":checked")) {
+               $('.external').slideUp('fast');
+            } else {
+               $('.external').slideDown('fast');
+            }
+         });
 
-      if ($.trim(sourceUrlInput.val()) !== "") {
-         sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
-      }
+         if ($.trim(sourceUrlInput.val()) !== "") {
+            sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
+         }
 
-      // 输入source url时，加载favicon
-      sourceUrlInput.keyup(function () {
-         var input = $(this);
-         clearTimeout(timer);
-         timer = setTimeout(function () {
-            sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
-         }, 500);
-      });
+         // 输入source url时，加载favicon
+         sourceUrlInput.keyup(function () {
+            var input = $(this);
+            clearTimeout(timerForSourceLink);
+            timerForSourceLink = setTimeout(function () {
+               sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
+            }, 500);
+         });
 
-      // 图片加载失败时，隐藏
-      sourceFavicon.load(function () {
-         $(this).fadeIn('fast');
-      }).error(function () {
-         $(this).hide();
-      });
+         // 图片加载失败时，隐藏
+         sourceFavicon.load(function () {
+            $(this).fadeIn('fast');
+         }).error(function () {
+            $(this).hide();
+         });
+
+         /**
+          * 更新字数
+          */
+         function updateWordCount() {
+            var content = $('#content').val();
+            var contentRemainLength = 160 - calculateWordLength(content);
+
+            $('.content-length').text(Math.abs(contentRemainLength));
+
+            if (contentRemainLength >= 0) {
+               $('.tip .positive').show();
+               $('.tip .negative').hide();
+            } else {
+               $('.tip .positive').hide();
+               $('.tip .negative').show();
+            }
+         }
+
+         /**
+          * Count word.
+          * 总字数 = 中文字数 + 英文字数 / 2
+          * @param content
+          * @returns {number}
+          */
+         function calculateWordLength(content) {
+            // 去除首尾空格，多个空格替换为1个空格
+            content = $.trim(content).replace(/\s+/g, ' ');
+
+            var cnLength = content.match(/[^ -~]/g) ? content.match(/[^ -~]/g).length : 0;
+            var enLength = content.length - cnLength;
+            return cnLength + Math.ceil(enLength / 2);
+         }
+      })();
    </script>
 {% endmacro %}

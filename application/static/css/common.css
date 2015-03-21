@@ -1,9 +1,3 @@
-.text-error {
-  color: red;
-}
-.text-light {
-  color: gray;
-}
 .table-vertical-middle > tbody > tr > td {
   vertical-align: middle;
 }
@@ -35,6 +29,6 @@
   float: right;
 }
 .form-error {
-  margin-top: 5px;
   font-size: 12px;
+  padding-top: 5px;
 }

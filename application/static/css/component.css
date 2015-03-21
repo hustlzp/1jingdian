@@ -513,6 +513,19 @@
   float: right;
   vertical-align: baseline;
 }
+.form-piece .tip {
+  font-size: 12px;
+  margin-left: 10px;
+  color: #999;
+  margin-top: 3px;
+}
+.form-piece .tip .content-length {
+  color: #333;
+}
+.form-piece .tip .negative .content-length {
+  color: #a94442;
+  display: none;
+}
 .form-piece .checkbox {
   margin-bottom: 20px;
 }

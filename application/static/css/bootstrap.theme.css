@@ -219,3 +219,6 @@ a:focus {
   color: #fff;
   outline: none;
 }
+.text-danger {
+  color: #a94442;
+}

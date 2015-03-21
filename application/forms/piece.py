@@ -1,9 +1,9 @@
 # coding: utf-8
 import re
+import math
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, TextAreaField, BooleanField
-from wtforms.validators import DataRequired, Email, URL, Optional
-from ..models import User
+from wtforms import StringField, TextAreaField, BooleanField
+from wtforms.validators import DataRequired, URL, Optional
 
 
 class PieceForm(Form):
@@ -21,7 +21,11 @@ class PieceForm(Form):
         content = re.sub('(\r\n)+', ' ', content)  # 将换行符替换为空格
         self.content.data = content
 
-        if len(content) > 160:
+        cn_length = (len(bytes(content)) - len(content)) / 2
+        en_length = len(content) - cn_length
+        content_length = cn_length + int(math.ceil(en_length / 2.0))
+
+        if content_length > 160:
             raise ValueError('不超过160字')
 
 
