@@ -84,30 +84,27 @@
         float: right;
         line-height: 1;
         margin-top: 1px;
+        font-size: 12px;
 
-        .collect {
+        a {
           color: #aaa;
-          font-size: 14px;
-          cursor: pointer;
 
-          &.collected,
           &:hover {
             color: @main-color;
           }
         }
 
+        .fa {
+          font-size: 14px;
+        }
+
+        .collect.collected {
+          color: @main-color !important;
+        }
+
+        .btn-full-screen,
         .btn-edit-piece {
           margin-left: 20px;
-          font-size: 14px;
-          color: #aaa;
-
-          &:hover {
-            color: @main-color;
-          }
-        }
-
-        .btn-text {
-          font-size: 12px;
         }
       }
     }
@@ -382,51 +379,30 @@
       margin-left: -5px;
       line-height: 1;
       vertical-align: text-bottom;
+      font-size: 14px;
 
-      .collect {
-        visibility: hidden;
-        margin-right: 10px;
-        padding: 0 5px;
-        cursor: pointer;
+      & > a {
         color: #aaa;
-        font-size: 14px;
+        visibility: hidden;
+        padding: 0 5px;
+        outline: none;
 
-        .collect-text {
-          font-size: 12px;
-        }
-
-        &.collected,
         &:hover {
           color: @main-color;
         }
+      }
+
+      .collect {
+        margin-right: 10px;
 
         &.collected {
           visibility: visible !important;
+          color: @main-color !important;
         }
       }
 
       .btn-edit-piece {
-        visibility: hidden;
-        display: inline-block;
-        padding: 0 5px;
         margin-right: 10px;
-        color: #aaa;
-        font-size: 14px;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-
-      .btn-full-screen {
-        color: #aaa;
-        font-size: 14px;
-        visibility: hidden;
-        padding: 0 5px;
-
-        &:hover {
-          color: @main-color;
-        }
       }
     }
   }

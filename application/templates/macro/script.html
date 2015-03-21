@@ -1,0 +1,78 @@
+{% macro full_screen_script() %}
+   <script type="text/javascript">
+      (function () {
+         $(document).on('click', '.btn-full-screen', function () {
+            var content = $(this).data('content'),
+                  source = $(this).data('source'),
+                  author = $(this).data('author'),
+                  html = "",
+                  sourceForDisplay = "";
+
+            html = "<div class='piece-full-screen-backdrop'>"
+                  + "<span class='btn-close-backdrop'>×</span>"
+                  + "<div class='wap'>"
+                  + "<div class='content'>" + content + "</div>";
+
+            if (source || author) {
+               if (author) {
+                  sourceForDisplay += author
+               }
+               if (source) {
+                  sourceForDisplay += "《" + source + "》";
+               }
+
+               html += "<div class='source'>" + sourceForDisplay + "</div>";
+            }
+
+            html += "</div>" + "</div>";
+
+            $('body').append(html);
+            adjustHeight();
+
+            setTimeout(function () {
+               $('.piece-full-screen-backdrop').css('opacity', '.8');
+               $('.base-wap').addClass('blur');
+            }, 100);
+         });
+
+         $(window).resize(function () {
+            adjustHeight();
+         });
+
+         $(document).keyup(function (e) {
+            if (e.keyCode == 27) {
+               closeBackdrop();
+            }
+         });
+
+         $(document).on('click', '.btn-close-backdrop', function () {
+            closeBackdrop();
+         });
+
+         function adjustHeight() {
+            var $wap = $('.piece-full-screen-backdrop .wap'),
+                  verticalMargin = 0;
+
+            if (!$wap.length) {
+               return;
+            }
+
+            verticalMargin = ($(window).height() - $wap.height()) / 2;
+
+            if (verticalMargin < 80) {
+               verticalMargin = 80;
+            }
+
+            $wap.css({
+               'marginTop': verticalMargin,
+               'marginBottom': verticalMargin
+            });
+         }
+
+         function closeBackdrop() {
+            $('.base-wap').removeClass('blur');
+            $('.piece-full-screen-backdrop').detach();
+         }
+      })();
+   </script>
+{% endmacro %}

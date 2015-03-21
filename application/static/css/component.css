@@ -70,26 +70,23 @@
   float: right;
   line-height: 1;
   margin-top: 1px;
+  font-size: 12px;
 }
-.piece-details-wap .piece-header .meta .options .collect {
+.piece-details-wap .piece-header .meta .options a {
   color: #aaa;
-  font-size: 14px;
-  cursor: pointer;
 }
-.piece-details-wap .piece-header .meta .options .collect.collected,
-.piece-details-wap .piece-header .meta .options .collect:hover {
+.piece-details-wap .piece-header .meta .options a:hover {
   color: #1e88a8;
 }
+.piece-details-wap .piece-header .meta .options .fa {
+  font-size: 14px;
+}
+.piece-details-wap .piece-header .meta .options .collect.collected {
+  color: #1e88a8 !important;
+}
+.piece-details-wap .piece-header .meta .options .btn-full-screen,
 .piece-details-wap .piece-header .meta .options .btn-edit-piece {
   margin-left: 20px;
-  font-size: 14px;
-  color: #aaa;
-}
-.piece-details-wap .piece-header .meta .options .btn-edit-piece:hover {
-  color: #1e88a8;
-}
-.piece-details-wap .piece-header .meta .options .btn-text {
-  font-size: 12px;
 }
 .piece-details-wap .created-info {
   padding: 10px 0;
@@ -304,44 +301,26 @@
   margin-left: -5px;
   line-height: 1;
   vertical-align: text-bottom;
-}
-.piece .meta .options .collect {
-  visibility: hidden;
-  margin-right: 10px;
-  padding: 0 5px;
-  cursor: pointer;
-  color: #aaa;
   font-size: 14px;
 }
-.piece .meta .options .collect .collect-text {
-  font-size: 12px;
+.piece .meta .options > a {
+  color: #aaa;
+  visibility: hidden;
+  padding: 0 5px;
+  outline: none;
 }
-.piece .meta .options .collect.collected,
-.piece .meta .options .collect:hover {
+.piece .meta .options > a:hover {
   color: #1e88a8;
+}
+.piece .meta .options .collect {
+  margin-right: 10px;
 }
 .piece .meta .options .collect.collected {
   visibility: visible !important;
+  color: #1e88a8 !important;
 }
 .piece .meta .options .btn-edit-piece {
-  visibility: hidden;
-  display: inline-block;
-  padding: 0 5px;
   margin-right: 10px;
-  color: #aaa;
-  font-size: 14px;
-}
-.piece .meta .options .btn-edit-piece:hover {
-  color: #1e88a8;
-}
-.piece .meta .options .btn-full-screen {
-  color: #aaa;
-  font-size: 14px;
-  visibility: hidden;
-  padding: 0 5px;
-}
-.piece .meta .options .btn-full-screen:hover {
-  color: #1e88a8;
 }
 .piece .vote {
   background-color: #ffffff;

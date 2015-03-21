@@ -1,4 +1,5 @@
 {% from 'macro/form.html' import vertical_field, field_error, form_submit %}
+{% from 'macro/script.html' import full_screen_script %}
 
 {% macro pagination(paginator) %}
    {% if paginator.pages > 1 %}
@@ -101,7 +102,7 @@
 {% endmacro %}
 
 
-{% macro render_piece_details_wap(piece) %}
+{% macro render_piece_details_wap(piece, width_full_screen=false) %}
    <div class="piece-details-wap">
       <div class="media piece-header">
          <div class="media-left">
@@ -132,7 +133,8 @@
                <div class="options">
                   <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
                      title="收藏到句集" {% if g.user %}data-toggle="modal"{% endif %}
-                     data-target="#collect-modal" data-piece-id="{{ piece.id }}">
+                     data-target="#collect-modal" data-piece-id="{{ piece.id }}"
+                     href="javascript: void(0)">
                      <span class="fa fa-star"></span>
                      <span class="btn-text">
                         {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}</span></a>
@@ -141,6 +143,15 @@
                      <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
                         title="编辑句集">
                         <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
+                     </a>
+                  {% endif %}
+
+                  {% if width_full_screen %}
+                     <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
+                        data-content="{{ piece.content }}"
+                        data-source="{{ piece.source or "" }}"
+                        data-author="{{ piece.author or "" }}">
+                        <span class="fa fa-arrows-alt "></span> 全屏
                      </a>
                   {% endif %}
                </div>
@@ -158,17 +169,6 @@
             <a href="">分享到微信</a>
          </div>
       </div>
-
-      {#      {% if piece.source_link %}#}
-      {#         <div class="subtitle">链接</div>#}
-      {##}
-      {#         <div class="source-link">#}
-      {#            <img src="{{ piece.source_link_favicon }}" class="source-link-favicon" alt="">#}
-      {#            <a href="{{ piece.source_link }}" class="source-link-title" target="_blank">#}
-      {#               {{ piece.source_link_title }}#}
-      {#            </a>#}
-      {#         </div>#}
-      {#      {% endif %}#}
 
       <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
@@ -407,7 +407,7 @@
                         <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
                            title="收藏到句集" data-piece-id="{{ piece.id }}"
                            {% if g.user %}data-toggle="modal"{% endif %}
-                           data-target="#collect-modal">
+                           data-target="#collect-modal" href="javascript: void(0)">
                            <span class="fa fa-star"></span></a>
 
                         {% if permissions.PieceEditPermission(piece).check() %}
@@ -429,86 +429,7 @@
          </div>
       {% endfor %}
 
-      <script type="text/javascript">
-         (function () {
-            $(document).on('click', '.btn-full-screen', function () {
-               var content = $(this).data('content'),
-                     source = $(this).data('source'),
-                     author = $(this).data('author'),
-                     html = "",
-                     sourceForDisplay = "";
-
-               html = "<div class='piece-full-screen-backdrop'>"
-                     + "<span class='btn-close-backdrop'>×</span>"
-                     + "<div class='wap'>"
-                     + "<div class='content'>" + content + "</div>";
-
-               if (source || author) {
-                  if (author) {
-                     sourceForDisplay += author
-                  }
-                  if (source) {
-                     sourceForDisplay += "《" + source + "》";
-                  }
-
-                  html += "<div class='source'>" + sourceForDisplay + "</div>";
-               }
-
-               html += "</div>" + "</div>";
-
-               $('body').append(html);
-               adjustHeight();
-
-               setTimeout(function () {
-                  $('.piece-full-screen-backdrop').css('opacity', '.8');
-
-                  setTimeout(function () {
-                     $('.base-wap').addClass('blur');
-                  }, 120);
-               }, 100);
-            });
-
-
-            $(window).resize(function () {
-               adjustHeight();
-            });
-
-            $(document).keyup(function (e) {
-               if (e.keyCode == 27) {
-                  closeBackdrop();
-               }
-            });
-
-            $(document).on('click', '.btn-close-backdrop', function () {
-               closeBackdrop();
-            });
-
-            function adjustHeight() {
-               var $wap = $('.piece-full-screen-backdrop .wap'),
-                     verticalMargin = 0;
-
-               if (!$wap.length) {
-                  return;
-               }
-
-               verticalMargin = ($(window).height() - $wap.height()) / 2;
-
-               if (verticalMargin < 80) {
-                  verticalMargin = 80;
-               }
-
-               $wap.css({
-                  'marginTop': verticalMargin,
-                  'marginBottom': verticalMargin
-               });
-            }
-
-            function closeBackdrop() {
-               $('.base-wap').removeClass('blur');
-               $('.piece-full-screen-backdrop').detach();
-            }
-         })();
-      </script>
+      {{ full_screen_script() }}
    </div>
 {% endmacro %}
 

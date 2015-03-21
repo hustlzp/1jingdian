@@ -1,14 +1,16 @@
 {% extends 'layout.html' %}
 {% from 'macro/ui.html' import render_piece_details_wap,render_collect_modal %}
+{% from 'macro/script.html' import full_screen_script %}
 
 {% block page_title %}句子 #{{ piece.id }}{% endblock %}
 {% block page_content %}
    {{ render_collect_modal() }}
+   {{ full_screen_script() }}
 
    <div class="container">
       <div class="panel panel-primary piece-panel">
          <div class="panel-body">
-            {{ render_piece_details_wap(piece) }}
+            {{ render_piece_details_wap(piece, true) }}
          </div>
       </div>
    </div>
