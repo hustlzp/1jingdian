@@ -537,7 +537,8 @@
             </div>
 
             {# 收藏句子 #}
-            <div class="modal-body for-collect-piece"></div>
+            <div class="modal-body for-collect-piece">
+            </div>
             {# 新建句集 #}
             <div class="modal-body for-add-collection">
                <form action="" id="form-add-collection">
@@ -582,14 +583,21 @@
          var pieceId = $(this).data('piece-id');
 
          $('#collect-modal').data('piece-id', pieceId);
+         {#         $collectionBarsWap#}
+         {#               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");#}
+
          $collectionBarsWap
-               .html("<span class='fa fa-spin fa-spinner flag-loading-collection-bars'></span>");
+               .html("");
 
          $.ajax({
             url: urlFor('collection.collection_bars', {piece_id: pieceId}),
             method: 'post'
          }).done(function (html) {
-            $collectionBarsWap.html(html);
+            if (html === "") {
+               $collectionBarsWap.html("<div class='tip'>没有句集？<a class='tip-add-collection' href='javascript:void(0)'>新建</a>一个吧</div>");
+            } else {
+               $collectionBarsWap.html(html);
+            }
          });
       }).on('click', '.collection-bar', function () {
          var url = "",
@@ -630,6 +638,11 @@
       });
 
       $('.btn-add-collection').click(function () {
+         switchToAddCollection();
+         $('#title').focus();
+      });
+
+      $collectionBarsWap.on('click', '.tip-add-collection', function () {
          switchToAddCollection();
          $('#title').focus();
       });
