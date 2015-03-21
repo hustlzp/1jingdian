@@ -13,7 +13,8 @@ class Piece(db.Model):
     original = db.Column(db.Boolean, default=False)
     author = db.Column(db.String(100))
     source = db.Column(db.String(100))
-    source_url = db.Column(db.String(200))
+    source_link = db.Column(db.String(200))
+    source_link_title = db.Column(db.String(200))
     clicks_count = db.Column(db.Integer, default=0)
     votes_count = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.now)
@@ -34,8 +35,8 @@ class Piece(db.Model):
         return g.user.colleced_pieces.filter(CollectionPiece.piece_id == self.id).count() > 0
 
     @property
-    def source_favicon(self):
-        result = urlparse(self.source_url)
+    def source_link_favicon(self):
+        result = urlparse(self.source_link)
         host = "%s://%s" % (result.scheme or "http", result.netloc)
         return "http://g.soz.im/%s" % host
 

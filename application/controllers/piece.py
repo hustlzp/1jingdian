@@ -100,7 +100,7 @@ def edit(uid):
         if piece.original:
             piece.author = ""
             piece.source = ""
-            piece.source_url = ""
+            piece.source_link = ""
         db.session.add(piece)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))

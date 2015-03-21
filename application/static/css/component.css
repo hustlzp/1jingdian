@@ -58,6 +58,14 @@
   color: #aaa;
   font-size: 12px;
 }
+.piece-details-wap .piece-header .meta .source-link {
+  font-size: 13px;
+  margin-left: 10px;
+  color: #aaa;
+}
+.piece-details-wap .piece-header .meta .source-link:hover {
+  color: #1e88a8;
+}
 .piece-details-wap .piece-header .meta .options {
   float: right;
   line-height: 1;
@@ -408,12 +416,6 @@
 }
 .source-wap {
   display: inline-block;
-}
-.source-wap .source_favicon {
-  vertical-align: text-bottom;
-  margin-right: 3px;
-  width: 16px;
-  height: 16px;
 }
 .source-wap .source {
   line-height: 16px;

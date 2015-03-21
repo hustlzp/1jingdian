@@ -33,19 +33,9 @@
          {% if piece.original %}
             <span class="source">原创</span>
          {% else %}
-            {% if piece.source_url %}
-               {% if with_favicon %}
-                  <img src="{{ piece.source_favicon }}" class="source_favicon" alt=""/>
-               {% endif %}
-
-               <a href="{{ piece.source_url }}" class="source" target="_blank">
-                  {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
-               </a>
-            {% else %}
-               <span class="source">
+            <span class="source">
                {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
             </span>
-            {% endif %}
          {% endif %}
       </div>
    {% endif %}
@@ -132,6 +122,13 @@
             <div class="meta clearfix">
                {{ render_piece_source(piece) }}
 
+               {% if piece.source_link %}
+                  <a href="{{ piece.source_link }}" class="source-link" target="_blank"
+                     title="相关链接">
+                     <span class="fa fa-link fa-rotate-90"></span>
+                  </a>
+               {% endif %}
+
                <div class="options">
                   <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
                      title="收藏到句集" {% if g.user %}data-toggle="modal"{% endif %}
@@ -141,7 +138,8 @@
                         {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}</span></a>
 
                   {% if permissions.PieceEditPermission(piece).check() %}
-                     <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece">
+                     <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
+                        title="编辑句集">
                         <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
                      </a>
                   {% endif %}
@@ -160,6 +158,17 @@
             <a href="">分享到微信</a>
          </div>
       </div>
+
+      {#      {% if piece.source_link %}#}
+      {#         <div class="subtitle">链接</div>#}
+      {##}
+      {#         <div class="source-link">#}
+      {#            <img src="{{ piece.source_link_favicon }}" class="source-link-favicon" alt="">#}
+      {#            <a href="{{ piece.source_link }}" class="source-link-title" target="_blank">#}
+      {#               {{ piece.source_link_title }}#}
+      {#            </a>#}
+      {#         </div>#}
+      {#      {% endif %}#}
 
       <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
@@ -764,15 +773,15 @@
          </div>
 
          <div class="form-group">
-            <label for="source_url">链接</label>
+            <label for="source_link">链接</label>
 
             <div class="source-url-wap">
-               <input class="form-control" id="source_url" name="source_url"
+               <input class="form-control" id="source_link" name="source_link"
                       placeholder="选填" type="text"
-                      value="{{ form.source_url.data or "" }}">
+                      value="{{ form.source_link.data or "" }}">
                <img class="source-favicon" src="" alt=""/>
             </div>
-            {{ field_error(form.source_url) }}
+            {{ field_error(form.source_link) }}
          </div>
       </div>
 
@@ -805,7 +814,7 @@
 
       var timer = null,
             sourceFavicon = $('.source-favicon'),
-            sourceUrlInput = $('#source_url');
+            sourceUrlInput = $('#source_link');
 
       if ($.trim(sourceUrlInput.val()) !== "") {
          sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
