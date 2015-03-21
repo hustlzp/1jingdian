@@ -266,7 +266,8 @@
   background-color: #f8f8f8;
 }
 .piece:hover .meta .options .collect,
-.piece:hover .meta .options .btn-edit-piece {
+.piece:hover .meta .options .btn-edit-piece,
+.piece:hover .meta .options .btn-full-screen {
   visibility: visible;
 }
 .piece .media-left {
@@ -306,11 +307,11 @@
 }
 .piece .meta .options .collect {
   visibility: hidden;
-  margin-right: 8px;
+  margin-right: 10px;
   padding: 0 5px;
+  cursor: pointer;
   color: #aaa;
   font-size: 14px;
-  cursor: pointer;
 }
 .piece .meta .options .collect .collect-text {
   font-size: 12px;
@@ -326,10 +327,20 @@
   visibility: hidden;
   display: inline-block;
   padding: 0 5px;
-  font-size: 14px;
+  margin-right: 10px;
   color: #aaa;
+  font-size: 14px;
 }
 .piece .meta .options .btn-edit-piece:hover {
+  color: #1e88a8;
+}
+.piece .meta .options .btn-full-screen {
+  color: #aaa;
+  font-size: 14px;
+  visibility: hidden;
+  padding: 0 5px;
+}
+.piece .meta .options .btn-full-screen:hover {
   color: #1e88a8;
 }
 .piece .vote {
@@ -354,6 +365,45 @@
 }
 .piece .vote .vote-icon {
   line-height: 1;
+}
+.piece-full-screen-backdrop {
+  z-index: 1500;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: #000;
+  transition: opacity .15s linear;
+  opacity: 0;
+}
+.piece-full-screen-backdrop .btn-close-backdrop {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 60px;
+  cursor: pointer;
+}
+.piece-full-screen-backdrop .btn-close-backdrop:hover {
+  color: #999;
+}
+.piece-full-screen-backdrop .wap {
+  padding: 0 10%;
+}
+.piece-full-screen-backdrop .wap .content {
+  line-height: 1.6;
+  font-size: 40px;
+  color: #ffffff;
+}
+.piece-full-screen-backdrop .wap .source {
+  margin-top: 60px;
+  font-size: 26px;
+  color: #ffffff;
+  text-align: right;
+}
+.piece-full-screen-backdrop .wap .source:before {
+  content: '\2014 \00A0';
 }
 .user-profile-header {
   padding-top: 50px;

@@ -335,7 +335,8 @@
 
     .meta .options {
       .collect,
-      .btn-edit-piece {
+      .btn-edit-piece,
+      .btn-full-screen {
         visibility: visible;
       }
     }
@@ -384,11 +385,11 @@
 
       .collect {
         visibility: hidden;
-        margin-right: 8px;
+        margin-right: 10px;
         padding: 0 5px;
+        cursor: pointer;
         color: #aaa;
         font-size: 14px;
-        cursor: pointer;
 
         .collect-text {
           font-size: 12px;
@@ -408,8 +409,20 @@
         visibility: hidden;
         display: inline-block;
         padding: 0 5px;
-        font-size: 14px;
+        margin-right: 10px;
         color: #aaa;
+        font-size: 14px;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .btn-full-screen {
+        color: #aaa;
+        font-size: 14px;
+        visibility: hidden;
+        padding: 0 5px;
 
         &:hover {
           color: @main-color;
@@ -443,6 +456,52 @@
 
     .vote-icon {
       line-height: 1;
+    }
+  }
+}
+
+.piece-full-screen-backdrop {
+  z-index: 1500;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: #000;
+  transition: opacity .15s linear;
+  opacity: 0;
+
+  .btn-close-backdrop {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 60px;
+    cursor: pointer;
+
+    &:hover {
+      color: #999;
+    }
+  }
+
+  .wap {
+    padding: 0 10%;
+
+    .content {
+      line-height: 1.6;
+      font-size: 40px;
+      color: #ffffff;
+    }
+
+    .source {
+      margin-top: 60px;
+      font-size: 26px;
+      color: #ffffff;
+      text-align: right;
+
+      &:before {
+        content: '\2014 \00A0';
+      }
     }
   }
 }

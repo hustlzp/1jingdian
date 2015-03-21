@@ -32,3 +32,8 @@
   font-size: 12px;
   padding-top: 5px;
 }
+.blur {
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+}
