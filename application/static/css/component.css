@@ -21,7 +21,7 @@
 }
 .piece-details-wap .piece-header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e2e2e2;
 }
 .piece-details-wap .piece-header .media-left {
   padding-right: 18px;
@@ -91,7 +91,7 @@
 .piece-details-wap .created-info {
   padding: 10px 0;
   line-height: 32px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e2e2e2;
   font-size: 12px;
 }
 .piece-details-wap .created-info .user-avatar-link {
@@ -137,8 +137,8 @@
 .piece-details-wap .comment-after-signed-in-wap {
   padding: 12px;
   text-align: center;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
 }
 /* 弹出的用户卡片 */
 .popover-content-wap {
@@ -168,7 +168,7 @@
 .user-card .user-name {
   font-size: 16px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e2e2e2;
   text-align: center;
   padding-bottom: 12px;
 }
@@ -192,16 +192,17 @@
 }
 .pieces-by-date-wap .panel-footer .btn-show-hide-pieces {
   cursor: pointer;
+  color: #999;
 }
 .pieces-by-date-wap .panel-footer .btn-show-hide-pieces:hover {
   color: #1e88a8;
 }
 .pieces-by-date-wap .hide-pieces {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #e2e2e2;
   display: none;
 }
 .pieces-by-date-wap .pieces-pager {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #e2e2e2;
 }
 .pieces-by-date-wap .pieces-pager .pre-page,
 .pieces-by-date-wap .pieces-pager .next-page {
@@ -250,14 +251,12 @@
   color: #333;
 }
 .piece {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e2e2e2;
   padding: 25px 20px 20px 20px;
   cursor: pointer;
 }
-.piece:last-child {
+.piece.last {
   border-bottom: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 .piece:hover {
   background-color: #f8f8f8;
@@ -492,7 +491,7 @@
   text-align: center;
 }
 #collect-modal .collection-bar {
-  border: 1px solid #ddd;
+  border: 1px solid #e2e2e2;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px 0;
   padding: 10px 15px;
   margin-bottom: 12px;

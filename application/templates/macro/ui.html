@@ -375,7 +375,7 @@
             {% set piece = piece[attr] %}
          {% endif %}
 
-         <div class="piece" data-piece-id={{ piece.id }}>
+         <div class="piece {% if loop.last %}last{% endif %}" data-piece-id={{ piece.id }}>
             <div class="media">
                <div class="media-left">
                   <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"

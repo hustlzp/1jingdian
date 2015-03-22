@@ -128,19 +128,19 @@ ol li {
   border-color: #1e88a8;
 }
 .popover {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 .panel-primary {
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
   border: none;
+  overflow: hidden;
 }
 .panel-primary .panel-heading {
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
