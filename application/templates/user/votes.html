@@ -16,7 +16,7 @@
             {{ render_pieces(votes.items, attr="piece") }}
          </div>
 
-         {% if votes.page > 1 %}
+         {% if votes.pages > 1 %}
             <div class="panel-footer">
                {{ pagination(votes) }}
             </div>
