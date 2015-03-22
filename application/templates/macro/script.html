@@ -27,7 +27,7 @@
             html += "</div>" + "</div>";
 
             $('body').append(html);
-            adjustHeight();
+            adjustContent();
 
             setTimeout(function () {
                $('.piece-full-screen-backdrop').css('opacity', '.8');
@@ -36,7 +36,7 @@
          });
 
          $(window).resize(function () {
-            adjustHeight();
+            adjustContent();
          });
 
          $(document).keyup(function (e) {
@@ -49,16 +49,27 @@
             closeBackdrop();
          });
 
-         function adjustHeight() {
+         /**
+          * Adjust content in the backdrop.
+          */
+         function adjustContent() {
             var $wap = $('.piece-full-screen-backdrop .wap'),
+                  $content = $('.piece-full-screen-backdrop .wap .content'),
                   verticalMargin = 0;
 
             if (!$wap.length) {
                return;
             }
 
-            verticalMargin = ($(window).height() - $wap.height()) / 2;
+            // 若content为单行，则居中排版
+            if ($content.height() < 100) {
+               $content.addClass('text-center');
+            } else {
+               $content.removeClass('text-center');
+            }
 
+            // 上边距最小为80px
+            verticalMargin = ($(window).height() - $wap.height()) / 2;
             if (verticalMargin < 80) {
                verticalMargin = 80;
             }
@@ -69,6 +80,9 @@
             });
          }
 
+         /**
+          * Close the backdrop.
+          */
          function closeBackdrop() {
             $('.base-wap').removeClass('blur');
             $('.piece-full-screen-backdrop').detach();
