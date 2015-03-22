@@ -35,6 +35,7 @@ ol li {
 }
 .navbar {
   margin-bottom: 40px;
+  position: static;
 }
 .navbar-default {
   background-color: #FFF;
