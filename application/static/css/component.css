@@ -59,7 +59,6 @@
   font-size: 12px;
 }
 .piece-details-wap .piece-header .meta .source-link {
-  font-size: 13px;
   margin-left: 10px;
   color: #aaa;
 }
@@ -69,7 +68,6 @@
 .piece-details-wap .piece-header .meta .options {
   float: right;
   line-height: 1;
-  margin-top: 1px;
   font-size: 12px;
 }
 .piece-details-wap .piece-header .meta .options a {
@@ -299,7 +297,6 @@
   display: inline-block;
   margin-left: -5px;
   line-height: 1;
-  vertical-align: text-bottom;
   font-size: 14px;
 }
 .piece .meta .options > a {
