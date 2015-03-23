@@ -90,7 +90,13 @@ $(document).on('click', '.need-signed-in', function () {
     }
 });
 
+// 激活tooltip
 $('[data-toggle="tooltip"]').tooltip();
+
+// 操作系统标签
+if (navigator.platform.indexOf('Win') > -1) {
+    $('body').addClass('windows');
+}
 
 /**
  * Show flash message.

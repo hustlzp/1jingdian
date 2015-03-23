@@ -81,7 +81,6 @@
 
       .options {
         float: right;
-        line-height: 1;
         font-size: 12px;
 
         a {
@@ -90,10 +89,6 @@
           &:hover {
             color: @main-color;
           }
-        }
-
-        .fa {
-          font-size: 14px;
         }
 
         .collect.collected {
@@ -231,7 +226,6 @@
           font-size: 12px;
         }
       }
-
     }
   }
 }
@@ -432,6 +426,11 @@
   }
 }
 
+// HACK: Hack on windows os
+.windows .piece .meta .option {
+  vertical-align: -1px;
+}
+
 .piece-full-screen-backdrop {
   z-index: 1500;
   position: fixed;
@@ -553,7 +552,6 @@
   display: inline-block;
 
   .source {
-    line-height: 16px;
     color: #aaa;
   }
 
