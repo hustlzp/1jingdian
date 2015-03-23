@@ -823,7 +823,7 @@
          var timerForContent = null,
                timerForSourceLink = null,
                sourceFavicon = $('.source-favicon'),
-               sourceUrlInput = $('#source_link');
+               sourceLinkInput = $('#source_link');
 
          $('.source-help').popover({
             trigger: 'hover',
@@ -851,17 +851,22 @@
             }
          });
 
-         if ($.trim(sourceUrlInput.val()) !== "") {
-            sourceFavicon.attr('src', 'http://g.soz.im/' + sourceUrlInput.val());
+         if ($.trim(sourceLinkInput.val()) !== "") {
+            sourceFavicon.attr('src', 'http://g.soz.im/' + sourceLinkInput.val());
          }
 
          // 输入source url时，加载favicon
-         sourceUrlInput.keyup(function () {
+         sourceLinkInput.keyup(function () {
             var input = $(this);
             clearTimeout(timerForSourceLink);
             timerForSourceLink = setTimeout(function () {
                sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
             }, 500);
+         });
+
+         // click或change事件时，加载favicon
+         sourceLinkInput.on('click change input', function () {
+            sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
          });
 
          // 图片加载失败时，隐藏
