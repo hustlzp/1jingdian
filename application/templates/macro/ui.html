@@ -28,7 +28,7 @@
 {% endmacro %}
 
 
-{% macro render_piece_source(piece, with_favicon=True) %}
+{% macro render_piece_source(piece, with_link=True) %}
    {% if piece.original or piece.author or piece.source %}
       <div class="source-wap">
          {% if piece.original %}
@@ -37,6 +37,13 @@
             <span class="source">
                {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
             </span>
+
+            {% if with_link and piece.source_link %}
+               <a href="{{ piece.source_link }}" class="source-link" target="_blank"
+                  title="相关链接">
+                  <span class="fa fa-link fa-rotate-90"></span>
+               </a>
+            {% endif %}
          {% endif %}
       </div>
    {% endif %}
@@ -139,7 +146,7 @@
 {% endmacro %}
 
 
-{% macro render_piece_details_wap(piece, width_full_screen=false) %}
+{% macro render_piece_details_wap(piece) %}
    <div class="piece-details-wap">
       <div class="media piece-header">
          <div class="media-left">
@@ -157,45 +164,34 @@
                {{ piece.content }}
             </div>
 
-            <div class="meta clearfix">
-               {{ render_piece_source(piece) }}
-
-               {% if piece.source_link %}
-                  <a href="{{ piece.source_link }}" class="source-link" target="_blank"
-                     title="相关链接">
-                     <span class="fa fa-link fa-rotate-90"></span>
-                  </a>
-               {% endif %}
-
-               <div class="options">
-                  {% if permissions.PieceEditPermission(piece).check() %}
-                     <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
-                        title="编辑句集">
-                        <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
-                     </a>
-                  {% endif %}
-
-                  {% if width_full_screen %}
-                     <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
-                        data-content="{{ piece.content }}"
-                        data-source="{{ piece.source or "" }}"
-                        data-author="{{ piece.author or "" }}">
-                        <span class="fa fa-arrows-alt "></span> 全屏
-                     </a>
-                  {% endif %}
-               </div>
-            </div>
+            {{ render_piece_source(piece) }}
          </div>
       </div>
 
-      <div class="created-info clearfix">
+      <div class="meta clearfix">
          <div class="pull-left">
             {{ render_user_avatar(piece.user) }}
             <span class="created-time">发布于 {{ piece.created_at|timesince }}</span>
          </div>
 
          <div class="actions pull-right">
-            <a href="">分享到微信</a>
+            {% if permissions.PieceEditPermission(piece).check() %}
+               <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
+                  title="编辑句集">
+                  <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
+               </a>
+            {% endif %}
+
+            <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
+               data-content="{{ piece.content }}"
+               data-source="{{ piece.source or "" }}"
+               data-author="{{ piece.author or "" }}">
+               <span class="fa fa-arrows-alt "></span> 全屏
+            </a>
+
+            <a href="javascript: void(0)" class="btn-share">
+               <span class="fa fa-share"></span> 分享
+            </a>
          </div>
       </div>
 

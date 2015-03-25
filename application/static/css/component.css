@@ -54,49 +54,31 @@
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-details-wap .piece-header .meta {
-  color: #aaa;
-  font-size: 12px;
-}
-.piece-details-wap .piece-header .meta .source-link {
-  margin-left: 10px;
-  color: #aaa;
-}
-.piece-details-wap .piece-header .meta .source-link:hover {
-  color: #1e88a8;
-}
-.piece-details-wap .piece-header .meta .options {
-  float: right;
-  font-size: 12px;
-}
-.piece-details-wap .piece-header .meta .options a {
-  color: #aaa;
-}
-.piece-details-wap .piece-header .meta .options a:hover {
-  color: #1e88a8;
-}
-.piece-details-wap .piece-header .meta .options .collect.collected {
-  color: #1e88a8 !important;
-}
-.piece-details-wap .piece-header .meta .options .btn-full-screen,
-.piece-details-wap .piece-header .meta .options .btn-edit-piece {
-  margin-left: 20px;
-}
-.piece-details-wap .created-info {
+.piece-details-wap .meta {
   padding: 10px 0;
   line-height: 32px;
   border-bottom: 1px solid #e2e2e2;
   font-size: 12px;
 }
-.piece-details-wap .created-info .user-avatar-link {
+.piece-details-wap .meta .user-avatar-link {
   margin-right: 8px;
 }
-.piece-details-wap .created-info .user-avatar-link .user-avatar {
+.piece-details-wap .meta .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-details-wap .created-info .created-time {
+.piece-details-wap .meta .created-time {
   color: #aaa;
+}
+.piece-details-wap .meta .actions a {
+  color: #aaa;
+}
+.piece-details-wap .meta .actions a:hover {
+  color: #1e88a8;
+}
+.piece-details-wap .meta .actions .btn-full-screen,
+.piece-details-wap .meta .actions .btn-share {
+  margin-left: 15px;
 }
 .piece-details-wap .subtitle {
   font-size: 16px;
@@ -452,13 +434,14 @@
 }
 .source-wap {
   display: inline-block;
+  color: #aaa;
+  font-size: 12px;
 }
-.source-wap .source {
+.source-wap .source-link {
+  margin-left: 15px;
   color: #aaa;
 }
-.source-wap a.source:hover,
-.source-wap a.source:focus {
-  text-decoration: none;
+.source-wap .source-link:hover {
   color: #1e88a8;
 }
 @media (min-width: 768px) {

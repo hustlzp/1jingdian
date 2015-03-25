@@ -65,45 +65,9 @@
       line-height: 1.6;
       font-size: 16px;
     }
-
-    .meta {
-      color: #aaa;
-      font-size: 12px;
-
-      .source-link {
-        margin-left: 10px;
-        color: #aaa;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-
-      .options {
-        float: right;
-        font-size: 12px;
-
-        a {
-          color: #aaa;
-
-          &:hover {
-            color: @main-color;
-          }
-        }
-
-        .collect.collected {
-          color: @main-color !important;
-        }
-
-        .btn-full-screen,
-        .btn-edit-piece {
-          margin-left: 20px;
-        }
-      }
-    }
   }
 
-  .created-info {
+  .meta {
     padding: 10px 0;
     line-height: 32px;
     border-bottom: 1px solid @border-color;
@@ -120,6 +84,21 @@
 
     .created-time {
       color: #aaa;
+    }
+
+    .actions {
+      a {
+        color: #aaa;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .btn-full-screen,
+      .btn-share {
+        margin-left: 15px;
+      }
     }
   }
 
@@ -566,15 +545,14 @@
 
 .source-wap {
   display: inline-block;
+  color: #aaa;
+  font-size: 12px;
 
-  .source {
+  .source-link {
+    margin-left: 15px;
     color: #aaa;
-  }
 
-  a.source {
-    &:hover,
-    &:focus {
-      text-decoration: none;
+    &:hover {
       color: @main-color;
     }
   }
