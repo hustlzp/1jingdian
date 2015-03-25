@@ -1,7 +1,7 @@
 # coding: utf-8
 from datetime import datetime, date
 from ._base import db
-from ..utils.uploadsets import collection_covers, collection_sm_covers
+from ..utils.uploadsets import collection_covers
 
 
 class Collection(db.Model):
