@@ -1,7 +1,7 @@
 # coding: utf-8
 from datetime import date, timedelta
 from flask import render_template, Blueprint
-from ..models import db, Piece
+from ..models import db, Piece, Collection
 from ..utils.helper import get_pieces_data_by_day
 
 bp = Blueprint('site', __name__)
@@ -32,3 +32,9 @@ def about():
 @bp.route('/search')
 def search():
     return render_template('site/search.html')
+
+
+@bp.route('/collections')
+def collections():
+    collections = Collection.query
+    return render_template('site/collections.html', collections=collections)

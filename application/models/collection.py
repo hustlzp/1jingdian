@@ -12,11 +12,6 @@ class Collection(db.Model):
     sm_cover = db.Column(db.String(200))
     desc = db.Column(db.Text)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('collections',
-                                                      lazy='dynamic',
-                                                      order_by='desc(Collection.created_at)'))
-
     @property
     def cover_url(self):
         return collection_covers.url(self.cover) if self.cover else ""
@@ -36,12 +31,11 @@ class CollectionPiece(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
-    collection_owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    collection_owner = db.relationship('User',
-                                       backref=db.backref('colleced_pieces',
-                                                          lazy='dynamic',
-                                                          order_by='desc('
-                                                                   'CollectionPiece.created_at)'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('edited_pieces',
+                                              lazy='dynamic',
+                                              order_by='desc(CollectionPiece.created_at)'))
 
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
     collection = db.relationship('Collection',

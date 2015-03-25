@@ -24,12 +24,6 @@ def share(uid, page):
     return render_template('user/share.html', user=user, pieces=pieces)
 
 
-@bp.route('/people/<int:uid>/collections')
-def collections(uid):
-    user = User.query.get_or_404(uid)
-    return render_template('user/collections.html', user=user)
-
-
 @bp.route('/my/settings', methods=['GET', 'POST'])
 @UserPermission()
 def settings():

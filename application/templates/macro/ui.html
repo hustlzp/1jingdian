@@ -74,6 +74,38 @@
 {% endmacro %}
 
 
+{% macro render_collections(collections, attr=None) %}
+   <div class="collections-wap clearfix">
+      {% for collection in collections %}
+         {% if attr %}
+            {% set collection = collection[attr] %}
+         {% endif %}
+
+         <div class="collection" data-collection-id="{{ collection.id }}">
+            <div class="title">{{ collection.title }}</div>
+
+            {% if collection.desc %}
+               <div class="desc">{{ collection.desc }}</div>
+            {% endif %}
+
+            <div class="pieces-count">
+               {{ collection.pieces.count() }} 句子
+            </div>
+         </div>
+      {% endfor %}
+   </div>
+
+   <script type="text/javascript">
+      (function () {
+         $('.collection').click(function () {
+            var collectionId = $(this).data('collection-id');
+            window.location = urlFor('collection.view', {'uid': collectionId});
+         });
+      })();
+   </script>
+{% endmacro %}
+
+
 {% macro render_comment(comment) %}
    <div class="comment">
       <div class="media">

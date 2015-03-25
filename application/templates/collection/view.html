@@ -21,22 +21,15 @@
                   <div class="desc">{{ collection.desc }}</div>
                {% endif %}
 
-               <a href="{{ url_for('user.profile', uid=collection.user.id) }}">
-                  <img src="{{ collection.user.avatar_url }}" alt=""
-                       class="img-circle user-avatar"/>
-               </a>
+               <img src="{{ collection.cover_url }}" alt=""
+                    class="img-circle collection-cover"/>
 
-               {% if permissions.CollectionEditPermission(collection).check() %}
+               {% if permissions.AdminPermission().check() %}
                   <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                      class="btn-edit-collection" title="编辑句集">
                      <span class="fa fa-pencil"></span>
                   </a>
                {% endif %}
-
-               <a href="{{ url_for('user.collections', uid=collection.user.id) }}"
-                  class="back-to-collections">
-                  <span class="fa fa-angle-left"></span>&nbsp;&nbsp;返回
-               </a>
             </div>
 
             {{ render_pieces(collection.pieces, attr="piece") }}
