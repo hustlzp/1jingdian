@@ -74,8 +74,12 @@
                {#            </li>#}
 
                <li>
-                  <a href="http://blog.1jingdian.com" target="_blank">博客</a>
+                  <a href="#">句集</a>
                </li>
+
+               {#               <li>#}
+               {#                  <a href="http://blog.1jingdian.com" target="_blank">博客</a>#}
+               {#               </li>#}
 
                {% if g.user %}
                   <li>
@@ -88,7 +92,6 @@
                      </a>
                      <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">个人主页</a></li>
-                        <li><a href="{{ url_for('user.collections', uid=g.user.id) }}">我的句集</a></li>
                         <li><a href="{{ url_for('feedback.index') }}">意见反馈</a></li>
                         <li><a href="{{ url_for('user.settings') }}">设置</a></li>
                         <li><a href="{{ url_for('account.signout') }}">登出</a></li>

@@ -126,14 +126,6 @@
                {% endif %}
 
                <div class="options">
-                  <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                     title="收藏到句集" {% if g.user %}data-toggle="modal"{% endif %}
-                     data-target="#collect-modal" data-piece-id="{{ piece.id }}"
-                     href="javascript: void(0)">
-                     <span class="fa fa-star"></span>
-                     <span class="btn-text">
-                        {% if piece.collected_by_user() %}已收藏{% else %}收藏{% endif %}</span></a>
-
                   {% if permissions.PieceEditPermission(piece).check() %}
                      <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
                         title="编辑句集">
@@ -399,12 +391,6 @@
                      {{ render_piece_source(piece, false) }}
 
                      <div class="options">
-                        <a class="collect {% if piece.collected_by_user() %}collected{% endif %} need-signed-in"
-                           title="收藏到句集" data-piece-id="{{ piece.id }}"
-                           {% if g.user %}data-toggle="modal"{% endif %}
-                           data-target="#collect-modal" href="javascript: void(0)">
-                           <span class="fa fa-star"></span></a>
-
                         {% if permissions.PieceEditPermission(piece).check() %}
                            <a href="{{ url_for('piece.edit', uid=piece.id) }}"
                               class="btn-edit-piece" title="编辑">
