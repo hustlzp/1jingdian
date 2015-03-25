@@ -89,12 +89,17 @@
          <div class="collection" data-collection-id="{{ collection.id }}">
             <div class="title">{{ collection.title }}</div>
 
-            {% if collection.desc %}
-               <div class="desc">{{ collection.desc }}</div>
+            {% if collection.cover_url %}
+               <img src="{{ collection.cover_url }}" alt="" class="img-circle collection-cover"/>
             {% endif %}
 
-            <div class="pieces-count">
-               {{ collection.pieces.count() }} 句子
+            {#            {% if collection.desc %}#}
+            {#               <div class="desc">{{ collection.desc }}</div>#}
+            {#            {% endif %}#}
+
+            <div class="meta">
+               {{ collection.pieces.count() }} 句子<span
+                  class="devider"></span>{{ collection.likers.count() }} 收藏
             </div>
          </div>
       {% endfor %}

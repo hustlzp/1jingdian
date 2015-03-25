@@ -17,12 +17,13 @@
                   <span class="fa fa-book"></span>&nbsp;&nbsp;{{ collection.title }}
                </div>
 
-               {% if collection.desc %}
-                  <div class="desc">{{ collection.desc }}</div>
-               {% endif %}
+               {#               {% if collection.desc %}#}
+               {#                  <div class="desc">{{ collection.desc }}</div>#}
+               {#               {% endif %}#}
 
-               <img src="{{ collection.cover_url }}" alt=""
-                    class="img-circle collection-cover"/>
+               {% if collection.cover_url %}
+                  <img src="{{ collection.cover_url }}" alt="" class="img-circle collection-cover"/>
+               {% endif %}
 
                {% if permissions.AdminPermission().check() %}
                   <a href="{{ url_for('collection.edit', uid=collection.id) }}"

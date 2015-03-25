@@ -1,21 +1,21 @@
-.form-group-avatar {
+.form-group-cover {
   margin: 10px 0 30px 0;
   text-align: center;
 }
-.form-group-avatar .avatar-wap {
+.form-group-cover .cover-wap {
   position: relative;
   margin: 0 auto;
   width: 80px;
   height: 80px;
 }
-.form-group-avatar .avatar-wap .user-avatar {
+.form-group-cover .cover-wap .cover {
   width: 80px;
   height: 80px;
 }
-.form-group-avatar #btn-upload-avatar {
+.form-group-cover #btn-upload-cover {
   margin-top: 15px;
 }
-.form-group-avatar .upload-error-info {
+.form-group-cover .upload-error-info {
   display: none;
   padding-top: 10px;
   font-size: 12px;

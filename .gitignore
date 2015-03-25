@@ -4,6 +4,11 @@ venv
 config/production.py
 config/development.py
 uploads/*
+# user avatars
 !uploads/avatars/
 uploads/avatars/*
 !uploads/avatars/default.png
+# collection covers
+!uploads/collectionCovers/
+uploads/collectionCovers/*
+!uploads/collectionCovers/default.png

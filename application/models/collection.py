@@ -8,17 +8,12 @@ class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.now)
-    cover = db.Column(db.String(200))
-    sm_cover = db.Column(db.String(200))
+    cover = db.Column(db.String(200), default='default.png')
     desc = db.Column(db.Text)
 
     @property
     def cover_url(self):
         return collection_covers.url(self.cover) if self.cover else ""
-
-    @property
-    def sm_cover_url(self):
-        return collection_sm_covers.url(self.sm_cover) if self.sm_cover else ""
 
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0

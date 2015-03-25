@@ -749,6 +749,7 @@
     color: #333;
     position: relative;
     cursor: pointer;
+    text-align: center;
 
     &:hover {
       background-color: #f8f8f8;
@@ -756,20 +757,31 @@
 
     .title {
       font-size: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
-    .desc {
-      color: #999;
-      font-size: 12px;
+    //    .desc {
+    //      color: #999;
+    //      font-size: 12px;
+    //    }
+
+    .collection-cover {
+      width: 64px;
+      height: 64px;
     }
 
-    .pieces-count {
+    .meta {
       position: absolute;
-      left: 20px;
+      left: 0px;
+      width: 100%;
       bottom: 20px;
       font-size: 12px;
+      text-align: center;
       color: #999;
+
+      .devider {
+        margin: 0 5px;
+      }
     }
   }
 }

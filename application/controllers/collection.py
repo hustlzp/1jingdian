@@ -5,6 +5,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
 from ..utils.permissions import VisitorPermission, UserPermission, CollectionEditPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, Collection, CollectionPiece
 from ..forms import CollectionForm
+from ..utils.uploadsets import collection_covers, process_avatar
 
 bp = Blueprint('collection', __name__)
 
@@ -36,7 +37,7 @@ def edit(uid):
         db.session.add(collection)
         db.session.commit()
         return redirect(url_for('collection.view', uid=uid))
-    return render_template('collection/edit.html', form=form)
+    return render_template('collection/edit.html', form=form, collection=collection)
 
 
 @bp.route('/collection/add_and_collect/<int:piece_id>', methods=['POST'])
@@ -64,3 +65,19 @@ def add_and_collect(piece_id):
     collection_bars_macro = get_template_attribute('macro/ui.html', 'render_collection_bars')
     collection_bars_html = collection_bars_macro(g.user.collections, piece_id)
     return json.dumps({'result': True, 'collection_bars_html': collection_bars_html})
+
+
+@bp.route('/collection/<int:uid>/upload_cover', methods=['POST'])
+@UserPermission()
+def upload_cover(uid):
+    collection = Collection.query.get_or_404(uid)
+    try:
+        filename = process_avatar(request.files['file'], collection_covers, 160)
+    except Exception, e:
+        return json.dumps({'result': False, 'error': e.__repr__()})
+    else:
+        collection.cover = filename
+        db.session.add(collection)
+        db.session.commit()
+        return json.dumps({'result': True, 'avatar_url': collection_covers.url(filename)})
+

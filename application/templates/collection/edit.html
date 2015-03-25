@@ -10,6 +10,19 @@
             <form method="post">
                {{ form.csrf_token() }}
 
+               <div class="form-group form-group-cover">
+                  <div class="cover-wap">
+                     <img class="cover img-circle" src="{{ collection.cover_url }}" alt=""/>
+                  </div>
+
+                  <button type="button" data-collection-id="{{ collection.id }}"
+                          class="btn btn-primary btn-xs" id="btn-upload-cover">
+                     更换图标
+                  </button>
+
+                  <div class="upload-error-info text-danger">上传失败，请稍后再试。</div>
+               </div>
+
                {{ vertical_field(form.title) }}
                {{ vertical_field(form.desc) }}
 
