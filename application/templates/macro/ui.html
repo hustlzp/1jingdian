@@ -312,7 +312,6 @@
 
             if (pieceModal.hasClass('open')) {
                pieceModal.attr('data-piece-id', pieceId);
-               changeUrl(pieceId);
                addClicksCount(pieceId);
 
                $.ajax({
@@ -341,7 +340,6 @@
        * @param callback
        */
       function openModal(pieceId, callback) {
-         changeUrl(pieceId);
          addClicksCount(pieceId);
 
          $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
@@ -358,10 +356,6 @@
        * @param callback
        */
       function closeModal(callback) {
-         if (window.history.replaceState) {
-            window.history.replaceState('', '', g.originalUrl);
-         }
-
          $('.piece-modal-wap').stop().transition({
             'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
          }, 400, function () {
@@ -371,16 +365,6 @@
                callback();
             }
          });
-      }
-
-      /**
-       * Change browser url without redirecting.
-       * @param pieceId
-       */
-      function changeUrl(pieceId) {
-         if (window.history.replaceState) {
-            window.history.replaceState('', '', urlFor('piece.view', {uid: pieceId}, true));
-         }
       }
 
       /**
