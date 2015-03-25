@@ -109,6 +109,19 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
+.piece-details-wap .collection {
+  background-color: #eff6fa;
+  padding: 5px 10px;
+  line-height: 1;
+  border-radius: 30px;
+  margin-right: 5px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #1e88a8;
+}
+.piece-details-wap .collection:hover {
+  background-color: #d0e5f0;
+}
 .piece-details-wap .comment {
   margin-bottom: 15px;
 }

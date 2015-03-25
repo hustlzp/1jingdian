@@ -199,6 +199,14 @@
          </div>
       </div>
 
+      <div class="subtitle">{{ piece.collections.count() }} 句集</div>
+
+      {% for collection in piece.collections %}
+         {% set collection = collection.collection %}
+         <a class="collection" href="{{ url_for('collection.view', uid=collection.id) }}">
+            {{ collection.title }}</a>
+      {% endfor %}
+
       <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
       <div class="voters">
