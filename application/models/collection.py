@@ -48,3 +48,20 @@ class CollectionPiece(db.Model):
                             backref=db.backref('collections',
                                                lazy='dynamic',
                                                order_by='desc(CollectionPiece.created_at)'))
+
+
+class UserLikeCollection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('liked_collections',
+                                              lazy='dynamic',
+                                              order_by='desc(UserLikeCollection.created_at)'))
+
+    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
+    collection = db.relationship('Collection',
+                                 backref=db.backref('likers',
+                                                    lazy='dynamic',
+                                                    order_by='desc(UserLikeCollection.created_at)'))

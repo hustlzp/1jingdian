@@ -68,6 +68,11 @@
                   {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>
                </a>
             </div>
+            <div class="count-wap collections-count">
+               <a href="{{ url_for('user.likes', uid=user.id) }}">
+                  {{ user.collections_count }}<br/><span class="count-quantifier">收藏</span>
+               </a>
+            </div>
          </div>
       </div>
    </div>
@@ -544,6 +549,10 @@
          <a class="tab-item {% if active == "share" %}active{% endif %}"
             href="{{ url_for('user.share', uid=user.id) }}">
             {{ user.pieces_count }} 分享
+         </a>
+         <a class="tab-item {% if active == "likes" %}active{% endif %}"
+            href="{{ url_for('user.likes', uid=user.id) }}">
+            {{ user.collections_count }} 收藏
          </a>
       </div>
    </div>
