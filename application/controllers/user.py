@@ -12,16 +12,16 @@ bp = Blueprint('user', __name__)
 @bp.route('/people/<int:uid>/page/<int:page>')
 def profile(uid, page):
     user = User.query.get_or_404(uid)
-    pieces = user.created_pieces.paginate(page, 20)
-    return render_template('user/profile.html', user=user, pieces=pieces)
-
-
-@bp.route('/people/<int:uid>/votes', defaults={'page': 1})
-@bp.route('/people/<int:uid>/votes/page/<int:page>')
-def votes(uid, page):
-    user = User.query.get_or_404(uid)
     votes = user.voted_pieces.paginate(page, 20)
-    return render_template('user/votes.html', user=user, votes=votes)
+    return render_template('user/profile.html', user=user, votes=votes)
+
+
+@bp.route('/people/<int:uid>/share', defaults={'page': 1})
+@bp.route('/people/<int:uid>/share/page/<int:page>')
+def share(uid, page):
+    user = User.query.get_or_404(uid)
+    pieces = user.created_pieces.paginate(page, 20)
+    return render_template('user/share.html', user=user, pieces=pieces)
 
 
 @bp.route('/people/<int:uid>/collections')

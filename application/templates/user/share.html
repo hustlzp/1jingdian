@@ -2,23 +2,23 @@
 {% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
       render_collect_modal, pagination %}
 
-{% block page_title %}{{ user.name }}{% endblock %}
+{% block page_title %}{{ user.name }} - 分享{% endblock %}
 {% block page_content %}
-   {% if votes.items %}
-      {{ render_piece_modal_wap(votes.items[0].piece) }}
+   {% if pieces.items %}
+      {{ render_piece_modal_wap(pieces.items[0]) }}
    {% endif %}
    {{ render_collect_modal() }}
 
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
-            {{ render_user_profile_header(user, active="votes") }}
-            {{ render_pieces(votes.items, attr="piece") }}
+            {{ render_user_profile_header(user, active="share") }}
+            {{ render_pieces(pieces.items) }}
          </div>
 
-         {% if votes.pages > 1 %}
+         {% if pieces.pages > 1 %}
             <div class="panel-footer">
-               {{ pagination(votes) }}
+               {{ pagination(pieces) }}
             </div>
          {% endif %}
       </div>

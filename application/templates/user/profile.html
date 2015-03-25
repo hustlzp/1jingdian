@@ -4,21 +4,21 @@
 
 {% block page_title %}{{ user.name }}{% endblock %}
 {% block page_content %}
-   {% if pieces.items %}
-      {{ render_piece_modal_wap(pieces.items[0]) }}
+   {% if votes.items %}
+      {{ render_piece_modal_wap(votes.items[0].piece) }}
    {% endif %}
    {{ render_collect_modal() }}
 
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
-            {{ render_user_profile_header(user, active="creates") }}
-            {{ render_pieces(pieces.items) }}
+            {{ render_user_profile_header(user, active="votes") }}
+            {{ render_pieces(votes.items, attr="piece") }}
          </div>
 
-         {% if pieces.pages > 1 %}
+         {% if votes.pages > 1 %}
             <div class="panel-footer">
-               {{ pagination(pieces) }}
+               {{ pagination(votes) }}
             </div>
          {% endif %}
       </div>
