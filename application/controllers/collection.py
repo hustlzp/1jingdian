@@ -18,13 +18,13 @@ def view(uid, page):
     return render_template('collection/view.html', collection=collection, pieces=pieces)
 
 
-@bp.route('/collection/<int:uid>/hotest', defaults={'page': 1})
-@bp.route('/collection/<int:uid>/hotest/page/<int:page>')
-def hotest_view(uid, page):
+@bp.route('/collection/<int:uid>/hot', defaults={'page': 1})
+@bp.route('/collection/<int:uid>/hot/page/<int:page>')
+def hot_view(uid, page):
     collection = Collection.query.get_or_404(uid)
     pieces = Piece.query.filter(Piece.collections.any(CollectionPiece.collection_id == uid)) \
         .order_by(Piece.votes_count.desc()).paginate(page, 20)
-    return render_template('collection/hotest_view.html', collection=collection, pieces=pieces)
+    return render_template('collection/hot_view.html', collection=collection, pieces=pieces)
 
 
 @bp.route('/collection/<int:uid>/voted', defaults={'page': 1})

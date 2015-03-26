@@ -951,8 +951,8 @@
       <div class="tab {% if g.user %}three{% else %}two{% endif %} clearfix">
          <a class="item {% if active == 'latest' %}active{% endif %}"
             href="{{ url_for('collection.view', uid=collection.id) }}">最新</a>
-         <a class="item {% if active == 'hotest' %}active{% endif %}"
-            href="{{ url_for('collection.hotest_view', uid=collection.id) }}">最热</a>
+         <a class="item {% if active == 'hot' %}active{% endif %}"
+            href="{{ url_for('collection.hot_view', uid=collection.id) }}">热门</a>
          {% if g.user %}
             <a class="item {% if active == 'voted' %}active{% endif %}"
                href="{{ url_for('collection.voted_view', uid=collection.id) }}">
