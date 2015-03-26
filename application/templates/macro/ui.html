@@ -202,11 +202,15 @@
                {{ collection.title }}</a>
          {% endfor %}
 
-         <a href="javascript: void(0)" class="btn-add-collection" title="添加">
-            <span class="fa fa-plus"></span></a>
+         {% if g.user %}
+            <a href="javascript: void(0)" class="btn-add-collection" title="添加">
+               <span class="fa fa-plus"></span></a>
+         {% endif %}
       {% else %}
-         <a href="javascript: void(0)" class="btn-add-collection btn-add-collection-full">
-            <span class="fa fa-plus"></span> 添加</a>
+         {% if g.user %}
+            <a href="javascript: void(0)" class="btn-add-collection btn-add-collection-full">
+               <span class="fa fa-plus"></span> 添加</a>
+         {% endif %}
       {% endif %}
 
       <div class="form-group collection-input-wap">
@@ -281,7 +285,7 @@
          // 添加句集
          $('.btn-add-collection').click(function () {
             $(this).hide();
-            $('.collection-input-wap').fadeIn();
+            $('.collection-input-wap').show();
             $('#input-collection').focus();
          });
 
