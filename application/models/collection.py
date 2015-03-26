@@ -1,5 +1,6 @@
 # coding: utf-8
 from datetime import datetime, date
+from flask import g
 from ._base import db
 from ..utils.uploadsets import collection_covers
 
@@ -17,6 +18,16 @@ class Collection(db.Model):
 
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0
+
+    @property
+    def voted_pieces_by_user(self):
+        from . import PieceVote, Piece
+
+        if not g.user:
+            return None
+        return Piece.query \
+            .filter(Piece.collections.any(CollectionPiece.collection_id == self.id)) \
+            .filter(Piece.voters.any(PieceVote.user_id == g.user.id))
 
     def __repr__(self):
         return '<Collection %s>' % self.id

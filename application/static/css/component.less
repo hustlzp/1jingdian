@@ -304,125 +304,129 @@
   }
 }
 
-.piece {
-  border-bottom: 1px solid @border-color;
-  padding: 25px 20px 20px 20px;
-  cursor: pointer;
+.pieces-wap {
+  min-height: 40px;
 
-  &.last {
-    border-bottom: none;
-  }
-
-  &:hover {
-    background-color: #f8f8f8;
-
-    .meta .options {
-      .collect,
-      .btn-edit-piece,
-      .btn-full-screen {
-        visibility: visible;
-      }
-    }
-  }
-
-  .media-left {
-    padding-right: 18px;
-  }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .comments-count {
-    text-align: center;
-    margin-top: 8px;
-    color: #bbb;
-
-    .fa {
-      font-size: 12px;
-      margin-left: 1px;
-    }
-  }
-
-  .content {
-    padding-right: 85px;
-    margin-bottom: 15px;
-    line-height: 1.6;
-    font-size: 16px;
-  }
-
-  .meta {
-    color: #aaa;
-    font-size: 12px;
-
-    .source-wap {
-      margin-right: 25px;
-    }
-
-    .options {
-      display: inline-block;
-      margin-left: -5px;
-      line-height: 1;
-      font-size: 14px;
-
-      & > a {
-        color: #aaa;
-        visibility: hidden;
-        padding: 0 5px;
-        outline: none;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-
-      .collect {
-        margin-right: 10px;
-
-        &.collected {
-          visibility: visible !important;
-          color: @main-color !important;
-        }
-      }
-
-      .btn-edit-piece {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  .vote {
-    background-color: #ffffff;
-    border: 1px solid #E0E3E6;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    font-size: 16px;
+  .piece {
+    border-bottom: 1px solid @border-color;
+    padding: 25px 20px 20px 20px;
     cursor: pointer;
-    text-align: center;
+
+    &.last {
+      border-bottom: none;
+    }
 
     &:hover {
-      border-color: #bbb;
+      background-color: #f8f8f8;
+
+      .meta .options {
+        .collect,
+        .btn-edit-piece,
+        .btn-full-screen {
+          visibility: visible;
+        }
+      }
     }
 
-    &.voted {
-      border-color: @main-color;
-      color: @main-color;
+    .media-left {
+      padding-right: 18px;
     }
 
-    .votes-count {
-      line-height: 1;
-      padding-bottom: 4px;
+    .user-avatar {
+      width: 32px;
+      height: 32px;
     }
 
-    .vote-icon {
-      line-height: 1;
+    .comments-count {
+      text-align: center;
+      margin-top: 8px;
+      color: #bbb;
+
+      .fa {
+        font-size: 12px;
+        margin-left: 1px;
+      }
+    }
+
+    .content {
+      padding-right: 85px;
+      margin-bottom: 15px;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .meta {
+      color: #aaa;
+      font-size: 12px;
+
+      .source-wap {
+        margin-right: 25px;
+      }
+
+      .options {
+        display: inline-block;
+        margin-left: -5px;
+        line-height: 1;
+        font-size: 14px;
+
+        & > a {
+          color: #aaa;
+          visibility: hidden;
+          padding: 0 5px;
+          outline: none;
+
+          &:hover {
+            color: @main-color;
+          }
+        }
+
+        .collect {
+          margin-right: 10px;
+
+          &.collected {
+            visibility: visible !important;
+            color: @main-color !important;
+          }
+        }
+
+        .btn-edit-piece {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .vote {
+      background-color: #ffffff;
+      border: 1px solid #E0E3E6;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        border-color: #bbb;
+      }
+
+      &.voted {
+        border-color: @main-color;
+        color: @main-color;
+      }
+
+      .votes-count {
+        line-height: 1;
+        padding-bottom: 4px;
+      }
+
+      .vote-icon {
+        line-height: 1;
+      }
     }
   }
 }
 
 // HACK: Hack on windows os
-.windows .piece .meta .options {
+.windows .pieces-wap .piece .meta .options {
   vertical-align: -1px;
 }
 
@@ -774,6 +778,68 @@
 
       .devider {
         margin: 0 5px;
+      }
+    }
+  }
+}
+
+.collection-header {
+  .collection-info {
+    padding: 40px 0 30px 0;
+    text-align: center;
+    position: relative;
+
+    .title {
+      font-size: 18px;
+    }
+
+    .desc {
+      margin-top: 10px;
+      color: #999;
+    }
+
+    .collection-cover {
+      margin-top: 15px;
+      width: 64px;
+      height: 64px;
+    }
+    .btn-edit-collection {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #999;
+      font-size: 14px;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
+  }
+
+  .tab {
+    text-align: center;
+
+    &.two .item {
+      width: 50%;
+    }
+
+    &.three .item {
+      width: 33.333333333%;
+    }
+
+    .item {
+      text-decoration: none;
+      float: left;
+      display: block;
+      line-height: 1;
+      padding: 17px 0;
+      background-color: #eee;
+      color: #333;
+
+      &.active,
+      &:hover {
+        background-color: @main-color;
+        color: #ffffff;
       }
     }
   }

@@ -16,6 +16,22 @@ def view(uid):
     return render_template('collection/view.html', collection=collection)
 
 
+@bp.route('/collection/<int:uid>/hotest')
+def hotest_view(uid):
+    collection = Collection.query.get_or_404(uid)
+    pieces = Piece.query.filter(Piece.collections.any(CollectionPiece.collection_id == uid)) \
+        .order_by(Piece.votes_count.desc())
+    return render_template('collection/hotest_view.html', collection=collection, pieces=pieces)
+
+
+@bp.route('/collection/<int:uid>/voted')
+@UserPermission()
+def voted_view(uid):
+    collection = Collection.query.get_or_404(uid)
+    pieces = collection.voted_pieces_by_user
+    return render_template('collection/voted_view.html', collection=collection, pieces=pieces)
+
+
 @bp.route('/collection_bars/<int:piece_id>', methods=['POST'])
 @UserPermission()
 def collection_bars(piece_id):

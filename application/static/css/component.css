@@ -239,77 +239,80 @@
   text-decoration: none;
   color: #333;
 }
-.piece {
+.pieces-wap {
+  min-height: 40px;
+}
+.pieces-wap .piece {
   border-bottom: 1px solid #e2e2e2;
   padding: 25px 20px 20px 20px;
   cursor: pointer;
 }
-.piece.last {
+.pieces-wap .piece.last {
   border-bottom: none;
 }
-.piece:hover {
+.pieces-wap .piece:hover {
   background-color: #f8f8f8;
 }
-.piece:hover .meta .options .collect,
-.piece:hover .meta .options .btn-edit-piece,
-.piece:hover .meta .options .btn-full-screen {
+.pieces-wap .piece:hover .meta .options .collect,
+.pieces-wap .piece:hover .meta .options .btn-edit-piece,
+.pieces-wap .piece:hover .meta .options .btn-full-screen {
   visibility: visible;
 }
-.piece .media-left {
+.pieces-wap .piece .media-left {
   padding-right: 18px;
 }
-.piece .user-avatar {
+.pieces-wap .piece .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece .comments-count {
+.pieces-wap .piece .comments-count {
   text-align: center;
   margin-top: 8px;
   color: #bbb;
 }
-.piece .comments-count .fa {
+.pieces-wap .piece .comments-count .fa {
   font-size: 12px;
   margin-left: 1px;
 }
-.piece .content {
+.pieces-wap .piece .content {
   padding-right: 85px;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece .meta {
+.pieces-wap .piece .meta {
   color: #aaa;
   font-size: 12px;
 }
-.piece .meta .source-wap {
+.pieces-wap .piece .meta .source-wap {
   margin-right: 25px;
 }
-.piece .meta .options {
+.pieces-wap .piece .meta .options {
   display: inline-block;
   margin-left: -5px;
   line-height: 1;
   font-size: 14px;
 }
-.piece .meta .options > a {
+.pieces-wap .piece .meta .options > a {
   color: #aaa;
   visibility: hidden;
   padding: 0 5px;
   outline: none;
 }
-.piece .meta .options > a:hover {
+.pieces-wap .piece .meta .options > a:hover {
   color: #1e88a8;
 }
-.piece .meta .options .collect {
+.pieces-wap .piece .meta .options .collect {
   margin-right: 10px;
 }
-.piece .meta .options .collect.collected {
+.pieces-wap .piece .meta .options .collect.collected {
   visibility: visible !important;
   color: #1e88a8 !important;
 }
-.piece .meta .options .btn-edit-piece {
+.pieces-wap .piece .meta .options .btn-edit-piece {
   margin-right: 10px;
 }
-.piece .vote {
+.pieces-wap .piece .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -318,21 +321,21 @@
   cursor: pointer;
   text-align: center;
 }
-.piece .vote:hover {
+.pieces-wap .piece .vote:hover {
   border-color: #bbb;
 }
-.piece .vote.voted {
+.pieces-wap .piece .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece .vote .votes-count {
+.pieces-wap .piece .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece .vote .vote-icon {
+.pieces-wap .piece .vote .vote-icon {
   line-height: 1;
 }
-.windows .piece .meta .options {
+.windows .pieces-wap .piece .meta .options {
   vertical-align: -1px;
 }
 .piece-full-screen-backdrop {
@@ -615,4 +618,54 @@
 }
 .collections-wap .collection .meta .devider {
   margin: 0 5px;
+}
+.collection-header .collection-info {
+  padding: 40px 0 30px 0;
+  text-align: center;
+  position: relative;
+}
+.collection-header .collection-info .title {
+  font-size: 18px;
+}
+.collection-header .collection-info .desc {
+  margin-top: 10px;
+  color: #999;
+}
+.collection-header .collection-info .collection-cover {
+  margin-top: 15px;
+  width: 64px;
+  height: 64px;
+}
+.collection-header .collection-info .btn-edit-collection {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #999;
+  font-size: 14px;
+}
+.collection-header .collection-info .btn-edit-collection:hover {
+  color: #1e88a8;
+}
+.collection-header .tab {
+  text-align: center;
+}
+.collection-header .tab.two .item {
+  width: 50%;
+}
+.collection-header .tab.three .item {
+  width: 33.333333333%;
+}
+.collection-header .tab .item {
+  text-decoration: none;
+  float: left;
+  display: block;
+  line-height: 1;
+  padding: 17px 0;
+  background-color: #eee;
+  color: #333;
+}
+.collection-header .tab .item.active,
+.collection-header .tab .item:hover {
+  background-color: #1e88a8;
+  color: #ffffff;
 }

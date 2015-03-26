@@ -922,3 +922,42 @@
       })();
    </script>
 {% endmacro %}
+
+
+{% macro render_collection_header(collection, active='latest') %}
+   <div class="collection-header">
+      <div class="collection-info">
+         <div class="title">
+            <span class="fa fa-book"></span>&nbsp;&nbsp;{{ collection.title }}
+         </div>
+
+         {#               {% if collection.desc %}#}
+         {#                  <div class="desc">{{ collection.desc }}</div>#}
+         {#               {% endif %}#}
+
+         {% if collection.cover_url %}
+            <img src="{{ collection.cover_url }}" alt=""
+                 class="img-circle collection-cover"/>
+         {% endif %}
+
+         {% if permissions.AdminPermission().check() %}
+            <a href="{{ url_for('collection.edit', uid=collection.id) }}"
+               class="btn-edit-collection" title="编辑句集">
+               <span class="fa fa-pencil"></span>
+            </a>
+         {% endif %}
+      </div>
+
+      <div class="tab {% if g.user %}three{% else %}two{% endif %} clearfix">
+         <a class="item {% if active == 'latest' %}active{% endif %}"
+            href="{{ url_for('collection.view', uid=collection.id) }}">最新</a>
+         <a class="item {% if active == 'hotest' %}active{% endif %}"
+            href="{{ url_for('collection.hotest_view', uid=collection.id) }}">最热</a>
+         {% if g.user %}
+            <a class="item {% if active == 'voted' %}active{% endif %}"
+               href="{{ url_for('collection.voted_view', uid=collection.id) }}">
+               {{ collection.voted_pieces_by_user.count() }} 顶过</a>
+         {% endif %}
+      </div>
+   </div>
+{% endmacro %}
