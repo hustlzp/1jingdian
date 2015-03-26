@@ -10,25 +10,29 @@ from ..utils.uploadsets import collection_covers, process_avatar
 bp = Blueprint('collection', __name__)
 
 
-@bp.route('/collection/<int:uid>')
-def view(uid):
+@bp.route('/collection/<int:uid>', defaults={'page': 1})
+@bp.route('/collection/<int:uid>/page/<int:page>')
+def view(uid, page):
     collection = Collection.query.get_or_404(uid)
-    return render_template('collection/view.html', collection=collection)
+    pieces = collection.pieces.paginate(page, 20)
+    return render_template('collection/view.html', collection=collection, pieces=pieces)
 
 
-@bp.route('/collection/<int:uid>/hotest')
-def hotest_view(uid):
+@bp.route('/collection/<int:uid>/hotest', defaults={'page': 1})
+@bp.route('/collection/<int:uid>/hotest/page/<int:page>')
+def hotest_view(uid, page):
     collection = Collection.query.get_or_404(uid)
     pieces = Piece.query.filter(Piece.collections.any(CollectionPiece.collection_id == uid)) \
-        .order_by(Piece.votes_count.desc())
+        .order_by(Piece.votes_count.desc()).paginate(page, 20)
     return render_template('collection/hotest_view.html', collection=collection, pieces=pieces)
 
 
-@bp.route('/collection/<int:uid>/voted')
+@bp.route('/collection/<int:uid>/voted', defaults={'page': 1})
+@bp.route('/collection/<int:uid>/voted/page/<int:page>')
 @UserPermission()
-def voted_view(uid):
+def voted_view(uid, page):
     collection = Collection.query.get_or_404(uid)
-    pieces = collection.voted_pieces_by_user
+    pieces = collection.voted_pieces_by_user.paginate(page, 20)
     return render_template('collection/voted_view.html', collection=collection, pieces=pieces)
 
 
