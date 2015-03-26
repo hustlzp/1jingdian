@@ -36,6 +36,9 @@
 </head>
 
 <body id="page" class="{{ page_name(self) }} {% if g.user %}signed-in{% endif %}">
+<div id="favicon-wx-share" style="margin: 0; display: none;">
+   <img src="{{ static('image/favicon_wx_share.png') }}" alt=""/>
+</div>
 <div class="base-wap">
    {# Flash message #}
    {% with message = get_flashed_messages()[0] %}
