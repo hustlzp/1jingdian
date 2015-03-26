@@ -2,7 +2,7 @@
 {% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
       render_collect_modal, pagination %}
 
-{% block page_title %}{{ user.name }} - 分享{% endblock %}
+{% block page_title %}{{ user.name }} - 分享 - 壹经典{% endblock %}
 {% block page_content %}
    {% if pieces.items %}
       {{ render_piece_modal_wap(pieces.items[0]) }}
