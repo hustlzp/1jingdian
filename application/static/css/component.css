@@ -91,6 +91,14 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
+.piece-details-wap .btn-add-collection {
+  font-size: 12px;
+  color: #aaa;
+}
+.piece-details-wap .btn-add-collection:hover {
+  color: #1e88a8;
+}
+.piece-details-wap .btn-add-collection-full,
 .piece-details-wap .collection {
   background-color: #eff6fa;
   padding: 5px 10px;
@@ -101,8 +109,27 @@
   text-decoration: none;
   color: #1e88a8;
 }
+.piece-details-wap .btn-add-collection-full.last,
+.piece-details-wap .collection.last {
+  margin-right: 10px;
+}
+.piece-details-wap .btn-add-collection-full:hover,
 .piece-details-wap .collection:hover {
   background-color: #d0e5f0;
+}
+.piece-details-wap .collection-input-wap {
+  margin-top: 15px;
+  display: none;
+}
+.piece-details-wap .collection-input-wap input {
+  display: inline-block;
+  width: 200px;
+}
+.piece-details-wap .collection-input-wap .btn-finish-add-collection {
+  color: #1e88a8;
+  font-size: 12px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 .piece-details-wap .comment {
   margin-bottom: 15px;

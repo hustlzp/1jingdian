@@ -117,6 +117,16 @@
     }
   }
 
+  .btn-add-collection {
+    font-size: 12px;
+    color: #aaa;
+
+    &:hover {
+      color: @main-color;
+    }
+  }
+
+  .btn-add-collection-full,
   .collection {
     background-color: #eff6fa;
     padding: 5px 10px;
@@ -127,8 +137,29 @@
     text-decoration: none;
     color: @main-color;
 
+    &.last {
+      margin-right: 10px;
+    }
+
     &:hover {
       background-color: darken(#eff6fa, 8%);
+    }
+  }
+
+  .collection-input-wap {
+    margin-top: 15px;
+    display: none;
+
+    input {
+      display: inline-block;
+      width: 200px;
+    }
+
+    .btn-finish-add-collection {
+      color: @main-color;
+      font-size: 12px;
+      margin-left: 10px;
+      cursor: pointer;
     }
   }
 

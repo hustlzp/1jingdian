@@ -178,30 +178,41 @@
             {% if permissions.PieceEditPermission(piece).check() %}
                <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
                   title="编辑句集">
-                  <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span>
-               </a>
+                  <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
             {% endif %}
 
             <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
                data-content="{{ piece.content }}"
                data-source="{{ piece.source or "" }}"
                data-author="{{ piece.author or "" }}">
-               <span class="fa fa-arrows-alt "></span> 全屏
-            </a>
+               <span class="fa fa-arrows-alt "></span> 全屏</a>
 
             <a href="javascript: void(0)" class="btn-share">
-               <span class="fa fa-share"></span> 分享
-            </a>
+               <span class="fa fa-share"></span> 分享</a>
          </div>
       </div>
 
       <div class="subtitle">{{ piece.collections.count() }} 句集</div>
 
-      {% for collection in piece.collections %}
-         {% set collection = collection.collection %}
-         <a class="collection" href="{{ url_for('collection.view', uid=collection.id) }}">
-            {{ collection.title }}</a>
-      {% endfor %}
+      {% if piece.collections.count() %}
+         {% for collection in piece.collections %}
+            {% set collection = collection.collection %}
+            <a class="collection {% if loop.last %}last{% endif %}"
+               href="{{ url_for('collection.view', uid=collection.id) }}">
+               {{ collection.title }}</a>
+         {% endfor %}
+
+         <a href="javascript: void(0)" class="btn-add-collection" title="添加">
+            <span class="fa fa-plus"></span></a>
+      {% else %}
+         <a href="javascript: void(0)" class="btn-add-collection btn-add-collection-full">
+            <span class="fa fa-plus"></span> 添加</a>
+      {% endif %}
+
+      <div class="form-group collection-input-wap">
+         <input type="text" id="input-collection" class="form-control input-sm"/>
+         <span class="btn-finish-add-collection">完成</span>
+      </div>
 
       <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
@@ -265,6 +276,20 @@
                   }
                });
             }
+         });
+
+         // 添加句集
+         $('.btn-add-collection').click(function () {
+            $(this).hide();
+            $('.collection-input-wap').fadeIn();
+            $('#input-collection').focus();
+         });
+
+         // 完成添加句集
+         $('.btn-finish-add-collection').click(function () {
+            $('.collection-input-wap').hide();
+            $('#input-collection').val('');
+            $('.btn-add-collection').show();
          });
       </script>
    </div>
