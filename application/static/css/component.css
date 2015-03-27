@@ -109,6 +109,7 @@
 .piece-details-wap .collections-container .collection-tag-wap {
   display: inline-block;
   margin-right: 5px;
+  margin-bottom: 8px;
 }
 .piece-details-wap .collections-container .collection-tag-wap:last-child {
   margin-right: 10px;
