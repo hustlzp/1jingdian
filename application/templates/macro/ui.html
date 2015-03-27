@@ -146,6 +146,15 @@
 {% endmacro %}
 
 
+{% macro render_collection_tag_wap(collection) %}
+   <span class="collection-tag-wap" data-id="{{ collection.id }}">
+      <a class="collection-tag" href="{{ url_for('collection.view', uid=collection.id) }}">
+         {{ collection.title }}</a><span class="fa fa-close btn-delete-collection"
+                                         data-id="{{ collection.id }}"></span>
+   </span>
+{% endmacro %}
+
+
 {% macro render_piece_details_wap(piece) %}
    <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
    <div class="media piece-header">
@@ -194,29 +203,28 @@
 
    <div class="subtitle">{{ piece.collections.count() }} 句集</div>
 
-   <span class="collections">
-      {% for collection in piece.collections %}
-         {% set collection = collection.collection %}
-         <a class="collection"
-            data-id="{{ collection.id }}"
-            href="{{ url_for('collection.view', uid=collection.id) }}">
-            {{ collection.title }}</a>
-      {% endfor %}
-   </span>
+   <div class="collections-container">
+      <span class="collections">
+         {% for collection in piece.collections %}
+            {% set collection = collection.collection %}
+            {{ render_collection_tag_wap(collection) }}
+         {% endfor %}
+      </span>
 
-   {% if g.user %}
-      {% if piece.collections.count() %}
-         <a href="javascript: void(0)" class="btn-edit-collection" title="添加">
-            <span class="fa fa-pencil"></span></a>
-      {% else %}
-         <a href="javascript: void(0)" class="btn-add-collection">
-            <span class="fa fa-plus"></span> 添加</a>
+      {% if g.user %}
+         {% if piece.collections.count() %}
+            <a href="javascript: void(0)" class="btn-edit-collection" title="添加">
+               <span class="fa fa-pencil"></span></a>
+         {% else %}
+            <a href="javascript: void(0)" class="btn-add-collection">
+               <span class="fa fa-plus"></span> 添加</a>
+         {% endif %}
       {% endif %}
-   {% endif %}
 
-   <div class="form-group collection-input-wap">
-      <input type="text" id="input-collection" class="form-control input-sm"/>
-      <span class="btn-finish-add-collection">完成</span>
+      <div class="form-group collection-input-wap">
+         <input type="text" id="input-collection" class="form-control"/>
+         <span class="btn-finish-add-collection">完成</span>
+      </div>
    </div>
 
    <div class="subtitle">{{ piece.votes_count }} 顶</div>
@@ -254,145 +262,158 @@
    </div>
 
    <script type="text/javascript">
-      // 评论
-      $('.btn-comment').click(function () {
-         var pieceId = parseInt($(this).attr('data-piece-id')),
-               comment = $.trim($('#comment-textarea').val());
+      (function () {
+         var timerForTypeahead = null;
+         var pieceId = {{ piece.id }};
+         var $collectionInput = $('#input-collection');
 
-         if (comment !== "") {
-            $.ajax({
-               url: urlFor('piece.comment', {uid: pieceId}),
-               method: 'post',
-               data: {
-                  comment: comment
-               },
-               success: function (comment) {
-                  var $comment = $(comment);
-                  var $container = null;
+         // 评论
+         $('.btn-comment').click(function () {
+            var comment = $.trim($('#comment-textarea').val());
 
-                  $('#comment-textarea').val('');
-                  $('.comments-wap').append($comment);
-                  if ($('.piece-modal-wap').length) {
-                     $container = $('.piece-modal-wap');
-                  } else {
-                     $container = $(window);
-                  }
-                  $container.scrollTo($comment, 500);
-               }
-            });
-         }
-      });
-
-      var timerForTypeahead = null;
-
-      $('#input-collection').typeahead({
-         minLength: 1,
-         highlight: true,
-         hint: false
-      }, {
-         displayKey: 'value',
-         source: function (q, cb) {
-            if (timerForTypeahead) {
-               clearTimeout(timerForTypeahead);
-            }
-
-            timerForTypeahead = setTimeout(function () {
+            if (comment !== "") {
                $.ajax({
-                  url: urlFor('collection.query'),
+                  url: urlFor('piece.comment', {uid: pieceId}),
                   method: 'post',
-                  dataType: 'json',
                   data: {
-                     q: q
-                  }
-               }).done(function (matchs) {
-                  cb(matchs);
-               });
-            }, 300);
-         },
-         templates: {
-            'suggestion': function (data) {
-               return '<p>' + data.value + '</p>';
-            }
-         }
-      }).on('typeahead:selected', function (e, collection) {
-         // 通过选择autocomplete菜单项添加句集
-         var pieceId = $('.piece-details-wap').data('piece-id');
-         var collectionId = collection.id;
+                     comment: comment
+                  },
+                  success: function (comment) {
+                     var $comment = $(comment);
+                     var $container = null;
 
-         $.ajax({
-            url: urlFor('piece.add_collection_by_id', {uid: pieceId}),
-            method: 'post',
-            dataType: 'json',
-            data: {
-               collection_id: collectionId
-            }
-         }).done(function (response) {
-            if (response.result) {
-               if (!$(".collections .collection[data-id='" + response.id + "']").length) {
-                  $(".collections").append("<a class='collection'"
-                        + " data-id='" + response.id + "'"
-                        + " href='" + response.url + "'>"
-                        + response.title
-                        + "</a>");
-               }
-               $('#input-collection').typeahead('val', '');
+                     $('#comment-textarea').val('');
+                     $('.comments-wap').append($comment);
+                     if ($('.piece-modal-wap').length) {
+                        $container = $('.piece-modal-wap');
+                     } else {
+                        $container = $(window);
+                     }
+                     $container.scrollTo($comment, 500);
+                  }
+               });
             }
          });
-      }).on('keypress', function (e) {
-         // 通过回车添加句集
-         if (e.which === 13) {
-            var title = $.trim($(this).val());
-            var pieceId = $('.piece-details-wap').data('piece-id');
+
+         // 启动Typeahead自动完成
+         $collectionInput.typeahead({
+            minLength: 1,
+            highlight: true,
+            hint: false
+         }, {
+            displayKey: 'value',
+            source: function (q, cb) {
+               if (timerForTypeahead) {
+                  clearTimeout(timerForTypeahead);
+               }
+
+               timerForTypeahead = setTimeout(function () {
+                  $.ajax({
+                     url: urlFor('collection.query'),
+                     method: 'post',
+                     dataType: 'json',
+                     data: {
+                        q: q
+                     }
+                  }).done(function (matchs) {
+                     cb(matchs);
+                  });
+               }, 300);
+            },
+            templates: {
+               'suggestion': function (data) {
+                  return '<p>' + data.value + '</p>';
+               }
+            }
+         });
+
+         // 通过选择autocomplete菜单项添加句集
+         $collectionInput.on('typeahead:selected', function (e, collection) {
+            var collectionId = collection.id;
 
             $.ajax({
-               url: urlFor('piece.add_collection_by_title', {uid: pieceId}),
+               url: urlFor('piece.add_collection_by_id', {uid: pieceId}),
                method: 'post',
                dataType: 'json',
                data: {
-                  title: title
+                  collection_id: collectionId
                }
             }).done(function (response) {
                if (response.result) {
-                  if (!$(".collections .collection[data-id='" + response.id + "']").length) {
-                     $(".collections").append("<a class='collection'"
-                           + " data-id='" + response.id + "'"
-                           + " href='" + response.url + "'>"
-                           + response.title
-                           + "</a>");
+                  if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
+                     $(".collections").append(response.html);
                   }
                   $('#input-collection').typeahead('val', '');
                }
             });
+         });
+
+         // 通过回车添加句集
+         $collectionInput.on('keypress', function (e) {
+            if (e.which === 13) {
+               var title = $.trim($(this).val());
+               var pieceId = $('.piece-details-wap').data('piece-id');
+
+               $.ajax({
+                  url: urlFor('piece.add_collection_by_title', {uid: pieceId}),
+                  method: 'post',
+                  dataType: 'json',
+                  data: {
+                     title: title
+                  }
+               }).done(function (response) {
+                  if (response.result) {
+                     if (!$(".collections .collection[data-id='" + response.id + "']").length) {
+                        $(".collections").append(response.html);
+                     }
+                     $('#input-collection').typeahead('val', '');
+                  }
+               });
+            }
+         });
+
+         // 进入添加句集模式
+         $('.btn-add-collection, .btn-edit-collection').click(function () {
+            enterEditCollectionMode();
+         });
+
+         // 删除句集
+         $('.collections-container').on('click', '.btn-delete-collection', function () {
+            var collectionId = $(this).data('id');
+            var _this = $(this);
+
+            $.ajax({
+               url: urlFor('piece.remove_from_collection', {uid: pieceId, collection_id: collectionId}),
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.parent().detach();
+               }
+            });
+         });
+
+         // 完成添加句集
+         $('.btn-finish-add-collection').click(function () {
+            quitEditCollectionMode();
+         });
+
+         /**
+          * Enter edit collection mode.
+          */
+         function enterEditCollectionMode() {
+            $('.collections-container').addClass('edit-mode');
+            $('#input-collection').focus();
          }
-      });
 
-      // 添加句集
-      $('.btn-add-collection, .btn-edit-collection').click(function () {
-         enterEditCollectionMode();
-      });
-
-      // 完成添加句集
-      $('.btn-finish-add-collection').click(function () {
-         quitEditCollectionMode();
-      });
-
-      /**
-       * Enter edit collection mode.
-       */
-      function enterEditCollectionMode() {
-         $('.btn-add-collection, .btn-edit-collection').hide();
-         $('.collection-input-wap').show();
-         $('#input-collection').focus();
-      }
-
-      /**
-       * Quit edit collection mode.
-       */
-      function quitEditCollectionMode() {
-         $('.collection-input-wap').hide();
-         $('#input-collection').val('');
-         $('.btn-add-collection, .btn-edit-collection').show();
-      }
+         /**
+          * Quit edit collection mode.
+          */
+         function quitEditCollectionMode() {
+            $('#input-collection').val('');
+            $('.collections-container').removeClass('edit-mode');
+         }
+      })();
    </script>
    </div>
 {% endmacro %}

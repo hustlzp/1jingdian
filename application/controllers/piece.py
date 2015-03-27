@@ -218,10 +218,10 @@ def add_collection_by_title(uid):
                                                piece_id=uid)
             db.session.add(collection_piece)
             db.session.commit()
+        macro = get_template_attribute('macro/ui.html', 'render_collection_tag_wap')
         return json.dumps({'result': True,
-                           'title': title,
                            'id': collection.id,
-                           'url': url_for('collection.view', uid=collection.id)})
+                           'html': macro(collection)})
     else:
         return json.dumps({'result': False})
 
@@ -245,10 +245,24 @@ def add_collection_by_id(uid):
                                            piece_id=uid)
         db.session.add(collection_piece)
         db.session.commit()
+    macro = get_template_attribute('macro/ui.html', 'render_collection_tag_wap')
     return json.dumps({'result': True,
-                       'title': collection.title,
                        'id': collection.id,
-                       'url': url_for('collection.view', uid=collection.id)})
+                       'html': macro(collection)})
+
+
+@bp.route('/piece/<int:uid>/remove_from_collection/<int:collection_id>', methods=['POST'])
+@UserPermission()
+def remove_from_collection(uid, collection_id):
+    """将某句子从某句集中移除"""
+    piece = Piece.query.get_or_404(uid)
+    collection = Collection.query.get_or_404(collection_id)
+    collection_piece = CollectionPiece.query.filter(
+        CollectionPiece.collection_id == collection_id,
+        CollectionPiece.piece_id == uid)
+    map(db.session.delete, collection_piece)
+    db.session.commit()
+    return json.dumps({'result': True})
 
 
 def _save_piece_source(source):

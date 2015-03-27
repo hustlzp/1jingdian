@@ -91,71 +91,107 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-details-wap .btn-edit-collection {
-  font-size: 12px;
-  color: #aaa;
+.piece-details-wap .collections-container.edit-mode .btn-add-collection,
+.piece-details-wap .collections-container.edit-mode .btn-edit-collection {
+  display: none;
 }
-.piece-details-wap .btn-edit-collection:hover {
+.piece-details-wap .collections-container.edit-mode .collection-tag-wap .btn-delete-collection {
+  display: inline-block;
+}
+.piece-details-wap .collections-container.edit-mode .collection-tag {
+  padding-right: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.piece-details-wap .collections-container.edit-mode .collection-input-wap {
+  display: block;
+}
+.piece-details-wap .collections-container .collection-tag-wap {
+  display: inline-block;
+  margin-right: 5px;
+}
+.piece-details-wap .collections-container .collection-tag-wap:last-child {
+  margin-right: 10px;
+}
+.piece-details-wap .collections-container .collection-tag-wap .collection-tag {
+  display: inline-block;
+}
+.piece-details-wap .collections-container .collection-tag-wap .btn-delete-collection {
+  display: none;
+  cursor: pointer;
+  background-color: #eff6fa;
+  padding: 6px 8px 6px 5px;
+  line-height: 1;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  font-size: 12px;
   color: #1e88a8;
 }
-.piece-details-wap .btn-add-collection,
-.piece-details-wap .collection {
+.piece-details-wap .collections-container .collection-tag-wap .btn-delete-collection:hover {
+  background-color: #d0e5f0;
+}
+.piece-details-wap .collections-container .btn-add-collection,
+.piece-details-wap .collections-container .collection-tag {
   background-color: #eff6fa;
-  padding: 5px 10px;
+  padding: 6px 10px;
   line-height: 1;
   border-radius: 30px;
-  margin-right: 5px;
   font-size: 12px;
   text-decoration: none;
   color: #1e88a8;
 }
-.piece-details-wap .btn-add-collection:hover,
-.piece-details-wap .collection:hover {
+.piece-details-wap .collections-container .btn-add-collection:hover,
+.piece-details-wap .collections-container .collection-tag:hover {
   background-color: #d0e5f0;
 }
-.piece-details-wap .collection:last-child {
-  margin-right: 10px;
+.piece-details-wap .collections-container .btn-edit-collection {
+  font-size: 12px;
+  color: #aaa;
 }
-.piece-details-wap .collection-input-wap {
+.piece-details-wap .collections-container .btn-edit-collection:hover {
+  color: #1e88a8;
+}
+.piece-details-wap .collections-container .collection-input-wap {
   margin-top: 15px;
   display: none;
 }
-.piece-details-wap .collection-input-wap input {
+.piece-details-wap .collections-container .collection-input-wap input {
   display: inline-block;
-  width: 200px;
+  width: 220px;
+  font-size: 12px;
 }
-.piece-details-wap .collection-input-wap .btn-finish-add-collection {
+.piece-details-wap .collections-container .collection-input-wap .btn-finish-add-collection {
   color: #1e88a8;
   font-size: 12px;
   margin-left: 10px;
   cursor: pointer;
-  vertical-align: -3px;
+  vertical-align: -5px;
 }
-.piece-details-wap .tt-dropdown-menu {
+.piece-details-wap .collections-container .tt-dropdown-menu {
   font-size: 12px;
   border-radius: 4px;
-  width: 200px;
+  width: 220px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   background-color: #ffffff;
 }
-.piece-details-wap .tt-dropdown-menu .tt-suggestion {
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion {
   cursor: pointer;
   padding: 12px;
   margin: 0;
 }
-.piece-details-wap .tt-dropdown-menu .tt-suggestion > p {
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion > p {
   line-height: 1;
   margin: 0;
 }
-.piece-details-wap .tt-dropdown-menu .tt-suggestion.tt-cursor,
-.piece-details-wap .tt-dropdown-menu .tt-suggestion:hover {
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion.tt-cursor,
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion:hover {
   background-color: #eff6fa;
 }
-.piece-details-wap .tt-dropdown-menu .tt-suggestion:first-child {
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion:first-child {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-.piece-details-wap .tt-dropdown-menu .tt-suggestion:last-child {
+.piece-details-wap .collections-container .tt-dropdown-menu .tt-suggestion:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }

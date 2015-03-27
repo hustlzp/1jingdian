@@ -117,83 +117,134 @@
     }
   }
 
-  .btn-edit-collection {
-    font-size: 12px;
-    color: #aaa;
+  .collections-container {
+    // 编辑模式
+    &.edit-mode {
+      .btn-add-collection,
+      .btn-edit-collection {
+        display: none;
+      }
 
-    &:hover {
-      color: @main-color;
+      .collection-tag-wap .btn-delete-collection {
+        display: inline-block;
+      }
+
+      .collection-tag {
+        padding-right: 8px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .collection-input-wap {
+        display: block;
+      }
     }
-  }
 
-  .btn-add-collection,
-  .collection {
-    background-color: #eff6fa;
-    padding: 5px 10px;
-    line-height: 1;
-    border-radius: 30px;
-    margin-right: 5px;
-    font-size: 12px;
-    text-decoration: none;
-    color: @main-color;
-
-    &:hover {
-      background-color: darken(#eff6fa, 8%);
-    }
-  }
-
-  .collection:last-child {
-    margin-right: 10px;
-  }
-
-  .collection-input-wap {
-    margin-top: 15px;
-    display: none;
-
-    input {
+    .collection-tag-wap {
       display: inline-block;
-      width: 200px;
-    }
-
-    .btn-finish-add-collection {
-      color: @main-color;
-      font-size: 12px;
-      margin-left: 10px;
-      cursor: pointer;
-      vertical-align: -3px;
-    }
-  }
-
-  .tt-dropdown-menu {
-    font-size: 12px;
-    border-radius: 4px;
-    width: 200px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
-    background-color: #ffffff;
-
-    .tt-suggestion {
-      & > p {
-        line-height: 1;
-        margin: 0;
-      }
-
-      &.tt-cursor,
-      &:hover {
-        background-color: #eff6fa;
-      }
-
-      cursor: pointer;
-      padding: 12px;
-      margin: 0;
-
-      &:first-child {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
+      margin-right: 5px;
 
       &:last-child {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+        margin-right: 10px;
+      }
+
+      .collection-tag {
+        display: inline-block;
+      }
+
+      .btn-delete-collection {
+        display: none;
+        cursor: pointer;
+        background-color: #eff6fa;
+        padding: 6px 8px 6px 5px;
+        line-height: 1;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        font-size: 12px;
+        color: @main-color;
+
+        &:hover {
+          background-color: darken(#eff6fa, 8%);
+        }
+      }
+    }
+
+    .btn-add-collection,
+    .collection-tag {
+      background-color: #eff6fa;
+      padding: 6px 10px;
+      line-height: 1;
+      border-radius: 30px;
+      font-size: 12px;
+      text-decoration: none;
+      color: @main-color;
+
+      &:hover {
+        background-color: darken(#eff6fa, 8%);
+      }
+    }
+
+    .btn-edit-collection {
+      font-size: 12px;
+      color: #aaa;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
+
+    // 句集输入框
+    .collection-input-wap {
+      margin-top: 15px;
+      display: none;
+
+      input {
+        display: inline-block;
+        width: 220px;
+        font-size: 12px;
+      }
+
+      .btn-finish-add-collection {
+        color: @main-color;
+        font-size: 12px;
+        margin-left: 10px;
+        cursor: pointer;
+        vertical-align: -5px;
+      }
+    }
+
+    // 自动完成下拉菜单
+    .tt-dropdown-menu {
+      font-size: 12px;
+      border-radius: 4px;
+      width: 220px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+      background-color: #ffffff;
+
+      .tt-suggestion {
+        & > p {
+          line-height: 1;
+          margin: 0;
+        }
+
+        &.tt-cursor,
+        &:hover {
+          background-color: #eff6fa;
+        }
+
+        cursor: pointer;
+        padding: 12px;
+        margin: 0;
+
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
       }
     }
   }
