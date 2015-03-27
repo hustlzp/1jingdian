@@ -53,7 +53,7 @@ class CollectionPiece(db.Model):
     piece = db.relationship('Piece',
                             backref=db.backref('collections',
                                                lazy='dynamic',
-                                               order_by='desc(CollectionPiece.created_at)'))
+                                               order_by='asc(CollectionPiece.created_at)'))
 
 
 class UserLikeCollection(db.Model):

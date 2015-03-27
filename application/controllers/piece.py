@@ -193,6 +193,64 @@ def uncollect(uid, collection_id):
         return json.dumps({'result': True})
 
 
+@bp.route('/piece/<int:uid>/add_collection_by_title', methods=['POST'])
+@UserPermission()
+def add_collection_by_title(uid):
+    piece = Piece.query.get_or_404(uid)
+    title = request.form.get('title')
+
+    if title:
+        title = title.strip().replace(" ", "")
+    if title:
+        # 若不存在该title的句集，则创建
+        collection = Collection.query.filter(Collection.title == title).first()
+        if not collection:
+            collection = Collection(title=title)
+            db.session.add(collection)
+            db.session.commit()
+
+        # 若该句集尚未收录此句子，则收录
+        collection_piece = CollectionPiece.query.filter(
+            CollectionPiece.collection_id == collection.id,
+            CollectionPiece.piece_id == uid).first()
+        if not collection_piece:
+            collection_piece = CollectionPiece(user_id=g.user.id, collection_id=collection.id,
+                                               piece_id=uid)
+            db.session.add(collection_piece)
+            db.session.commit()
+        return json.dumps({'result': True,
+                           'title': title,
+                           'id': collection.id,
+                           'url': url_for('collection.view', uid=collection.id)})
+    else:
+        return json.dumps({'result': False})
+
+
+@bp.route('/piece/<int:uid>/add_collection_by_id', methods=['POST'])
+@UserPermission()
+def add_collection_by_id(uid):
+    piece = Piece.query.get_or_404(uid)
+    collection_id = request.form.get('collection_id', type=int)
+
+    if not collection_id:
+        abort(400)
+    collection = Collection.query.get_or_404(collection_id)
+
+    # 若该句集尚未收录此句子，则收录
+    collection_piece = CollectionPiece.query.filter(
+        CollectionPiece.collection_id == collection.id,
+        CollectionPiece.piece_id == uid).first()
+    if not collection_piece:
+        collection_piece = CollectionPiece(user_id=g.user.id, collection_id=collection.id,
+                                           piece_id=uid)
+        db.session.add(collection_piece)
+        db.session.commit()
+    return json.dumps({'result': True,
+                       'title': collection.title,
+                       'id': collection.id,
+                       'url': url_for('collection.view', uid=collection.id)})
+
+
 def _save_piece_source(source):
     """存储Piece来源，若存在，则count加1"""
     piece_source = PieceSource.query.filter(PieceSource.name == source).first()

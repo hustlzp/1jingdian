@@ -101,3 +101,16 @@ def upload_cover(uid):
         db.session.commit()
         return json.dumps({'result': True, 'avatar_url': collection_covers.url(filename)})
 
+
+@bp.route('/collection/query', methods=['POST'])
+@UserPermission()
+def query():
+    q = request.form.get('q')
+    if q:
+        collections = Collection.query.filter(Collection.title.like("%%%s%%" % q))
+        return json.dumps([{'value': collection.title,
+                            'count': collection.pieces.count(),
+                            'id': collection.id}
+                           for collection in collections])
+    else:
+        return json.dumps({})

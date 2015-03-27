@@ -109,13 +109,12 @@
   text-decoration: none;
   color: #1e88a8;
 }
-.piece-details-wap .btn-add-collection.last,
-.piece-details-wap .collection.last {
-  margin-right: 10px;
-}
 .piece-details-wap .btn-add-collection:hover,
 .piece-details-wap .collection:hover {
   background-color: #d0e5f0;
+}
+.piece-details-wap .collection:last-child {
+  margin-right: 10px;
 }
 .piece-details-wap .collection-input-wap {
   margin-top: 15px;
@@ -131,6 +130,34 @@
   margin-left: 10px;
   cursor: pointer;
   vertical-align: -3px;
+}
+.piece-details-wap .tt-dropdown-menu {
+  font-size: 12px;
+  border-radius: 4px;
+  width: 200px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+}
+.piece-details-wap .tt-dropdown-menu .tt-suggestion {
+  cursor: pointer;
+  padding: 12px;
+  margin: 0;
+}
+.piece-details-wap .tt-dropdown-menu .tt-suggestion > p {
+  line-height: 1;
+  margin: 0;
+}
+.piece-details-wap .tt-dropdown-menu .tt-suggestion.tt-cursor,
+.piece-details-wap .tt-dropdown-menu .tt-suggestion:hover {
+  background-color: #eff6fa;
+}
+.piece-details-wap .tt-dropdown-menu .tt-suggestion:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.piece-details-wap .tt-dropdown-menu .tt-suggestion:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .piece-details-wap .comment {
   margin-bottom: 15px;
