@@ -130,6 +130,7 @@
   font-size: 12px;
   margin-left: 10px;
   cursor: pointer;
+  vertical-align: -3px;
 }
 .piece-details-wap .comment {
   margin-bottom: 15px;

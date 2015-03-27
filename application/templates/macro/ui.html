@@ -282,10 +282,30 @@
             }
          });
 
+         var substringMatcher = function () {
+            return function findMatches(q, cb) {
+               var matchs = [
+                  {value: 'asdsa'},
+                  {value: 'ccc'}
+               ];
+               cb(matchs);
+            }
+         };
+
+         $('#input-collection').typeahead({
+            minLength: 1,
+            highlight: true,
+            hint: false
+         }, {
+            displayKey: 'value',
+            source: substringMatcher()
+         });
+
          // 添加句集
          $('.btn-add-collection, .btn-edit-collection').click(function () {
             enterEditCollectionMode();
          });
+
 
          // 完成添加句集
          $('.btn-finish-add-collection').click(function () {
