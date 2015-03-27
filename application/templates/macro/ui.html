@@ -201,25 +201,26 @@
       </div>
    </div>
 
-   <div class="subtitle">{{ piece.collections.count() }} 句集</div>
+   <div class="subtitle">
+      <span class="collections-count">{{ piece.collections.count() }}</span> 句集
+   </div>
 
-   <div class="collections-container">
-      <span class="collections">
-         {% for collection in piece.collections %}
-            {% set collection = collection.collection %}
-            {{ render_collection_tag_wap(collection) }}
-         {% endfor %}
-      </span>
+   <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
+      <div class="collections-inner-container">
+         <span class="collections">
+            {% for collection in piece.collections %}
+               {% set collection = collection.collection %}
+               {{ render_collection_tag_wap(collection) }}
+            {% endfor %}
+         </span>
 
-      {% if g.user %}
-         {% if piece.collections.count() %}
+         {% if g.user %}
             <a href="javascript: void(0)" class="btn-edit-collection" title="添加">
                <span class="fa fa-pencil"></span></a>
-         {% else %}
             <a href="javascript: void(0)" class="btn-add-collection">
                <span class="fa fa-plus"></span> 添加</a>
          {% endif %}
-      {% endif %}
+      </div>
 
       <div class="form-group collection-input-wap">
          <input type="text" id="input-collection" class="form-control"/>
@@ -342,6 +343,7 @@
                if (response.result) {
                   if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
                      $(".collections").append(response.html);
+                     checkCollectionsCount();
                   }
                   $('#input-collection').typeahead('val', '');
                }
@@ -365,6 +367,7 @@
                   if (response.result) {
                      if (!$(".collections .collection[data-id='" + response.id + "']").length) {
                         $(".collections").append(response.html);
+                        checkCollectionsCount();
                      }
                      $('#input-collection').typeahead('val', '');
                   }
@@ -389,6 +392,7 @@
             }).done(function (response) {
                if (response.result) {
                   _this.parent().detach();
+                  checkCollectionsCount();
                }
             });
          });
@@ -397,6 +401,22 @@
          $('.btn-finish-add-collection').click(function () {
             quitEditCollectionMode();
          });
+
+         /**
+          * Check if there is no collection, and update elements status.
+          */
+         function checkCollectionsCount() {
+            var collectionsCount = $('.collection-tag').length;
+            console.log(collectionsCount)
+
+            $('.collections-count').text(collectionsCount);
+
+            if (collectionsCount === 0) {
+               $('.collections-container').addClass('empty');
+            } else {
+               $('.collections-container').removeClass('empty');
+            }
+         }
 
          /**
           * Enter edit collection mode.

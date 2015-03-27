@@ -118,6 +118,19 @@
   }
 
   .collections-container {
+    // 句集为空
+    &.empty {
+      .btn-edit-collection {
+        display: none;
+      }
+      .btn-add-collection {
+        display: inline-block;
+      }
+      .collections-inner-container {
+        margin-bottom: 0;
+      }
+    }
+
     // 编辑模式
     &.edit-mode {
       .btn-add-collection,
@@ -138,6 +151,10 @@
       .collection-input-wap {
         display: block;
       }
+    }
+
+    .collections-inner-container {
+      margin-bottom: -8px;
     }
 
     .collection-tag-wap {
@@ -183,6 +200,10 @@
       &:hover {
         background-color: darken(#eff6fa, 8%);
       }
+    }
+
+    .btn-add-collection {
+      display: none;
     }
 
     .btn-edit-collection {

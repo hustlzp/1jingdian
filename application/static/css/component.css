@@ -91,6 +91,15 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
+.piece-details-wap .collections-container.empty .btn-edit-collection {
+  display: none;
+}
+.piece-details-wap .collections-container.empty .btn-add-collection {
+  display: inline-block;
+}
+.piece-details-wap .collections-container.empty .collections-inner-container {
+  margin-bottom: 0;
+}
 .piece-details-wap .collections-container.edit-mode .btn-add-collection,
 .piece-details-wap .collections-container.edit-mode .btn-edit-collection {
   display: none;
@@ -105,6 +114,9 @@
 }
 .piece-details-wap .collections-container.edit-mode .collection-input-wap {
   display: block;
+}
+.piece-details-wap .collections-container .collections-inner-container {
+  margin-bottom: -8px;
 }
 .piece-details-wap .collections-container .collection-tag-wap {
   display: inline-block;
@@ -144,6 +156,9 @@
 .piece-details-wap .collections-container .btn-add-collection:hover,
 .piece-details-wap .collections-container .collection-tag:hover {
   background-color: #d0e5f0;
+}
+.piece-details-wap .collections-container .btn-add-collection {
+  display: none;
 }
 .piece-details-wap .collections-container .btn-edit-collection {
   font-size: 12px;
