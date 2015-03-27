@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_piece_modal_wap,
-      render_collect_modal, pagination %}
+{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_collect_modal,
+   pagination %}
 
 {% block page_title %}{{ user.name }} - 壹经典{% endblock %}
 {% block page_content %}
-   {% if votes.items %}
-      {{ render_piece_modal_wap(votes.items[0].piece) }}
-   {% endif %}
    {#   {{ render_collect_modal() }}#}
 
    <div class="container">

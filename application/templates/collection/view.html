@@ -1,14 +1,10 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_piece_modal_wap, render_pieces, render_collect_modal,
+{% from 'macro/ui.html' import render_pieces, render_collect_modal,
    render_collection_header, pagination %}
 
 {% block page_title %}句集「{{ collection.title }}」- 壹经典{% endblock %}
 {% block page_content %}
    {#   {{ render_collect_modal() }}#}
-
-   {% if pieces.items|length %}
-      {{ render_piece_modal_wap(pieces.items[0].piece) }}
-   {% endif %}
 
    <div class="container">
       <div class="panel panel-primary piece-panel">

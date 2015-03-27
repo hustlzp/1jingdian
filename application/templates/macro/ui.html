@@ -315,7 +315,7 @@
 
 
 {% macro render_piece_modal_wap(piece) %}
-   <div class="piece-modal-wap" data-piece-id={{ piece.id }}>
+   <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
       {% if piece %}
          {{ render_piece_details_wap(piece) }}
       {% endif %}
@@ -495,6 +495,12 @@
 
       {{ full_screen_script() }}
    </div>
+
+   {% set first_piece = pieces|first %}
+   {% if first_piece and attr %}
+      {% set first_piece = first_piece[attr] %}
+   {% endif %}
+   {{ render_piece_modal_wap(first_piece) }}
 {% endmacro %}
 
 

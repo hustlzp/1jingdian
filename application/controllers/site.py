@@ -13,14 +13,13 @@ def index(page):
     """Index page."""
     target_day = date.today() - timedelta(days=page - 1)
     pieces = get_pieces_data_by_day(target_day)
-    first_piece = pieces['pieces'].first()
     if page == 1:
         pre_page = None
     else:
         pre_page = page - 1
     next_page = page + 1
     return render_template('site/index.html', pieces=pieces, page=page, pre_page=pre_page,
-                           next_page=next_page, first_piece=first_piece)
+                           next_page=next_page)
 
 
 @bp.route('/about')
