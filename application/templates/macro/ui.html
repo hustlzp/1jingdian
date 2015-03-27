@@ -332,7 +332,7 @@
             var collectionId = collection.id;
 
             $.ajax({
-               url: urlFor('piece.add_collection_by_id', {uid: pieceId}),
+               url: urlFor('piece.add_to_collection_by_id', {uid: pieceId}),
                method: 'post',
                dataType: 'json',
                data: {
@@ -355,7 +355,7 @@
                var pieceId = $('.piece-details-wap').data('piece-id');
 
                $.ajax({
-                  url: urlFor('piece.add_collection_by_title', {uid: pieceId}),
+                  url: urlFor('piece.add_to_collection_by_title', {uid: pieceId}),
                   method: 'post',
                   dataType: 'json',
                   data: {

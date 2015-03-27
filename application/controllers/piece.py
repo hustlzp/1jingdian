@@ -193,9 +193,9 @@ def uncollect(uid, collection_id):
         return json.dumps({'result': True})
 
 
-@bp.route('/piece/<int:uid>/add_collection_by_title', methods=['POST'])
+@bp.route('/piece/<int:uid>/add_to_collection_by_title', methods=['POST'])
 @UserPermission()
-def add_collection_by_title(uid):
+def add_to_collection_by_title(uid):
     piece = Piece.query.get_or_404(uid)
     title = request.form.get('title')
 
@@ -226,9 +226,9 @@ def add_collection_by_title(uid):
         return json.dumps({'result': False})
 
 
-@bp.route('/piece/<int:uid>/add_collection_by_id', methods=['POST'])
+@bp.route('/piece/<int:uid>/add_to_collection_by_id', methods=['POST'])
 @UserPermission()
-def add_collection_by_id(uid):
+def add_to_collection_by_id(uid):
     piece = Piece.query.get_or_404(uid)
     collection_id = request.form.get('collection_id', type=int)
 
