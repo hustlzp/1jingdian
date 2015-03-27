@@ -91,14 +91,14 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-details-wap .btn-add-collection {
+.piece-details-wap .btn-edit-collection {
   font-size: 12px;
   color: #aaa;
 }
-.piece-details-wap .btn-add-collection:hover {
+.piece-details-wap .btn-edit-collection:hover {
   color: #1e88a8;
 }
-.piece-details-wap .btn-add-collection-full,
+.piece-details-wap .btn-add-collection,
 .piece-details-wap .collection {
   background-color: #eff6fa;
   padding: 5px 10px;
@@ -109,11 +109,11 @@
   text-decoration: none;
   color: #1e88a8;
 }
-.piece-details-wap .btn-add-collection-full.last,
+.piece-details-wap .btn-add-collection.last,
 .piece-details-wap .collection.last {
   margin-right: 10px;
 }
-.piece-details-wap .btn-add-collection-full:hover,
+.piece-details-wap .btn-add-collection:hover,
 .piece-details-wap .collection:hover {
   background-color: #d0e5f0;
 }

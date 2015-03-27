@@ -203,12 +203,12 @@
          {% endfor %}
 
          {% if g.user %}
-            <a href="javascript: void(0)" class="btn-add-collection" title="添加">
-               <span class="fa fa-plus"></span></a>
+            <a href="javascript: void(0)" class="btn-edit-collection" title="添加">
+               <span class="fa fa-pencil"></span></a>
          {% endif %}
       {% else %}
          {% if g.user %}
-            <a href="javascript: void(0)" class="btn-add-collection btn-add-collection-full">
+            <a href="javascript: void(0)" class="btn-add-collection">
                <span class="fa fa-plus"></span> 添加</a>
          {% endif %}
       {% endif %}
@@ -283,18 +283,32 @@
          });
 
          // 添加句集
-         $('.btn-add-collection').click(function () {
-            $(this).hide();
-            $('.collection-input-wap').show();
-            $('#input-collection').focus();
+         $('.btn-add-collection, .btn-edit-collection').click(function () {
+            enterEditCollectionMode();
          });
 
          // 完成添加句集
          $('.btn-finish-add-collection').click(function () {
+            quitEditCollectionMode();
+         });
+
+         /**
+          * Enter edit collection mode.
+          */
+         function enterEditCollectionMode() {
+            $('.btn-add-collection, .btn-edit-collection').hide();
+            $('.collection-input-wap').show();
+            $('#input-collection').focus();
+         }
+
+         /**
+          * Quit edit collection mode.
+          */
+         function quitEditCollectionMode() {
             $('.collection-input-wap').hide();
             $('#input-collection').val('');
-            $('.btn-add-collection').show();
-         });
+            $('.btn-add-collection .btn-edit-collection').show();
+         }
       </script>
    </div>
 {% endmacro %}
@@ -384,6 +398,7 @@
          $('.piece-modal-wap').stop().transition({
             'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
          }, 400, function () {
+            quitEditCollectionMode();
             $(this).removeClass('open');
 
             if ($.isFunction(callback)) {
@@ -409,6 +424,15 @@
        */
       function showLoadingFlag(pieceModal) {
          pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+      }
+
+      /**
+       * Quit edit collection mode.
+       */
+      function quitEditCollectionMode() {
+         $('.collection-input-wap').hide();
+         $('#input-collection').val('');
+         $('.btn-add-collection, .btn-edit-collection').show();
       }
    </script>
 {% endmacro %}
