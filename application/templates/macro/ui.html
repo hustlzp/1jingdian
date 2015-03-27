@@ -297,9 +297,8 @@
             }
 
             timerForTypeahead = setTimeout(function () {
-               var url = urlFor('collection.query');
                $.ajax({
-                  url: url,
+                  url: urlFor('collection.query'),
                   method: 'post',
                   dataType: 'json',
                   data: {
