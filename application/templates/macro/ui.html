@@ -186,7 +186,7 @@
       <div class="actions pull-right">
          {% if permissions.PieceEditPermission(piece).check() %}
             <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
-               title="编辑句集">
+               title="编辑句子">
                <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
          {% endif %}
 
