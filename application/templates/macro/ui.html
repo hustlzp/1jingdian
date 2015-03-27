@@ -201,10 +201,6 @@
       </div>
    </div>
 
-   <div class="subtitle">
-      <span class="collections-count">{{ piece.collections.count() }}</span> 句集
-   </div>
-
    <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
       <div class="collections-inner-container">
          <span class="collections">
@@ -215,15 +211,16 @@
          </span>
 
          {% if g.user %}
-            <a href="javascript: void(0)" class="btn-edit-collection" title="添加">
+            <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
                <span class="fa fa-pencil"></span></a>
             <a href="javascript: void(0)" class="btn-add-collection">
-               <span class="fa fa-plus"></span> 添加</a>
+               <span class="fa fa-plus"></span> 添加句集</a>
          {% endif %}
       </div>
 
       <div class="form-group collection-input-wap">
-         <input type="text" id="input-collection" class="form-control"/>
+         <input type="text" id="input-collection" class="form-control"
+                placeholder="输入句集，回车确认"/>
          <span class="btn-finish-add-collection">完成</span>
       </div>
    </div>
@@ -406,12 +403,7 @@
           * Check if there is no collection, and update elements status.
           */
          function checkCollectionsCount() {
-            var collectionsCount = $('.collection-tag').length;
-            console.log(collectionsCount)
-
-            $('.collections-count').text(collectionsCount);
-
-            if (collectionsCount === 0) {
+            if ($('.collection-tag').length === 0) {
                $('.collections-container').addClass('empty');
             } else {
                $('.collections-container').removeClass('empty');

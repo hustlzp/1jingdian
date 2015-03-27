@@ -76,12 +76,12 @@ $(document).on('click', '.vote', function () {
 });
 
 // 点击input或textare，隐藏placeholder
-$("input, textarea").focus(function () {
-    $(this).data('placeholder', $(this).attr('placeholder'))
-    $(this).attr('placeholder', '');
-}).blur(function () {
-    $(this).attr('placeholder', $(this).data('placeholder'));
-});
+//$("input, textarea").focus(function () {
+//    $(this).data('placeholder', $(this).attr('placeholder'))
+//    $(this).attr('placeholder', '');
+//}).blur(function () {
+//    $(this).attr('placeholder', $(this).data('placeholder'));
+//});
 
 // 若某操作需要登陆，而用户尚未登陆，则跳转登陆页
 $(document).on('click', '.need-signed-in', function () {

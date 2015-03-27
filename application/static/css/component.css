@@ -91,6 +91,9 @@
   display: inline-block;
   margin: 0 8px 8px 0;
 }
+.piece-details-wap .collections-container {
+  margin-top: 20px;
+}
 .piece-details-wap .collections-container.empty .btn-edit-collection {
   display: none;
 }
