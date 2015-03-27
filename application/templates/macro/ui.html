@@ -558,12 +558,6 @@
                      {{ render_piece_source(piece, false) }}
 
                      <div class="options">
-                        {% if permissions.PieceEditPermission(piece).check() %}
-                           <a href="{{ url_for('piece.edit', uid=piece.id) }}"
-                              class="btn-edit-piece" title="编辑">
-                              <span class="fa fa-pencil"></span></a>
-                        {% endif %}
-
                         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
                            data-content="{{ piece.content }}"
                            data-source="{{ piece.source or "" }}"
