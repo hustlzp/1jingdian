@@ -237,10 +237,10 @@ def remove_from_collection(uid, collection_id):
         CollectionPiece.collection_id == collection_id,
         CollectionPiece.piece_id == uid)
     for collection_piece in collection_pieces:
+        db.session.delete(collection_piece)
         # 记录log
         log = PieceEditLog(piece_id=uid, user_id=g.user.id, collection_id=collection_id,
                            kind=PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION)
-        db.session.delete(collection_piece)
         db.session.add(log)
     db.session.commit()
     return json.dumps({'result': True})

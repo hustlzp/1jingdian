@@ -328,7 +328,7 @@
 
          // 通过选择autocomplete菜单项添加句集
          $collectionInput.on('typeahead:selected', function (e, collection) {
-            addToCollection(pieceId, {collection_id: collectionId});
+            addToCollection(pieceId, {collection_id: collection.id});
          });
 
          // 通过回车添加句集
