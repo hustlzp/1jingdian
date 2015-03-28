@@ -149,8 +149,9 @@
 {% macro render_collection_tag_wap(collection) %}
    <span class="collection-tag-wap" data-id="{{ collection.id }}">
       <a class="collection-tag" href="{{ url_for('collection.view', uid=collection.id) }}">
-         {{ collection.title }}</a><span class="fa fa-close btn-delete-collection"
-                                         data-id="{{ collection.id }}"></span>
+         {{ collection.title }}</a><a href="javascript: void(0)" class="btn-delete-collection"
+                                      data-id="{{ collection.id }}"><span
+         class="fa fa-close"></span></a>
    </span>
 {% endmacro %}
 
