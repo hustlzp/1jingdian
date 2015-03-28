@@ -192,9 +192,9 @@ def register_error_handle(app):
 
 def register_uploadsets(app):
     """Register UploadSets."""
-    from .utils.uploadsets import avatars, collection_covers
+    from .utils.uploadsets import avatars, collection_covers, qrcodes
 
-    configure_uploads(app, (avatars, collection_covers))
+    configure_uploads(app, (avatars, collection_covers, qrcodes))
 
 
 def register_hooks(app):

@@ -7,6 +7,7 @@ from flask.ext.uploads import UploadSet, IMAGES, extension, ALL
 # UploadSets
 avatars = UploadSet('avatars', IMAGES)
 collection_covers = UploadSet('collectionCovers', IMAGES)
+qrcodes = UploadSet('qrcodes', IMAGES)
 
 
 def process_avatar(file_storage, upload_set, border):
@@ -14,11 +15,8 @@ def process_avatar(file_storage, upload_set, border):
     image = open_image(file_storage)
     image = center_crop(image)
     image = resize_square(image, border)
-    return save_image(image, file_storage, upload_set)
-
-
-def random_filename():
-    return str(uuid.uuid4())
+    ext = extension(file_storage.filename)
+    return save_image(image, upload_set, ext)
 
 
 def open_image(file_storage):
@@ -30,9 +28,8 @@ def open_image(file_storage):
     return image
 
 
-def save_image(image, file_storage, upload_set):
+def save_image(image, upload_set, ext):
     """Save image with random filename and original ext."""
-    ext = extension(file_storage.filename)
     filename = '%s.%s' % (random_filename(), ext)
     dir_path = upload_set.config.destination
 
@@ -56,3 +53,7 @@ def center_crop(image):
 
 def resize_square(image, border):
     return image.resize((border, border), Image.ANTIALIAS)
+
+
+def random_filename():
+    return str(uuid.uuid4())

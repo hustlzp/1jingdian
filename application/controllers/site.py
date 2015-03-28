@@ -2,7 +2,6 @@
 from datetime import date, timedelta
 from flask import render_template, Blueprint
 from ..models import db, Piece, Collection
-from ..utils.helper import get_pieces_data_by_day
 
 bp = Blueprint('site', __name__)
 
@@ -12,7 +11,7 @@ bp = Blueprint('site', __name__)
 def index(page):
     """Index page."""
     target_day = date.today() - timedelta(days=page - 1)
-    pieces = get_pieces_data_by_day(target_day)
+    pieces = Piece.get_pieces_data_by_day(target_day)
     if page == 1:
         pre_page = None
     else:
@@ -37,3 +36,15 @@ def search():
 def collections():
     collections = Collection.query
     return render_template('site/collections.html', collections=collections)
+
+
+@bp.route('/test')
+def test():
+    import qrcode
+
+    qr = qrcode.QRCode(box_size=10, border=0)
+    qr.add_data('http://alpha.1jingdian.com/piece/20')
+    qr.make(fit=True)
+
+    img = qr.make_image()
+    img.save('/tmp/haha.png')

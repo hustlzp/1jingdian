@@ -5,7 +5,6 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
 from ..utils.permissions import UserPermission, PieceAddPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog
-from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -23,7 +22,7 @@ def pieces_by_date():
     html = ""
     for i in xrange(days):
         target_day = start_date - timedelta(days=i)
-        pieces_data = get_pieces_data_by_day(target_day)
+        pieces_data = Piece.get_pieces_data_by_day(target_day)
         pieces_macro = get_template_attribute('macro/ui.html', 'render_pieces_by_date')
         html += pieces_macro(pieces_data)
     return html
@@ -76,8 +75,12 @@ def add():
         if piece.author:
             _save_piece_author(piece.author)
         g.user.pieces_count += 1
-
         db.session.add(g.user)
+        db.session.commit()
+
+        # Generate QRCode
+        piece.make_qrcode()
+        db.session.add(piece)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)

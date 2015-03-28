@@ -1,9 +1,11 @@
 # coding: utf-8
+import qrcode
 from flask import g
 from urlparse import urlparse
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from ._base import db
-from .collection import CollectionPiece
+from ..utils.uploadsets import qrcodes, save_image
+from ..utils.helpers import absolute_url_for
 
 
 class Piece(db.Model):
@@ -17,12 +19,23 @@ class Piece(db.Model):
     source_link_title = db.Column(db.String(200))
     clicks_count = db.Column(db.Integer, default=0)
     votes_count = db.Column(db.Integer, default=0)
+    qrcode = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('created_pieces',
                                                       lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
+
+    @property
+    def source_link_favicon(self):
+        result = urlparse(self.source_link)
+        host = "%s://%s" % (result.scheme or "http", result.netloc)
+        return "http://g.soz.im/%s" % host
+
+    @property
+    def qrcode_url(self):
+        return qrcodes.url(self.qrcode)
 
     def voted_by_user(self):
         if not g.user:
@@ -32,13 +45,44 @@ class Piece(db.Model):
     def collected_by_user(self):
         if not g.user:
             return False
-        return g.user.colleced_pieces.filter(CollectionPiece.piece_id == self.id).count() > 0
+        return g.user.colleced_pieces.filter(piece_id=self.id).count() > 0
 
-    @property
-    def source_link_favicon(self):
-        result = urlparse(self.source_link)
-        host = "%s://%s" % (result.scheme or "http", result.netloc)
-        return "http://g.soz.im/%s" % host
+    def make_qrcode(self):
+        qr = qrcode.QRCode(box_size=10, border=0)
+        qr.add_data(absolute_url_for('piece.view', uid=self.id))
+        qr.make(fit=True)
+        img = qr.make_image()
+        self.qrcode = save_image(img, qrcodes, 'png')
+
+    @staticmethod
+    def get_pieces_data_by_day(day):
+        """获取某天的pieces"""
+        SHOW_PIECES_COUNT = 20
+        pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == day).count()
+        hide_pieces_count = pieces_count - SHOW_PIECES_COUNT if pieces_count > SHOW_PIECES_COUNT \
+            else 0
+        if hide_pieces_count:
+            hide_pieces = pieces = Piece.query.filter(
+                db.func.date(Piece.created_at) == day).order_by(
+                Piece.votes_count.desc()).offset(SHOW_PIECES_COUNT)
+        else:
+            hide_pieces = None
+        pieces = Piece.query.filter(db.func.date(Piece.created_at) == day).order_by(
+            Piece.votes_count.desc()).limit(SHOW_PIECES_COUNT)
+        if day == date.today():
+            date_string = '今天'
+        elif day == date.today() - timedelta(days=1):
+            date_string = '昨天'
+        else:
+            date_string = "%s年%s月%s日" % (day.year, day.month, day.day)
+
+        return {
+            'date': day,
+            'date_string': date_string,
+            'pieces': pieces,
+            'hide_pieces': hide_pieces,
+            'hide_pieces_count': hide_pieces_count
+        }
 
     def __repr__(self):
         return '<Piece %s>' % self.id

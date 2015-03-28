@@ -2,7 +2,6 @@
 from datetime import date, timedelta
 from flask import render_template, Blueprint
 from ..models import db, Piece
-from ..utils.helper import get_pieces_data_by_day
 
 bp = Blueprint('feedback', __name__)
 
