@@ -16,11 +16,7 @@
    {{ link('css/component.css') }}
    {{ link('css/layout.css') }}
    <!--[if IE 9]>
-   <style>
-      .blur {
-         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
-      }
-   </style>
+   {{ link('css/ie9.css') }}
    <![endif]-->
    {{ page_link(self) }}
    {{ script('js/modernizr.js') }}
