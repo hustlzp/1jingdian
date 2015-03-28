@@ -311,7 +311,8 @@
                      method: 'post',
                      dataType: 'json',
                      data: {
-                        q: q
+                        q: q,
+                        piece_id: pieceId
                      }
                   }).done(function (matchs) {
                      cb(matchs);

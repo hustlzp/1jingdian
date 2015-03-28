@@ -106,8 +106,12 @@ def upload_cover(uid):
 @UserPermission()
 def query():
     q = request.form.get('q')
+    piece_id = request.form.get('piece_id')
     if q:
         collections = Collection.query.filter(Collection.title.like("%%%s%%" % q))
+        if piece_id:
+            collections = collections.filter(
+                ~Collection.pieces.any(CollectionPiece.piece_id == piece_id))
         return json.dumps([{'value': collection.title,
                             'count': collection.pieces.count(),
                             'id': collection.id}
