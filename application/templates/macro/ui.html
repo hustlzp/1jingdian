@@ -260,11 +260,62 @@
       {% endfor %}
    </div>
 
+   <div class="share-wap">
+      <span class="btn-close-share-wap">×</span>
+
+      <div class="inner-wap">
+         <a href="{{ piece.weibo_share_url }}"
+            class="btn btn-default btn-share-to-weibo" target="_blank">
+            <img src="{{ static('image/media/weibo.png') }}"
+                 class="weibo-icon" alt=""/>&nbsp;分享到微博
+         </a>
+
+         <div class="devider">或</div>
+
+         <div class="share-to-weixin-wap">
+            <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
+
+            <div>
+               <span class="fa fa-weixin"></span>&nbsp;&nbsp;分享到微信
+            </div>
+         </div>
+      </div>
+   </div>
+
    <script type="text/javascript">
       (function () {
          var timerForTypeahead = null;
          var pieceId = {{ piece.id }};
          var $collectionInput = $('#input-collection');
+
+         // 弹出分享框
+         $('.btn-share').click(function () {
+            var $shareInnerWap = $('.share-wap .inner-wap');
+            var $detailsWap = $('.piece-details-wap');
+            var marginTop = 0;
+
+            $('.share-wap').show();
+            marginTop = ($detailsWap.parent().outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
+            if (marginTop < 30) {
+               marginTop = 30;
+            }
+            $shareInnerWap.css('marginTop', marginTop + 'px');
+
+            $('.share-wap').transition({
+               'top': '0',
+               'opacity': 1
+            }, 300);
+         });
+
+         // 关闭分享框
+         $('.btn-close-share-wap').click(function () {
+            $('.share-wap').transition({
+               'top': '15px',
+               'opacity': 0
+            }, 300, function () {
+               $('.share-wap').hide();
+            });
+         });
 
          // 评论
          $('.btn-comment').click(function () {

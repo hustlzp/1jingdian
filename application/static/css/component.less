@@ -313,6 +313,67 @@
     border-top: 1px solid @border-color;
     border-bottom: 1px solid @border-color;
   }
+
+  // 分享框
+  .share-wap {
+    position: absolute;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    top: 15px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 800;
+    background-color: #ffffff;
+
+    .btn-share-to-weibo {
+      &:focus,
+      &:hover {
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .175);
+        border-color: #ccc;
+      }
+
+      .weibo-icon {
+        height: 14px;
+        vertical-align: -1px;
+      }
+    }
+
+    .devider {
+      color: #999;
+      margin: 15px 0;
+    }
+
+    .share-to-weixin-wap {
+      .piece-qrcode {
+        width: 150px;
+        height: 150px;
+        display: block;
+        margin: 0 auto 15px auto;
+      }
+
+      .fa-weixin {
+        color: #06B712;
+      }
+    }
+
+    // 关闭分享框
+    .btn-close-share-wap {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 40px;
+      color: #ccc;
+      cursor: pointer;
+      line-height: 1;
+
+      &:hover {
+        color: #999;
+      }
+    }
+  }
 }
 
 /* 弹出的用户卡片 */

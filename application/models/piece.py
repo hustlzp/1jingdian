@@ -35,7 +35,26 @@ class Piece(db.Model):
 
     @property
     def qrcode_url(self):
-        return qrcodes.url(self.qrcode)
+        return qrcodes.url(self.qrcode) if self.qrcode else ""
+
+    @property
+    def source_string(self):
+        result_str = ""
+        if self.original:
+            return result_str
+        result_str += self.author
+        if self.source:
+            result_str += "《%s》" % self.source
+        return result_str
+
+    @property
+    def weibo_share_url(self):
+        template = "http://service.weibo.com/share/share.php?searchPic=false&title=%s&url=%s"
+        title = self.content
+        if self.source_string:
+            title += " ——%s" % self.source_string
+        url = absolute_url_for('piece.view', uid=self.id)
+        return template % (title, url)
 
     def voted_by_user(self):
         if not g.user:
