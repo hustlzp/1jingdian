@@ -19,3 +19,4 @@ nose
 coverage
 pylint
 markdown2
+qrcode
