@@ -3,8 +3,7 @@
       (function () {
          $(document).on('click', '.btn-full-screen', function () {
             var content = $(this).data('content'),
-                  source = $(this).data('source'),
-                  author = $(this).data('author'),
+                  sourceString = $(this).data('source-string'),
                   html = "",
                   sourceForDisplay = "";
 
@@ -13,15 +12,8 @@
                   + "<div class='wap'>"
                   + "<div class='content'>" + content + "</div>";
 
-            if (source || author) {
-               if (author) {
-                  sourceForDisplay += author
-               }
-               if (source) {
-                  sourceForDisplay += "《" + source + "》";
-               }
-
-               html += "<div class='source'>" + sourceForDisplay + "</div>";
+            if (sourceString) {
+               html += "<div class='source'>" + sourceString + "</div>";
             }
 
             html += "</div>" + "</div>";

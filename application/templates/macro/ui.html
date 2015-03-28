@@ -34,9 +34,7 @@
          {% if piece.original %}
             <span class="source">原创</span>
          {% else %}
-            <span class="source">
-               {{ piece.author or "" }}{% if piece.source %}《{{ piece.source }}》{% endif %}
-            </span>
+            <span class="source">{{ piece.source_string }}</span>
 
             {% if with_link and piece.source_link %}
                <a href="{{ piece.source_link }}" class="source-link" target="_blank"
@@ -193,8 +191,7 @@
 
          <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
             data-content="{{ piece.content }}"
-            data-source="{{ piece.source or "" }}"
-            data-author="{{ piece.author or "" }}">
+            data-source-string="{{ piece.source_string }}">
             <span class="fa fa-arrows-alt "></span> 全屏</a>
 
          <a href="javascript: void(0)" class="btn-share">
@@ -635,8 +632,7 @@
                      <div class="options">
                         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
                            data-content="{{ piece.content }}"
-                           data-source="{{ piece.source or "" }}"
-                           data-author="{{ piece.author or "" }}">
+                           data-source-string="{{ piece.source_string }}">
                            <span class="fa fa-arrows-alt "></span>
                         </a>
                      </div>
