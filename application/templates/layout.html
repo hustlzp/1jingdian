@@ -15,6 +15,13 @@
    {{ link('css/common.css') }}
    {{ link('css/component.css') }}
    {{ link('css/layout.css') }}
+   <!--[if IE 9]>
+   <style>
+      .blue {
+         filter: blur(0px);
+      }
+   </style>
+   <![endif]-->
    {{ page_link(self) }}
    {{ script('js/modernizr.js') }}
    {{ script('bower_components/respond/dest/respond.min.js') }}
