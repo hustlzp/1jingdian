@@ -131,9 +131,11 @@
 }
 .piece-details-wap .collections-container .collection-tag-wap .collection-tag {
   display: inline-block;
+  vertical-align: text-top;
 }
 .piece-details-wap .collections-container .collection-tag-wap .btn-delete-collection {
   display: none;
+  vertical-align: text-top;
   cursor: pointer;
   background-color: #eff6fa;
   padding-top: 6px;
