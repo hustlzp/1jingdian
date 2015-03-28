@@ -327,48 +327,13 @@
 
          // 通过选择autocomplete菜单项添加句集
          $collectionInput.on('typeahead:selected', function (e, collection) {
-            var collectionId = collection.id;
-
-            $.ajax({
-               url: urlFor('piece.add_to_collection_by_id', {uid: pieceId}),
-               method: 'post',
-               dataType: 'json',
-               data: {
-                  collection_id: collectionId
-               }
-            }).done(function (response) {
-               if (response.result) {
-                  if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
-                     $(".collections").append(response.html);
-                     checkCollectionsCount();
-                  }
-                  $('#input-collection').typeahead('val', '');
-               }
-            });
+            addToCollection(pieceId, {collection_id: collectionId});
          });
 
          // 通过回车添加句集
          $collectionInput.on('keypress', function (e) {
             if (e.which === 13) {
-               var title = $.trim($(this).val());
-               var pieceId = $('.piece-details-wap').data('piece-id');
-
-               $.ajax({
-                  url: urlFor('piece.add_to_collection_by_title', {uid: pieceId}),
-                  method: 'post',
-                  dataType: 'json',
-                  data: {
-                     title: title
-                  }
-               }).done(function (response) {
-                  if (response.result) {
-                     if (!$(".collections .collection[data-id='" + response.id + "']").length) {
-                        $(".collections").append(response.html);
-                        checkCollectionsCount();
-                     }
-                     $('#input-collection').typeahead('val', '');
-                  }
-               });
+               addToCollection(pieceId, {title: $(this).val()});
             }
          });
 
@@ -398,6 +363,28 @@
          $('.btn-finish-add-collection').click(function () {
             quitEditCollectionMode();
          });
+
+         /**
+          * 将句子添加到句集
+          * @param {int|string} pieceId - 句子的id
+          * @param {Object} data - Ajax请求的data部分，key为title或collection_id
+          */
+         function addToCollection(pieceId, data) {
+            $.ajax({
+               url: urlFor('piece.add_to_collection', {uid: pieceId}),
+               method: 'post',
+               dataType: 'json',
+               data: data
+            }).done(function (response) {
+               if (response.result) {
+                  if (!$(".collections .collection[data-id='" + response.id + "']").length) {
+                     $(".collections").append(response.html);
+                     checkCollectionsCount();
+                  }
+                  $('#input-collection').typeahead('val', '');
+               }
+            });
+         }
 
          /**
           * Check if there is no collection, and update elements status.

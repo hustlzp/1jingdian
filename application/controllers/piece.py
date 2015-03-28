@@ -193,48 +193,21 @@ def uncollect(uid, collection_id):
         return json.dumps({'result': True})
 
 
-@bp.route('/piece/<int:uid>/add_to_collection_by_title', methods=['POST'])
+@bp.route('/piece/<int:uid>/add_to_collection', methods=['POST'])
 @UserPermission()
-def add_to_collection_by_title(uid):
+def add_to_collection(uid):
     piece = Piece.query.get_or_404(uid)
     title = request.form.get('title')
+    collection_id = request.form.get('collection_id')
 
+    collection = None
     if title:
-        title = title.strip().replace(" ", "")
-    if title:
-        # 若不存在该title的句集，则创建
-        collection = Collection.query.filter(Collection.title == title).first()
-        if not collection:
-            collection = Collection(title=title)
-            db.session.add(collection)
-            db.session.commit()
+        collection = _get_collection_by_title(title)
+    elif collection_id:
+        collection = Collection.query.get_or_404(collection_id)
 
-        # 若该句集尚未收录此句子，则收录
-        collection_piece = CollectionPiece.query.filter(
-            CollectionPiece.collection_id == collection.id,
-            CollectionPiece.piece_id == uid).first()
-        if not collection_piece:
-            collection_piece = CollectionPiece(user_id=g.user.id, collection_id=collection.id,
-                                               piece_id=uid)
-            db.session.add(collection_piece)
-            db.session.commit()
-        macro = get_template_attribute('macro/ui.html', 'render_collection_tag_wap')
-        return json.dumps({'result': True,
-                           'id': collection.id,
-                           'html': macro(collection)})
-    else:
-        return json.dumps({'result': False})
-
-
-@bp.route('/piece/<int:uid>/add_to_collection_by_id', methods=['POST'])
-@UserPermission()
-def add_to_collection_by_id(uid):
-    piece = Piece.query.get_or_404(uid)
-    collection_id = request.form.get('collection_id', type=int)
-
-    if not collection_id:
+    if not collection:
         abort(400)
-    collection = Collection.query.get_or_404(collection_id)
 
     # 若该句集尚未收录此句子，则收录
     collection_piece = CollectionPiece.query.filter(
@@ -287,3 +260,19 @@ def _save_piece_author(author):
         db.session.add(piece_author)
         db.session.commit()
     return piece_author.id
+
+
+def _get_collection_by_title(title):
+    """通过title获取句集，若不存在则创建"""
+    title = title or ""
+    title = title.strip().replace(" ", "")
+    if title:
+        # 若不存在该title的句集，则创建
+        collection = Collection.query.filter(Collection.title == title).first()
+        if not collection:
+            collection = Collection(title=title)
+            db.session.add(collection)
+            db.session.commit()
+        return collection
+    else:
+        return None
