@@ -327,6 +327,8 @@
             }
          });
 
+         $collectionInput.css('verticalAlign', 'baseline');
+
          // 通过选择autocomplete菜单项添加句集
          $collectionInput.on('typeahead:selected', function (e, collection) {
             addToCollection(pieceId, {collection_id: collection.id});
