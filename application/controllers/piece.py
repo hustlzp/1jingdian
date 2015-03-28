@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
-    PieceSource, PieceAuthor
+    PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog
 from ..utils.helper import get_pieces_data_by_day
 from ..forms import PieceForm
 
@@ -214,9 +214,12 @@ def add_to_collection(uid):
         CollectionPiece.collection_id == collection.id,
         CollectionPiece.piece_id == uid).first()
     if not collection_piece:
-        collection_piece = CollectionPiece(user_id=g.user.id, collection_id=collection.id,
-                                           piece_id=uid)
+        collection_piece = CollectionPiece(collection_id=collection.id, piece_id=uid)
+        # 记录log
+        log = PieceEditLog(piece_id=uid, user_id=g.user.id, collection_id=collection.id,
+                           kind=PIECE_EDIT_KIND.ADD_TO_COLLECTION)
         db.session.add(collection_piece)
+        db.session.add(log)
         db.session.commit()
     macro = get_template_attribute('macro/ui.html', 'render_collection_tag_wap')
     return json.dumps({'result': True,
@@ -230,10 +233,15 @@ def remove_from_collection(uid, collection_id):
     """将某句子从某句集中移除"""
     piece = Piece.query.get_or_404(uid)
     collection = Collection.query.get_or_404(collection_id)
-    collection_piece = CollectionPiece.query.filter(
+    collection_pieces = CollectionPiece.query.filter(
         CollectionPiece.collection_id == collection_id,
         CollectionPiece.piece_id == uid)
-    map(db.session.delete, collection_piece)
+    for collection_piece in collection_pieces:
+        # 记录log
+        log = PieceEditLog(piece_id=uid, user_id=g.user.id, collection_id=collection_id,
+                           kind=PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION)
+        db.session.delete(collection_piece)
+        db.session.add(log)
     db.session.commit()
     return json.dumps({'result': True})
 

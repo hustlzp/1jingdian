@@ -107,3 +107,48 @@ class PieceAuthor(db.Model):
     name = db.Column(db.String(200))
     count = db.Column(db.Integer, default=1)
     created_at = db.Column(db.DateTime, default=datetime.now)
+
+
+class PIECE_EDIT_KIND(object):
+    # collection
+    ADD_TO_COLLECTION = 1
+    REMOVE_FROM_COLLECTION = 2
+
+    # content
+    UPDATE_CONTENT = 3
+
+    # authro
+    ADD_AUTHOR = 4
+    UPDATE_AUTHOR = 5
+    DELETE_AUTHOR = 6
+
+    # source
+    ADD_SOURCE = 7
+    UPDATE_SOURCE = 8
+    DELETE_SOURCE = 9
+
+    # source link
+    ADD_SOURCE_LINK = 10
+    UPDATE_SOURCE_LINK = 11
+    DELETE_SOURCE_LINK = 12
+
+
+class PieceEditLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    kind = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('edited_pieces',
+                                              lazy='dynamic',
+                                              order_by='desc(CollectionPiece.created_at)'))
+
+    piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    piece = db.relationship('Piece',
+                            backref=db.backref('logs',
+                                               lazy='dynamic',
+                                               order_by='asc(CollectionPiece.created_at)'))
+
+    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
+    collection = db.relationship('Collection')
