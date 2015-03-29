@@ -769,8 +769,8 @@
   margin-bottom: 18px;
 }
 .collections-wap .collection .collection-cover {
-  width: 64px;
-  height: 64px;
+  width: 62px;
+  height: 62px;
 }
 .collections-wap .collection .meta {
   position: absolute;
@@ -785,19 +785,19 @@
   margin: 0 5px;
 }
 .collection-header .collection-info {
-  padding: 40px 0 30px 0;
+  padding: 50px 0 35px 0;
   text-align: center;
   position: relative;
 }
 .collection-header .collection-info .title {
-  font-size: 18px;
+  font-size: 20px;
 }
 .collection-header .collection-info .desc {
   margin-top: 10px;
   color: #999;
 }
 .collection-header .collection-info .collection-cover {
-  margin-top: 15px;
+  margin-top: 20px;
   width: 64px;
   height: 64px;
 }
