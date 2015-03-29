@@ -556,6 +556,7 @@
             'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
          }, 400, function () {
             quitEditCollectionMode();
+            closeUpperLayers();
             $(this).removeClass('open');
 
             if ($.isFunction(callback)) {
@@ -589,6 +590,13 @@
       function quitEditCollectionMode() {
          $('#input-collection').typeahead('val', '');
          $('.collections-container').removeClass('edit-mode');
+      }
+
+      /**
+       * Close layers upon piece modal.
+       */
+      function closeUpperLayers() {
+         $('.share-wap').hide();
       }
    </script>
 {% endmacro %}
