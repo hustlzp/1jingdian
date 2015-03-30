@@ -15,10 +15,18 @@
    {{ link('css/common.css') }}
    {{ link('css/component.css') }}
    {{ link('css/layout.css') }}
+   {{ page_link(self) }}
    <!--[if IE 9]>
    {{ link('css/ie9.css') }}
    <![endif]-->
-   {{ page_link(self) }}
+   <script type="text/javascript">
+      var g = {
+         domain: "{{ config.SITE_DOMAIN }}",
+         csrfToken: "{{ csrf_token() }}",
+         rules: {{ rules|safe }},
+         method: "{{ request.method }}"
+      };
+   </script>
    {{ script('js/modernizr.js') }}
    {{ script('bower_components/respond/dest/respond.min.js') }}
    {{ script('bower_components/jquery/dist/jquery.min.js') }}
@@ -28,14 +36,6 @@
    {{ script('bower_components/moment/min/moment.min.js') }}
    {{ script('bower_components/plupload/js/plupload.full.min.js') }}
    {{ script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
-   <script type="text/javascript">
-      var g = {
-         domain: "{{ config.SITE_DOMAIN }}",
-         csrfToken: "{{ csrf_token() }}",
-         rules: {{ rules|safe }},
-         method: "{{ request.method }}"
-      };
-   </script>
    {{ script('js/init.js') }}
 </head>
 
@@ -125,11 +125,11 @@
       {% block page_content %}{% endblock %}
    </div>
 
-   {# Global JavaScript codes #}
-   {{ script('js/layout.js') }}
-
    {# Inject vars on g for single page #}
    {% block page_vars %}{% endblock %}
+
+   {# Global JavaScript codes #}
+   {{ script('js/layout.js') }}
 
    {# Single page JavaScript codes #}
    {{ page_script(self) }}
