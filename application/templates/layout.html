@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html id="{{ page_id(self) }}">
 <head>
    <title>{% block page_title %}{% endblock %}</title>
    <meta name="renderer" content="webkit">
@@ -9,15 +9,9 @@
    <meta name="csrf-token" content="{{ csrf_token() }}"/>
    {% block meta %}{% endblock %}
    <link rel="Shortcut Icon" href="{{ static('image/favicon.ico') }}">
-   {{ link('bower_components/bootstrap/dist/css/bootstrap.min.css') }}
-   {{ link('bower_components/font-awesome/css/font-awesome.min.css') }}
-   {{ link('css/bootstrap.theme.css') }}
-   {{ link('css/common.css') }}
-   {{ link('css/component.css') }}
-   {{ link('css/layout.css') }}
-   {{ page_link(self) }}
+   {{ app_css(self) }}
    <!--[if IE 9]>
-   {{ link('css/ie9.css') }}
+   <link rel="stylesheet" href="{{ static('css/ie9.css') }}"/>
    <![endif]-->
    <script type="text/javascript">
       var g = {
@@ -27,19 +21,10 @@
          method: "{{ request.method }}"
       };
    </script>
-   {{ script('js/modernizr.js') }}
-   {{ script('bower_components/respond/dest/respond.min.js') }}
-   {{ script('bower_components/jquery/dist/jquery.min.js') }}
-   {{ script('bower_components/jquery.transit/jquery.transit.js') }}
-   {{ script('bower_components/jquery.scrollTo/jquery.scrollTo.min.js') }}
-   {{ script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
-   {{ script('bower_components/moment/min/moment.min.js') }}
-   {{ script('bower_components/plupload/js/plupload.full.min.js') }}
-   {{ script('bower_components/typeahead.js/dist/typeahead.bundle.min.js') }}
-   {{ script('js/init.js') }}
+   {{ libs_js() }}
 </head>
 
-<body id="page" class="{{ page_name(self) }} {% if g.user %}signed-in{% endif %}">
+<body class="{% if g.user %}signed-in{% endif %}">
 <div id="favicon-wx-share" style="margin: 0; display: none;">
    <img src="{{ static('image/favicon_wx_share.png') }}" alt=""/>
 </div>
@@ -124,18 +109,14 @@
    <div id="main-wap">
       {% block page_content %}{% endblock %}
    </div>
-
-   {# Inject vars on g for single page #}
-   {% block page_vars %}{% endblock %}
-
-   {# Global JavaScript codes #}
-   {{ script('js/layout.js') }}
-
-   {# Single page JavaScript codes #}
-   {{ page_script(self) }}
-
-   {# Access analysis #}
-   {# TODO #}
 </div>
+
+{# Inject vars on g for single page #}
+{% block page_vars %}{% endblock %}
+
+{{ page_js(self) }}
+
+{# Access analysis #}
+{# TODO #}
 </body>
 </html>

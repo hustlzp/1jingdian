@@ -20,3 +20,7 @@ coverage
 pylint
 markdown2
 qrcode
+PyYAML
+jsmin
+cssmin
+lesscpy

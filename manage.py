@@ -3,6 +3,8 @@ from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from application import create_app
 from application.models import db
+from application.utils.assets import build
+
 
 # Used by app debug & livereload
 PORT = 5000
@@ -49,6 +51,11 @@ def live():
 def createdb():
     """Create database."""
     db.create_all()
+
+
+@manager.command
+def build_assets():
+    build(app)
 
 
 if __name__ == "__main__":

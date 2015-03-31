@@ -39,10 +39,11 @@ class Piece(db.Model):
 
     @property
     def source_string(self):
-        result_str = ""
         if self.original:
-            return result_str
-        result_str += self.author
+            return ""
+        result_str = ""
+        if self.author:
+            result_str += self.author
         if self.source:
             result_str += "《%s》" % self.source
         return result_str
