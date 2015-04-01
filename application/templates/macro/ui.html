@@ -102,8 +102,7 @@
             <div class="media-body">
                <div class="title">{{ collection.title }}</div>
                <div class="meta">
-                  {{ collection.pieces.count() }} 句子<span
-                     class="devider"></span>{{ collection.likers.count() }} 收藏
+                  {{ collection.desc or "" }}
                </div>
             </div>
 

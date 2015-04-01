@@ -744,11 +744,12 @@
   color: #999;
 }
 .collections-wap {
-  padding: 35px 20px 10px 20px;
+  padding: 35px 20px 0 20px;
 }
 .collections-wap .collection {
   display: block;
   width: 325px;
+  height: 90px;
   border-radius: 4px;
   float: left;
   margin: 0 15px 25px 15px;
