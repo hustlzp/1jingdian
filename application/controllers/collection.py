@@ -124,7 +124,7 @@ def query():
 @UserPermission()
 def like(uid):
     collection = Collection.query.get_or_404(uid)
-    like = collection.likers.filter(user_id=g.user.id).first()
+    like = collection.likers.filter(UserLikeCollection.user_id == g.user.id).first()
     if not like:
         like = UserLikeCollection(collection_id=uid, user_id=g.user.id)
         db.session.add(like)
@@ -136,7 +136,7 @@ def like(uid):
 @UserPermission()
 def unlike(uid):
     collection = Collection.query.get_or_404(uid)
-    like = collection.likers.filter(user_id=g.user.id)
+    like = collection.likers.filter(UserLikeCollection.user_id == g.user.id)
     map(db.session.delete, like)
     db.session.commit()
     return json.dumps({'result': True})

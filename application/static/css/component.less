@@ -956,8 +956,12 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #f8f8f8;
+      background-color: #fAfAfA;
       box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+
+      .btn-like-collection {
+        visibility: visible;
+      }
     }
 
     .media-left {
@@ -980,6 +984,36 @@
 
       .devider {
         margin: 0 8px;
+      }
+    }
+
+    .btn-like-collection {
+      visibility: hidden;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #999;
+
+      &.liked {
+        visibility: visible;
+
+        .fa-bookmark {
+          display: block;
+        }
+        .fa-bookmark-o {
+          display: none;
+        }
+      }
+
+      .fa-bookmark {
+        display: none;
+        color: @main-color;
+      }
+      .fa-bookmark-o {
+        display: block;
+        &:hover {
+          color: @main-color;
+        }
       }
     }
   }

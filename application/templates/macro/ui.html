@@ -92,7 +92,6 @@
          {% endif %}
 
          <div class="collection media" data-collection-id="{{ collection.id }}">
-
             <div class="media-left">
                <a href="#">
                   <img src="{{ collection.cover_url }}" alt=""
@@ -107,6 +106,12 @@
                      class="devider"></span>{{ collection.likers.count() }} 收藏
                </div>
             </div>
+
+            <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
+                 data-id="{{ collection.id }}">
+               <span class="fa fa-bookmark-o" title="收藏句集"></span>
+               <span class="fa fa-bookmark" title="取消收藏"></span>
+            </div>
          </div>
       {% endfor %}
    </div>
@@ -116,6 +121,31 @@
          $('.collection').click(function () {
             var collectionId = $(this).data('collection-id');
             window.location = urlFor('collection.view', {'uid': collectionId});
+         });
+
+         $('.btn-like-collection').click(function (e) {
+            var id = $(this).data('id');
+            var url = "";
+            var _this = $(this);
+            var liked = $(this).hasClass('liked');
+
+            if (liked) {
+               url = urlFor('collection.unlike', {uid: id});
+            } else {
+               url = urlFor('collection.like', {uid: id});
+            }
+
+            $.ajax({
+               url: url,
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.toggleClass('liked');
+               }
+            });
+
+            e.stopPropagation();
          });
       })();
    </script>

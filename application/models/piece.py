@@ -62,11 +62,6 @@ class Piece(db.Model):
             return False
         return g.user.voted_pieces.filter(PieceVote.piece_id == self.id).count() > 0
 
-    def collected_by_user(self):
-        if not g.user:
-            return False
-        return g.user.colleced_pieces.filter(piece_id=self.id).count() > 0
-
     def make_qrcode(self):
         qr = qrcode.QRCode(box_size=10, border=0)
         qr.add_data(absolute_url_for('piece.view', uid=self.id))

@@ -1,5 +1,5 @@
 # coding: utf-8
-from datetime import datetime, date
+from datetime import datetime
 from flask import g
 from ._base import db
 from ..utils.uploadsets import collection_covers
@@ -33,7 +33,7 @@ class Collection(db.Model):
             .filter(Piece.voters.any(PieceVote.user_id == g.user.id))
 
     def liked_by_user(self):
-        return g.user and self.likers.filter(user_id=g.user.id).count() > 0
+        return g.user and self.likers.filter(UserLikeCollection.user_id == g.user.id).count() > 0
 
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0

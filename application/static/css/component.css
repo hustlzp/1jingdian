@@ -759,8 +759,11 @@
   cursor: pointer;
 }
 .collections-wap .collection:hover {
-  background-color: #f8f8f8;
+  background-color: #fAfAfA;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+}
+.collections-wap .collection:hover .btn-like-collection {
+  visibility: visible;
 }
 .collections-wap .collection .media-left {
   padding-right: 15px;
@@ -779,6 +782,32 @@
 }
 .collections-wap .collection .meta .devider {
   margin: 0 8px;
+}
+.collections-wap .collection .btn-like-collection {
+  visibility: hidden;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #999;
+}
+.collections-wap .collection .btn-like-collection.liked {
+  visibility: visible;
+}
+.collections-wap .collection .btn-like-collection.liked .fa-bookmark {
+  display: block;
+}
+.collections-wap .collection .btn-like-collection.liked .fa-bookmark-o {
+  display: none;
+}
+.collections-wap .collection .btn-like-collection .fa-bookmark {
+  display: none;
+  color: #1e88a8;
+}
+.collections-wap .collection .btn-like-collection .fa-bookmark-o {
+  display: block;
+}
+.collections-wap .collection .btn-like-collection .fa-bookmark-o:hover {
+  color: #1e88a8;
 }
 .collection-header .collection-info {
   padding: 50px 0 35px 0;
