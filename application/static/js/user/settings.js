@@ -1,22 +1,22 @@
-//var uploader = new plupload.Uploader($.extend(g.pluploadDefaults, {
-//    browse_button: 'btn-upload-avatar',
-//    url: urlFor('user.upload_avatar'),
-//    multipart_params: {
-//        'csrf_token': g.csrfToken
-//    }
-//}));
-
-var options = $.extend(g.pluploadDefaults, {
+var uploader = new plupload.Uploader($.extend(g.pluploadDefaults, {
     browse_button: 'btn-upload-avatar',
     url: urlFor('user.upload_avatar'),
     multipart_params: {
         'csrf_token': g.csrfToken
     }
-});
+}));
 
-alert(options);
-
-var uploader = new plupload.Uploader(options);
+//var options = $.extend(g.pluploadDefaults, {
+//    browse_button: 'btn-upload-avatar',
+//    url: urlFor('user.upload_avatar'),
+//    multipart_params: {
+//        'csrf_token': g.csrfToken
+//    }
+//});
+//
+//alert(options);
+//
+//var uploader = new plupload.Uploader(options);
 
 uploader.init();
 
