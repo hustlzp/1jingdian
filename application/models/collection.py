@@ -19,6 +19,8 @@ class Collection(db.Model):
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0
 
+    # def
+
     @property
     def voted_pieces_by_user(self):
         from . import PieceVote, Piece
