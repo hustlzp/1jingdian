@@ -101,9 +101,7 @@
 
             <div class="media-body">
                <div class="title">{{ collection.title }}</div>
-               <div class="meta">
-                  {{ collection.desc or "" }}
-               </div>
+               <div class="desc">{{ collection.desc or "" }}</div>
             </div>
 
             <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
