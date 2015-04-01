@@ -75,7 +75,7 @@
             </div>
             <div class="count-wap collections-count">
                <a href="{{ url_for('user.likes', uid=user.id) }}">
-                  {{ user.collections_count }}<br/><span class="count-quantifier">收藏</span>
+                  {{ user.liked_collections_count }}<br/><span class="count-quantifier">收藏</span>
                </a>
             </div>
          </div>
@@ -792,7 +792,7 @@
          </a>
          <a class="tab-item {% if active == "likes" %}active{% endif %}"
             href="{{ url_for('user.likes', uid=user.id) }}">
-            {{ user.collections_count }} 收藏
+            {{ user.liked_collections_count }} 收藏
          </a>
       </div>
    </div>

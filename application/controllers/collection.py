@@ -128,6 +128,8 @@ def like(uid):
     if not like:
         like = UserLikeCollection(collection_id=uid, user_id=g.user.id)
         db.session.add(like)
+        g.user.liked_collections_count += 1
+        db.session.add(g.user)
         db.session.commit()
     return json.dumps({'result': True})
 
@@ -136,7 +138,11 @@ def like(uid):
 @UserPermission()
 def unlike(uid):
     collection = Collection.query.get_or_404(uid)
-    like = collection.likers.filter(UserLikeCollection.user_id == g.user.id)
-    map(db.session.delete, like)
+    likes = collection.likers.filter(UserLikeCollection.user_id == g.user.id)
+    for like in likes:
+        db.session.delete(like)
+        if g.user.liked_collections_count > 0:
+            g.user.liked_collections_count -= 1
+    db.session.add(g.user)
     db.session.commit()
     return json.dumps({'result': True})
