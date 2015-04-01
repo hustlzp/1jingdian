@@ -52,7 +52,7 @@ def register_assets(app):
     # Move excluded css libs to G.css_config['excluded_libs']
     G.css_config['excluded_libs'] = []
     for index, lib_path in enumerate(G.css_config['libs']):
-        if lib_path.startswith('~'):
+        if lib_path.startswith(('~', 'http://', 'https://')):
             lib_path = lib_path[1:]
             G.css_config['libs'][index] = lib_path
             G.css_config['excluded_libs'].append(lib_path)
