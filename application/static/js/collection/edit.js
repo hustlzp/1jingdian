@@ -1,7 +1,6 @@
 var uploader = new plupload.Uploader({
     browse_button: 'btn-upload-cover',
     flash_swf_url: g.pluploadDefaults.flash_swf_url,
-    silverlight_xap_url: g.pluploadDefaults.silverlight_xap_url,
     url: urlFor('collection.upload_cover', {uid: $('#btn-upload-cover').data('collection-id')}),
     multipart_params: {
         'csrf_token': g.csrfToken
