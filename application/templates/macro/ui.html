@@ -1187,12 +1187,20 @@
                  class="img-circle collection-cover"/>
          {% endif %}
 
-         {% if permissions.AdminPermission().check() %}
-            <a href="{{ url_for('collection.edit', uid=collection.id) }}"
-               class="btn-edit-collection" title="编辑句集">
-               <span class="fa fa-pencil"></span>
-            </a>
-         {% endif %}
+         <div class="options">
+            {% if permissions.AdminPermission().check() %}
+               <a href="{{ url_for('collection.edit', uid=collection.id) }}"
+                  class="btn-edit-collection" title="编辑句集">
+                  <span class="fa fa-pencil"></span>
+               </a>
+            {% endif %}
+
+            <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
+                 data-id="{{ collection.id }}">
+               <span class="fa fa-bookmark-o" title="收藏句集"></span>
+               <span class="fa fa-bookmark" title="取消收藏"></span>
+            </div>
+         </div>
       </div>
 
       <div class="tab {% if g.user %}three{% else %}two{% endif %} clearfix">
@@ -1207,4 +1215,31 @@
          {% endif %}
       </div>
    </div>
+
+   <script type="text/javascript">
+      (function () {
+         $('.btn-like-collection').click(function (e) {
+            var id = $(this).data('id');
+            var url = "";
+            var _this = $(this);
+            var liked = $(this).hasClass('liked');
+
+            if (liked) {
+               url = urlFor('collection.unlike', {uid: id});
+            } else {
+               url = urlFor('collection.like', {uid: id});
+            }
+
+            $.ajax({
+               url: url,
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.toggleClass('liked');
+               }
+            });
+         });
+      })();
+   </script>
 {% endmacro %}

@@ -1040,17 +1040,50 @@
       height: 70px;
     }
 
-    .btn-edit-collection {
+    .options {
       position: absolute;
-      right: 20px;
-      top: 20px;
-      color: #999;
-      font-size: 14px;
+      right: 25px;
+      top: 25px;
 
-      &:hover {
-        color: @main-color;
+      .btn-edit-collection {
+        color: #999;
+        font-size: 14px;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .btn-like-collection {
+        display: inline-block;
+        color: #999;
+        margin-left: 20px;
+        cursor: pointer;
+
+        &.liked {
+          visibility: visible;
+
+          .fa-bookmark {
+            display: block;
+          }
+          .fa-bookmark-o {
+            display: none;
+          }
+        }
+
+        .fa-bookmark {
+          display: none;
+          color: @main-color;
+        }
+        .fa-bookmark-o {
+          display: block;
+          &:hover {
+            color: @main-color;
+          }
+        }
       }
     }
+
   }
 
   .tab {
