@@ -112,7 +112,6 @@ function hideFlash() {
     $('.flash-message').slideUp('fast');
 }
 
-
 registerContext({
     pluploadDefaults: {
         flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
