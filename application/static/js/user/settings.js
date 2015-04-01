@@ -8,7 +8,6 @@
 
 $.extend(g.pluploadDefaults, {
     browse_button: 'btn-upload-avatar',
-    url: urlFor('user.upload_avatar'),
     multipart_params: {
         'csrf_token': g.csrfToken
     }
