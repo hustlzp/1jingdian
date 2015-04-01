@@ -32,9 +32,10 @@ def search():
     return render_template('site/search.html')
 
 
-@bp.route('/collections')
-def collections():
-    collections = Collection.query
+@bp.route('/collections', defaults={'page': 1})
+@bp.route('/collections/page/<int:page>')
+def collections(page):
+    collections = Collection.query.paginate(page, 20)
     return render_template('site/collections.html', collections=collections)
 
 

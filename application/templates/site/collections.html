@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_collections %}
+{% from "macro/ui.html" import pagination, render_collections %}
 
 {% block page_title %}句集 - 壹经典{% endblock %}
 {% block page_content %}
@@ -7,8 +7,14 @@
       <div class="panel panel-primary">
          <div class="panel-heading">句集</div>
          <div class="panel-body panel-body-no-padding">
-            {{ render_collections(collections) }}
+            {{ render_collections(collections.items) }}
          </div>
+
+         {% if collections.pages > 1 %}
+            <div class="panel-footer">
+               {{ pagination(collections) }}
+            </div>
+         {% endif %}
       </div>
    </div>
 {% endblock %}

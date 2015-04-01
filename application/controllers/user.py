@@ -24,10 +24,11 @@ def share(uid, page):
     return render_template('user/share.html', user=user, pieces=pieces)
 
 
-@bp.route('/people/<int:uid>/likes')
-def likes(uid):
+@bp.route('/people/<int:uid>/likes', defaults={'page': 1})
+@bp.route('/people/<int:uid>/likes/page/<int:page>')
+def likes(uid, page):
     user = User.query.get_or_404(uid)
-    collections = user.liked_collections
+    collections = user.liked_collections.paginate(page, 20)
     return render_template('user/collections.html', user=user, collections=collections)
 
 
