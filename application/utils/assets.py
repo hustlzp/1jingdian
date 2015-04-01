@@ -312,13 +312,3 @@ def _get_immediate_subdirectories(_dir):
 def _get_template_name(template_reference):
     """Get current template name."""
     return template_reference._TemplateReference__context.name
-
-
-def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except OSError as exc:  # Python >2.5
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else:
-            raise
