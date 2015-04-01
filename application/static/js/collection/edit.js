@@ -1,11 +1,10 @@
-var uploader = new plupload.Uploader({
+var uploader = new plupload.Uploader($.extend(g.pluploadDefaults, {
     browse_button: 'btn-upload-cover',
-    flash_swf_url: g.pluploadDefaults.flash_swf_url,
     url: urlFor('collection.upload_cover', {uid: $('#btn-upload-cover').data('collection-id')}),
     multipart_params: {
         'csrf_token': g.csrfToken
     }
-});
+}));
 
 uploader.init();
 
