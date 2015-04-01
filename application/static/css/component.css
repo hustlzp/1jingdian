@@ -744,41 +744,37 @@
   color: #999;
 }
 .collections-wap {
-  padding: 35px 0px 25px 25px;
+  padding: 35px 20px 25px 20px;
 }
 .collections-wap .collection {
   display: block;
-  height: 200px;
-  width: 150px;
+  width: 325px;
   border-radius: 4px;
   float: left;
-  margin: 0 12px 25px 12px;
+  margin: 0 15px 25px 15px;
   border: 1px solid #e2e2e2;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
-  padding: 30px 20px 0 20px;
+  padding: 20px 20px;
   color: #333;
   position: relative;
   cursor: pointer;
-  text-align: center;
 }
 .collections-wap .collection:hover {
   background-color: #f8f8f8;
 }
+.collections-wap .collection .media-left {
+  padding-right: 15px;
+}
 .collections-wap .collection .title {
   font-size: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 .collections-wap .collection .collection-cover {
-  width: 62px;
-  height: 62px;
+  width: 48px;
+  height: 48px;
 }
 .collections-wap .collection .meta {
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  bottom: 20px;
   font-size: 12px;
-  text-align: center;
   color: #999;
 }
 .collections-wap .collection .meta .devider {

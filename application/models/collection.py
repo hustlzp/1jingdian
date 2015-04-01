@@ -9,7 +9,7 @@ class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.now)
-    cover = db.Column(db.String(200))
+    cover = db.Column(db.String(200), default="default.png")
     desc = db.Column(db.Text)
 
     @property

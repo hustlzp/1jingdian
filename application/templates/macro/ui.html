@@ -91,20 +91,21 @@
             {% set collection = collection[attr] %}
          {% endif %}
 
-         <div class="collection" data-collection-id="{{ collection.id }}">
-            <div class="title">{{ collection.title }}</div>
+         <div class="collection media" data-collection-id="{{ collection.id }}">
 
-            {% if collection.cover_url %}
-               <img src="{{ collection.cover_url }}" alt="" class="img-circle collection-cover"/>
-            {% endif %}
+            <div class="media-left">
+               <a href="#">
+                  <img src="{{ collection.cover_url }}" alt=""
+                       class="media-object img-circle collection-cover"/>
+               </a>
+            </div>
 
-            {#            {% if collection.desc %}#}
-            {#               <div class="desc">{{ collection.desc }}</div>#}
-            {#            {% endif %}#}
-
-            <div class="meta">
-               {{ collection.pieces.count() }} 句子<span
-                  class="devider"></span>{{ collection.likers.count() }} 收藏
+            <div class="media-body">
+               <div class="title">{{ collection.title }}</div>
+               <div class="meta">
+                  {{ collection.pieces.count() }} 句子<span
+                     class="devider"></span>{{ collection.likers.count() }} 收藏
+               </div>
             </div>
          </div>
       {% endfor %}
