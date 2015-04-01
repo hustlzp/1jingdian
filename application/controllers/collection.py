@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import VisitorPermission, UserPermission, CollectionEditPermission
-from ..models import db, User, Piece, PieceVote, PieceComment, Collection, CollectionPiece
+from ..models import db, Piece, Collection, CollectionPiece, UserLikeCollection
 from ..forms import CollectionForm
 from ..utils.uploadsets import collection_covers, process_avatar
 
@@ -118,3 +118,25 @@ def query():
                            for collection in collections])
     else:
         return json.dumps({})
+
+
+@bp.route('/collection/<int:uid>/like', methods=['POST'])
+@UserPermission()
+def like(uid):
+    collection = Collection.query.get_or_404(uid)
+    like = collection.likers.filter(user_id=g.user.id).first()
+    if not like:
+        like = UserLikeCollection(collection_id=uid, user_id=g.user.id)
+        db.session.add(like)
+        db.session.commit()
+    return json.dumps({'result': True})
+
+
+@bp.route('/collection/<int:uid>/unlike', methods=['POST'])
+@UserPermission()
+def unlike(uid):
+    collection = Collection.query.get_or_404(uid)
+    like = collection.likers.filter(user_id=g.user.id)
+    map(db.session.delete, like)
+    db.session.commit()
+    return json.dumps({'result': True})
