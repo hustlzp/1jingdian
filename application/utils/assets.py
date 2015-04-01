@@ -20,8 +20,6 @@ HEAD_JS = "build/libs.js"
 BOTTOM_JS = "build/page.js"
 HEAD_CSS = "build/app.css"
 
-mkdir_p(HEAD_JS)
-
 
 class G(object):
     """Global object."""

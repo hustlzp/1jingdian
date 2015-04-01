@@ -111,3 +111,9 @@ function showFlash() {
 function hideFlash() {
     $('.flash-message').slideUp('fast');
 }
+
+// Set the default settings of plupload.
+plupload.Uploader.settings.flash_swf_url
+    = '/static/bower_components/plupload/js/Moxie.swf';
+plupload.Uploader.settings.silverlight_xap_url
+    = '/static/bower_components/plupload/js/Moxie.xap';
