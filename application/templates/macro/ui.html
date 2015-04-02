@@ -318,6 +318,10 @@
             var targetUserName = $(this).data('target-user-name');
             var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
 
+            if (!$(document.body).hasClass('signed-in')) {
+               return;
+            }
+
             $('.form-sub-comment').hide();
             $subCommentForm.show();
             $subCommentForm.find('textarea').attr('placeholder', '回复 ' + targetUserName).focus();
