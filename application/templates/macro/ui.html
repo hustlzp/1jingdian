@@ -178,7 +178,8 @@
                   </a>
 
                   <a href="javascript: void(0)" class="btn-show-comment-form need-signed-in"
-                     title="回复" data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
+                     title="回复" data-target-user-name="{{ comment.user.name }}"
+                     data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
                      data-target-user-id="{{ comment.user_id }}">
                      <span class="fa fa-comment-o"></span>
                   </a>
@@ -205,7 +206,7 @@
       <form action="" class="form-sub-comment">
          <div class="form-group">
             <textarea name="" rows="4" class="form-control sub-comment-textarea"
-                      placeholder="说点什么"></textarea>
+                      placeholder=""></textarea>
          </div>
          <div class="submit-wap submit-right">
             <span class="btn-cancel-submit-sub-comment">取消</span>
@@ -314,11 +315,12 @@
          $(document).on('click', '.btn-show-comment-form', function () {
             var rootCommentId = $(this).data('root-comment-id');
             var targetUserId = $(this).data('target-user-id');
+            var targetUserName = $(this).data('target-user-name');
             var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
 
             $('.form-sub-comment').hide();
             $subCommentForm.show();
-            $subCommentForm.find('textarea').focus();
+            $subCommentForm.find('textarea').attr('placeholder', '回复 ' + targetUserName).focus();
             $subCommentForm.attr({
                'data-root-comment-id': rootCommentId,
                'data-target-user-id': targetUserId
