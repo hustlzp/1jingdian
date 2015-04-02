@@ -8,13 +8,11 @@
          <div class="panel-heading">句集</div>
          <div class="panel-body panel-body-no-padding">
             {{ render_collections(collections.items) }}
-         </div>
 
-         {% if collections.pages > 1 %}
-            <div class="panel-footer">
+            {% if collections.pages > 1 %}
                {{ pagination(collections) }}
-            </div>
-         {% endif %}
+            {% endif %}
+         </div>
       </div>
    </div>
 {% endblock %}

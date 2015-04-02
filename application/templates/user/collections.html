@@ -8,13 +8,11 @@
          <div class="panel-body panel-body-no-padding">
             {{ render_user_profile_header(user, active="likes") }}
             {{ render_collections(collections.items, attr='collection') }}
-         </div>
 
-         {% if collections.pages > 1 %}
-            <div class="panel-footer">
+            {% if collections.pages > 1 %}
                {{ pagination(collections) }}
-            </div>
-         {% endif %}
+            {% endif %}
+         </div>
       </div>
    </div>
 {% endblock %}
