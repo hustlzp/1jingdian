@@ -260,7 +260,8 @@
 .piece-details-wap .comment .comment-meta .options a:hover {
   color: #1e88a8;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me {
+.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me,
+.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people {
   visibility: visible !important;
 }
 .piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-votes-count,
@@ -270,6 +271,9 @@
 .piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-vote-text,
 .piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people .comment-vote-text {
   display: none;
+}
+.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me {
+  color: #1e88a8;
 }
 .piece-details-wap .comment .comment-meta .options .btn-vote-comment .comment-votes-count {
   display: none;

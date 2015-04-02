@@ -329,18 +329,20 @@
         }
 
         .btn-vote-comment {
-          &.voted-by-me {
-            visibility: visible !important;
-          }
-
           &.voted-by-me,
           &.voted-by-people {
+            visibility: visible !important;
+
             .comment-votes-count {
               display: inline-block;
             }
             .comment-vote-text {
               display: none;
             }
+          }
+
+          &.voted-by-me {
+            color: @main-color;
           }
 
           .comment-votes-count {

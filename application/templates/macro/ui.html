@@ -164,10 +164,11 @@
             <div class="comment-meta">
                <span class="options">
                   {% set votes_count = comment.votes.count() %}
-                  <a href="javascript: void(0)"
+                  <a href="javascript: void(0)" title="顶"
                      class="btn-vote-comment
                         {% if votes_count %}voted-by-people{% endif %}
-                        {% if comment.voted_by_user() %}voted-by-me{% endif %}">
+                        {% if comment.voted_by_user() %}voted-by-me{% endif %}"
+                     data-id="{{ comment.id }}">
                      <span class="fa fa-angle-up"></span>
                      <span class="comment-votes-count">{{ votes_count }}</span>
                      <span class="comment-vote-text">顶</span>
@@ -245,6 +246,44 @@
                   }
                });
             }
+         });
+
+         // 顶评论
+         $(document).on('click', '.btn-vote-comment', function () {
+            var commentId = $(this).data('id');
+            var url = "";
+            var _this = $(this);
+            var voted = $(this).hasClass('voted-by-me');
+
+            if (voted) {
+               url = urlFor('piece.unvote_comment', {uid: commentId});
+            } else {
+               url = urlFor('piece.vote_comment', {uid: commentId});
+            }
+
+            $.ajax({
+               url: url,
+               dataType: 'json',
+               method: 'post'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.toggleClass('voted-by-me');
+
+                  var $votesCountElement = _this.find('.comment-votes-count');
+                  var votesCount = parseInt($.trim($votesCountElement.text()));
+
+                  if (voted) {
+                     votesCount -= 1;
+                  } else {
+                     votesCount += 1;
+                  }
+                  $votesCountElement.text(votesCount);
+
+                  if (votesCount === 0) {
+                     _this.removeClass('voted-by-me');
+                  }
+               }
+            });
          });
       })();
    </script>
