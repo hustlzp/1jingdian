@@ -236,10 +236,10 @@
   color: #000;
   margin-bottom: 8px;
 }
-.piece-details-wap .comment .comment-user .comment-time {
+.piece-details-wap .comment .comment-user .to-target-user {
   font-size: 12px;
-  color: #aaa;
-  margin-left: 6px;
+  color: #999;
+  margin: 0 2px;
 }
 .piece-details-wap .comment .comment-content {
   line-height: 1.6;
@@ -283,6 +283,9 @@
 }
 .piece-details-wap .comment .comment-meta .options .btn-show-comment-form {
   margin-left: 18px;
+}
+.piece-details-wap .sub-comments-wap {
+  padding-left: 42px;
 }
 .piece-details-wap #form-comment .form-group {
   margin-top: 5px;

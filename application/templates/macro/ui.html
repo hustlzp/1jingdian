@@ -150,17 +150,20 @@
 
 
 {% macro render_piece_comment(comment) %}
-   <div class="comment">
+   <div class="comment {% if sub %}sub-comment{% endif %}">
       <div class="media">
          <div class="media-left">
             {{ render_user_avatar(comment.user) }}
          </div>
 
          <div class="media-body">
-            <div class="comment-user">{{ comment.user.name }}</div>
-
+            <div class="comment-user">
+               {{ comment.user.name }}
+               {% if comment.root_comment_id %}
+                  <span class="to-target-user">回复</span> {{ comment.target_user.name }}
+               {% endif %}
+            </div>
             <div class="comment-content">{{ comment.content }}</div>
-
             <div class="comment-meta">
                <span class="options">
                   {% set votes_count = comment.votes.count() %}
@@ -174,8 +177,11 @@
                      <span class="comment-vote-text">顶</span>
                   </a>
 
-                  <a href="javascript: void(0)" class="btn-show-comment-form">
-                     <span class="fa fa-comment-o"></span> 评
+                  <a href="javascript: void(0)" class="btn-show-comment-form"
+                     title="回复"
+                     data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
+                     data-target-user-id="{{ comment.user_id }}">
+                     <span class="fa fa-comment-o"></span>
                   </a>
                </span>
 
@@ -184,6 +190,17 @@
                </div>
             </div>
          </div>
+      </div>
+   </div>
+{% endmacro %}
+
+
+{% macro render_piece_sub_comments(comment) %}
+   <div class="sub-comments-wap" data-root-comment-id="{{ comment.id }}">
+      <div>
+         {% for sub_comment in comment.sub_comments %}
+            {{ render_piece_comment(sub_comment) }}
+         {% endfor %}
       </div>
    </div>
 {% endmacro %}
@@ -211,8 +228,9 @@
    {% endif %}
 
    <div class="comments-wap">
-      {% for comment in piece.comments %}
+      {% for comment in piece.root_comments %}
          {{ render_piece_comment(comment) }}
+         {{ render_piece_sub_comments(comment) }}
       {% endfor %}
    </div>
 

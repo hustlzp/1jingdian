@@ -57,6 +57,10 @@ class Piece(db.Model):
         url = absolute_url_for('piece.view', uid=self.id)
         return template % (title, url)
 
+    @property
+    def root_comments(self):
+        return self.comments.filter(PieceComment.root_comment_id == None)
+
     def voted_by_user(self):
         if not g.user:
             return False
@@ -99,9 +103,6 @@ class Piece(db.Model):
             'hide_pieces_count': hide_pieces_count
         }
 
-    def __repr__(self):
-        return '<Piece %s>' % self.id
-
 
 class PieceVote(db.Model):
     """每日文字的投票（顶）"""
@@ -127,9 +128,21 @@ class PieceComment(db.Model):
     votes_count = db.Column(db.Integer, default=0)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('piece_comments',
+    user = db.relationship('User',
+                           foreign_keys=[user_id],
+                           backref=db.backref('piece_comments',
+                                              lazy='dynamic',
+                                              order_by='desc(PieceComment.created_at)'))
+
+    target_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    target_user = db.relationship('User', foreign_keys=[target_user_id])
+
+    root_comment_id = db.Column(db.Integer, db.ForeignKey('piece_comment.id'))
+    root_comment = db.relationship('PieceComment',
+                                   remote_side=[id],
+                                   backref=db.backref('sub_comments',
                                                       lazy='dynamic',
-                                                      order_by='desc(PieceComment.created_at)'))
+                                                      order_by='asc(PieceComment.created_at)'))
 
     piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
     piece = db.relationship('Piece', backref=db.backref('comments',
