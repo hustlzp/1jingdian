@@ -308,13 +308,13 @@
 
     .comment-content {
       line-height: 1.6;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #666;
     }
 
     .comment-meta {
       font-size: 12px;
-      color: #bbb;
+      color: #aaa;
 
       .options {
         visibility: hidden;
@@ -368,6 +368,25 @@
     .form-group {
       margin-top: 5px;
       margin-bottom: 12px;
+    }
+  }
+
+  .form-sub-comment {
+    display: none;
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .btn-cancel-submit-sub-comment {
+      font-size: 12px;
+      margin-right: 8px;
+      color: #999;
+      cursor: pointer;
+
+      &:hover {
+        color: @main-color;
+      }
     }
   }
 

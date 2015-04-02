@@ -20,13 +20,8 @@
 .col-top-gap {
   margin-top: 20px;
 }
-.submit-wap.submit-right:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.submit-wap.submit-right button {
-  float: right;
+.submit-wap.submit-right {
+  text-align: right;
 }
 .form-error {
   font-size: 12px;

@@ -243,12 +243,12 @@
 }
 .piece-details-wap .comment .comment-content {
   line-height: 1.6;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: #666;
 }
 .piece-details-wap .comment .comment-meta {
   font-size: 12px;
-  color: #bbb;
+  color: #aaa;
 }
 .piece-details-wap .comment .comment-meta .options {
   visibility: hidden;
@@ -290,6 +290,21 @@
 .piece-details-wap #form-comment .form-group {
   margin-top: 5px;
   margin-bottom: 12px;
+}
+.piece-details-wap .form-sub-comment {
+  display: none;
+}
+.piece-details-wap .form-sub-comment .form-group {
+  margin-bottom: 12px;
+}
+.piece-details-wap .form-sub-comment .btn-cancel-submit-sub-comment {
+  font-size: 12px;
+  margin-right: 8px;
+  color: #999;
+  cursor: pointer;
+}
+.piece-details-wap .form-sub-comment .btn-cancel-submit-sub-comment:hover {
+  color: #1e88a8;
 }
 .piece-details-wap .comment-after-signed-in-wap {
   padding: 12px;

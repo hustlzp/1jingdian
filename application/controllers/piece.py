@@ -154,14 +154,27 @@ def comment(uid):
     """评论"""
     piece = Piece.query.get_or_404(uid)
     content = request.form.get('comment')
-    if content:
-        comment = PieceComment(content=content, piece_id=uid, user_id=g.user.id)
-        db.session.add(comment)
-        db.session.commit()
-        comment_macro = get_template_attribute('macro/ui.html', 'render_piece_comment')
-        return comment_macro(comment)
-    else:
+    root_comment_id = request.form.get('root_comment_id', type=int)
+    target_user_id = request.form.get('target_user_id', type=int)
+
+    if not content:
         abort(500)
+    comment = PieceComment(content=content, piece_id=uid, user_id=g.user.id)
+    if root_comment_id:
+        root_comment = PieceComment.query.get_or_404(root_comment_id)
+        target_user = User.query.get_or_404(target_user_id)
+        comment.root_comment_id = root_comment_id
+        comment.target_user_id = target_user_id
+    db.session.add(comment)
+    db.session.commit()
+
+    comment_macro = get_template_attribute('macro/ui.html', 'render_piece_comment')
+    sub_comments_macro = get_template_attribute('macro/ui.html', 'render_piece_sub_comments')
+    comment_html = comment_macro(comment)
+    # 若为root comment，则在返回的HTML中加入sub_comments
+    if not root_comment_id:
+        comment_html += sub_comments_macro(comment)
+    return comment_html
 
 
 @bp.route('/piece/comment/<int:uid>/vote', methods=['POST'])

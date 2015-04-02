@@ -168,7 +168,7 @@
                <span class="options">
                   {% set votes_count = comment.votes.count() %}
                   <a href="javascript: void(0)" title="顶"
-                     class="btn-vote-comment
+                     class="btn-vote-comment need-signed-in
                         {% if votes_count %}voted-by-people{% endif %}
                         {% if comment.voted_by_user() %}voted-by-me{% endif %}"
                      data-id="{{ comment.id }}">
@@ -177,9 +177,8 @@
                      <span class="comment-vote-text">顶</span>
                   </a>
 
-                  <a href="javascript: void(0)" class="btn-show-comment-form"
-                     title="回复"
-                     data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
+                  <a href="javascript: void(0)" class="btn-show-comment-form need-signed-in"
+                     title="回复" data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
                      data-target-user-id="{{ comment.user_id }}">
                      <span class="fa fa-comment-o"></span>
                   </a>
@@ -197,11 +196,24 @@
 
 {% macro render_piece_sub_comments(comment) %}
    <div class="sub-comments-wap" data-root-comment-id="{{ comment.id }}">
-      <div>
+      <div class="inner-wap">
          {% for sub_comment in comment.sub_comments %}
             {{ render_piece_comment(sub_comment) }}
          {% endfor %}
       </div>
+
+      <form action="" class="form-sub-comment">
+         <div class="form-group">
+            <textarea name="" rows="4" class="form-control sub-comment-textarea"
+                      placeholder="说点什么"></textarea>
+         </div>
+         <div class="submit-wap submit-right">
+            <span class="btn-cancel-submit-sub-comment">取消</span>
+            <button type="button" class="btn btn-sm btn-submit-sub-comment btn-primary"
+                    data-piece-id="{{ comment.piece_id }}">评论
+            </button>
+         </div>
+      </form>
    </div>
 {% endmacro %}
 
@@ -216,9 +228,7 @@
                       placeholder="说点什么"></textarea>
          </div>
          <div class="submit-wap submit-right">
-            <button type="button" class="btn btn-sm btn-comment btn-primary"
-                    data-piece-id="{{ piece.id }}">评论
-            </button>
+            <button type="button" class="btn btn-sm btn-comment btn-primary">评论</button>
          </div>
       </form>
    {% else %}
@@ -242,28 +252,24 @@
          $('.btn-comment').click(function () {
             var comment = $.trim($('#comment-textarea').val());
 
-            if (comment !== "") {
-               $.ajax({
-                  url: urlFor('piece.comment', {uid: pieceId}),
-                  method: 'post',
-                  data: {
-                     comment: comment
-                  },
-                  success: function (comment) {
-                     var $comment = $(comment);
-                     var $container = null;
-
-                     $('#comment-textarea').val('');
-                     $('.comments-wap').append($comment);
-                     if ($('.piece-modal-wap').length) {
-                        $container = $('.piece-modal-wap');
-                     } else {
-                        $container = $(window);
-                     }
-                     $container.scrollTo($comment, 500);
-                  }
-               });
+            if (comment === "") {
+               return;
             }
+
+            $.ajax({
+               url: urlFor('piece.comment', {uid: pieceId}),
+               method: 'post',
+               data: {
+                  comment: comment
+               }
+            }).done(function (comment) {
+               var $comment = $(comment);
+
+               $comment.hide();
+               $('#comment-textarea').val('');
+               $('.comments-wap').prepend($comment);
+               $comment.fadeIn();
+            });
          });
 
          // 顶评论
@@ -302,6 +308,59 @@
                   }
                }
             });
+         });
+
+         // 打开评论回复form
+         $(document).on('click', '.btn-show-comment-form', function () {
+            var rootCommentId = $(this).data('root-comment-id');
+            var targetUserId = $(this).data('target-user-id');
+            var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
+
+            $('.form-sub-comment').hide();
+            $subCommentForm.show();
+            $subCommentForm.find('textarea').focus();
+            $subCommentForm.attr({
+               'data-root-comment-id': rootCommentId,
+               'data-target-user-id': targetUserId
+            });
+         });
+
+         // 提交对评论的回复
+         $(document).on('click', '.btn-submit-sub-comment', function () {
+            var $form = $(this).parents('form').first();
+            var comment = $.trim($form.find('textarea').val());
+            var rootCommentId = $form.data('root-comment-id');
+            var targetUserId = $form.data('target-user-id');
+
+            if (comment === '') {
+               return;
+            }
+
+            $.ajax({
+               url: urlFor('piece.comment', {uid: pieceId}),
+               method: 'post',
+               data: {
+                  comment: comment,
+                  'root_comment_id': rootCommentId,
+                  'target_user_id': targetUserId
+               }
+            }).done(function (comment) {
+               var $comment = $(comment);
+
+               $('.sub-comment-textarea').val('');
+               $form.hide();
+               $comment.hide();
+               $form.parent().find('.inner-wap').append($comment);
+               $comment.fadeIn();
+            });
+         });
+
+         // 取消回复评论
+         $(document).on('click', '.btn-cancel-submit-sub-comment', function () {
+            var $form = $(this).parents('form').first();
+
+            $form.find('textarea').val('');
+            $form.hide();
          });
       })();
    </script>
