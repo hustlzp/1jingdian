@@ -149,26 +149,105 @@
 {% endmacro %}
 
 
-{% macro render_comment(comment) %}
+{% macro render_piece_comment(comment) %}
    <div class="comment">
       <div class="media">
          <div class="media-left">
             {{ render_user_avatar(comment.user) }}
          </div>
-         <div class="media-body">
-            <div class="comment-user">
-               {{ comment.user.name }}
-               <span class="comment-time">
-                  {{ comment.created_at|timesince }}
-               </span>
-            </div>
 
-            <div class="comment-content">
-               {{ comment.content }}
+         <div class="media-body">
+            <div class="comment-user">{{ comment.user.name }}</div>
+
+            <div class="comment-content">{{ comment.content }}</div>
+
+            <div class="comment-meta">
+               <span class="options">
+                  {% set votes_count = comment.votes.count() %}
+                  <a href="javascript: void(0)"
+                     class="btn-vote-comment
+                        {% if votes_count %}voted-by-people{% endif %}
+                        {% if comment.voted_by_user() %}voted-by-me{% endif %}">
+                     <span class="fa fa-angle-up"></span>
+                     <span class="comment-votes-count">{{ votes_count }}</span>
+                     <span class="comment-vote-text">顶</span>
+                  </a>
+
+                  <a href="javascript: void(0)" class="btn-show-comment-form">
+                     <span class="fa fa-comment-o"></span> 评
+                  </a>
+               </span>
+
+               <div class="comment-time pull-right">
+                  {{ comment.created_at|timesince }}
+               </div>
             </div>
          </div>
       </div>
    </div>
+{% endmacro %}
+
+
+{% macro render_piece_comments(piece) %}
+   <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+
+   {% if g.user %}
+      <form action="" id="form-comment">
+         <div class="form-group">
+            <textarea name="" id="comment-textarea" rows="5" class="form-control"
+                      placeholder="说点什么"></textarea>
+         </div>
+         <div class="submit-wap submit-right">
+            <button type="button" class="btn btn-sm btn-comment btn-primary"
+                    data-piece-id="{{ piece.id }}">评论
+            </button>
+         </div>
+      </form>
+   {% else %}
+      <div class="comment-after-signed-in-wap">
+         <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
+      </div>
+   {% endif %}
+
+   <div class="comments-wap">
+      {% for comment in piece.comments %}
+         {{ render_piece_comment(comment) }}
+      {% endfor %}
+   </div>
+
+   <script type="text/javascript">
+      (function () {
+         var pieceId = {{ piece.id }};
+
+         // 评论
+         $('.btn-comment').click(function () {
+            var comment = $.trim($('#comment-textarea').val());
+
+            if (comment !== "") {
+               $.ajax({
+                  url: urlFor('piece.comment', {uid: pieceId}),
+                  method: 'post',
+                  data: {
+                     comment: comment
+                  },
+                  success: function (comment) {
+                     var $comment = $(comment);
+                     var $container = null;
+
+                     $('#comment-textarea').val('');
+                     $('.comments-wap').append($comment);
+                     if ($('.piece-modal-wap').length) {
+                        $container = $('.piece-modal-wap');
+                     } else {
+                        $container = $(window);
+                     }
+                     $container.scrollTo($comment, 500);
+                  }
+               });
+            }
+         });
+      })();
+   </script>
 {% endmacro %}
 
 
@@ -259,31 +338,7 @@
       {% endfor %}
    </div>
 
-   <div class="subtitle">{{ piece.comments.count() }} 评论</div>
-
-   {% if g.user %}
-      <form action="" id="form-comment">
-         <div class="form-group">
-            <textarea name="" id="comment-textarea" rows="5" class="form-control"
-                      placeholder="说点什么"></textarea>
-         </div>
-         <div class="submit-wap submit-right">
-            <button type="button" class="btn btn-sm btn-comment btn-primary"
-                    data-piece-id="{{ piece.id }}">评论
-            </button>
-         </div>
-      </form>
-   {% else %}
-      <div class="comment-after-signed-in-wap">
-         <a href="{{ url_for('account.signin') }}">登陆</a> 后评论
-      </div>
-   {% endif %}
-
-   <div class="comments-wap">
-      {% for comment in piece.comments %}
-         {{ render_comment(comment) }}
-      {% endfor %}
-   </div>
+   {{ render_piece_comments(piece) }}
 
    <div class="share-wap">
       <span class="btn-close-share-wap">×</span>
@@ -340,34 +395,6 @@
             }, 300, function () {
                $('.share-wap').hide();
             });
-         });
-
-         // 评论
-         $('.btn-comment').click(function () {
-            var comment = $.trim($('#comment-textarea').val());
-
-            if (comment !== "") {
-               $.ajax({
-                  url: urlFor('piece.comment', {uid: pieceId}),
-                  method: 'post',
-                  data: {
-                     comment: comment
-                  },
-                  success: function (comment) {
-                     var $comment = $(comment);
-                     var $container = null;
-
-                     $('#comment-textarea').val('');
-                     $('.comments-wap').append($comment);
-                     if ($('.piece-modal-wap').length) {
-                        $container = $('.piece-modal-wap');
-                     } else {
-                        $container = $(window);
-                     }
-                     $container.scrollTo($comment, 500);
-                  }
-               });
-            }
          });
 
          // 启动Typeahead自动完成

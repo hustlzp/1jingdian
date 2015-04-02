@@ -124,7 +124,7 @@ class PieceComment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.now)
-    likes_count = db.Column(db.Integer, default=0)
+    votes_count = db.Column(db.Integer, default=0)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('piece_comments',
@@ -136,22 +136,26 @@ class PieceComment(db.Model):
                                                         lazy='dynamic',
                                                         order_by='asc(PieceComment.created_at)'))
 
+    def voted_by_user(self):
+        return g.user and g.user.voted_piece_comments.filter(
+            PieceCommentVote.piece_comment_id == self.id).count() > 0
 
-class PieceCommentLike(db.Model):
+
+class PieceCommentVote(db.Model):
     """针对文字评论的赞"""
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('piece_comment_likes',
+    user = db.relationship('User', backref=db.backref('voted_piece_comments',
                                                       lazy='dynamic',
-                                                      order_by='desc(PieceCommentLike.created_at)'))
+                                                      order_by='desc(PieceCommentVote.created_at)'))
 
     piece_comment_id = db.Column(db.Integer, db.ForeignKey('piece_comment.id'))
     piece_comment = db.relationship('PieceComment',
-                                    backref=db.backref('likes',
+                                    backref=db.backref('votes',
                                                        lazy='dynamic',
-                                                       order_by='asc(PieceCommentLike.created_at)'))
+                                                       order_by='asc(PieceCommentVote.created_at)'))
 
 
 class PieceSource(db.Model):

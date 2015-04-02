@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
-    PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog
+    PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -158,10 +158,35 @@ def comment(uid):
         comment = PieceComment(content=content, piece_id=uid, user_id=g.user.id)
         db.session.add(comment)
         db.session.commit()
-        comment_macro = get_template_attribute('macro/ui.html', 'render_comment')
+        comment_macro = get_template_attribute('macro/ui.html', 'render_piece_comment')
         return comment_macro(comment)
     else:
         abort(500)
+
+
+@bp.route('/piece/comment/<int:uid>/vote', methods=['POST'])
+@UserPermission()
+def vote_comment(uid):
+    """顶评论"""
+    comment = PieceComment.query.get_or_404(uid)
+    vote = comment.votes.filter(PieceCommentVote.user_id == g.user.id).first()
+    if not vote:
+        vote = PieceCommentVote(user_id=g.user.id, piece_comment_id=uid)
+        db.session.add(vote)
+        db.session.commit()
+    return json.dumps({'result': True})
+
+
+@bp.route('/piece/comment/<int:uid>/unvote', methods=['POST'])
+@UserPermission()
+def unvote_comment(uid):
+    """取消顶评论"""
+    comment = PieceComment.query.get_or_404(uid)
+    votes = comment.votes.filter(PieceCommentVote.user_id == g.user.id)
+    for vote in votes:
+        db.session.delete(vote)
+    db.session.commit()
+    return json.dumps({'result': True})
 
 
 @bp.route('/piece/<int:uid>/collect_to/<int:collection_id>', methods=['POST'])
