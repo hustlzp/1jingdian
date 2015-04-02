@@ -159,8 +159,9 @@ def comment(uid):
 
     if not content:
         abort(500)
+
     comment = PieceComment(content=content, piece_id=uid, user_id=g.user.id)
-    if root_comment_id:
+    if root_comment_id:  # 若该评论为sub comment
         root_comment = PieceComment.query.get_or_404(root_comment_id)
         target_user = User.query.get_or_404(target_user_id)
         comment.root_comment_id = root_comment_id
