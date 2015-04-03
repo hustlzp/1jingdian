@@ -1,15 +1,8 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_pieces_by_date, render_collect_modal %}
+{% from "macro/ui.html" import render_pieces_by_date %}
 
 {% block page_title %}壹经典{% endblock %}
-{% block page_vars %}
-   <script type="text/javascript">
-      g.startDate = "{{ start_date }}";
-   </script>
-{% endblock %}
 {% block page_content %}
-   {#   {{ render_collect_modal() }}#}
-
    <div class="container">
       <div class="pieces-container">
          {{ render_pieces_by_date(pieces, page, pre_page, next_page) }}

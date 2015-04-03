@@ -1,11 +1,8 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_pieces, render_collect_modal,
-   render_collection_header, pagination %}
+{% from 'macro/ui.html' import render_pieces, render_collection_header, pagination %}
 
 {% block page_title %}句集「{{ collection.title }}」- 壹经典{% endblock %}
 {% block page_content %}
-   {#   {{ render_collect_modal() }}#}
-
    <div class="container">
       <div class="panel panel-primary piece-panel">
          <div class="panel-body panel-body-no-padding">

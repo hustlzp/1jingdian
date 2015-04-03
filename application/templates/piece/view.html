@@ -1,10 +1,9 @@
 {% extends 'layout.html' %}
-{% from 'macro/ui.html' import render_piece_details_wap,render_collect_modal %}
+{% from 'macro/ui.html' import render_piece_details_wap %}
 {% from 'macro/script.html' import full_screen_script %}
 
 {% block page_title %}「{{ piece.content }}」- 壹经典{% endblock %}
 {% block page_content %}
-   {#   {{ render_collect_modal() }}#}
    {{ full_screen_script() }}
 
    <div class="container">

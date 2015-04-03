@@ -1,11 +1,8 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import render_user_profile_header, render_pieces, render_collect_modal,
-   pagination %}
+{% from "macro/ui.html" import render_user_profile_header, render_pieces, pagination %}
 
 {% block page_title %}{{ user.name }} - 分享 - 壹经典{% endblock %}
 {% block page_content %}
-   {#   {{ render_collect_modal() }}#}
-
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-body panel-body-no-padding">
