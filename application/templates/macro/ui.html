@@ -945,17 +945,6 @@
 {% endmacro %}
 
 
-{% macro render_collection_bars(collections, piece_id) %}
-   {% for collection in g.user.collections %}
-      <div class="collection-bar {% if collection.has_piece(piece_id) %}collected{% endif %}"
-           data-piece-id="{{ piece_id }}" data-collection-id="{{ collection.id }}">
-         <span>{{ collection.title }}</span>
-         <span class="collected-flag fa fa-check"></span>
-      </div>
-   {% endfor %}
-{% endmacro %}
-
-
 {% macro render_piece_form(form, add=True) %}
    <form method="post" class="form-piece">
       {{ form.csrf_token() }}

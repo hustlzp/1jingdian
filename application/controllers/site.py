@@ -41,11 +41,4 @@ def collections(page):
 
 @bp.route('/test')
 def test():
-    import qrcode
-
-    qr = qrcode.QRCode(box_size=10, border=0)
-    qr.add_data('http://alpha.1jingdian.com/piece/20')
-    qr.make(fit=True)
-
-    img = qr.make_image()
-    img.save('/tmp/haha.png')
+    pass
