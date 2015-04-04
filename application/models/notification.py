@@ -23,12 +23,12 @@ class Notification(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     sender = db.relationship('User',
                              backref=db.backref('sender_notifications', lazy='dynamic',
-                                                order_by="desc(Notification.created)",
+                                                order_by="desc(Notification.created_at)",
                                                 cascade="all, delete, delete-orphan"),
                              foreign_keys=[sender_id])
 
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     receiver = db.relationship('User', backref=db.backref('notifications', lazy='dynamic',
-                                                          order_by="desc(Notification.created)",
+                                                          order_by="desc(Notification.created_at)",
                                                           cascade="all, delete, delete-orphan"),
                                foreign_keys=[receiver_id])

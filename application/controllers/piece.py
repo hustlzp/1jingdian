@@ -170,6 +170,19 @@ def comment(uid):
     db.session.add(comment)
     db.session.commit()
 
+    # 推送通知
+    noti = Notification(sender_id=g.user.id, target=piece.content, content=content,
+                        link="%s#comment_%d" % (url_for('piece.view', uid=uid), comment.id))
+    if root_comment_id:
+        noti.receiver_id = target_user_id
+        noti.kind = NOTIFICATION_KIND.COMMENT_PIECE_COMMENT
+    else:
+        noti.receiver_id = piece.user_id
+        noti.kind = NOTIFICATION_KIND.COMMENT_PIECE
+    db.session.add(noti)
+    db.session.commit()
+
+    # 返回comment HTML
     comment_macro = get_template_attribute('macro/ui.html', 'render_piece_comment')
     sub_comments_macro = get_template_attribute('macro/ui.html', 'render_piece_sub_comments')
     comment_html = comment_macro(comment)
