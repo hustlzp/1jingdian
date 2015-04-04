@@ -67,13 +67,20 @@ def create_app():
 
 def register_jinja(app):
     """Register jinja filters, vars, functions."""
-    from jinja2 import Markup
     from .utils import filters, permissions, helpers
+    from .models import Notification, NOTIFICATION_KIND
 
     app.jinja_env.filters.update({
         'timesince': filters.timesince,
         'markdown': filters.markdown
     })
+
+    @app.context_processor
+    def inject_vars():
+        return dict(
+            notifications_count=g.user.notifications.filter(
+                ~Notification.checked).count() if g.user else 0
+        )
 
     def url_for_other_page(page):
         """Generate url for pagination."""
@@ -93,7 +100,8 @@ def register_jinja(app):
         'absolute_url_for': helpers.absolute_url_for,
         'url_for_other_page': url_for_other_page,
         'rules': rules,
-        'permissions': permissions
+        'permissions': permissions,
+        'NOTIFICATION_KIND': NOTIFICATION_KIND
     })
 
 

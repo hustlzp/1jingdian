@@ -1,13 +1,44 @@
 {% extends "layout.html" %}
+{% from "macro/ui.html" import pagination, render_user_avatar %}
 
 {% block page_title %}通知 - 壹经典{% endblock %}
 {% block page_content %}
    <div class="container">
       <div class="panel panel-primary">
-         <div class="panel-heading">通知</div>
-         <div class="panel-body">
-
+         <div class="panel-heading">
+            {% if not notifications_count %}
+               通知
+            {% else %}
+               {{ notifications_count }} 条通知
+            {% endif %}
          </div>
+
+         <div class="panel-body">
+            {% for notification in notifications.items %}
+               <div class="notification media {% if notification.checked %}checked{% endif %}"
+                    data-id="{{ notification.id }}">
+                  <div class="media-left">
+                     {{ render_user_avatar(notification.sender) }}
+                  </div>
+                  <div class="media-body">
+                     {% if notification.kind == NOTIFICATION_KIND.COMMENT_PIECE %}
+                        {{ notification.sender.name }}
+                        评论了句子「{{ notification.target|truncate(20, true) }}」
+                     {% elif notification.kind == NOTIFICATION_KIND.COMMENT_PIECE_COMMENT %}
+                        {{ notification.sender.name }}
+                        在句子「{{ notification.target|truncate(20, true) }}」中回复了你
+                     {% endif %}
+                     <span class="created-at">{{ notification.created_at|timesince }}</span>
+                  </div>
+               </div>
+            {% endfor %}
+         </div>
+
+         {% if notifications.pages > 1 %}
+            <div class="panel-footer">
+               {{ pagination(notifications) }}
+            </div>
+         {% endif %}
       </div>
    </div>
 {% endblock %}

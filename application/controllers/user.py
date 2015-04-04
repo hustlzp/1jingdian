@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
 from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, process_avatar
-from ..models import db, User
+from ..models import db, User, Notification
 from ..forms import SettingsForm
 
 bp = Blueprint('user', __name__)
@@ -60,7 +60,19 @@ def upload_avatar():
         return json.dumps({'result': True, 'avatar_url': avatars.url(filename)})
 
 
-@bp.route('/my/notifications')
+@bp.route('/my/notifications', defaults={'page': 1})
+@bp.route('/my/notifications/page/<int:page>')
 @UserPermission()
-def notifications():
-    return render_template('user/notifications.html')
+def notifications(page):
+    notifications = g.user.notifications.paginate(page, 15)
+    return render_template('user/notifications.html', notifications=notifications)
+
+
+@bp.route('/my/notification/<int:uid>/check')
+@UserPermission()
+def check_notification(uid):
+    notification = Notification.query.get_or_404(uid)
+    notification.checked = True
+    db.session.add(notification)
+    db.session.commit()
+    return redirect(notification.link)

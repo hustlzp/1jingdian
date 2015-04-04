@@ -1,0 +1,44 @@
+@import "../utils";
+
+.panel-primary .panel-body {
+  padding: 0;
+}
+
+.notification {
+  border-bottom: 1px solid @border-color;
+  margin: 0;
+  padding: 15px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.checked {
+    color: #aaa;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .media-left {
+    padding-right: 15px;
+  }
+
+  .media-body {
+    line-height: 32px;
+  }
+
+  .created-at {
+    float: right;
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+  }
+}

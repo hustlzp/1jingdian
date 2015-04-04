@@ -75,7 +75,12 @@
 
                {% if g.user %}
                   <li>
-                     <a href="{{ url_for('user.notifications') }}">通知</a>
+                     <a href="{{ url_for('user.notifications') }}">
+                        通知
+                        {% if notifications_count %}
+                           <span class="notifications-count">{{ notifications_count }}</span>
+                        {% endif %}
+                     </a>
                   </li>
 
                   <li class="dropdown">

@@ -1,0 +1,34 @@
+.panel-primary .panel-body {
+  padding: 0;
+}
+.notification {
+  border-bottom: 1px solid #e2e2e2;
+  margin: 0;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+.notification:hover {
+  background-color: #f8f8f8;
+}
+.notification:last-child {
+  border-bottom: none;
+}
+.notification.checked {
+  color: #aaa;
+}
+.notification .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.notification .media-left {
+  padding-right: 15px;
+}
+.notification .media-body {
+  line-height: 32px;
+}
+.notification .created-at {
+  float: right;
+  display: block;
+  color: #aaa;
+  font-size: 12px;
+}
