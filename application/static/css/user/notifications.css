@@ -1,6 +1,19 @@
 .panel-primary .panel-body {
   padding: 0;
 }
+.panel-heading {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.btn-check-all {
+  float: right;
+  display: block;
+  color: #78cde7;
+  cursor: pointer;
+}
+.btn-check-all:hover {
+  color: #fff;
+}
 .notification {
   border-bottom: 1px solid #e2e2e2;
   margin: 0;

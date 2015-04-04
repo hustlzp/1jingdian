@@ -1,4 +1,5 @@
 # coding: utf-8
+from datetime import datetime
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
 from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, process_avatar
@@ -73,6 +74,20 @@ def notifications(page):
 def check_notification(uid):
     notification = Notification.query.get_or_404(uid)
     notification.checked = True
+    notification.checked_at = datetime.now()
     db.session.add(notification)
     db.session.commit()
     return redirect(notification.link)
+
+
+@bp.route('/my/notifications/check', methods=['POST'])
+@UserPermission()
+def check_all_notifications():
+    notifications = g.user.notifications.filter(~Notification.checked)
+    for notification in notifications:
+        notification.checked = True
+        notification.checked_at = datetime.now()
+        db.session.add(notification)
+    db.session.commit()
+    return json.dumps({'result': True})
+

@@ -9,8 +9,10 @@
             {% if not notifications_count %}
                通知
             {% else %}
-               {{ notifications_count }} 条通知
+               <span class="only-for-nonzero">{{ notifications_count }} </span>条通知
             {% endif %}
+
+            <span class="fa fa-check btn-check-all" title="全部标记为已读"></span>
          </div>
 
          <div class="panel-body">
