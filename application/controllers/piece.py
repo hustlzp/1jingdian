@@ -4,7 +4,8 @@ from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
-    PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote
+    PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
+    NOTIFICATION_KIND
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)

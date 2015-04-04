@@ -12,12 +12,13 @@ class NOTIFICATION_KIND(object):
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    checked = db.Column(db.Boolean, nullable=False, default=False)
-    kind = db.Column(db.String(20), nullable=False)
+    kind = db.Column(db.Integer, nullable=False)
     target = db.Column(db.String(100))
     content = db.Column(db.Text, default="")
     link = db.Column(db.String(200))
-    created = db.Column(db.DateTime, default=datetime.datetime.now)
+    checked = db.Column(db.Boolean, nullable=False, default=False)
+    checked_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     sender = db.relationship('User',
