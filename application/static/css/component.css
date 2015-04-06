@@ -810,9 +810,15 @@
   right: 25px;
   top: 25px;
 }
+.collection-header .collection-info .options .btn-play-collection {
+  color: #999;
+}
+.collection-header .collection-info .options .btn-play-collection:hover {
+  color: #1e88a8;
+}
 .collection-header .collection-info .options .btn-edit-collection {
   color: #999;
-  font-size: 14px;
+  margin-left: 20px;
 }
 .collection-header .collection-info .options .btn-edit-collection:hover {
   color: #1e88a8;

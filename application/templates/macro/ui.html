@@ -1113,6 +1113,10 @@
          {% endif %}
 
          <div class="options">
+            <a href="javascript:void(0)" class="btn-play-collection" data-id="{{ collection.id }}">
+               <span class="fa fa-play-circle"></span>
+            </a>
+
             {% if permissions.AdminPermission().check() %}
                <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                   class="btn-edit-collection" title="编辑句集">
@@ -1143,6 +1147,7 @@
 
    <script type="text/javascript">
       (function () {
+         // 收藏句集
          $('.btn-like-collection').click(function (e) {
             var id = $(this).data('id');
             var url = "";
@@ -1164,6 +1169,54 @@
                   _this.toggleClass('liked');
                }
             });
+         });
+
+         // 随机播放句集中的句子
+         var timerForCollectionPlay = null;
+
+         $('.btn-play-collection').click(function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+               url: urlFor('piece.random'),
+               method: 'POST',
+               dataType: 'json',
+               data: {
+                  collection_id: id
+               }
+            }).done(function (piece) {
+               var html = "<div class='content'>" + piece.content + "</div>";
+
+               if (piece.source) {
+                  html += "<div class='source'>" + piece.source + "</div>";
+               }
+
+               openBackdrop(html);
+            });
+
+            if (timerForCollectionPlay) {
+               clearInterval(timerForCollectionPlay);
+            }
+
+            timerForCollectionPlay = setInterval(function () {
+               $.ajax({
+                  url: urlFor('piece.random'),
+                  method: 'POST',
+                  dataType: 'json',
+                  data: {
+                     collection_id: id
+                  }
+               }).done(function (piece) {
+                  $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
+                  if (piece.source) {
+                     $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
+                  } else {
+                     $('.full-screen-backdrop .source').hide();
+                  }
+
+                  adjustBackdropContent();
+               });
+            }, 5000);
          });
       })();
    </script>

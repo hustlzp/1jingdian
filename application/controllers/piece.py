@@ -304,13 +304,23 @@ def remove_from_collection(uid, collection_id):
 
 @bp.route('/piece/random', methods=['POST'])
 def random():
-    piece = Piece.query.order_by(db.func.random()).first()
-    return json.dumps({
-        'id': piece.id,
-        'content': piece.content,
-        'source': piece.source_string,
-        'source_link': piece.source_link
-    })
+    collection_id = request.form.get('collection_id', type=int)
+    if collection_id:
+        collection = Collection.query.get_or_404(collection_id)
+        collection_piece = collection.pieces.order_by(db.func.random()).first()
+        piece = collection_piece.piece if collection_piece else None
+    else:
+        piece = Piece.query.order_by(db.func.random()).first()
+
+    if piece:
+        return json.dumps({
+            'id': piece.id,
+            'content': piece.content,
+            'source': piece.source_string,
+            'source_link': piece.source_link
+        })
+    else:
+        abort(404)
 
 
 def _save_piece_source(source):
