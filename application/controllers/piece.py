@@ -302,6 +302,17 @@ def remove_from_collection(uid, collection_id):
     return json.dumps({'result': True})
 
 
+@bp.route('/piece/random', methods=['POST'])
+def random():
+    piece = Piece.query.order_by(db.func.random()).first()
+    return json.dumps({
+        'id': piece.id,
+        'content': piece.content,
+        'source': piece.source_string,
+        'source_link': piece.source_link
+    })
+
+
 def _save_piece_source(source):
     """存储Piece来源，若存在，则count加1"""
     piece_source = PieceSource.query.filter(PieceSource.name == source).first()

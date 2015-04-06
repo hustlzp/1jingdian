@@ -75,14 +75,6 @@ $(document).on('click', '.vote', function () {
     });
 });
 
-// 点击input或textare，隐藏placeholder
-//$("input, textarea").focus(function () {
-//    $(this).data('placeholder', $(this).attr('placeholder'))
-//    $(this).attr('placeholder', '');
-//}).blur(function () {
-//    $(this).attr('placeholder', $(this).data('placeholder'));
-//});
-
 // 若某操作需要登陆，而用户尚未登陆，则跳转登陆页
 $(document).on('click', '.need-signed-in', function () {
     if (!$(document.body).hasClass('signed-in')) {
@@ -93,10 +85,29 @@ $(document).on('click', '.need-signed-in', function () {
 // 激活tooltip
 $('[data-toggle="tooltip"]').tooltip();
 
-// 操作系统标签
+// 操作系统class
 if (navigator.platform.indexOf('Win') > -1) {
     $('body').addClass('windows');
 }
+
+// plupload全局配置
+registerContext({
+    pluploadDefaults: {
+        flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
+        silverlight_xap_url: '/static/bower_components/plupload/js/Moxie.xap'
+    }
+});
+
+// 偶遇
+$('.btn-meet').click(function () {
+    $.ajax({
+        url: urlFor('piece.random'),
+        method: 'POST',
+        dataType: 'json'
+    }).done(function (piece) {
+        console.log(piece);
+    });
+});
 
 /**
  * Show flash message.
@@ -111,10 +122,3 @@ function showFlash() {
 function hideFlash() {
     $('.flash-message').slideUp('fast');
 }
-
-registerContext({
-    pluploadDefaults: {
-        flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
-        silverlight_xap_url: '/static/bower_components/plupload/js/Moxie.xap'
-    }
-});
