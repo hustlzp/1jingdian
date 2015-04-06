@@ -25,10 +25,10 @@
                   <div class="media-body">
                      {% if notification.kind == NOTIFICATION_KIND.COMMENT_PIECE %}
                         {{ notification.sender.name }}
-                        评论了句子「{{ notification.target|truncate(20, true) }}」
+                        评论了句子「{{ notification.target|truncate(15, true) }}」
                      {% elif notification.kind == NOTIFICATION_KIND.COMMENT_PIECE_COMMENT %}
                         {{ notification.sender.name }}
-                        在句子「{{ notification.target|truncate(20, true) }}」中回复了你
+                        在句子「{{ notification.target|truncate(15, true) }}」中回复了你
                      {% endif %}
                      <span class="created-at">{{ notification.created_at|timesince }}</span>
                   </div>

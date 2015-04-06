@@ -17,7 +17,7 @@
 .notification {
   border-bottom: 1px solid #e2e2e2;
   margin: 0;
-  padding: 15px 20px;
+  padding: 18px 20px;
   cursor: pointer;
 }
 .notification:hover {
