@@ -1113,11 +1113,11 @@
          {% endif %}
 
          <div class="options">
-            <a href="javascript:void(0)" class="btn-play-collection"
-               data-id="{{ collection.id }}"
-               data-collection="{{ collection.title }}">
-               <span class="fa fa-play-circle"></span>
-            </a>
+            {#            <a href="javascript:void(0)" class="btn-play-collection"#}
+            {#               data-id="{{ collection.id }}"#}
+            {#               data-collection="{{ collection.title }}">#}
+            {#               <span class="fa fa-play-circle"></span>#}
+            {#            </a>#}
 
             {% if permissions.AdminPermission().check() %}
                <a href="{{ url_for('collection.edit', uid=collection.id) }}"
