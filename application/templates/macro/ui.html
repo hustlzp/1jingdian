@@ -1171,8 +1171,6 @@
             });
          });
 
-         // 随机播放句集中的句子
-         var timerForCollectionPlay = null;
 
          $('.btn-play-collection').click(function () {
             var id = $(this).data('id');
@@ -1194,11 +1192,11 @@
                openBackdrop(html);
             });
 
-            if (timerForCollectionPlay) {
-               clearInterval(timerForCollectionPlay);
+            if (g.timerForBackdrop) {
+               clearInterval(g.timerForBackdrop);
             }
 
-            timerForCollectionPlay = setInterval(function () {
+            g.timerForBackdrop = setInterval(function () {
                $.ajax({
                   url: urlFor('piece.random'),
                   method: 'POST',

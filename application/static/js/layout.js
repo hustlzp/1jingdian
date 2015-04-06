@@ -95,10 +95,10 @@ registerContext({
     pluploadDefaults: {
         flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
         silverlight_xap_url: '/static/bower_components/plupload/js/Moxie.xap'
-    }
+    },
+    timerForBackdrop: null
 });
 
-var timerForPiece = null;
 
 // 偶遇
 $('.btn-meet').click(function () {
@@ -116,11 +116,11 @@ $('.btn-meet').click(function () {
         openBackdrop(html);
     });
 
-    if (timerForPiece) {
-        clearInterval(timerForPiece);
+    if (g.timerForBackdrop) {
+        clearInterval(g.timerForBackdrop);
     }
 
-    timerForPiece = setInterval(function () {
+    g.timerForBackdrop = setInterval(function () {
         $.ajax({
             url: urlFor('piece.random'),
             method: 'POST',
@@ -205,7 +205,7 @@ function adjustBackdropContent() {
 function closeBackdrop() {
     $('.base-wap').removeClass('blur');
     $('.full-screen-backdrop').detach();
-    clearInterval(timerForPiece);
+    clearInterval(g.timerForBackdrop);
 }
 
 /**
