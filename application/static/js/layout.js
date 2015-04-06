@@ -126,8 +126,13 @@ $('.btn-meet').click(function () {
             method: 'POST',
             dataType: 'json'
         }).done(function (piece) {
-            $('.full-screen-backdrop .content').text(piece.content);
-            $('.full-screen-backdrop .source').text(piece.source);
+            $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
+            if (piece.source) {
+                $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
+            } else {
+                $('.full-screen-backdrop .source').hide();
+            }
+
             adjustBackdropContent();
         });
     }, 5000);
