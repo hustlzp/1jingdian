@@ -113,7 +113,7 @@ $('.btn-meet').click(function () {
             html += "<div class='source'>" + piece.source + "</div>";
         }
 
-        openBackdrop(html);
+        openBackdrop('偶遇', html);
     });
 
     if (g.timerForBackdrop) {
@@ -135,7 +135,7 @@ $('.btn-meet').click(function () {
 
             adjustBackdropContent();
         });
-    }, 5000);
+    }, 8000);
 });
 
 // 按下Esc，关闭backdrop
@@ -153,9 +153,14 @@ $(document).on('click', '.btn-close-backdrop', function () {
 /**
  * Open the backdrop.
  */
-function openBackdrop(content_html) {
-    var html = "<div class='full-screen-backdrop'>"
-        + "<span class='btn-close-backdrop'>×</span>"
+function openBackdrop(title, content_html) {
+    var html = "<div class='full-screen-backdrop'>";
+
+    if (title !== "") {
+        html += "<div class='title'>" + title + "</div>";
+    }
+
+    html += "<span class='btn-close-backdrop'>×</span>"
         + "<div class='wap'>" + content_html + "</div>"
         + "</div>";
 

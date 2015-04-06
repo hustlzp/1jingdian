@@ -1113,7 +1113,9 @@
          {% endif %}
 
          <div class="options">
-            <a href="javascript:void(0)" class="btn-play-collection" data-id="{{ collection.id }}">
+            <a href="javascript:void(0)" class="btn-play-collection"
+               data-id="{{ collection.id }}"
+               data-collection="{{ collection.title }}">
                <span class="fa fa-play-circle"></span>
             </a>
 
@@ -1171,9 +1173,10 @@
             });
          });
 
-
+         // 播放句集
          $('.btn-play-collection').click(function () {
             var id = $(this).data('id');
+            var collection = $(this).data('collection');
 
             $.ajax({
                url: urlFor('piece.random'),
@@ -1189,7 +1192,7 @@
                   html += "<div class='source'>" + piece.source + "</div>";
                }
 
-               openBackdrop(html);
+               openBackdrop('「' + collection + '」', html);
             });
 
             if (g.timerForBackdrop) {
@@ -1214,7 +1217,7 @@
 
                   adjustBackdropContent();
                });
-            }, 5000);
+            }, 8000);
          });
       })();
    </script>

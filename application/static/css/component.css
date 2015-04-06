@@ -581,6 +581,13 @@
   transition: opacity .15s linear;
   opacity: 0;
 }
+.full-screen-backdrop .title {
+  position: absolute;
+  left: 20px;
+  top: 30px;
+  line-height: 1;
+  font-size: 24px;
+}
 .full-screen-backdrop .btn-close-backdrop {
   position: absolute;
   right: 20px;
