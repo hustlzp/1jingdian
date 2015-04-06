@@ -4,81 +4,14 @@
          $(document).on('click', '.btn-full-screen', function () {
             var content = $(this).data('content'),
                   sourceString = $(this).data('source-string'),
-                  html = "",
-                  sourceForDisplay = "";
+                  html = "";
 
-            html = "<div class='piece-full-screen-backdrop'>"
-                  + "<span class='btn-close-backdrop'>×</span>"
-                  + "<div class='wap'>"
-                  + "<div class='content'>" + content + "</div>";
-
+            html = "<div class='content'>" + content + "</div>";
             if (sourceString) {
                html += "<div class='source'>" + sourceString + "</div>";
             }
-
-            html += "</div>" + "</div>";
-
-            $('body').append(html);
-            adjustContent();
-
-            setTimeout(function () {
-               $('.piece-full-screen-backdrop').css('opacity', '.8');
-               $('.base-wap').addClass('blur');
-            }, 100);
+            openBackdrop(html);
          });
-
-         $(window).resize(function () {
-            adjustContent();
-         });
-
-         $(document).keyup(function (e) {
-            if (e.keyCode == 27) {
-               closeBackdrop();
-            }
-         });
-
-         $(document).on('click', '.btn-close-backdrop', function () {
-            closeBackdrop();
-         });
-
-         /**
-          * Adjust content in the backdrop.
-          */
-         function adjustContent() {
-            var $wap = $('.piece-full-screen-backdrop .wap'),
-                  $content = $('.piece-full-screen-backdrop .wap .content'),
-                  verticalMargin = 0;
-
-            if (!$wap.length) {
-               return;
-            }
-
-            // 若content为单行，则居中排版
-            if ($content.height() < 100) {
-               $content.addClass('text-center');
-            } else {
-               $content.removeClass('text-center');
-            }
-
-            // 上边距最小为80px
-            verticalMargin = ($(window).height() - $wap.height()) / 2;
-            if (verticalMargin < 80) {
-               verticalMargin = 80;
-            }
-
-            $wap.css({
-               'marginTop': verticalMargin,
-               'marginBottom': verticalMargin
-            });
-         }
-
-         /**
-          * Close the backdrop.
-          */
-         function closeBackdrop() {
-            $('.base-wap').removeClass('blur');
-            $('.piece-full-screen-backdrop').detach();
-         }
       })();
    </script>
 {% endmacro %}

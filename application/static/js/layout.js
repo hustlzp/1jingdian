@@ -98,6 +98,8 @@ registerContext({
     }
 });
 
+var timerForPiece = null;
+
 // 偶遇
 $('.btn-meet').click(function () {
     $.ajax({
@@ -105,9 +107,101 @@ $('.btn-meet').click(function () {
         method: 'POST',
         dataType: 'json'
     }).done(function (piece) {
-        console.log(piece);
+        var html = "<div class='content'>" + piece.content + "</div>";
+
+        if (piece.source) {
+            html += "<div class='source'>" + piece.source + "</div>";
+        }
+
+        openBackdrop(html);
     });
+
+    if (timerForPiece) {
+        clearInterval(timerForPiece);
+    }
+
+    timerForPiece = setInterval(function () {
+        $.ajax({
+            url: urlFor('piece.random'),
+            method: 'POST',
+            dataType: 'json'
+        }).done(function (piece) {
+            $('.full-screen-backdrop .content').text(piece.content);
+            $('.full-screen-backdrop .source').text(piece.source);
+            adjustBackdropContent();
+        });
+    }, 5000);
 });
+
+// 按下Esc，关闭backdrop
+$(document).keyup(function (e) {
+    if (e.keyCode == 27) {
+        closeBackdrop();
+    }
+});
+
+// 按下关闭按钮，关闭backdrop
+$(document).on('click', '.btn-close-backdrop', function () {
+    closeBackdrop();
+});
+
+/**
+ * Open the backdrop.
+ */
+function openBackdrop(content_html) {
+    var html = "<div class='full-screen-backdrop'>"
+        + "<span class='btn-close-backdrop'>×</span>"
+        + "<div class='wap'>" + content_html + "</div>"
+        + "</div>";
+
+    $('body').append(html);
+    adjustBackdropContent();
+
+    setTimeout(function () {
+        $('.full-screen-backdrop').css('opacity', '.8');
+        $('.base-wap').addClass('blur');
+    }, 100);
+}
+
+/**
+ * Adjust content in the backdrop.
+ */
+function adjustBackdropContent() {
+    var $wap = $('.full-screen-backdrop .wap'),
+        $content = $('.full-screen-backdrop .wap .content'),
+        verticalMargin = 0;
+
+    if (!$wap.length) {
+        return;
+    }
+
+    // 若content为单行，则居中排版
+    if ($content.height() < 100) {
+        $content.addClass('text-center');
+    } else {
+        $content.removeClass('text-center');
+    }
+
+    // 上边距最小为80px
+    verticalMargin = ($(window).height() - $wap.height()) / 2;
+    if (verticalMargin < 80) {
+        verticalMargin = 80;
+    }
+
+    $wap.css({
+        'marginTop': verticalMargin,
+        'marginBottom': verticalMargin
+    });
+}
+
+/**
+ * Close the backdrop.
+ */
+function closeBackdrop() {
+    $('.base-wap').removeClass('blur');
+    $('.full-screen-backdrop').detach();
+    clearInterval(timerForPiece);
+}
 
 /**
  * Show flash message.
@@ -122,3 +216,5 @@ function showFlash() {
 function hideFlash() {
     $('.flash-message').slideUp('fast');
 }
+
+window.openBackdrop = openBackdrop;
