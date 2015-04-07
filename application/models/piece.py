@@ -193,7 +193,11 @@ class PIECE_EDIT_KIND(object):
     # content
     UPDATE_CONTENT = 3
 
-    # authro
+    # original
+    CHANGE_TO_ORIGINAL = 13
+    CHANGE_TO_NON_ORIGINAL = 14
+
+    # author
     ADD_AUTHOR = 4
     UPDATE_AUTHOR = 5
     DELETE_AUTHOR = 6
