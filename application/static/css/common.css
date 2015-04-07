@@ -30,6 +30,15 @@
 .text-light {
   color: #999;
 }
+.list-text {
+  padding-left: 20px;
+}
+.list-text li {
+  padding-bottom: 5px;
+}
+.list-no-margin {
+  margin: 0;
+}
 .blur {
   transition: 0.15s -webkit-filter linear;
   filter: blur(10px);

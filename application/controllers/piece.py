@@ -2,7 +2,7 @@
 from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
-from ..utils.permissions import UserPermission, PieceAddPermission
+from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPermission
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
     NOTIFICATION_KIND
@@ -94,6 +94,9 @@ def edit(uid):
     piece = Piece.query.get_or_404(uid)
     form = PieceForm(obj=piece)
     if form.validate_on_submit():
+        permission = PieceEditPermission(piece)
+        if not permission.check():
+            return permission.deny()
         form.original.data = request.form.get('original') == 'true'
         source = form.source.data
         author = form.author.data

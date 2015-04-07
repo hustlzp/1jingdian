@@ -7,7 +7,16 @@
       <div class="panel panel-primary">
          <div class="panel-heading">编辑句子</div>
          <div class="panel-body">
-            {{ render_piece_form(form, add=False) }}
+            {% if permissions.PieceEditPermission(piece).check() %}
+               {{ render_piece_form(form, add=False) }}
+            {% else %}
+               <p>满足以下条件之一的用户可参与编辑该句子：</p>
+               <ul class="list-text list-no-margin">
+                  <li>句子分享者</li>
+                  <li>管理员</li>
+                  <li>分享过 5 个以上获得 5 次顶的句子</li>
+               </ul>
+            {% endif %}
          </div>
       </div>
    </div>

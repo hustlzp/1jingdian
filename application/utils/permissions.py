@@ -1,6 +1,5 @@
 from permission import Permission
-from .rules import VisitorRule, UserRule, AdminRule, CollectionOwnerRule, PieceAddRule, \
-    PieceOwnerEditRule
+from .rules import VisitorRule, UserRule, AdminRule, PieceAddRule, PieceOwnerRule, TrustedUserRule
 
 
 class VisitorPermission(Permission):
@@ -24,7 +23,7 @@ class CollectionEditPermission(Permission):
         super(CollectionEditPermission, self).__init__()
 
     def rule(self):
-        return AdminRule() | CollectionOwnerRule(self.collection)
+        return AdminRule()
 
 
 class PieceEditPermission(Permission):
@@ -33,7 +32,7 @@ class PieceEditPermission(Permission):
         super(PieceEditPermission, self).__init__()
 
     def rule(self):
-        return AdminRule() | PieceOwnerEditRule(self.piece)
+        return AdminRule() | PieceOwnerRule(self.piece) | TrustedUserRule()
 
 
 class PieceAddPermission(Permission):

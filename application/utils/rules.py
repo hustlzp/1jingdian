@@ -34,21 +34,6 @@ class AdminRule(Rule):
         abort(403)
 
 
-class CollectionOwnerRule(Rule):
-    def __init__(self, collection):
-        self.collection = collection
-        super(CollectionOwnerRule, self).__init__()
-
-    def base(self):
-        return UserRule()
-
-    def check(self):
-        return self.collection and self.collection.user_id == g.user.id
-
-    def deny(self):
-        abort(403)
-
-
 class PieceOwnerRule(Rule):
     def __init__(self, piece):
         self.piece = piece
@@ -77,16 +62,14 @@ class PieceAddRule(Rule):
         abort(403)
 
 
-class PieceOwnerEditRule(Rule):
-    def __init__(self, piece):
-        self.piece = piece
-        super(PieceOwnerEditRule, self).__init__()
+class TrustedUserRule(Rule):
+    """受信赖句子：发表过 5 个以上获得 5 次顶的句子的用户。"""
 
     def base(self):
-        return PieceOwnerRule(self.piece)
+        return UserRule()
 
     def check(self):
-        return self.piece.created_at > datetime.now() - timedelta(minutes=20)
+        return g.user.pieces.filter(Piece.votes_count >= 5).count() >= 5
 
     def deny(self):
         abort(403)
