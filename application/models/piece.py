@@ -213,6 +213,8 @@ class PieceEditLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
     kind = db.Column(db.Integer, nullable=False)
+    result = db.Column(db.String(200))
+    result_id = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',
@@ -225,6 +227,3 @@ class PieceEditLog(db.Model):
                             backref=db.backref('logs',
                                                lazy='dynamic',
                                                order_by='asc(CollectionPiece.created_at)'))
-
-    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
-    collection = db.relationship('Collection')

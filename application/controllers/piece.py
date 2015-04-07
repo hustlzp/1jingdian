@@ -225,38 +225,6 @@ def unvote_comment(uid):
     return json.dumps({'result': True})
 
 
-@bp.route('/piece/<int:uid>/collect_to/<int:collection_id>', methods=['POST'])
-@UserPermission()
-def collect(uid, collection_id):
-    piece = Piece.query.get_or_404(uid)
-    collection = Collection.query.get_or_404(collection_id)
-    collect = g.user.colleced_pieces.filter(CollectionPiece.collection_id == collection_id,
-                                            CollectionPiece.piece_id == uid).first()
-    if not collect:
-        collect = CollectionPiece(collection_id=collection_id, piece_id=uid)
-        g.user.colleced_pieces.append(collect)
-        db.session.add(g.user)
-        db.session.commit()
-        return json.dumps({'result': True})
-    else:
-        return json.dumps({'result': False})
-
-
-@bp.route('/piece/<int:uid>/uncollect_from/<int:collection_id>', methods=['POST'])
-@UserPermission()
-def uncollect(uid, collection_id):
-    piece = Piece.query.get_or_404(uid)
-    collects = g.user.colleced_pieces.filter(CollectionPiece.collection_id == collection_id,
-                                             CollectionPiece.piece_id == uid)
-    if not collects.count():
-        return json.dumps({'result': False})
-    else:
-        for collect in collects:
-            db.session.delete(collect)
-        db.session.commit()
-        return json.dumps({'result': True})
-
-
 @bp.route('/piece/<int:uid>/add_to_collection', methods=['POST'])
 @UserPermission()
 def add_to_collection(uid):
@@ -279,8 +247,9 @@ def add_to_collection(uid):
         CollectionPiece.piece_id == uid).first()
     if not collection_piece:
         collection_piece = CollectionPiece(collection_id=collection.id, piece_id=uid)
-        # 记录log
-        log = PieceEditLog(piece_id=uid, user_id=g.user.id, collection_id=collection.id,
+        # log
+        log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                           result=collection.title, result_id=collection.id,
                            kind=PIECE_EDIT_KIND.ADD_TO_COLLECTION)
         db.session.add(collection_piece)
         db.session.add(log)
@@ -302,8 +271,9 @@ def remove_from_collection(uid, collection_id):
         CollectionPiece.piece_id == uid)
     for collection_piece in collection_pieces:
         db.session.delete(collection_piece)
-        # 记录log
-        log = PieceEditLog(piece_id=uid, user_id=g.user.id, collection_id=collection_id,
+        # log
+        log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                           result=collection.title, result_id=collection_id,
                            kind=PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION)
         db.session.add(log)
     db.session.commit()
