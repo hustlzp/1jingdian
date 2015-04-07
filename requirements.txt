@@ -9,18 +9,21 @@ MySQL-python
 itsdangerous
 permission
 Pillow
-livereload
-formic==0.9beta8
+blinker
+markdown2
+qrcode
 gunicorn
+
+# dev
 fabric
 raven
-blinker
+formic==0.9beta8
+livereload
 nose
 coverage
 pylint
-markdown2
-qrcode
 PyYAML
-jsmin
 cssmin
 lesscpy
+PyExecJS
+uglipyjs
