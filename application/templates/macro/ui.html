@@ -490,18 +490,26 @@
          var timerForTypeahead = null;
          var pieceId = {{ piece.id }};
          var $collectionInput = $('#input-collection');
+         var $detailsParentWap = $('.piece-details-wap').parent();
+         var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
 
          // 弹出分享框
          $('.btn-share').click(function () {
             var $shareInnerWap = $('.share-wap .inner-wap');
-            var $detailsWap = $('.piece-details-wap');
             var marginTop = 0;
 
             $('.share-wap').show();
-            marginTop = ($detailsWap.parent().outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
-            if (marginTop < 30) {
-               marginTop = 30;
+
+            if (isModal) {
+               marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
+               if (marginTop < 30) {
+                  marginTop = 30;
+               }
+               $detailsParentWap.css('overflow', 'hidden');
+            } else {
+               marginTop = 150;
             }
+
             $shareInnerWap.css('marginTop', marginTop + 'px');
 
             $('.share-wap').transition({
@@ -512,6 +520,10 @@
 
          // 关闭分享框
          $('.btn-close-share-wap').click(function () {
+            if (isModal) {
+               $detailsParentWap.css('overflow', 'auto');
+            }
+
             $('.share-wap').transition({
                'top': '15px',
                'opacity': 0
