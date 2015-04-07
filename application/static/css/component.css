@@ -697,16 +697,20 @@
   color: #a94442;
   display: none;
 }
-.form-piece .checkbox {
+.form-piece .btn-group-original {
   margin-bottom: 20px;
 }
-.form-piece .checkbox label[for='original'] {
-  margin-bottom: 0px;
-  font-weight: bold;
-  padding-left: 0;
+.form-piece .btn-group-original > label {
+  padding: 3px 8px;
 }
-.form-piece .checkbox label[for='original'] #original {
-  margin-left: 35px;
+.form-piece .btn-group-original > label.active {
+  box-shadow: none;
+  background-color: #1e88a8;
+  color: white;
+  border-color: #1e88a8;
+}
+.form-piece .btn-group-original > label:last-child:hover {
+  border-left-color: #1e88a8;
 }
 .form-piece .source-url-wap {
   position: relative;

@@ -973,9 +973,15 @@
          {{ field_error(form.content) }}
       </div>
 
-      <div class="checkbox">
-         <label for="original">
-            {{ form.original() }} 原创
+      {% set original = form.original.data %}
+      <div class="btn-group btn-group-sm btn-group-original" data-toggle="buttons">
+         <label class="btn btn-default {% if not original %}active{% endif %}">
+            <input type="radio" name="original" value="false" autocomplete="off"
+                   {% if not original %}checked="checked"{% endif %}> 引用
+         </label>
+         <label class="btn btn-default {% if original %}active{% endif %}">
+            <input type="radio" name="original" value="true" autocomplete="off"
+                   {% if original %}checked="checked"{% endif %}> 原创
          </label>
       </div>
 
@@ -1032,12 +1038,12 @@
          });
 
          // 若为原创，则无需填写其他内容
-         if ($('#original').is(":checked")) {
+         if ($('input[name=original]:checked').val() === 'true') {
             $('.external').hide();
          }
 
-         $('#original').change(function () {
-            if ($(this).is(":checked")) {
+         $('input[name=original]').change(function () {
+            if ($(this).val() === 'true') {
                $('.external').slideUp('fast');
             } else {
                $('.external').slideDown('fast');

@@ -881,16 +881,21 @@
     }
   }
 
-  .checkbox {
+  .btn-group-original {
     margin-bottom: 20px;
 
-    label[for='original'] {
-      margin-bottom: 0px;
-      font-weight: bold;
-      padding-left: 0;
+    & > label {
+      padding: 3px 8px;
 
-      #original {
-        margin-left: 35px;
+      &.active {
+        box-shadow: none;
+        background-color: @main-color;
+        color: white;
+        border-color: @main-color;
+      }
+
+      &:last-child:hover {
+        border-left-color: @main-color;
       }
     }
   }

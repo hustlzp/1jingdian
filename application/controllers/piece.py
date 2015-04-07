@@ -67,6 +67,7 @@ def add():
 
     form = PieceForm()
     if form.validate_on_submit():
+        form.original.data = request.form.get('original') == 'true'
         piece = Piece(**form.data)
         piece.user_id = g.user.id
         db.session.add(piece)
