@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPermission
+from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
     NOTIFICATION_KIND
@@ -104,6 +105,12 @@ def edit(uid):
             _save_piece_source(source)
         if author and author != piece.author:
             _save_piece_author(author)
+
+        if piece.content != form.content.data:
+            content_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                       result=generate_lcs_html(piece.content, form.content.data),
+                                       kind=PIECE_EDIT_KIND.UPDATE_CONTENT)
+            db.session.add(content_log)
 
         form.populate_obj(piece)
         if piece.original:

@@ -224,10 +224,10 @@ class PieceEditLog(db.Model):
     user = db.relationship('User',
                            backref=db.backref('edited_pieces',
                                               lazy='dynamic',
-                                              order_by='desc(CollectionPiece.created_at)'))
+                                              order_by='desc(PieceEditLog.created_at)'))
 
     piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
     piece = db.relationship('Piece',
                             backref=db.backref('logs',
                                                lazy='dynamic',
-                                               order_by='asc(CollectionPiece.created_at)'))
+                                               order_by='asc(PieceEditLog.created_at)'))
