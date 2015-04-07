@@ -94,6 +94,7 @@ def edit(uid):
     piece = Piece.query.get_or_404(uid)
     form = PieceForm(obj=piece)
     if form.validate_on_submit():
+        form.original.data = request.form.get('original') == 'true'
         source = form.source.data
         author = form.author.data
         if source and source != piece.source:
