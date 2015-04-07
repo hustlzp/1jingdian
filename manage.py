@@ -4,6 +4,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from application import create_app
 from application.models import db
 from application.utils.assets import build
+from application.utils.helpers import generate_lcs_html
 
 
 # Used by app debug & livereload
@@ -56,6 +57,13 @@ def createdb():
 @manager.command
 def build_assets():
     build(app)
+
+
+@manager.command
+def test():
+    src = u'ABCBDAB'
+    dest = u'BDCABA'
+    print(generate_lcs_html(src, dest))
 
 
 if __name__ == "__main__":

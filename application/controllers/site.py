@@ -41,4 +41,7 @@ def collections(page):
 
 @bp.route('/test')
 def test():
-    pass
+    from jinja2 import Markup
+    from ..utils.helpers import generate_lcs_html
+
+    return Markup(generate_lcs_html('ABCBDAB', 'BDCABA'))
