@@ -217,8 +217,11 @@ class PieceEditLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
     kind = db.Column(db.Integer, nullable=False)
-    result = db.Column(db.String(200))
-    result_id = db.Column(db.Integer)
+    before = db.Column(db.String(200))
+    before_id = db.Column(db.Integer)
+    after = db.Column(db.String(200))
+    after_id = db.Column(db.Integer)
+    compare = db.Column(db.String(500))
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',

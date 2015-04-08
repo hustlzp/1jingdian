@@ -106,9 +106,11 @@ def edit(uid):
         if author and author != piece.author:
             _save_piece_author(author)
 
+        # content变更记录
         if piece.content != form.content.data:
             content_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                       result=generate_lcs_html(piece.content, form.content.data),
+                                       before=piece.content, after=form.content.data,
+                                       compare=generate_lcs_html(piece.content, form.content.data),
                                        kind=PIECE_EDIT_KIND.UPDATE_CONTENT)
             db.session.add(content_log)
 
@@ -256,7 +258,7 @@ def add_to_collection(uid):
         collection_piece = CollectionPiece(collection_id=collection.id, piece_id=uid)
         # log
         log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                           result=collection.title, result_id=collection.id,
+                           after=collection.title, after_id=collection.id,
                            kind=PIECE_EDIT_KIND.ADD_TO_COLLECTION)
         db.session.add(collection_piece)
         db.session.add(log)
@@ -280,7 +282,7 @@ def remove_from_collection(uid, collection_id):
         db.session.delete(collection_piece)
         # log
         log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                           result=collection.title, result_id=collection_id,
+                           before=collection.title, before_id=collection_id,
                            kind=PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION)
         db.session.add(log)
     db.session.commit()
