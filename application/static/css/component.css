@@ -402,6 +402,9 @@
   color: #333;
   padding: 0 5px;
 }
+.user-card .meta .count-wap > a:hover {
+  color: #1e88a8;
+}
 .user-card .meta .count-wap > a .count-quantifier {
   font-size: 12px;
 }
