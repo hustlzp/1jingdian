@@ -149,4 +149,15 @@
         });
         return this;
     };
+
+    // Unbind events before bind.
+    $.fn.onOnce = function (events, selector, handle) {
+        if ($.isFunction(selector)) {
+            handle = selector;
+            this.off(events).on(events, handle);
+        } else {
+            this.off(events, selector).on(events, selector, handle);
+        }
+        return this;
+    };
 })();
