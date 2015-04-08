@@ -200,17 +200,17 @@ class PIECE_EDIT_KIND(object):
     # author
     ADD_AUTHOR = 4
     UPDATE_AUTHOR = 5
-    DELETE_AUTHOR = 6
+    REMOVE_AUTHOR = 6
 
     # source
     ADD_SOURCE = 7
     UPDATE_SOURCE = 8
-    DELETE_SOURCE = 9
+    REMOVE_SOURCE = 9
 
     # source link
     ADD_SOURCE_LINK = 10
     UPDATE_SOURCE_LINK = 11
-    DELETE_SOURCE_LINK = 12
+    REMOVE_SOURCE_LINK = 12
 
 
 class PieceEditLog(db.Model):

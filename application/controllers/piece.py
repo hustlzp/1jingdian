@@ -94,11 +94,13 @@ def add():
 def edit(uid):
     piece = Piece.query.get_or_404(uid)
     form = PieceForm(obj=piece)
+
     if form.validate_on_submit():
         permission = PieceEditPermission(piece)
         if not permission.check():
             return permission.deny()
         form.original.data = request.form.get('original') == 'true'
+
         source = form.source.data
         author = form.author.data
         if source and source != piece.source:
@@ -113,6 +115,56 @@ def edit(uid):
                                        compare=generate_lcs_html(piece.content, form.content.data),
                                        kind=PIECE_EDIT_KIND.UPDATE_CONTENT)
             db.session.add(content_log)
+
+        # original变更记录：原创->引用
+        if piece.original and not form.original.data:
+            original_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                        kind=PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL)
+            db.session.add(original_log)
+        # original变更记录：引用->原创
+        elif not piece.original and form.original.data:
+            original_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                        kind=PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL)
+            db.session.add(original_log)
+
+        # 仅当句子为引用时，才去记录其他的变更
+        if not form.original.data:
+            # author变更
+            if piece.author != form.author.data:
+                author_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                          before=piece.author, after=form.author.data)
+                if piece.author == "":
+                    author_log.kind = PIECE_EDIT_KIND.ADD_AUTHOR
+                elif form.author.data == "":
+                    author_log.kind = PIECE_EDIT_KIND.REMOVE_AUTHOR
+                else:
+                    author_log.kind = PIECE_EDIT_KIND.UPDATE_AUTHOR
+                db.session.add(author_log)
+
+            # source变更
+            if piece.source != form.source.data:
+                source_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                          before=piece.source, after=form.source.data)
+                if piece.source == "":
+                    source_log.kind = PIECE_EDIT_KIND.ADD_SOURCE
+                elif form.source.data == "":
+                    source_log.kind = PIECE_EDIT_KIND.REMOVE_SOURCE
+                else:
+                    source_log.kind = PIECE_EDIT_KIND.UPDATE_SOURCE
+                db.session.add(source_log)
+
+            # source_link变更
+            if piece.source_link != form.source_link.data:
+                source_link_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
+                                               before=piece.source_link,
+                                               after=form.source_link.data)
+                if piece.source_link == "":
+                    source_link_log.kind = PIECE_EDIT_KIND.ADD_SOURCE_LINK
+                elif form.source_link.data == "":
+                    source_link_log.kind = PIECE_EDIT_KIND.REMOVE_SOURCE_LINK
+                else:
+                    source_link_log.kind = PIECE_EDIT_KIND.UPDATE_SOURCE_LINK
+                db.session.add(source_link_log)
 
         form.populate_obj(piece)
         if piece.original:
