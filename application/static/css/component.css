@@ -884,25 +884,41 @@
 }
 .piece-log {
   border-bottom: 1px solid #e2e2e2;
-  padding: 15px 0;
-  margin: 0;
+  padding: 0 0 15px 0;
+  margin: 0 0 15px 0;
 }
 .piece-log:hover .log-meta .btn-report-abuse {
   visibility: visible;
 }
 .piece-log .media-left {
-  padding-right: 12px;
+  padding-right: 15px;
 }
 .piece-log .user-avatar {
   width: 32px;
   height: 32px;
 }
 .piece-log .title {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   color: #999;
 }
+.piece-log .title a {
+  color: #333;
+}
+.piece-log .title a:hover {
+  color: #1e88a8;
+}
 .piece-log .content {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+.piece-log .content .fa-long-arrow-right {
+  margin: 0 5px;
+}
+.piece-log .content .collection {
+  padding: 4px 10px;
+  border-radius: 30px;
+}
+.piece-log .content .link:hover {
+  text-decoration: underline;
 }
 .piece-log .log-meta {
   color: #999;

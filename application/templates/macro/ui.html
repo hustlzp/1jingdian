@@ -463,6 +463,8 @@
 
    {{ render_piece_comments(piece) }}
 
+   <div class="subtitle">句子编辑日志</div>
+
    {% for log in piece.logs %}
       <div class="piece-log media">
          <div class="media-left">{{ render_user_avatar(log.user) }}</div>
@@ -477,7 +479,7 @@
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
                   移除了话题
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
-                  更新了句子
+                  编辑了句子
                {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
                   将句子设为原创
                {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
@@ -506,11 +508,11 @@
             <div class="content">
                {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
                   <a href="{{ url_for('collection.view', uid=log.after_id) }}">
-                     <ins>{{ log.after }}</ins>
+                     <ins class="collection">{{ log.after }}</ins>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
                   <a href="{{ url_for('collection.view', uid=log.before_id) }}">
-                     <del>{{ log.before }}</del>
+                     <del class="collection">{{ log.before }}</del>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
                   {{ log.compare|safe }}
@@ -518,6 +520,7 @@
                   <ins>{{ log.after }}</ins>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
                   <del>{{ log.before }}</del>
+                  <span class="fa fa-long-arrow-right"></span>
                   <ins>{{ log.after }}</ins>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
                   <del>{{ log.before }}</del>
@@ -525,22 +528,25 @@
                   <ins>{{ log.after }}</ins>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
                   <del>{{ log.before }}</del>
+                  <span class="fa fa-long-arrow-right"></span>
                   <ins>{{ log.after }}</ins>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
                   <del>{{ log.before }}</del>
                {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
                   <a href="{{ log.after }}" target="_blank">
-                     <ins>{{ log.after }}</ins>
+                     <ins class="link">{{ log.after }}</ins>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
                   <a href="{{ log.before }}">
-                     <del>{{ log.before }}</del>
-                  </a><a href="{{ log.after }}" target="_blank">
-                  <ins>{{ log.after }}</ins>
-               </a>
+                     <del class="link">{{ log.before }}</del>
+                  </a>
+                  <span class="fa fa-long-arrow-right"></span>
+                  <a href="{{ log.after }}" target="_blank">
+                     <ins class="link">{{ log.after }}</ins>
+                  </a>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
                   <a href="{{ log.before }}">
-                     <del>{{ log.before }}</del>
+                     <del class="link">{{ log.before }}</del>
                   </a>
                {% endif %}
             </div>
