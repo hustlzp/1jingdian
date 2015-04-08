@@ -136,6 +136,7 @@
     window.urlFor = urlFor;
     window.registerContext = registerContext;
 
+    // 阻止mousewheel影响到父元素
     $.fn.isolatedScroll = function () {
         this.bind('mousewheel DOMMouseScroll', function (e) {
             var delta = e.deltaY;

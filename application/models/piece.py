@@ -186,6 +186,9 @@ class PieceAuthor(db.Model):
 
 
 class PIECE_EDIT_KIND(object):
+    # create
+    CREATE = 15
+
     # collection
     ADD_TO_COLLECTION = 1
     REMOVE_FROM_COLLECTION = 2

@@ -72,6 +72,7 @@ def add():
         piece = Piece(**form.data)
         piece.user_id = g.user.id
         db.session.add(piece)
+        db.session.commit()
 
         if piece.source:
             _save_piece_source(piece.source)
@@ -79,7 +80,10 @@ def add():
             _save_piece_author(piece.author)
         g.user.pieces_count += 1
         db.session.add(g.user)
-        db.session.commit()
+
+        # log
+        log = PieceEditLog(piece_id=piece.id, user_id=g.user.id, kind=PIECE_EDIT_KIND.CREATE)
+        db.session.add(log)
 
         # Generate QRCode
         piece.make_qrcode()
