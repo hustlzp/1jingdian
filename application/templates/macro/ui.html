@@ -613,19 +613,19 @@
             var marginTop = 0;
 
             $('.share-wap').show();
+            marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
 
             if (isModal) {
-               marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
                if (marginTop < 30) {
                   marginTop = 30;
                }
-               $detailsParentWap.css('overflow', 'hidden');
             } else {
-               marginTop = 150;
+               if (marginTop > 150) {
+                  marginTop = 150;
+               }
             }
 
             $shareInnerWap.css('marginTop', marginTop + 'px');
-
             $('.share-wap').transition({
                'top': '0',
                'opacity': 1
@@ -634,10 +634,6 @@
 
          // 关闭分享框
          $('.btn-close-share-wap').click(function () {
-            if (isModal) {
-               $detailsParentWap.css('overflow', 'auto');
-            }
-
             $('.share-wap').transition({
                'top': '15px',
                'opacity': 0
