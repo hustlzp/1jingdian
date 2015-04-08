@@ -1107,3 +1107,48 @@
     }
   }
 }
+
+.piece-log {
+  border-bottom: 1px solid @border-color;
+  padding: 15px 0;
+  margin: 0;
+
+  &:hover {
+    .log-meta .btn-report-abuse {
+      visibility: visible;
+    }
+  }
+
+  .media-left {
+    padding-right: 12px;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+    color: #999;
+  }
+
+  .content {
+    margin-bottom: 10px;
+  }
+
+  .log-meta {
+    color: #999;
+    font-size: 12px;
+
+    .btn-report-abuse {
+      visibility: hidden;
+      margin-left: 15px;
+      color: #999;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
+  }
+}

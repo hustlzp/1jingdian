@@ -463,6 +463,97 @@
 
    {{ render_piece_comments(piece) }}
 
+   {% for log in piece.logs %}
+      <div class="piece-log media">
+         <div class="media-left">{{ render_user_avatar(log.user) }}</div>
+         <div class="media-body">
+            <div class="title">
+               <a href="{{ url_for('user.profile', uid=log.user_id) }}">
+                  {{ log.user.name }}
+               </a>
+
+               {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+                  添加了话题
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+                  移除了话题
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+                  更新了句子
+               {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
+                  将句子设为原创
+               {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
+                  将句子设为引用
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+                  添加了原作者
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+                  更新了原作者
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+                  移除了原作者
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+                  添加了出处
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+                  更新了出处
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+                  移除了出处
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+                  添加了链接
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+                  更新了链接
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+                  移除了链接
+               {% endif %}
+            </div>
+
+            <div class="content">
+               {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+                  <a href="{{ url_for('collection.view', uid=log.after_id) }}">
+                     <ins>{{ log.after }}</ins>
+                  </a>
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+                  <a href="{{ url_for('collection.view', uid=log.before_id) }}">
+                     <del>{{ log.before }}</del>
+                  </a>
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+                  {{ log.compare|safe }}
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+                  <ins>{{ log.after }}</ins>
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+                  <del>{{ log.before }}</del>
+                  <ins>{{ log.after }}</ins>
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+                  <del>{{ log.before }}</del>
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+                  <ins>{{ log.after }}</ins>
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+                  <del>{{ log.before }}</del>
+                  <ins>{{ log.after }}</ins>
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+                  <del>{{ log.before }}</del>
+               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+                  <a href="{{ log.after }}" target="_blank">
+                     <ins>{{ log.after }}</ins>
+                  </a>
+               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+                  <a href="{{ log.before }}">
+                     <del>{{ log.before }}</del>
+                  </a><a href="{{ log.after }}" target="_blank">
+                  <ins>{{ log.after }}</ins>
+               </a>
+               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+                  <a href="{{ log.before }}">
+                     <del>{{ log.before }}</del>
+                  </a>
+               {% endif %}
+            </div>
+            <div class="log-meta">
+               {{ log.created_at|timesince }}
+               <a href="#" class="btn-report-abuse">
+                  <span class="fa fa-exclamation-triangle"></span> 举报恶意编辑
+               </a>
+            </div>
+         </div>
+      </div>
+   {% endfor %}
+
    <div class="share-wap">
       <span class="btn-close-share-wap">×</span>
 

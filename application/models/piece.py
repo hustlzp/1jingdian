@@ -215,7 +215,7 @@ class PIECE_EDIT_KIND(object):
 
 class PieceEditLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
     kind = db.Column(db.Integer, nullable=False)
     before = db.Column(db.String(200))
     before_id = db.Column(db.Integer)
@@ -233,4 +233,4 @@ class PieceEditLog(db.Model):
     piece = db.relationship('Piece',
                             backref=db.backref('logs',
                                                lazy='dynamic',
-                                               order_by='asc(PieceEditLog.created_at)'))
+                                               order_by='desc(PieceEditLog.created_at)'))

@@ -48,8 +48,14 @@
   filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='10');
 }
 ins {
-  background-color: lightgreen;
+  text-decoration: none;
+  padding: 3px 0;
+  background: #EAF0DD;
+  color: #5B7918;
 }
 del {
-  background-color: red;
+  text-decoration: line-through;
+  padding: 3px 0;
+  background: #f5dfdf;
+  color: #ac1414;
 }

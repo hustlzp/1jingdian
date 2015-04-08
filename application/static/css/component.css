@@ -882,3 +882,37 @@
   background-color: #1e88a8;
   color: #ffffff;
 }
+.piece-log {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 15px 0;
+  margin: 0;
+}
+.piece-log:hover .log-meta .btn-report-abuse {
+  visibility: visible;
+}
+.piece-log .media-left {
+  padding-right: 12px;
+}
+.piece-log .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.piece-log .title {
+  margin-bottom: 10px;
+  color: #999;
+}
+.piece-log .content {
+  margin-bottom: 10px;
+}
+.piece-log .log-meta {
+  color: #999;
+  font-size: 12px;
+}
+.piece-log .log-meta .btn-report-abuse {
+  visibility: hidden;
+  margin-left: 15px;
+  color: #999;
+}
+.piece-log .log-meta .btn-report-abuse:hover {
+  color: #1e88a8;
+}
