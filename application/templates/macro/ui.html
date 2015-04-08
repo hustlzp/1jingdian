@@ -1,6 +1,7 @@
 {% from 'macro/form.html' import vertical_field, field_error, form_submit %}
 {% from 'macro/script.html' import full_screen_script %}
 
+
 {% macro pagination(paginator) %}
    {% if paginator.pages > 1 %}
       <ul class='pagination pagination-sm clearfix'>
@@ -384,85 +385,7 @@
 {% endmacro %}
 
 
-{% macro render_piece_details_wap(piece) %}
-   <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
-   <div class="media piece-header">
-      <div class="media-left">
-         <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
-              data-piece-id={{ piece.id }}>
-            <div class="vote-icon">
-               <span class="fa fa-angle-up"></span>
-            </div>
-            <div class="votes-count">{{ piece.votes_count }}</div>
-         </div>
-      </div>
-
-      <div class="media-body">
-         <div class="content">
-            {{ piece.content }}
-         </div>
-
-         {{ render_piece_source(piece) }}
-      </div>
-   </div>
-
-   <div class="meta clearfix">
-      <div class="pull-left">
-         {{ render_user_avatar(piece.user) }}
-         <span class="created-time hidden-xs">发布于 {{ piece.created_at|timesince }}</span>
-      </div>
-
-      <div class="actions pull-right">
-         {% if permissions.PieceEditPermission(piece).check() %}
-            <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
-               title="编辑句子">
-               <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
-         {% endif %}
-
-         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
-            data-content="{{ piece.content }}"
-            data-source-string="{{ piece.source_string }}">
-            <span class="fa fa-arrows-alt "></span> 全屏</a>
-
-         <a href="javascript: void(0)" class="btn-share">
-            <span class="fa fa-share"></span> 分享</a>
-      </div>
-   </div>
-
-   <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
-      <div class="collections-inner-container">
-         <span class="collections">
-            {% for collection in piece.collections %}
-               {% set collection = collection.collection %}
-               {{ render_collection_tag_wap(collection) }}
-            {% endfor %}
-         </span>
-
-         {% if g.user %}
-            <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
-               <span class="fa fa-pencil"></span></a>
-            <a href="javascript: void(0)" class="btn-add-collection">
-               <span class="fa fa-plus"></span> 添加句集</a>
-         {% endif %}
-      </div>
-
-      <div class="form-group collection-input-wap">
-         <input type="text" id="input-collection" class="form-control"
-                placeholder="输入句集，回车确认"/>
-         <span class="btn-finish-add-collection">完成</span>
-      </div>
-   </div>
-
-   <div class="subtitle">{{ piece.votes_count }} 顶</div>
-
-   <div class="voters">
-      {% for voter in piece.voters %}
-         {{ render_user_avatar(voter.user) }}
-      {% endfor %}
-   </div>
-
-   {{ render_piece_comments(piece) }}
-
+{% macro render_piece_logs(piece) %}
    <div class="subtitle">句子编辑日志</div>
 
    {% for log in piece.logs %}
@@ -507,11 +430,11 @@
 
             <div class="content">
                {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
-                  <a href="{{ url_for('collection.view', uid=log.after_id) }}">
+                  <a href="{{ url_for('collection.view', uid=log.after_id) }}" target="_blank">
                      <ins class="collection">{{ log.after }}</ins>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
-                  <a href="{{ url_for('collection.view', uid=log.before_id) }}">
+                  <a href="{{ url_for('collection.view', uid=log.before_id) }}" target="_blank">
                      <del class="collection">{{ log.before }}</del>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
@@ -537,7 +460,7 @@
                      <ins class="link">{{ log.after }}</ins>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
-                  <a href="{{ log.before }}">
+                  <a href="{{ log.before }}" target="_blank">
                      <del class="link">{{ log.before }}</del>
                   </a>
                   <span class="fa fa-long-arrow-right"></span>
@@ -545,20 +468,114 @@
                      <ins class="link">{{ log.after }}</ins>
                   </a>
                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
-                  <a href="{{ log.before }}">
+                  <a href="{{ log.before }}" target="_blank">
                      <del class="link">{{ log.before }}</del>
                   </a>
                {% endif %}
             </div>
+
             <div class="log-meta">
                {{ log.created_at|timesince }}
                <a href="#" class="btn-report-abuse">
-                  <span class="fa fa-exclamation-triangle"></span> 举报恶意编辑
+                  {# <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> #}
+                  举报
                </a>
             </div>
          </div>
       </div>
    {% endfor %}
+{% endmacro %}
+
+
+{% macro render_piece_details_wap(piece) %}
+   <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
+   <div class="media piece-header">
+      <div class="media-left">
+         <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
+              data-piece-id={{ piece.id }}>
+            <div class="vote-icon">
+               <span class="fa fa-angle-up"></span>
+            </div>
+            <div class="votes-count">{{ piece.votes_count }}</div>
+         </div>
+      </div>
+
+      <div class="media-body">
+         <div class="content">
+            {{ piece.content }}
+         </div>
+
+         {{ render_piece_source(piece) }}
+      </div>
+   </div>
+
+   <div class="meta clearfix">
+      <div class="pull-left">
+         {{ render_user_avatar(piece.user) }}
+         <span class="created-time hidden-xs">发布于 {{ piece.created_at|timesince }}</span>
+      </div>
+
+      <div class="actions pull-right">
+         {% if permissions.PieceEditPermission(piece).check() %}
+            <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
+               title="编辑句子">
+               <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
+         {% endif %}
+
+         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
+            data-content="{{ piece.content }}"
+            data-source-string="{{ piece.source_string }}">
+            <span class="fa fa-arrows-alt "></span> 全屏</a>
+
+         {% if piece.logs.count() %}
+            <a class="btn-show-logs-wap" href="javascript: void(0)" title="句子编辑日志">
+               <span class="fa fa-file-text-o"></span> 日志
+            </a>
+         {% endif %}
+
+         <a href="javascript: void(0)" class="btn-share">
+            <span class="fa fa-share"></span> 分享</a>
+      </div>
+   </div>
+
+   <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
+      <div class="collections-inner-container">
+         <span class="collections">
+            {% for collection in piece.collections %}
+               {% set collection = collection.collection %}
+               {{ render_collection_tag_wap(collection) }}
+            {% endfor %}
+         </span>
+
+         {% if g.user %}
+            <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
+               <span class="fa fa-pencil"></span></a>
+            <a href="javascript: void(0)" class="btn-add-collection">
+               <span class="fa fa-plus"></span> 添加句集</a>
+         {% endif %}
+      </div>
+
+      <div class="form-group collection-input-wap">
+         <input type="text" id="input-collection" class="form-control"
+                placeholder="输入句集，回车确认"/>
+         <span class="btn-finish-add-collection">完成</span>
+      </div>
+   </div>
+
+   <div class="subtitle">{{ piece.votes_count }} 顶</div>
+
+   <div class="voters">
+      {% for voter in piece.voters %}
+         {{ render_user_avatar(voter.user) }}
+      {% endfor %}
+   </div>
+
+   {{ render_piece_comments(piece) }}
+
+   <div class="piece-logs-wap">
+      <span class="btn-close-logs-wap">×</span>
+      {{ render_piece_logs(piece) }}
+   </div>
 
    <div class="share-wap">
       <span class="btn-close-share-wap">×</span>
@@ -626,6 +643,24 @@
                'opacity': 0
             }, 300, function () {
                $('.share-wap').hide();
+            });
+         });
+
+         // 弹出编辑记录框
+         $('.btn-show-logs-wap').click(function () {
+            $('.piece-logs-wap').show().transition({
+               'top': '0',
+               'opacity': 1
+            }, 300);
+         });
+
+         // 关闭编辑记录框
+         $('.btn-close-logs-wap').click(function () {
+            $('.piece-logs-wap').transition({
+               'top': '15px',
+               'opacity': 0
+            }, 300, function () {
+               $('.piece-logs-wap').hide();
             });
          });
 

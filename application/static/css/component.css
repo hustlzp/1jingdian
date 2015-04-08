@@ -6,7 +6,7 @@
   background-color: #fff;
   width: 500px;
   z-index: 1000;
-  padding: 30px 20px;
+  padding: 30px 20px 20px 15px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
@@ -76,9 +76,10 @@
 .piece-details-wap .meta .actions a:hover {
   color: #1e88a8;
 }
+.piece-details-wap .meta .actions .btn-show-logs-wap,
 .piece-details-wap .meta .actions .btn-full-screen,
 .piece-details-wap .meta .actions .btn-share {
-  margin-left: 15px;
+  margin-left: 12px;
 }
 .piece-details-wap .subtitle {
   font-size: 16px;
@@ -882,53 +883,82 @@
   background-color: #1e88a8;
   color: #ffffff;
 }
-.piece-log {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 0 0 15px 0;
-  margin: 0 0 15px 0;
+.piece-logs-wap {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 800;
+  background-color: #ffffff;
+  padding: 30px 25px 10px 25px;
+  overflow: auto;
+  border-radius: 5px;
 }
-.piece-log:hover .log-meta .btn-report-abuse {
+.piece-logs-wap .subtitle {
+  margin: 0 0 25px 0;
+}
+.piece-logs-wap .piece-log {
+  border-top: 1px solid #e2e2e2;
+  padding: 15px 0 15px 0;
+  margin: 0;
+}
+.piece-logs-wap .piece-log:hover .log-meta .btn-report-abuse {
   visibility: visible;
 }
-.piece-log .media-left {
+.piece-logs-wap .piece-log .media-left {
   padding-right: 15px;
 }
-.piece-log .user-avatar {
+.piece-logs-wap .piece-log .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-log .title {
+.piece-logs-wap .piece-log .title {
   margin-bottom: 12px;
   color: #999;
 }
-.piece-log .title a {
+.piece-logs-wap .piece-log .title a {
   color: #333;
 }
-.piece-log .title a:hover {
+.piece-logs-wap .piece-log .title a:hover {
   color: #1e88a8;
 }
-.piece-log .content {
+.piece-logs-wap .piece-log .content {
   margin-bottom: 12px;
 }
-.piece-log .content .fa-long-arrow-right {
+.piece-logs-wap .piece-log .content .fa-long-arrow-right {
   margin: 0 5px;
 }
-.piece-log .content .collection {
+.piece-logs-wap .piece-log .content .collection {
   padding: 4px 10px;
   border-radius: 30px;
 }
-.piece-log .content .link:hover {
+.piece-logs-wap .piece-log .content .link:hover {
   text-decoration: underline;
 }
-.piece-log .log-meta {
+.piece-logs-wap .piece-log .log-meta {
   color: #999;
   font-size: 12px;
 }
-.piece-log .log-meta .btn-report-abuse {
+.piece-logs-wap .piece-log .log-meta .btn-report-abuse {
   visibility: hidden;
   margin-left: 15px;
   color: #999;
 }
-.piece-log .log-meta .btn-report-abuse:hover {
+.piece-logs-wap .piece-log .log-meta .btn-report-abuse:hover {
   color: #1e88a8;
+}
+.piece-logs-wap .btn-close-logs-wap {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+  line-height: 1;
+}
+.piece-logs-wap .btn-close-logs-wap:hover {
+  color: #999;
 }

@@ -8,7 +8,7 @@
   background-color: #fff;
   width: 500px;
   z-index: 1000;
-  padding: 30px 20px;
+  padding: 30px 20px 20px 15px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 
@@ -95,9 +95,10 @@
         }
       }
 
+      .btn-show-logs-wap,
       .btn-full-screen,
       .btn-share {
-        margin-left: 15px;
+        margin-left: 12px;
       }
     }
   }
@@ -1108,68 +1109,101 @@
   }
 }
 
-.piece-log {
-  border-bottom: 1px solid @border-color;
-  padding: 0 0 15px 0;
-  margin: 0 0 15px 0;
+.piece-logs-wap {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 800;
+  background-color: #ffffff;
+  padding: 30px 25px 10px 25px;
+  overflow: auto;
+  border-radius: 5px;
 
-  &:hover {
-    .log-meta .btn-report-abuse {
-      visibility: visible;
-    }
+  .subtitle {
+    margin: 0 0 25px 0;
   }
 
-  .media-left {
-    padding-right: 15px;
-  }
+  .piece-log {
+    border-top: 1px solid @border-color;
+    padding: 15px 0 15px 0;
+    margin: 0;
 
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .title {
-    margin-bottom: 12px;
-    color: #999;
-
-    a {
-      color: #333;
-
-      &:hover {
-        color: @main-color;
+    &:hover {
+      .log-meta .btn-report-abuse {
+        visibility: visible;
       }
     }
-  }
 
-  .content {
-    margin-bottom: 12px;
-
-    .fa-long-arrow-right {
-      margin: 0 5px;
+    .media-left {
+      padding-right: 15px;
     }
 
-    .collection {
-      padding: 4px 10px;
-      border-radius: 30px;
+    .user-avatar {
+      width: 32px;
+      height: 32px;
     }
 
-    .link:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .log-meta {
-    color: #999;
-    font-size: 12px;
-
-    .btn-report-abuse {
-      visibility: hidden;
-      margin-left: 15px;
+    .title {
+      margin-bottom: 12px;
       color: #999;
 
-      &:hover {
-        color: @main-color;
+      a {
+        color: #333;
+
+        &:hover {
+          color: @main-color;
+        }
       }
+    }
+
+    .content {
+      margin-bottom: 12px;
+
+      .fa-long-arrow-right {
+        margin: 0 5px;
+      }
+
+      .collection {
+        padding: 4px 10px;
+        border-radius: 30px;
+      }
+
+      .link:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .log-meta {
+      color: #999;
+      font-size: 12px;
+
+      .btn-report-abuse {
+        visibility: hidden;
+        margin-left: 15px;
+        color: #999;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+    }
+  }
+
+  .btn-close-logs-wap {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      color: #999;
     }
   }
 }
