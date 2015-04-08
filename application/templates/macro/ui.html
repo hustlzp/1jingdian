@@ -607,6 +607,11 @@
          var $detailsParentWap = $('.piece-details-wap').parent();
          var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
 
+         if (isModal) {
+            $('.share-wap').isolatedScroll();
+            $('.piece-logs-wap').isolatedScroll();
+         }
+
          // 弹出分享框
          $('.btn-share').click(function () {
             var $shareInnerWap = $('.share-wap .inner-wap');

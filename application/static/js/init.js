@@ -135,4 +135,17 @@
 
     window.urlFor = urlFor;
     window.registerContext = registerContext;
+
+    $.fn.isolatedScroll = function () {
+        this.bind('mousewheel DOMMouseScroll', function (e) {
+            var delta = e.deltaY;
+            var bottomOverflow = this.scrollTop + $(this).outerHeight() - this.scrollHeight >= 0;
+            var topOverflow = this.scrollTop <= 0;
+
+            if ((delta < 0 && bottomOverflow) || (delta > 0 && topOverflow)) {
+                e.preventDefault();
+            }
+        });
+        return this;
+    };
 })();

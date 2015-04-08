@@ -8,6 +8,7 @@ libs:
   - bower_components/moment/min/moment.min.js
   - bower_components/plupload/js/plupload.full.min.js
   - bower_components/typeahead.js/dist/typeahead.bundle.min.js
+  - bower_components/jquery-mousewheel/jquery.mousewheel.min.js
   - js/init.js
 
 layout:
