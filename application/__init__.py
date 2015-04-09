@@ -116,7 +116,7 @@ def register_db(app):
 
 def register_routes(app):
     """Register routes."""
-    from .controllers import site, account, piece, user, collection, feedback
+    from .controllers import site, account, piece, user, collection, feedback, admin
 
     app.register_blueprint(site.bp)
     app.register_blueprint(account.bp)
@@ -124,6 +124,7 @@ def register_routes(app):
     app.register_blueprint(user.bp)
     app.register_blueprint(collection.bp)
     app.register_blueprint(feedback.bp)
+    app.register_blueprint(admin.bp)
 
 
 def register_error_handle(app):

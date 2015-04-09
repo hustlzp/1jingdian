@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block page_title %}句集恶意编辑举报 - 壹经典{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">句集恶意编辑举报</div>
+         <div class="panel-body panel-body-no-padding">
+            <table class="table no-margin">
+               <tr>
+                  <th>编辑内容</th>
+                  <th>操作</th>
+               </tr>
+
+               {% for report in reports %}
+                  <tr>
+                     <td>{{ report.id }}</td>
+                     <td>
+                        <a href="#" class="btn btn-xs btn-default">处理</a>
+                     </td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </div>
+      </div>
+   </div>
+{% endblock %}
