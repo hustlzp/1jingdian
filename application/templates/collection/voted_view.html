@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
-{% from 'macro/piece.html' import render_pieces %}
-{% from 'macro/collection.html' import render_collection_header %}
-{% from 'macro/utils.html' import pagination %}
+{% from 'macros/_piece.html' import render_pieces %}
+{% from 'macros/_collection.html' import render_collection_header %}
+{% from 'macros/_utils.html' import pagination %}
 
 {% block page_title %}句集「{{ collection.title }}」- 顶过 - 壹经典{% endblock %}
 {% block page_content %}
