@@ -27,6 +27,9 @@ def mkdir_p(path):
 
 
 def lcs(a, b):
+    if not a or not b:
+        return [], []
+
     lena = len(a)
     lenb = len(b)
     c = [[0 for i in range(lenb + 1)] for j in range(lena + 1)]
@@ -46,6 +49,13 @@ def lcs(a, b):
 
 
 def generate_lcs_html(src, dest):
+    if not src and not dest:
+        return ""
+    elif not src:
+        return "<ins>%s</ins>" % dest
+    elif not dest:
+        return "<del>%s</del>" % src
+
     c, flag = lcs(src, dest)
 
     result = []

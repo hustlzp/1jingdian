@@ -55,7 +55,7 @@ def edit(uid):
             db.session.add(title_log)
 
         # desc变更
-        if collection.desc != form.desc.data:
+        if collection.desc or "" != form.desc.data:
             desc_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
                                          before=collection.desc, after=form.desc.data,
                                          compare=generate_lcs_html(collection.desc, form.desc.data))
@@ -87,7 +87,7 @@ def upload_cover(uid):
         cover_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
                                       before=collection.cover_url,
                                       after=collection_covers.url(filename))
-        if collection.cover == 'default.png':
+        if not collection.cover or collection.cover == 'default.png':
             cover_log.kind = COLLECTION_EDIT_KIND.ADD_COVER
         else:
             cover_log.kind = COLLECTION_EDIT_KIND.UPDATE_COVER
