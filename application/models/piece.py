@@ -237,3 +237,21 @@ class PieceEditLog(db.Model):
                             backref=db.backref('logs',
                                                lazy='dynamic',
                                                order_by='desc(PieceEditLog.created_at)'))
+
+
+class PieceEditLogReport(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('reported_piece_edit_logs',
+                                              lazy='dynamic',
+                                              order_by='desc(PieceEditLogReport.created_at)'))
+
+    piece_edit_log_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    piece_edit_log = db.relationship('PieceEditLog',
+                                     backref=db.backref('reported_logs',
+                                                        lazy='dynamic',
+                                                        order_by='desc('
+                                                                 'PieceEditLogReport.created_at)'))
