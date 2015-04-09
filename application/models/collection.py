@@ -80,3 +80,63 @@ class UserLikeCollection(db.Model):
                                  backref=db.backref('likers',
                                                     lazy='dynamic',
                                                     order_by='desc(UserLikeCollection.created_at)'))
+
+
+class COLLECTION_EDIT_KIND(object):
+    # create
+    CREATE = 1
+
+    # desc
+    ADD_DESC = 2
+    UPDATE_DESC = 3
+    REMOVE_DESC = 4
+
+    # cover
+    ADD_COVER = 5
+    UPDATE_COVER = 6
+
+
+class CollectionEditLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    kind = db.Column(db.Integer, nullable=False)
+    before = db.Column(db.String(200))
+    before_id = db.Column(db.Integer)
+    after = db.Column(db.String(200))
+    after_id = db.Column(db.Integer)
+    compare = db.Column(db.String(500))
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('edited_collections',
+                                              lazy='dynamic',
+                                              order_by='desc(CollectionEditLog.created_at)'))
+
+    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
+    collection = db.relationship('Collection',
+                                 backref=db.backref('logs',
+                                                    lazy='dynamic',
+                                                    order_by='desc(CollectionEditLog.created_at)'))
+
+    def reported_by_user(self):
+        return g.user and g.user.reported_collection_edit_logs.filter(
+            CollectionEditLogReport.collection_edit_log_id == self.id).count() > 0
+
+
+class CollectionEditLogReport(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('reported_collection_edit_logs',
+                                              lazy='dynamic',
+                                              order_by='desc(CollectionEditLogReport.created_at)'))
+
+    collection_edit_log_id = db.Column(db.Integer, db.ForeignKey('collection_edit_log.id'))
+    collection_edit_log = db.relationship('CollectionEditLog',
+                                          backref=db.backref(
+                                              'reports',
+                                              lazy='dynamic',
+                                              order_by='desc(CollectionEditLogReport.created_at)'
+                                          ))

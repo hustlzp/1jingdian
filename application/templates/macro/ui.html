@@ -484,7 +484,8 @@
             <div class="log-meta">
                {{ log.created_at|timesince }}
                <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
-                  <a href="#" class="need-signed-in btn-report-abuse" data-id="{{ log.id }}">
+                  <a href="javascript: void(0)" data-id="{{ log.id }}"
+                     class="need-signed-in btn-report-abuse">
                      <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> 举报
                   </a>
                   <span class="flag-reported">已举报</span>
