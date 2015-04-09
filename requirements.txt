@@ -27,3 +27,4 @@ cssmin
 lesscpy
 PyExecJS
 jsmin
+glob2

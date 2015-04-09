@@ -36,7 +36,7 @@ def modal(uid):
     piece.clicks_count += 1
     db.session.add(piece)
     db.session.commit()
-    modal = get_template_attribute('macro/_piece.html', 'render_piece_details_wap')
+    modal = get_template_attribute('macros/_piece.html', 'render_piece_details_wap')
     return modal(piece)
 
 
@@ -238,8 +238,8 @@ def comment(uid):
         db.session.commit()
 
     # 返回comment HTML
-    comment_macro = get_template_attribute('macro/_piece.html', 'render_piece_comment')
-    sub_comments_macro = get_template_attribute('macro/_piece.html', 'render_piece_sub_comments')
+    comment_macro = get_template_attribute('macros/_piece.html', 'render_piece_comment')
+    sub_comments_macro = get_template_attribute('macros/_piece.html', 'render_piece_sub_comments')
     comment_html = comment_macro(comment)
     # 若为root comment，则在返回的HTML中加入sub_comments
     if not root_comment_id:
@@ -301,7 +301,7 @@ def add_to_collection(uid):
         db.session.add(collection_piece)
         db.session.add(log)
         db.session.commit()
-    macro = get_template_attribute('macro/_collection.html', 'render_collection_tag_wap')
+    macro = get_template_attribute('macros/_collection.html', 'render_collection_tag_wap')
     return json.dumps({'result': True,
                        'id': collection.id,
                        'html': macro(collection)})

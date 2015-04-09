@@ -1,0 +1,105 @@
+.user-profile-header {
+  padding-top: 50px;
+}
+.user-profile-header .user-info {
+  text-align: center;
+  margin-bottom: 35px;
+}
+.user-profile-header .user-info .user-avatar {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.user-profile-header .user-info .user-name {
+  font-size: 20px;
+  text-align: center;
+}
+.user-profile-header .user-info .motto {
+  margin-top: 12px;
+  color: #999;
+}
+.user-profile-header .user-info .media-icons {
+  text-align: center;
+  margin-top: 15px;
+  top: 20px;
+  right: 20px;
+}
+.user-profile-header .user-info .media-icons a {
+  margin-right: 8px;
+}
+.user-profile-header .user-info .media-icons a:last-child {
+  margin-right: 0;
+}
+.user-profile-header .user-info .media-icons a:focus,
+.user-profile-header .user-info .media-icons a:hover {
+  text-decoration: none;
+}
+.user-profile-header .user-info .media-icons a img {
+  border-radius: 2px;
+  height: 20px;
+}
+.user-profile-header .tab {
+  text-align: center;
+}
+.user-profile-header .tab .tab-item {
+  text-decoration: none;
+  float: left;
+  display: block;
+  line-height: 1;
+  padding: 17px 0;
+  width: 33.333333333%;
+  background-color: #eee;
+  color: #333;
+}
+.user-profile-header .tab .tab-item.active,
+.user-profile-header .tab .tab-item:hover {
+  background-color: #1e88a8;
+  color: #ffffff;
+}
+/* 用户卡片 */
+.popover-content-wap {
+  display: none;
+}
+.user-card {
+  padding: 15px 0 2px 0;
+  text-align: center;
+  width: 130px;
+  font-family: Georgia, "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+}
+.user-card .user-link {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.user-card .user-link .user-avatar {
+  width: 70px;
+  height: 70px;
+}
+.user-card .user-name {
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e2e2e2;
+  text-align: center;
+  padding-bottom: 12px;
+}
+.user-card .meta .count-wap {
+  width: 33.333333%;
+  float: left;
+}
+.user-card .meta .count-wap > a {
+  display: inline-block;
+  color: #333;
+  padding: 0 5px;
+}
+.user-card .meta .count-wap > a:hover {
+  color: #1e88a8;
+}
+.user-card .meta .count-wap > a .count-quantifier {
+  font-size: 12px;
+}
+.user-avatar-link:focus,
+.user-avatar-link:hover {
+  text-decoration: none;
+}
+.user-avatar-link .user-avatar-popover {
+  cursor: pointer;
+}

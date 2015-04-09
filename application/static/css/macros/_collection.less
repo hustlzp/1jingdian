@@ -1,0 +1,290 @@
+@import "../utils";
+
+.collection-logs-wap {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 800;
+  background-color: #ffffff;
+  padding: 30px 25px 10px 25px;
+  overflow: auto;
+  border-radius: 5px;
+
+  .subtitle {
+    font-size: 16px;
+    color: #aaa;
+    margin: 0 0 15px 0;
+  }
+
+  .collection-log {
+    border-top: 1px solid @border-color;
+    padding: 15px 0 15px 0;
+    margin: 0;
+
+    &:hover {
+      .log-meta .wap-report {
+        visibility: visible;
+      }
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+    }
+
+    .title {
+      margin-bottom: 12px;
+      color: #999;
+
+      a {
+        color: #333;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+    }
+
+    .content {
+      margin-bottom: 12px;
+
+      .fa-long-arrow-right {
+        margin: 0 5px;
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .log-meta {
+      color: #999;
+      font-size: 12px;
+
+      .wap-report {
+        display: inline-block;
+        visibility: hidden;
+        margin-left: 15px;
+
+        &.reported {
+          visibility: visible !important;
+
+          .btn-report-collection-log {
+            display: none;
+          }
+          .flag-reported {
+            display: inline-block;
+          }
+        }
+
+        .btn-report-collection-log {
+          display: inline-block;
+          color: #999;
+
+          &:hover {
+            color: @main-color;
+          }
+        }
+
+        .flag-reported {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .btn-close-collection-logs-wap {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      color: #999;
+    }
+  }
+}
+
+
+.collections-wap {
+  padding: 35px 20px 0 20px;
+
+  .collection {
+    display: block;
+    width: 325px;
+    height: 90px;
+    border-radius: 4px;
+    float: left;
+    margin: 0 15px 25px 15px;
+    border: 1px solid @border-color;
+    padding: 20px 20px;
+    color: #333;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #fAfAfA;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+
+      .btn-like-collection {
+        visibility: visible;
+      }
+    }
+
+    .media-left {
+      padding-right: 15px;
+    }
+
+    .title {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .collection-cover {
+      width: 48px;
+      height: 48px;
+    }
+
+    .desc {
+      font-size: 12px;
+      color: #aaa;
+      overflow: hidden;
+      height: 18px;
+    }
+
+    .btn-like-collection {
+      visibility: hidden;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #999;
+
+      &.liked {
+        visibility: visible;
+
+        .fa-bookmark {
+          display: block;
+        }
+        .fa-bookmark-o {
+          display: none;
+        }
+      }
+
+      .fa-bookmark {
+        display: none;
+        color: @main-color;
+      }
+      .fa-bookmark-o {
+        display: block;
+        &:hover {
+          color: @main-color;
+        }
+      }
+    }
+  }
+}
+
+.collection-header {
+  .collection-info {
+    padding: 50px 0 35px 0;
+    text-align: center;
+    position: relative;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .desc {
+      margin-top: 10px;
+      color: #999;
+    }
+
+    .collection-cover {
+      margin-top: 20px;
+      width: 70px;
+      height: 70px;
+    }
+
+    .options {
+      position: absolute;
+      color: #999;
+      right: 25px;
+      top: 25px;
+
+      & > a {
+        color: #999;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .btn-like-collection {
+        &.liked {
+          visibility: visible;
+
+          .fa-bookmark {
+            display: inline-block;
+          }
+          .fa-bookmark-o {
+            display: none;
+          }
+        }
+
+        .fa-bookmark {
+          display: none;
+          color: @main-color;
+        }
+        .fa-bookmark-o {
+          display: inline-block;
+
+          &:hover {
+            color: @main-color;
+          }
+        }
+      }
+
+      .btn-edit-collection,
+      .btn-like-collection,
+      .btn-show-collection-logs-wap {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .tab {
+    text-align: center;
+
+    &.two .item {
+      width: 50%;
+    }
+
+    &.three .item {
+      width: 33.333333333%;
+    }
+
+    .item {
+      text-decoration: none;
+      float: left;
+      display: block;
+      line-height: 1;
+      padding: 17px 0;
+      background-color: #eee;
+      color: #333;
+
+      &.active,
+      &:hover {
+        background-color: @main-color;
+        color: #ffffff;
+      }
+    }
+  }
+}
