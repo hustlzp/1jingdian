@@ -828,6 +828,7 @@
 }
 .collection-header .collection-info .options {
   position: absolute;
+  color: #999;
   right: 25px;
   top: 25px;
 }

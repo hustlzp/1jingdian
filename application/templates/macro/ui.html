@@ -1292,7 +1292,9 @@
             {#               <span class="fa fa-play-circle"></span>#}
             {#            </a>#}
 
-            {% if permissions.AdminPermission().check() %}
+            {% if collection.locked %}
+               <span class="fa fa-lock" title="该话题已锁定"></span>
+            {% elif permissions.AdminPermission().check() %}
                <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                   class="btn-edit-collection" title="编辑句集">
                   <span class="fa fa-pencil"></span>

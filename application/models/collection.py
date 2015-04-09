@@ -8,6 +8,7 @@ from ..utils.uploadsets import collection_covers
 class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
+    locked = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     cover = db.Column(db.String(200), default="default.png")
     desc = db.Column(db.Text)
