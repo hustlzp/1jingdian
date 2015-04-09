@@ -6,7 +6,7 @@ from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPer
 from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
-    NOTIFICATION_KIND, PieceEditLogReport
+    NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -412,6 +412,8 @@ def _get_collection_by_title(title):
         collection = Collection.query.filter(Collection.title == title).first()
         if not collection:
             collection = Collection(title=title, user_id=g.user.id)
+            log = CollectionEditLog(user_id=g.user.id, kind=COLLECTION_EDIT_KIND.CREATE)
+            collection.logs.append(log)
             db.session.add(collection)
             db.session.commit()
         return collection
