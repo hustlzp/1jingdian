@@ -1,9 +1,11 @@
 # coding: utf-8
 from flask import render_template, Blueprint, redirect, request, url_for, g, json
 from ..utils.permissions import UserPermission, CollectionEditPermission
-from ..models import db, Piece, Collection, CollectionPiece, UserLikeCollection
+from ..models import db, Piece, Collection, CollectionPiece, UserLikeCollection, \
+    CollectionEditLog, COLLECTION_EDIT_KIND
 from ..forms import CollectionForm
 from ..utils.uploadsets import collection_covers, process_avatar
+from ..utils.helpers import generate_lcs_html
 
 bp = Blueprint('collection', __name__)
 
@@ -43,6 +45,28 @@ def edit(uid):
 
     form = CollectionForm(obj=collection)
     if form.validate_on_submit():
+        # title变更
+        if collection.title != form.title.data:
+            title_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
+                                          kind=COLLECTION_EDIT_KIND.UPDATE_TITLE,
+                                          before=collection.title, after=form.title.data,
+                                          compare=generate_lcs_html(collection.title,
+                                                                    form.title.data))
+            db.session.add(title_log)
+
+        # desc变更
+        if collection.desc != form.desc.data:
+            desc_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
+                                         before=collection.desc, after=form.desc.data,
+                                         compare=generate_lcs_html(collection.desc, form.desc.data))
+            if collection.desc == "":
+                desc_log.kind = COLLECTION_EDIT_KIND.ADD_DESC
+            elif form.desc.data == "":
+                desc_log.kind = COLLECTION_EDIT_KIND.REMOVE_DESC
+            else:
+                desc_log.kind = COLLECTION_EDIT_KIND.UPDATE_DESC
+            db.session.add(desc_log)
+
         form.populate_obj(collection)
         db.session.add(collection)
         db.session.commit()
@@ -59,6 +83,16 @@ def upload_cover(uid):
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
+        # cover变更
+        cover_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
+                                      before=collection.cover_url,
+                                      after=collection_covers.url(filename))
+        if collection.cover == 'default.png':
+            cover_log.kind = COLLECTION_EDIT_KIND.ADD_COVER
+        else:
+            cover_log.kind = COLLECTION_EDIT_KIND.UPDATE_COVER
+        db.session.add(cover_log)
+
         collection.cover = filename
         db.session.add(collection)
         db.session.commit()

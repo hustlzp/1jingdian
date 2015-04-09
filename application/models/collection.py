@@ -93,6 +93,9 @@ class COLLECTION_EDIT_KIND(object):
     # create
     CREATE = 1
 
+    # title
+    UPDATE_TITLE = 7
+
     # desc
     ADD_DESC = 2
     UPDATE_DESC = 3
