@@ -1,6 +1,6 @@
 # coding: utf-8
-from datetime import timedelta, datetime, date
-from flask import session, abort, flash, redirect, url_for, g
+from datetime import date
+from flask import session, abort, redirect, url_for, g
 from permission import Rule
 from ..models import db, User, Piece
 

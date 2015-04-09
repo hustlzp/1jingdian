@@ -2,7 +2,7 @@
 import os
 import uuid
 from PIL import Image
-from flask.ext.uploads import UploadSet, IMAGES, extension, ALL
+from flask.ext.uploads import UploadSet, IMAGES, extension
 
 # UploadSets
 avatars = UploadSet('avatars', IMAGES)

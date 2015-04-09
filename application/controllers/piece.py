@@ -1,5 +1,4 @@
 # coding: utf-8
-from datetime import datetime, date, timedelta
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPermission
@@ -10,24 +9,6 @@ from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, 
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
-
-
-@bp.route('/pieces_by_date', methods=['POST'])
-def pieces_by_date():
-    """获取从指定date开始的指定天数的pieces"""
-    start = request.form.get('start')
-    if start:
-        start_date = datetime.strptime(start, '%Y-%m-%d').date()
-    else:
-        start_date = date.today() - timedelta(days=3)
-    days = request.form.get('days', 2, type=int)
-    html = ""
-    for i in xrange(days):
-        target_day = start_date - timedelta(days=i)
-        pieces_data = Piece.get_pieces_data_by_day(target_day)
-        pieces_macro = get_template_attribute('macro/ui.html', 'render_pieces_by_date')
-        html += pieces_macro(pieces_data)
-    return html
 
 
 @bp.route('/piece/<int:uid>')
@@ -55,7 +36,7 @@ def modal(uid):
     piece.clicks_count += 1
     db.session.add(piece)
     db.session.commit()
-    modal = get_template_attribute('macro/ui.html', 'render_piece_details_wap')
+    modal = get_template_attribute('macro/piece.html', 'render_piece_details_wap')
     return modal(piece)
 
 
@@ -257,8 +238,8 @@ def comment(uid):
         db.session.commit()
 
     # 返回comment HTML
-    comment_macro = get_template_attribute('macro/ui.html', 'render_piece_comment')
-    sub_comments_macro = get_template_attribute('macro/ui.html', 'render_piece_sub_comments')
+    comment_macro = get_template_attribute('macro/piece.html', 'render_piece_comment')
+    sub_comments_macro = get_template_attribute('macro/piece.html', 'render_piece_sub_comments')
     comment_html = comment_macro(comment)
     # 若为root comment，则在返回的HTML中加入sub_comments
     if not root_comment_id:
@@ -320,7 +301,7 @@ def add_to_collection(uid):
         db.session.add(collection_piece)
         db.session.add(log)
         db.session.commit()
-    macro = get_template_attribute('macro/ui.html', 'render_collection_tag_wap')
+    macro = get_template_attribute('macro/collection.html', 'render_collection_tag_wap')
     return json.dumps({'result': True,
                        'id': collection.id,
                        'html': macro(collection)})

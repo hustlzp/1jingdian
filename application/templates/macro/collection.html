@@ -1,6 +1,5 @@
 {% from 'macro/user.html' import render_user_avatar %}
 
-
 {% macro render_collection_logs_wap(collection) %}
    <div class="collection-logs-wap">
       <span class="btn-close-collection-logs-wap">×</span>
@@ -83,4 +82,233 @@
          });
       });
    </script>
+{% endmacro %}
+
+
+{% macro render_collection_header(collection, active='latest') %}
+   <div class="collection-header">
+      <div class="collection-info">
+         <div class="title">
+            <span class="fa fa-book"></span>&nbsp;&nbsp;{{ collection.title }}
+         </div>
+
+         {% if collection.desc %}
+            <div class="desc">{{ collection.desc }}</div>
+         {% endif %}
+
+         {% if collection.cover_url %}
+            <img src="{{ collection.cover_url }}" alt=""
+                 class="img-circle collection-cover"/>
+         {% endif %}
+
+         <div class="options">
+            {#            <a href="javascript:void(0)" class="btn-play-collection"#}
+            {#               data-id="{{ collection.id }}"#}
+            {#               data-collection="{{ collection.title }}">#}
+            {#               <span class="fa fa-play-circle"></span>#}
+            {#            </a>#}
+
+            {% if permissions.CollectionEditPermission(collection).check() %}
+               <a href="{{ url_for('collection.edit', uid=collection.id) }}"
+                  class="btn-edit-collection" title="编辑句集">
+                  <span class="fa fa-pencil"></span>
+               </a>
+            {% elif collection.locked %} %}
+               <span class="fa fa-lock" title="该话题已锁定"></span>
+            {% endif %}
+
+            <a href="javascript: void(0)" class="btn-show-collection-logs-wap" title="句集编辑日志">
+               <span class="fa fa-file-text-o"></span>
+            </a>
+
+            <a class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
+               data-id="{{ collection.id }}" href="javascript: void(0)">
+               <span class="fa fa-bookmark-o" title="收藏句集"></span>
+               <span class="fa fa-bookmark" title="取消收藏"></span>
+            </a>
+         </div>
+      </div>
+
+      <div class="tab {% if g.user %}three{% else %}two{% endif %} clearfix">
+         <a class="item {% if active == 'latest' %}active{% endif %}"
+            href="{{ url_for('collection.view', uid=collection.id) }}">最新</a>
+         <a class="item {% if active == 'hot' %}active{% endif %}"
+            href="{{ url_for('collection.hot_view', uid=collection.id) }}">热门</a>
+         {% if g.user %}
+            <a class="item {% if active == 'voted' %}active{% endif %}"
+               href="{{ url_for('collection.voted_view', uid=collection.id) }}">
+               {{ collection.voted_pieces_by_user.count() }} 顶过</a>
+         {% endif %}
+      </div>
+   </div>
+
+   {{ render_collection_logs_wap(collection) }}
+
+   <script type="text/javascript">
+      (function () {
+         // 收藏句集
+         $('.btn-like-collection').click(function (e) {
+            var id = $(this).data('id');
+            var url = "";
+            var _this = $(this);
+            var liked = $(this).hasClass('liked');
+
+            if (liked) {
+               url = urlFor('collection.unlike', {uid: id});
+            } else {
+               url = urlFor('collection.like', {uid: id});
+            }
+
+            $.ajax({
+               url: url,
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.toggleClass('liked');
+               }
+            });
+         });
+
+         // 弹出句集编辑日志
+         $('.btn-show-collection-logs-wap').click(function () {
+            $('.collection-logs-wap').show().transition({
+               'top': '0',
+               'opacity': 1
+            }, 300);
+         });
+
+         // 隐藏句集编辑日志
+         $('.btn-close-collection-logs-wap').click(function () {
+            $('.collection-logs-wap').transition({
+               'top': '15px',
+               'opacity': 0
+            }, 300, function () {
+               $('.collection-logs-wap').hide();
+            });
+         });
+
+         // 播放句集
+         $('.btn-play-collection').click(function () {
+            var id = $(this).data('id');
+            var collection = $(this).data('collection');
+
+            $.ajax({
+               url: urlFor('piece.random'),
+               method: 'POST',
+               dataType: 'json',
+               data: {
+                  collection_id: id
+               }
+            }).done(function (piece) {
+               var html = "<div class='content'>" + piece.content + "</div>";
+
+               if (piece.source) {
+                  html += "<div class='source'>" + piece.source + "</div>";
+               }
+
+               openBackdrop('「' + collection + '」', html);
+            });
+
+            if (g.timerForBackdrop) {
+               clearInterval(g.timerForBackdrop);
+            }
+
+            g.timerForBackdrop = setInterval(function () {
+               $.ajax({
+                  url: urlFor('piece.random'),
+                  method: 'POST',
+                  dataType: 'json',
+                  data: {
+                     collection_id: id
+                  }
+               }).done(function (piece) {
+                  $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
+                  if (piece.source) {
+                     $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
+                  } else {
+                     $('.full-screen-backdrop .source').hide();
+                  }
+
+                  adjustBackdropContent();
+               });
+            }, 8000);
+         });
+      })();
+   </script>
+{% endmacro %}
+
+
+{% macro render_collections(collections, attr=None) %}
+   <div class="collections-wap clearfix">
+      {% for collection in collections %}
+         {% if attr %}
+            {% set collection = collection[attr] %}
+         {% endif %}
+
+         <div class="collection media" data-collection-id="{{ collection.id }}">
+            <div class="media-left">
+               <a href="#">
+                  <img src="{{ collection.cover_url }}" alt=""
+                       class="media-object img-circle collection-cover"/>
+               </a>
+            </div>
+
+            <div class="media-body">
+               <div class="title">{{ collection.title }}</div>
+               <div class="desc">{{ collection.desc or "" }}</div>
+            </div>
+
+            <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
+                 data-id="{{ collection.id }}">
+               <span class="fa fa-bookmark-o" title="收藏句集"></span>
+               <span class="fa fa-bookmark" title="取消收藏"></span>
+            </div>
+         </div>
+      {% endfor %}
+   </div>
+
+   <script type="text/javascript">
+      (function () {
+         $('.collection').click(function () {
+            var collectionId = $(this).data('collection-id');
+            window.location = urlFor('collection.view', {'uid': collectionId});
+         });
+
+         $('.btn-like-collection').click(function (e) {
+            var id = $(this).data('id');
+            var url = "";
+            var _this = $(this);
+            var liked = $(this).hasClass('liked');
+
+            if (liked) {
+               url = urlFor('collection.unlike', {uid: id});
+            } else {
+               url = urlFor('collection.like', {uid: id});
+            }
+
+            $.ajax({
+               url: url,
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.toggleClass('liked');
+               }
+            });
+
+            e.stopPropagation();
+         });
+      })();
+   </script>
+{% endmacro %}
+
+
+{% macro render_collection_tag_wap(collection) %}
+   <span class="collection-tag-wap" data-id="{{ collection.id }}">
+      <a class="collection-tag" href="{{ url_for('collection.view', uid=collection.id) }}">
+         {{ collection.title }}</a><a href="javascript: void(0)" class="btn-delete-collection"
+                                      data-id="{{ collection.id }}"><span
+         class="fa fa-close"></span></a>
+   </span>
 {% endmacro %}

@@ -90,4 +90,3 @@ def check_all_notifications():
         db.session.add(notification)
     db.session.commit()
     return json.dumps({'result': True})
-

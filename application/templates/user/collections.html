@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
-{% from "macro/ui.html" import pagination, render_collections, render_user_profile_header %}
+{% from "macro/collection.html" import render_collections %}
+{% from "macro/user.html" import render_user_profile_header %}
+{% from 'macro/utils.html' import pagination %}
 
 {% block page_title %}{{ user.name }} - 收藏的句集 - 壹经典{% endblock %}
 {% block page_content %}

@@ -1,3 +1,4 @@
+# coding: utf-8
 from permission import Permission
 from .rules import VisitorRule, UserRule, AdminRule, PieceAddRule, PieceOwnerRule, \
     TrustedUserRule, CollectionEditableRule, CollectionCreatorRule

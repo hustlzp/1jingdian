@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for
 from ..forms import SigninForm, SignupForm
 from ..utils.account import signin_user, signout_user
-from ..utils.permissions import VisitorPermission, UserPermission
+from ..utils.permissions import VisitorPermission
 from ..models import db, User
 
 bp = Blueprint('account', __name__)

@@ -32,3 +32,56 @@
       </div>
    </div>
 {% endmacro %}
+
+
+{% macro render_user_profile_header(user, active="creates") %}
+   <div class="user-profile-header">
+      <div class="user-info">
+         <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+
+         <div class="user-name">{{ user.name }}</div>
+
+         {% if user.motto %}
+            <div class="motto">{{ user.motto }}</div>
+         {% endif %}
+
+         <div class="media-icons">
+            {% if user.blog %}
+               <a href="{{ user.blog }}" target="_blank" title="博客">
+                  <img src="{{ static('image/media/blog.png') }}" alt=""/>
+               </a>
+            {% endif %}
+            {% if user.weibo %}
+               <a href="{{ user.weibo }}" target="_blank" title="微博">
+                  <img src="{{ static('image/media/weibo.jpg') }}" alt=""/>
+               </a>
+            {% endif %}
+            {% if user.douban %}
+               <a href="{{ user.douban }}" target="_blank" title="豆瓣">
+                  <img src="{{ static('image/media/douban.png') }}" alt=""/>
+               </a>
+            {% endif %}
+            {#            {% if user.zhihu %}#}
+            {#               <a href="{{ user.zhihu }}" target="_blank" title="知乎">#}
+            {#                  <img src="{{ static('image/media/zhihu.png') }}" alt=""/>#}
+            {#               </a>#}
+            {#            {% endif %}#}
+         </div>
+      </div>
+
+      <div class="tab clearfix">
+         <a class="tab-item {% if active == "votes" %}active{% endif %}"
+            href="{{ url_for('user.profile', uid=user.id) }}">
+            {{ user.votes_count }} 顶
+         </a>
+         <a class="tab-item {% if active == "share" %}active{% endif %}"
+            href="{{ url_for('user.share', uid=user.id) }}">
+            {{ user.pieces_count }} 分享
+         </a>
+         <a class="tab-item {% if active == "likes" %}active{% endif %}"
+            href="{{ url_for('user.likes', uid=user.id) }}">
+            {{ user.liked_collections_count }} 收藏
+         </a>
+      </div>
+   </div>
+{% endmacro %}

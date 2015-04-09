@@ -1,7 +1,5 @@
 # coding: utf-8
-from datetime import date, timedelta
 from flask import render_template, Blueprint
-from ..models import db, Piece
 
 bp = Blueprint('feedback', __name__)
 
