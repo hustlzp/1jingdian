@@ -914,7 +914,7 @@
   padding: 15px 0 15px 0;
   margin: 0;
 }
-.piece-logs-wap .piece-log:hover .log-meta .btn-report-abuse {
+.piece-logs-wap .piece-log:hover .log-meta .wap-report-abuse {
   visibility: visible;
 }
 .piece-logs-wap .piece-log .user-avatar {
@@ -948,13 +948,29 @@
   color: #999;
   font-size: 12px;
 }
-.piece-logs-wap .piece-log .log-meta .btn-report-abuse {
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse {
+  display: inline-block;
   visibility: hidden;
   margin-left: 15px;
+}
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse.reported {
+  visibility: visible !important;
+}
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse.reported .btn-report-abuse {
+  display: none;
+}
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse.reported .flag-reported {
+  display: inline-block;
+}
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse .btn-report-abuse {
+  display: inline-block;
   color: #999;
 }
-.piece-logs-wap .piece-log .log-meta .btn-report-abuse:hover {
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse .btn-report-abuse:hover {
   color: #1e88a8;
+}
+.piece-logs-wap .piece-log .log-meta .wap-report-abuse .flag-reported {
+  display: none;
 }
 .piece-logs-wap .btn-close-logs-wap {
   position: absolute;

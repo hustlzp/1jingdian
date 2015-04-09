@@ -1145,7 +1145,7 @@
     margin: 0;
 
     &:hover {
-      .log-meta .btn-report-abuse {
+      .log-meta .wap-report-abuse {
         visibility: visible;
       }
     }
@@ -1189,13 +1189,33 @@
       color: #999;
       font-size: 12px;
 
-      .btn-report-abuse {
+      .wap-report-abuse {
+        display: inline-block;
         visibility: hidden;
         margin-left: 15px;
-        color: #999;
 
-        &:hover {
-          color: @main-color;
+        &.reported {
+          visibility: visible !important;
+
+          .btn-report-abuse {
+            display: none;
+          }
+          .flag-reported {
+            display: inline-block;
+          }
+        }
+
+        .btn-report-abuse {
+          display: inline-block;
+          color: #999;
+
+          &:hover {
+            color: @main-color;
+          }
+        }
+
+        .flag-reported {
+          display: none;
         }
       }
     }

@@ -483,13 +483,33 @@
 
             <div class="log-meta">
                {{ log.created_at|timesince }}
-               <a href="#" class="btn-report-abuse need-signed-in">
-                  <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> 举报
-               </a>
+               <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
+                  <a href="#" class="need-signed-in btn-report-abuse" data-id="{{ log.id }}">
+                     <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> 举报
+                  </a>
+                  <span class="flag-reported">已举报</span>
+               </div>
             </div>
          </div>
       </div>
    {% endfor %}
+
+   <script type="text/javascript">
+      $(document).onOnce('click', '.btn-report-abuse', function () {
+         var id = $(this).data('id');
+         var _this = $(this);
+
+         $.ajax({
+            url: urlFor('piece.report_log', {uid: id}),
+            method: 'post',
+            dataType: 'json'
+         }).done(function (response) {
+            if (response.result) {
+               _this.parent().addClass('reported');
+            }
+         });
+      });
+   </script>
 {% endmacro %}
 
 

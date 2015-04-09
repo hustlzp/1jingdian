@@ -21,7 +21,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('piece_edit_log_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['piece_edit_log_id'], ['piece.id'], ),
+    sa.ForeignKeyConstraint(['piece_edit_log_id'], ['piece_edit_log.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

@@ -6,7 +6,7 @@ from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPer
 from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
-    NOTIFICATION_KIND
+    NOTIFICATION_KIND, PieceEditLogReport
 from ..forms import PieceForm
 
 bp = Blueprint('piece', __name__)
@@ -364,6 +364,19 @@ def random():
         })
     else:
         abort(404)
+
+
+@bp.route('/piece/log/<int:uid>/report', methods=['POST'])
+@UserPermission()
+def report_log(uid):
+    """举报恶意编辑"""
+    log = PieceEditLog.query.get_or_404(uid)
+    report = log.reports.filter(PieceEditLog.user_id == g.user.id).first()
+    if not report:
+        report = PieceEditLogReport(piece_edit_log_id=uid, user_id=g.user.id)
+        db.session.add(report)
+        db.session.commit()
+    return json.dumps({'result': True})
 
 
 def _save_piece_source(source):
