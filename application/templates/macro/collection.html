@@ -1,0 +1,85 @@
+{% from 'macro/user.html' import render_user_avatar %}
+
+
+{% macro render_collection_logs_wap(collection) %}
+   <div class="collection-logs-wap">
+      <span class="btn-close-collection-logs-wap">×</span>
+
+      <div class="subtitle">句集编辑日志</div>
+
+      {% for log in collection.logs %}
+         <div class="collection-log media">
+            <div class="media-left">{{ render_user_avatar(log.user) }}</div>
+            <div class="media-body">
+               <div class="title">
+                  <a href="{{ url_for('user.profile', uid=log.user_id) }}">
+                     {{ log.user.name }}
+                  </a>
+
+                  {% if log.kind == COLLECTION_EDIT_KIND.CREATE %}
+                     创建了句集
+                  {% elif log.kind == COLLECTION_EDIT_KIND.UPDATE_TITLE %}
+                     更新了名称
+                  {% elif log.kind == COLLECTION_EDIT_KIND.ADD_DESC %}
+                     添加了描述
+                  {% elif log.kind == COLLECTION_EDIT_KIND.UPDATE_DESC %}
+                     更新了描述
+                  {% elif log.kind == COLLECTION_EDIT_KIND.REMOVE_DESC %}
+                     移除了描述
+                  {% elif log.kind == COLLECTION_EDIT_KIND.ADD_COVER %}
+                     添加了图标
+                  {% elif log.kind == COLLECTION_EDIT_KIND.UPDATE_COVER %}
+                     更新了图标
+                  {% endif %}
+               </div>
+
+               <div class="content">
+                  {% if log.kind == COLLECTION_EDIT_KIND.UPDATE_TITLE %}
+                     {{ log.compare|safe }}
+                  {% elif log.kind == COLLECTION_EDIT_KIND.ADD_DESC %}
+                     {{ log.compare|safe }}
+                  {% elif log.kind == COLLECTION_EDIT_KIND.UPDATE_DESC %}
+                     {{ log.compare|safe }}
+                  {% elif log.kind == COLLECTION_EDIT_KIND.REMOVE_DESC %}
+                     {{ log.compare|safe }}
+                  {% elif log.kind == COLLECTION_EDIT_KIND.ADD_COVER %}
+                     <img src="{{ log.after }}" alt="" class="img-circle"/>
+                  {% elif log.kind == COLLECTION_EDIT_KIND.UPDATE_COVER %}
+                     <img src="{{ log.after }}" alt="" class="img-circle"/>
+                     <span class="fa fa-long-arrow-right"></span>
+                     <img src="{{ log.after }}" alt="" class="img-circle"/>
+                  {% endif %}
+               </div>
+
+               <div class="log-meta">
+                  {{ log.created_at|timesince }}
+                  <div class="wap-report {% if log.reported_by_user() %}reported{% endif %}">
+                     <a href="javascript: void(0)" data-id="{{ log.id }}"
+                        class="need-signed-in btn-report-collection-log">
+                        <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> 举报
+                     </a>
+                     <span class="flag-reported">已举报</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {% endfor %}
+   </div>
+
+   <script type="text/javascript">
+      $(document).onOnce('click', '.btn-report-collection-log', function () {
+         var id = $(this).data('id');
+         var _this = $(this);
+
+         $.ajax({
+            url: urlFor('collection.report_log', {uid: id}),
+            method: 'post',
+            dataType: 'json'
+         }).done(function (response) {
+            if (response.result) {
+               _this.parent().addClass('reported');
+            }
+         });
+      });
+   </script>
+{% endmacro %}

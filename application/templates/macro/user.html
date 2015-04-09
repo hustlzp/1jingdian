@@ -1,0 +1,34 @@
+{% macro render_user_avatar(user) %}
+   <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
+      <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
+           data-user-id="{{ user.id }}" alt=""/></a>
+   <div class="popover-content-wap">
+      <div class="user-card">
+         <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-link">
+            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+         </a>
+
+         <div class="user-name">
+            {{ user.name }}
+         </div>
+
+         <div class="meta clearfix">
+            <div class="count-wap votes-count">
+               <a href="{{ url_for('user.profile', uid=user.id) }}">
+                  {{ user.votes_count }}<br/><span class="count-quantifier">顶</span>
+               </a>
+            </div>
+            <div class="count-wap pieces-count">
+               <a href="{{ url_for('user.share', uid=user.id) }}">
+                  {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>
+               </a>
+            </div>
+            <div class="count-wap collections-count">
+               <a href="{{ url_for('user.likes', uid=user.id) }}">
+                  {{ user.liked_collections_count }}<br/><span class="count-quantifier">收藏</span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endmacro %}

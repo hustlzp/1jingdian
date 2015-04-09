@@ -1,6 +1,7 @@
 {% from 'macro/form.html' import vertical_field, field_error, form_submit %}
 {% from 'macro/script.html' import full_screen_script %}
-
+{% from 'macro/collection.html' import render_collection_logs_wap %}
+{% from 'macro/user.html' import render_user_avatar %}
 
 {% macro pagination(paginator) %}
    {% if paginator.pages > 1 %}
@@ -46,42 +47,6 @@
          {% endif %}
       </div>
    {% endif %}
-{% endmacro %}
-
-
-{% macro render_user_avatar(user) %}
-   <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
-      <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
-           data-user-id="{{ user.id }}" alt=""/></a>
-   <div class="popover-content-wap">
-      <div class="user-card">
-         <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-link">
-            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
-         </a>
-
-         <div class="user-name">
-            {{ user.name }}
-         </div>
-
-         <div class="meta clearfix">
-            <div class="count-wap votes-count">
-               <a href="{{ url_for('user.profile', uid=user.id) }}">
-                  {{ user.votes_count }}<br/><span class="count-quantifier">顶</span>
-               </a>
-            </div>
-            <div class="count-wap pieces-count">
-               <a href="{{ url_for('user.share', uid=user.id) }}">
-                  {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>
-               </a>
-            </div>
-            <div class="count-wap collections-count">
-               <a href="{{ url_for('user.likes', uid=user.id) }}">
-                  {{ user.liked_collections_count }}<br/><span class="count-quantifier">收藏</span>
-               </a>
-            </div>
-         </div>
-      </div>
-   </div>
 {% endmacro %}
 
 
@@ -1326,6 +1291,8 @@
       </div>
    </div>
 
+   {{ render_collection_logs_wap(collection) }}
+
    <script type="text/javascript">
       (function () {
          // 收藏句集
@@ -1349,6 +1316,24 @@
                if (response.result) {
                   _this.toggleClass('liked');
                }
+            });
+         });
+
+         // 弹出句集编辑日志
+         $('.btn-show-collection-logs-wap').click(function () {
+            $('.collection-logs-wap').show().transition({
+               'top': '0',
+               'opacity': 1
+            }, 300);
+         });
+
+         // 隐藏句集编辑日志
+         $('.btn-close-collection-logs-wap').click(function () {
+            $('.collection-logs-wap').transition({
+               'top': '15px',
+               'opacity': 0
+            }, 300, function () {
+               $('.collection-logs-wap').hide();
             });
          });
 
