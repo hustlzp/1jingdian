@@ -1292,13 +1292,13 @@
             {#               <span class="fa fa-play-circle"></span>#}
             {#            </a>#}
 
-            {% if collection.locked %}
-               <span class="fa fa-lock" title="该话题已锁定"></span>
-            {% elif permissions.AdminPermission().check() %}
+            {% if permissions.CollectionEditPermission(collection).check() %}
                <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                   class="btn-edit-collection" title="编辑句集">
                   <span class="fa fa-pencil"></span>
                </a>
+            {% elif collection.locked %} %}
+               <span class="fa fa-lock" title="该话题已锁定"></span>
             {% endif %}
 
             <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"

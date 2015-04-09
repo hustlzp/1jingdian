@@ -411,7 +411,7 @@ def _get_collection_by_title(title):
         # 若不存在该title的句集，则创建
         collection = Collection.query.filter(Collection.title == title).first()
         if not collection:
-            collection = Collection(title=title)
+            collection = Collection(title=title, user_id=g.user.id)
             db.session.add(collection)
             db.session.commit()
         return collection

@@ -73,3 +73,30 @@ class TrustedUserRule(Rule):
 
     def deny(self):
         abort(403)
+
+
+class CollectionEditableRule(Rule):
+    def __init__(self, collection):
+        self.collection = collection
+        super(CollectionEditableRule, self).__init__()
+
+    def check(self):
+        return self.collection and self.collection.locked
+
+    def deny(self):
+        abort(403)
+
+
+class CollectionCreatorRule(Rule):
+    def __init__(self, collection):
+        self.collection = collection
+        super(CollectionCreatorRule, self).__init__()
+
+    def base(self):
+        return UserRule()
+
+    def check(self):
+        return self.collection.user_id == g.user.id
+
+    def deny(self):
+        abort(403)

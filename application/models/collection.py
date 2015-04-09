@@ -19,6 +19,12 @@ class Collection(db.Model):
                                               lazy='dynamic',
                                               order_by='desc(Collection.created_at)'))
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+                           backref=db.backref('created_collections',
+                                              lazy='dynamic',
+                                              order_by='desc(Collection.created_at)'))
+
     @property
     def cover_url(self):
         return collection_covers.url(self.cover) if self.cover else ""
