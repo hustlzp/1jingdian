@@ -180,7 +180,6 @@ def build_css(app):
         if '*' in absolute_layout_path:
             for path in glob2.iglob(absolute_layout_path):
                 with open(path) as css_file:
-                    print(path)
                     app_css_string += cssmin(css_file.read())
         else:
             with open(absolute_layout_path) as css_file:
@@ -251,8 +250,10 @@ def app_css(template_reference):
 
     # if False:
     if G.debug:
-        # libs + layout
+        # libs
         css_paths += G.css_config['libs']
+
+        # layout
         for layout in G.css_config['layout']:
             # 支持通配符
             if '*' in layout:
@@ -260,6 +261,7 @@ def app_css(template_reference):
                     css_paths.append(path.split(G.static_path)[1][1:])
             else:
                 css_paths.append(layout)
+
         # page
         template_name = _get_template_name(template_reference)
         page_css_path = os.path.join(G.css_config['page'],
