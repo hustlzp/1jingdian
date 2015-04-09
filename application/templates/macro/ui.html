@@ -1301,11 +1301,15 @@
                <span class="fa fa-lock" title="该话题已锁定"></span>
             {% endif %}
 
-            <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
-                 data-id="{{ collection.id }}">
+            <a href="javascript: void(0)" class="btn-show-collection-logs-wap" title="句集编辑日志">
+               <span class="fa fa-file-text-o"></span>
+            </a>
+
+            <a class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
+               data-id="{{ collection.id }}">
                <span class="fa fa-bookmark-o" title="收藏句集"></span>
                <span class="fa fa-bookmark" title="取消收藏"></span>
-            </div>
+            </a>
          </div>
       </div>
 

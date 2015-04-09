@@ -1044,17 +1044,8 @@
       right: 25px;
       top: 25px;
 
-      .btn-play-collection {
+      & > a {
         color: #999;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-
-      .btn-edit-collection {
-        color: #999;
-        margin-left: 20px;
 
         &:hover {
           color: @main-color;
@@ -1062,16 +1053,11 @@
       }
 
       .btn-like-collection {
-        display: inline-block;
-        color: #999;
-        margin-left: 20px;
-        cursor: pointer;
-
         &.liked {
           visibility: visible;
 
           .fa-bookmark {
-            display: block;
+            display: inline-block;
           }
           .fa-bookmark-o {
             display: none;
@@ -1083,11 +1069,18 @@
           color: @main-color;
         }
         .fa-bookmark-o {
-          display: block;
+          display: inline-block;
+
           &:hover {
             color: @main-color;
           }
         }
+      }
+
+      .btn-edit-collection,
+      .btn-like-collection,
+      .btn-show-collection-logs-wap {
+        margin-left: 15px;
       }
     }
 

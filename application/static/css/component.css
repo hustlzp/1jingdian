@@ -832,30 +832,17 @@
   right: 25px;
   top: 25px;
 }
-.collection-header .collection-info .options .btn-play-collection {
+.collection-header .collection-info .options > a {
   color: #999;
 }
-.collection-header .collection-info .options .btn-play-collection:hover {
+.collection-header .collection-info .options > a:hover {
   color: #1e88a8;
-}
-.collection-header .collection-info .options .btn-edit-collection {
-  color: #999;
-  margin-left: 20px;
-}
-.collection-header .collection-info .options .btn-edit-collection:hover {
-  color: #1e88a8;
-}
-.collection-header .collection-info .options .btn-like-collection {
-  display: inline-block;
-  color: #999;
-  margin-left: 20px;
-  cursor: pointer;
 }
 .collection-header .collection-info .options .btn-like-collection.liked {
   visibility: visible;
 }
 .collection-header .collection-info .options .btn-like-collection.liked .fa-bookmark {
-  display: block;
+  display: inline-block;
 }
 .collection-header .collection-info .options .btn-like-collection.liked .fa-bookmark-o {
   display: none;
@@ -865,10 +852,15 @@
   color: #1e88a8;
 }
 .collection-header .collection-info .options .btn-like-collection .fa-bookmark-o {
-  display: block;
+  display: inline-block;
 }
 .collection-header .collection-info .options .btn-like-collection .fa-bookmark-o:hover {
   color: #1e88a8;
+}
+.collection-header .collection-info .options .btn-edit-collection,
+.collection-header .collection-info .options .btn-like-collection,
+.collection-header .collection-info .options .btn-show-collection-logs-wap {
+  margin-left: 15px;
 }
 .collection-header .tab {
   text-align: center;
