@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for, g, json
 from ..utils.permissions import UserPermission, CollectionEditPermission
 from ..models import db, Piece, Collection, CollectionPiece, UserLikeCollection, \
-    CollectionEditLog, COLLECTION_EDIT_KIND
+    CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport
 from ..forms import CollectionForm
 from ..utils.uploadsets import collection_covers, process_avatar
 from ..utils.helpers import generate_lcs_html
@@ -142,4 +142,17 @@ def unlike(uid):
             g.user.liked_collections_count -= 1
     db.session.add(g.user)
     db.session.commit()
+    return json.dumps({'result': True})
+
+
+@bp.route('/collection/log/<int:uid>/report', methods=['POST'])
+@UserPermission()
+def report_log(uid):
+    """举报恶意编辑"""
+    log = CollectionEditLog.query.get_or_404(uid)
+    report = log.reports.filter(CollectionEditLog.user_id == g.user.id).first()
+    if not report:
+        report = CollectionEditLogReport(collection_edit_log_id=uid, user_id=g.user.id)
+        db.session.add(report)
+        db.session.commit()
     return json.dumps({'result': True})
