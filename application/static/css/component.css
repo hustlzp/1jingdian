@@ -237,6 +237,12 @@
   color: #000;
   margin-bottom: 8px;
 }
+.piece-details-wap .comment .comment-user a {
+  color: #333;
+}
+.piece-details-wap .comment .comment-user a:hover {
+  color: #1e88a8;
+}
 .piece-details-wap .comment .comment-user .to-target-user {
   font-size: 12px;
   color: #999;
@@ -910,9 +916,6 @@
 }
 .piece-logs-wap .piece-log:hover .log-meta .btn-report-abuse {
   visibility: visible;
-}
-.piece-logs-wap .piece-log .media-left {
-  padding-right: 15px;
 }
 .piece-logs-wap .piece-log .user-avatar {
   width: 32px;

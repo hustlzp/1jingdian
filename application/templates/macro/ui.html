@@ -160,9 +160,14 @@
 
          <div class="media-body">
             <div class="comment-user">
-               {{ comment.user.name }}
+               <a href="{{ url_for('user.profile', uid=comment.user_id) }}">
+                  {{ comment.user.name }}
+               </a>
                {% if comment.root_comment_id %}
-                  <span class="to-target-user">回复</span> {{ comment.target_user.name }}
+                  <span class="to-target-user">回复</span>
+                  <a href="{{ url_for('user.profile', uid=comment.target_user_id) }}">
+                     {{ comment.target_user.name }}
+                  </a>
                {% endif %}
             </div>
             <div class="comment-content">{{ comment.content }}</div>
