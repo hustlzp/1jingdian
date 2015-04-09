@@ -6,5 +6,5 @@ from ..models import User
 
 
 class CollectionForm(Form):
-    title = StringField('标题', validators=[DataRequired('标题不能为空')])
+    title = StringField('名称', validators=[DataRequired('句集名称不能为空')])
     desc = StringField('描述')
