@@ -733,6 +733,8 @@
             showLoadingFlag(pieceModal);
 
             if (pieceModal.hasClass('open')) {
+               $('.piece').removeClass('selected');
+               $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
                pieceModal.attr('data-piece-id', pieceId);
                addClicksCount(pieceId);
 
@@ -763,6 +765,7 @@
        */
       function openModal(pieceId, callback) {
          addClicksCount(pieceId);
+         $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
 
          $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
             $(this).addClass('open');
@@ -778,6 +781,8 @@
        * @param callback
        */
       function closeModal(callback) {
+         $('.piece').removeClass('selected');
+
          $('.piece-modal-wap').stop().transition({
             'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
          }, 400, function () {

@@ -444,6 +444,9 @@
 .pieces-wap .piece.last {
   border-bottom: none;
 }
+.pieces-wap .piece.selected {
+  background-color: #f8f8f8;
+}
 .pieces-wap .piece:hover {
   background-color: #f8f8f8;
 }
