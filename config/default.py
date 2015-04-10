@@ -40,4 +40,4 @@ class Config(object):
     SC_API_KEY = ''
 
     # Host string, used by fabric
-    HOST_STRING = "root@192.241.159.34"
+    HOST_STRING = ""
