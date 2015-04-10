@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% from 'macro/form.html' import render_field %}
+
+{% block page_title %}发送邀请码{% endblock %}
+{% block page_content %}
+   <div class="ui segment">
+      <p>发送邀请码</p>
+
+      <form action="" method="post">
+         <div class="ui form">
+            {{ form.csrf_token() }}
+
+            <div class="field">
+               <label for="">邀请码</label>
+
+               <input type="text" readonly="readonly" value="{{ invitation_code.code }}"/>
+            </div>
+
+            {{ render_field(form.email) }}
+
+            <button type="submit" class="mini green ui submit button">发送</button>
+         </div>
+      </form>
+   </div>
+{% endblock %}

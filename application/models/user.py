@@ -12,6 +12,7 @@ class User(db.Model):
     avatar = db.Column(db.String(200), default='default.png')
     motto = db.Column(db.String(100))
     password = db.Column(db.String(200))
+    is_active = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% from "macros/_utils.html" import pagination %}
+
+{% block page_title %}管理邀请码{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">管理邀请码</div>
+         <div class="panel-body">
+            <a href="{{ url_for('admin.generate_invitation_codes') }}"
+               class="btn btn-primary btn-sm btn-generate-invitation-codes">生成邀请码</a>
+
+            <table class="table">
+               <tr>
+                  <th>邀请码</th>
+                  <th>发送邮箱</th>
+                  <th>发送时间</th>
+                  <th>注册用户</th>
+                  <th>注册时间</th>
+                  <th>操作</th>
+               </tr>
+
+               {% for code in codes.items %}
+                  <tr>
+                     <td>{{ code.code }}</td>
+                     <td>{{ code.email or "" }}</td>
+                     <td>{{ code.sended_at|timesince }}</td>
+                     <td>
+                        {% if code.user %}
+                           <a href="{{ url_for('people.profile', uid=code.user.id) }}"
+                              target="_blank">{{ code.user.name }}
+                           </a>
+                        {% endif %}
+                     </td>
+                     <td>
+                        {% if code.user %}
+                           {{ code.user.created_at|timesince }}
+                        {% endif %}
+                     </td>
+                     <td>
+                        {% if not code.used and not code.email %}
+                           <a href="{{ url_for('admin.send_invitation_code', uid=code.id) }}"
+                              class="btn btn-default btn-xs">发送</a>
+                        {% endif %}
+                     </td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </div>
+
+         {% if codes.pages > 1 %}
+            <div class="panel-footer">
+               {{ pagination(codes) }}
+            </div>
+         {% endif %}
+      </div>
+   </div>
+{% endblock %}
