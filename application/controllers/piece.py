@@ -69,6 +69,19 @@ def add():
         # Generate QRCode
         piece.make_qrcode()
         db.session.add(piece)
+
+        # 如果存在title为author的句集，则自动将piece加入到此句集
+        author_collection = Collection.get_by_title(piece.author)
+        if author_collection:
+            author_collection_piece = CollectionPiece(collection_id=author_collection.id)
+            piece.collections.append(author_collection_piece)
+
+        # 如果存在title为source的句集，则自动将piece加入到此句集
+        source_collection = Collection.get_by_title(piece.source)
+        if source_collection:
+            source_collection_piece = CollectionPiece(collection_id=source_collection.id)
+            piece.collections.append(source_collection_piece)
+
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)
@@ -158,6 +171,19 @@ def edit(uid):
             piece.source = ""
             piece.source_link = ""
         db.session.add(piece)
+
+        # 如果存在title为author的句集，则自动将piece加入到此句集
+        author_collection = Collection.get_by_title(piece.author)
+        if author_collection:
+            author_collection_piece = CollectionPiece(collection_id=author_collection.id)
+            piece.collections.append(author_collection_piece)
+
+        # 如果存在title为source的句集，则自动将piece加入到此句集
+        source_collection = Collection.get_by_title(piece.source)
+        if source_collection:
+            source_collection_piece = CollectionPiece(collection_id=source_collection.id)
+            piece.collections.append(source_collection_piece)
+
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/edit.html', piece=piece, form=form)
