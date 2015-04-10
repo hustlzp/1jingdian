@@ -1,25 +1,26 @@
 {% extends "layout.html" %}
-{% from 'macro/form.html' import render_field %}
+{% from 'macros/_form.html' import vertical_field, form_submit %}
 
 {% block page_title %}发送邀请码{% endblock %}
 {% block page_content %}
-   <div class="ui segment">
-      <p>发送邀请码</p>
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">发送邀请码</div>
+         <div class="panel-body">
+            <form action="" method="post">
+               {{ form.csrf_token() }}
 
-      <form action="" method="post">
-         <div class="ui form">
-            {{ form.csrf_token() }}
+               <div class="form-group">
+                  <label for="">邀请码</label>
+                  <input type="text" readonly="readonly" class="form-control"
+                         value="{{ invitation_code.code }}"/>
+               </div>
 
-            <div class="field">
-               <label for="">邀请码</label>
+               {{ vertical_field(form.email) }}
 
-               <input type="text" readonly="readonly" value="{{ invitation_code.code }}"/>
-            </div>
-
-            {{ render_field(form.email) }}
-
-            <button type="submit" class="mini green ui submit button">发送</button>
+               {{ form_submit('发送') }}
+            </form>
          </div>
-      </form>
+      </div>
    </div>
 {% endblock %}

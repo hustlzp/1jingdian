@@ -3,7 +3,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, flash
 from ..forms import SigninForm, SignupForm, ResetPasswordForm, ForgotPasswordForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission
-from ..utils.mail import send_activate_mail, send_retrieve_password_mail
+from ..utils.mail import send_activate_mail, send_reset_password_mail
 from ..utils.security import decode
 from ..models import db, User, InvitationCode
 
@@ -91,7 +91,7 @@ def forgot_password():
         user = User.query.filter(User.email == form.email.data).first()
         if not user.is_active:
             return render_template('site/message.html', title="提示", message='请先完成账号激活')
-        send_retrieve_password_mail(user)
+        send_reset_password_mail(user)
         return render_template('site/message.html', title="邮件发送成功", message='请登录邮箱完成密码重置')
     return render_template('account/forgot_password.html', form=form)
 
