@@ -174,13 +174,13 @@ def edit(uid):
 
         # 如果存在title为author的句集，则自动将piece加入到此句集
         author_collection = Collection.get_by_title(piece.author)
-        if author_collection:
+        if author_collection and not author_collection.has_piece(uid):
             author_collection_piece = CollectionPiece(collection_id=author_collection.id)
             piece.collections.append(author_collection_piece)
 
         # 如果存在title为source的句集，则自动将piece加入到此句集
         source_collection = Collection.get_by_title(piece.source)
-        if source_collection:
+        if source_collection and not source_collection.has_piece(uid):
             source_collection_piece = CollectionPiece(collection_id=source_collection.id)
             piece.collections.append(source_collection_piece)
 
