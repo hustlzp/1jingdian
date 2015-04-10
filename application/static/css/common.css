@@ -65,3 +65,31 @@ del {
   background: #f5dfdf;
   color: #ac1414;
 }
+.tt-dropdown-menu {
+  font-size: 12px;
+  border-radius: 4px;
+  width: 220px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+}
+.tt-dropdown-menu .tt-suggestion {
+  cursor: pointer;
+  padding: 12px;
+  margin: 0;
+}
+.tt-dropdown-menu .tt-suggestion > p {
+  line-height: 1;
+  margin: 0;
+}
+.tt-dropdown-menu .tt-suggestion.tt-cursor,
+.tt-dropdown-menu .tt-suggestion:hover {
+  background-color: #eff6fa;
+}
+.tt-dropdown-menu .tt-suggestion:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.tt-dropdown-menu .tt-suggestion:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
