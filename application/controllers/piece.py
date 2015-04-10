@@ -55,10 +55,12 @@ def add():
         db.session.add(piece)
         db.session.commit()
 
+        # 存储source和author
         if piece.source:
             _save_piece_source(piece.source)
         if piece.author:
             _save_piece_author(piece.author)
+
         g.user.pieces_count += 1
         db.session.add(g.user)
 
@@ -164,6 +166,12 @@ def edit(uid):
                 else:
                     source_link_log.kind = PIECE_EDIT_KIND.UPDATE_SOURCE_LINK
                 db.session.add(source_link_log)
+
+        # 存储source和author
+        if form.source.data and form.source.data != piece.source:
+            _save_piece_source(form.source.data)
+        if form.author.data and form.author.data != piece.author:
+            _save_piece_author(form.author.data)
 
         form.populate_obj(piece)
         if piece.original:
@@ -401,11 +409,11 @@ def _save_piece_source(source):
 
 def _save_piece_author(author):
     """存储Piece原作者，若存在，则count加1"""
-    piece_author = PieceAuthor.query.filter(PieceSource.name == author).first()
+    piece_author = PieceAuthor.query.filter(PieceAuthor.name == author).first()
     if piece_author:
         piece_author.count += 1
     else:
-        piece_author = PieceSource(name=author)
+        piece_author = PieceAuthor(name=author)
         db.session.add(piece_author)
         db.session.commit()
     return piece_author.id
