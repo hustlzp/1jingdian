@@ -15,6 +15,9 @@ setTimeout(hideFlash, 2000);
 $(document).on('mouseenter', '.user-avatar.user-avatar-popover', function () {
     var _this = $(this);
 
+    // 隐藏其他的用户卡片
+    $('.user-avatar.user-avatar-popover').popover('destroy');
+
     $(this).popover({
         content: function () {
             return $(this).parent().nextAll('.popover-content-wap').first().html()
@@ -36,6 +39,7 @@ $(document).on('mouseenter', '.user-avatar.user-avatar-popover', function () {
     });
 });
 
+// 隐藏用户卡片
 $(document).on('mouseleave', '.user-avatar.user-avatar-popover', function () {
     var _this = $(this);
 
