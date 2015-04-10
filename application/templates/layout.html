@@ -95,7 +95,7 @@
                         <ul class="dropdown-menu" role="menu">
                            <li><a href="#">Dashboard</a></li>
                            <li><a href="#">用户管理</a></li>
-                           <li><a href="#">意见反馈</a></li>
+                           <li><a href="{{ url_for('admin.feedback') }}">意见反馈</a></li>
                            <li>
                               <a href="{{ url_for('admin.report_piece_logs') }}">
                                  句子恶意编辑

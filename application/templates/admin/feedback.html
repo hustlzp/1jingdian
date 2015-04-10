@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block page_title %}意见反馈 - 壹经典{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">意见反馈</div>
+         <div class="panel-body panel-body-no-padding">
+            <table class="table no-margin">
+               <tr>
+                  <th>用户</th>
+                  <th>反馈</th>
+                  <th>时间</th>
+                  <th>操作</th>
+               </tr>
+
+               {% for feedback in feedbacks %}
+                  <tr>
+                     <td>
+                        <a href="{{ url_for('user.profile', uid=feedback.user_id) }}"
+                           target="_blank">
+                           {{ feedback.user.name }}
+                        </a>
+                     </td>
+                     <td>{{ feedback.content }}</td>
+                     <td>{{ feedback.created_at|timesince }}</td>
+                     <td>
+                        {% if feedback.processed %}
+                           <span class="text-light">已处理</span>
+                        {% else %}
+                           <a href="{{ url_for('admin.process_feedback', uid=feedback.id) }}"
+                              class="btn btn-xs btn-default">
+                              处理
+                           </a>
+                        {% endif %}
+                     </td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </div>
+      </div>
+   </div>
+{% endblock %}
