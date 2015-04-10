@@ -1,0 +1,7 @@
+{% extends "mail/layout.html" %}
+
+{% block content %}
+   <p>欢迎注册<b>小流派</b>，请点击下方的链接激活你的账号：</p>
+
+   <p><a href="{{ url }}">{{ url|safe }}</a></p>
+{% endblock %}

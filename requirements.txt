@@ -13,6 +13,7 @@ blinker
 markdown2
 qrcode
 gunicorn
+requests
 
 # dev
 fabric
