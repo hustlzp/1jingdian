@@ -73,10 +73,6 @@
                   <a href="{{ url_for('site.collections') }}">句集</a>
                </li>
 
-               {#               <li>#}
-               {#                  <a href="http://blog.1jingdian.com" target="_blank">博客</a>#}
-               {#               </li>#}
-
                {% if g.user %}
                   <li>
                      <a href="{{ url_for('user.notifications') }}">
@@ -124,14 +120,10 @@
                      </ul>
                   </li>
                {% else %}
-                  <li id="nav-account" class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        账户 <span class="fa fa-angle-down"></span>
-                     </a>
-                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url_for('account.signin') }}">登录</a></li>
-                        <li><a href="{{ url_for('account.signup') }}">注册</a></li>
-                     </ul>
+                  <li>
+                     <a href="{{ url_for('account.signin') }}" id="nav-signin">登录</a>
+                     <span class="nav-devider">/</span>
+                     <a href="{{ url_for('account.signup') }}" id="nav-signup">注册</a>
                   </li>
                {% endif %}
             </ul>

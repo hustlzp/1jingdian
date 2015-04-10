@@ -38,3 +38,13 @@ body {
   padding: 2px 5px;
   vertical-align: 1px;
 }
+#nav-signin {
+  padding-right: 4px;
+}
+#nav-signup {
+  padding-left: 4px;
+}
+.nav-devider {
+  color: #bbb;
+  vertical-align: 1px;
+}

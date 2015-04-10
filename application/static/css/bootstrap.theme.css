@@ -53,6 +53,7 @@ ol li {
 .navbar-nav > li > a {
   padding-top: 19px !important;
   padding-bottom: 19px !important;
+  display: inline-block;
 }
 .navbar-nav > li > a.disabled {
   color: #aaa;
