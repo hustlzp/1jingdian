@@ -10,6 +10,7 @@
             <form method="post" action="{{ url_for('account.signup') }}">
                {{ form.csrf_token() }}
 
+               {{ vertical_field(form.code) }}
                {{ vertical_field(form.name) }}
                {{ vertical_field(form.email) }}
                {{ vertical_field(form.password) }}
