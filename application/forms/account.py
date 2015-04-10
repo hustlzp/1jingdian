@@ -88,12 +88,11 @@ class ChangePasswordForm(Form):
 
 
 class ForgotPasswordForm(Form):
-    email = StringField('邮箱',
+    email = StringField('注册邮箱',
                         validators=[
                             DataRequired(message="邮箱不能为空"),
                             Email(message="无效的邮箱")
-                        ],
-                        description='邮箱')
+                        ])
 
     def validate_email(self, field):
         user = User.query.filter(User.email == self.email.data).first()
