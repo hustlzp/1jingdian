@@ -95,6 +95,7 @@
                         <ul class="dropdown-menu" role="menu">
                            <li><a href="#">Dashboard</a></li>
                            <li><a href="#">用户管理</a></li>
+                           <li><a href="#">意见反馈</a></li>
                            <li>
                               <a href="{{ url_for('admin.report_piece_logs') }}">
                                  句子恶意编辑
@@ -116,7 +117,7 @@
                      <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">个人主页</a></li>
                         <li><a href="{{ url_for('user.likes', uid=g.user.id) }}">我的收藏</a></li>
-                        <li><a href="{{ url_for('feedback.index') }}">意见反馈</a></li>
+                        <li><a href="{{ url_for('feedback.add') }}">意见反馈</a></li>
                         <li><a href="{{ url_for('user.settings') }}">设置</a></li>
                         <li><a href="{{ url_for('account.signout') }}">登出</a></li>
                      </ul>
