@@ -34,5 +34,10 @@ class Config(object):
     # Sentry config
     SENTRY_DSN = ''
 
+    # SendCloud config
+    SC_FROM = ''
+    SC_API_USER = ''
+    SC_API_KEY = ''
+
     # Host string, used by fabric
     HOST_STRING = "root@192.241.159.34"
