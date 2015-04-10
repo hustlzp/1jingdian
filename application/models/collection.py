@@ -45,6 +45,24 @@ class Collection(db.Model):
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0
 
+    @staticmethod
+    def get_by_title(title, create_if_not_exist=False):
+        """通过title获取句集，若不存在则创建"""
+        title = title or ""
+        title = title.strip().replace(" ", "")
+        if title:
+            # 若不存在该title的句集，则创建
+            collection = Collection.query.filter(Collection.title == title).first()
+            if not collection and create_if_not_exist:
+                collection = Collection(title=title, user_id=g.user.id)
+                log = CollectionEditLog(user_id=g.user.id, kind=COLLECTION_EDIT_KIND.CREATE)
+                collection.logs.append(log)
+                db.session.add(collection)
+                db.session.commit()
+            return collection
+        else:
+            return None
+
     def __repr__(self):
         return '<Collection %s>' % self.id
 

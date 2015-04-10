@@ -281,7 +281,7 @@ def add_to_collection(uid):
 
     collection = None
     if title:
-        collection = _get_collection_by_title(title)
+        collection = Collection.get_by_title(title, create_if_not_exist=True)
     elif collection_id:
         collection = Collection.query.get_or_404(collection_id)
 
@@ -383,21 +383,3 @@ def _save_piece_author(author):
         db.session.add(piece_author)
         db.session.commit()
     return piece_author.id
-
-
-def _get_collection_by_title(title):
-    """通过title获取句集，若不存在则创建"""
-    title = title or ""
-    title = title.strip().replace(" ", "")
-    if title:
-        # 若不存在该title的句集，则创建
-        collection = Collection.query.filter(Collection.title == title).first()
-        if not collection:
-            collection = Collection(title=title, user_id=g.user.id)
-            log = CollectionEditLog(user_id=g.user.id, kind=COLLECTION_EDIT_KIND.CREATE)
-            collection.logs.append(log)
-            db.session.add(collection)
-            db.session.commit()
-        return collection
-    else:
-        return None
