@@ -67,3 +67,44 @@ class SignupForm(Form):
         code = InvitationCode.query.filter(InvitationCode.code == self.code.data).first()
         if not code or code.used:
             raise ValueError('无效的邀请码')
+
+
+class ChangePasswordForm(Form):
+    password = PasswordField('当前密码',
+                             validators=[DataRequired('当前密码不能为空')])
+
+    new_password = PasswordField('新的密码',
+                                 validators=[DataRequired('新密码不能为空')])
+
+    re_new_password = PasswordField('确认密码',
+                                    validators=[
+                                        DataRequired('请再输入一次新密码'),
+                                        EqualTo('new_password', message='两次输入密码不一致')])
+
+    def validate_password(self, field):
+        if not g.user or not g.user.check_password(self.password.data):
+            raise ValueError('密码错误')
+
+
+class ForgotPasswordForm(Form):
+    email = StringField('邮箱',
+                        validators=[
+                            DataRequired(message="邮箱不能为空"),
+                            Email(message="无效的邮箱")
+                        ],
+                        description='邮箱')
+
+    def validate_email(self, field):
+        user = User.query.filter(User.email == self.email.data).first()
+        if not user:
+            raise ValueError('账号不存在')
+
+
+class ResetPasswordForm(Form):
+    new_password = PasswordField('新的密码',
+                                 validators=[DataRequired('新密码不能为空')])
+
+    re_new_password = PasswordField('确认密码',
+                                    validators=[
+                                        DataRequired('请再输入一次新密码'),
+                                        EqualTo('new_password', message='两次输入密码不一致')])
