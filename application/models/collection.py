@@ -153,6 +153,7 @@ class CollectionEditLog(db.Model):
 
 class CollectionEditLogReport(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    processed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

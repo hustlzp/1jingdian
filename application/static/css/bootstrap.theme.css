@@ -214,3 +214,6 @@ a:focus {
 .text-danger {
   color: #a94442;
 }
+.table-responsive {
+  white-space: nowrap;
+}

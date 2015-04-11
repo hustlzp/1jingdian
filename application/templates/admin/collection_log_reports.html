@@ -7,7 +7,7 @@
       <div class="panel panel-primary">
          <div class="panel-heading">句集恶意编辑</div>
          <div class="panel-body">
-            <table class="table">
+            <table class="table table-responsive">
                <tr>
                   <th>编辑内容</th>
                   <th>操作</th>
@@ -18,8 +18,13 @@
                      <td>
                         {{ render_collection_log(report.log, False) }}
                      </td>
-                     <td class="text-sm">
-                        <a href="#" class="btn btn-xs btn-default">处理</a>
+                     <td>
+                        {% if report.processed %}
+                           <span class="text-light text-sm">已处理</span>
+                        {% else %}
+                           <a href="{{ url_for('admin.process_collection_log_report', uid=report.id) }}"
+                              class="btn btn-xs btn-default">处理</a>
+                        {% endif %}
                      </td>
                   </tr>
                {% endfor %}
