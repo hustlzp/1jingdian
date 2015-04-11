@@ -50,13 +50,12 @@ $(document).on('mouseleave', '.user-avatar.user-avatar-popover', function () {
     }, 200);
 });
 
-// 投票
+// 顶
 $(document).on('click', '.vote', function () {
     var pieceId = parseInt($(this).attr('data-piece-id')),
         url = "",
-        votesCount = $(this).find('.votes-count').first(),
-        vote = $(this),
-        voted = $(this).hasClass('voted');
+        voted = $(this).hasClass('voted'),
+        _this = $(this);
 
     if (voted) {
         url = urlFor('piece.unvote', {uid: pieceId});
@@ -64,29 +63,44 @@ $(document).on('click', '.vote', function () {
         url = urlFor('piece.vote', {uid: pieceId});
     }
 
+    // 点击后立即出发效果
+    toggleVoteEffect(_this);
+
     $.ajax({
         url: url,
         method: 'post',
-        dataType: 'json',
-        success: function (response) {
-            var currentVotesCount = parseInt(votesCount.text()),
-                targetVotesCount;
-            if (response.result) {
-                if (voted) {
-                    targetVotesCount = (currentVotesCount > 0) ? currentVotesCount - 1 : 0;
-                    $(".vote[data-piece-id=" + pieceId + "]")
-                        .removeClass('voted')
-                        .find('.votes-count').text(targetVotesCount);
-                } else {
-                    targetVotesCount = currentVotesCount + 1;
-                    $(".vote[data-piece-id=" + pieceId + "]")
-                        .addClass('voted')
-                        .find('.votes-count').text(targetVotesCount);
-                }
-            }
+        dataType: 'json'
+    }).done(function (response) {
+        if (!response.result) {
+            toggleVoteEffect(_this);
         }
+    }).fail(function () {
+        toggleVoteEffect(_this);
     });
 });
+
+/**
+ * 切换顶效果
+ * @param $voteElement
+ */
+function toggleVoteEffect($voteElement) {
+    var voted = $voteElement.hasClass('voted');
+    var pieceId = parseInt($voteElement.attr('data-piece-id'));
+    var currentVotesCount = parseInt($voteElement.find('.votes-count').text());
+    var targetVotesCount = 0;
+
+    if (voted) {
+        targetVotesCount = (currentVotesCount > 0) ? currentVotesCount - 1 : 0;
+        $(".vote[data-piece-id=" + pieceId + "]")
+            .removeClass('voted')
+            .find('.votes-count').text(targetVotesCount);
+    } else {
+        targetVotesCount = currentVotesCount + 1;
+        $(".vote[data-piece-id=" + pieceId + "]")
+            .addClass('voted')
+            .find('.votes-count').text(targetVotesCount);
+    }
+}
 
 // 若某操作需要登陆，而用户尚未登陆，则跳转登陆页
 $(document).on('click', '.need-signed-in', function () {
