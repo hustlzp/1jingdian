@@ -94,11 +94,11 @@
 }
 .collections-wap .collection {
   display: block;
-  width: 330px;
+  width: 336px;
   height: 86px;
   border-radius: 4px;
   float: left;
-  margin: 0 15px 25px 15px;
+  margin: 0 12px 25px 12px;
   border: 1px solid #e2e2e2;
   padding: 18px 20px;
   color: #333;
