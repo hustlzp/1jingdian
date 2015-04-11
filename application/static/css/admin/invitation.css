@@ -2,9 +2,6 @@
   float: right;
   margin-bottom: 20px;
 }
-.table {
-  margin-bottom: 0;
-}
 .used {
   color: #999;
   text-decoration: line-through;

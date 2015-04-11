@@ -26,6 +26,13 @@ def dashboard():
                            today_collections_count=today_collections_count)
 
 
+@bp.route('/admin/users')
+@AdminPermission()
+def users():
+    users = User.query.order_by(User.created_at.desc())
+    return render_template('admin/users.html', users=users)
+
+
 @bp.route('/admin/report_piece_logs', methods=['GET', 'POST'])
 @AdminPermission()
 def piece_log_reports():

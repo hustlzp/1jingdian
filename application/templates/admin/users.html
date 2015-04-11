@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block page_title %}用户管理 - 壹经典{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">用户管理</div>
+         <div class="panel-body">
+            <table class="table no-margin">
+               <tr>
+                  <th>用户</th>
+                  <th>邮箱</th>
+                  <th>注册时间</th>
+                  <th>激活</th>
+               </tr>
+
+               {% for user in users %}
+                  <tr>
+                     <td>
+                        <a href="{{ url_for('user.profile', uid=user.id) }}" target="_blank">
+                           <img src="{{ user.avatar_url }}" class="img-circle avatar-xs" alt=""/>
+                        </a>
+                        &nbsp;
+                        <a href="{{ url_for('user.profile', uid=user.id) }}" target="_blank">
+                           {{ user.name }}
+                        </a>
+                     </td>
+                     <td>{{ user.email }}</td>
+                     <td>{{ user.created_at|timesince }}</td>
+                     <td>
+                        {% if user.is_active %}
+                           <span class="fa fa-check"></span>
+                        {% else %}
+                           <span class="fa fa-close"></span>
+                        {% endif %}
+                     </td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </div>
+      </div>
+   </div>
+{% endblock %}
