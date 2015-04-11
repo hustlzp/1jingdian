@@ -48,7 +48,7 @@ class SignupForm(Form):
     password = PasswordField('密码',
                              validators=[DataRequired('密码不能为空')])
 
-    repassword = PasswordField('再次确认',
+    repassword = PasswordField('确认密码',
                                validators=[
                                    DataRequired('再次确认你的密码'),
                                    EqualTo('password', message='两次输入密码不一致')

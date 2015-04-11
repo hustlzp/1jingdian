@@ -134,6 +134,15 @@
    <div id="main-wap">
       {% block page_content %}{% endblock %}
    </div>
+
+   <div id="footer">
+      <ul id='links' class="list-unstyled list-inline">
+         <li class="copyright">© 2015</li>
+         <li><a href="{{ url_for('site.about') }}">关于</a></li>
+         <li><a href="http://blog.1jingdian.com/" target="_blank">博客</a></li>
+         <li><a href="https://github.com/1jingdian" target="_blank">GitHub</a></li>
+      </ul>
+   </div>
 </div>
 
 {# Inject vars on g for single page #}
