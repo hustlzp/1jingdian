@@ -21,6 +21,8 @@ class SigninForm(Form):
         user = User.query.filter(User.email == self.email.data).first()
         if not user:
             raise ValueError("账户不存在")
+        if not user.is_active:
+            raise ValueError("账户尚未激活，请登录邮箱激活账户")
 
     def validate_password(self, field):
         if self.email.data:
