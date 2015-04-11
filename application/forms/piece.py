@@ -1,9 +1,11 @@
 # coding: utf-8
 import re
 import math
+from urlparse import urlparse
 from flask_wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, URL, Optional
+from ._helper import check_url
 
 
 class PieceForm(Form):
@@ -11,7 +13,7 @@ class PieceForm(Form):
     original = BooleanField('原创', default=False)
     author = StringField('原作者', validators=[Optional()], description='选填')
     source = StringField('出处', validators=[Optional()])
-    source_link = StringField('链接', validators=[Optional(), URL(message='链接格式不正确')],
+    source_link = StringField('链接', validators=[Optional(), check_url, URL(message='链接格式不正确')],
                               description='选填')
 
     def validate_content(self, field):
