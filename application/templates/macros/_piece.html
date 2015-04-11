@@ -1052,10 +1052,17 @@
 
          // 输入source url时，加载favicon
          $sourceLinkInput.keyup(function () {
-            var input = $(this);
+            var $input = $(this);
             clearTimeout(timerForSourceLink);
             timerForSourceLink = setTimeout(function () {
-               $sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
+               var url = $.trim($input.val());
+
+               if (url !== "" && !startsWith(url, 'http')) {
+                  url = "http://" + url.replace(new RegExp("^:?/*"), '');
+                  $input.val(url);
+               }
+
+               $sourceFavicon.attr('src', 'http://g.soz.im/' + url);
             }, 500);
          });
 

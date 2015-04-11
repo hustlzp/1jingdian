@@ -102,13 +102,23 @@
     }
 
     /**
+     * Check whether str starts with prefix.
+     * @param str
+     * @param prefix
+     * @returns {boolean}
+     */
+    function startsWith(str, prefix) {
+        return str.slice(0, prefix.length) === prefix;
+    }
+
+    /**
      * Check whether str ends with suffix.
      * @param str
      * @param suffix
      * @returns {boolean}
      */
     function endsWith(str, suffix) {
-        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        return str.slice(-suffix.length) === suffix;
     }
 
     // Use $.fn.animate replace $.fn.transition when css3 transition not support.
@@ -132,9 +142,6 @@
             g[key] = value;
         });
     }
-
-    window.urlFor = urlFor;
-    window.registerContext = registerContext;
 
     // 阻止mousewheel影响到父元素
     $.fn.isolatedScroll = function () {
@@ -160,4 +167,9 @@
         }
         return this;
     };
+
+    window.urlFor = urlFor;
+    window.registerContext = registerContext;
+    window.startsWith = startsWith;
+    window.endsWith = endsWith;
 })();
