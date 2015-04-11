@@ -40,7 +40,7 @@ class Collection(db.Model):
             .filter(Piece.voters.any(PieceVote.user_id == g.user.id))
 
     def liked_by_user(self):
-        return g.user and self.likers.filter(UserLikeCollection.user_id == g.user.id).count() > 0
+        return g.user and self.likers.filter(CollectionLike.user_id == g.user.id).count() > 0
 
     def has_piece(self, piece_id):
         return self.pieces.filter(CollectionPiece.piece_id == piece_id).count() > 0
@@ -90,7 +90,7 @@ class CollectionPiece(db.Model):
                                                order_by='asc(CollectionPiece.created_at)'))
 
 
-class UserLikeCollection(db.Model):
+class CollectionLike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
@@ -98,13 +98,13 @@ class UserLikeCollection(db.Model):
     user = db.relationship('User',
                            backref=db.backref('liked_collections',
                                               lazy='dynamic',
-                                              order_by='desc(UserLikeCollection.created_at)'))
+                                              order_by='desc(CollectionLike.created_at)'))
 
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
     collection = db.relationship('Collection',
                                  backref=db.backref('likers',
                                                     lazy='dynamic',
-                                                    order_by='desc(UserLikeCollection.created_at)'))
+                                                    order_by='desc(CollectionLike.created_at)'))
 
 
 class COLLECTION_EDIT_KIND(object):

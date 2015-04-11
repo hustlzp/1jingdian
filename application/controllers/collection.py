@@ -1,7 +1,7 @@
 # coding: utf-8
 from flask import render_template, Blueprint, redirect, request, url_for, g, json
 from ..utils.permissions import UserPermission, CollectionEditPermission
-from ..models import db, Piece, Collection, CollectionPiece, UserLikeCollection, \
+from ..models import db, Piece, Collection, CollectionPiece, CollectionLike, \
     CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport
 from ..forms import CollectionForm
 from ..utils.uploadsets import collection_covers, process_avatar
@@ -121,9 +121,9 @@ def query():
 @UserPermission()
 def like(uid):
     collection = Collection.query.get_or_404(uid)
-    like = collection.likers.filter(UserLikeCollection.user_id == g.user.id).first()
+    like = collection.likers.filter(CollectionLike.user_id == g.user.id).first()
     if not like:
-        like = UserLikeCollection(collection_id=uid, user_id=g.user.id)
+        like = CollectionLike(collection_id=uid, user_id=g.user.id)
         db.session.add(like)
         g.user.liked_collections_count += 1
         db.session.add(g.user)
@@ -135,7 +135,7 @@ def like(uid):
 @UserPermission()
 def unlike(uid):
     collection = Collection.query.get_or_404(uid)
-    likes = collection.likers.filter(UserLikeCollection.user_id == g.user.id)
+    likes = collection.likers.filter(CollectionLike.user_id == g.user.id)
     for like in likes:
         db.session.delete(like)
         if g.user.liked_collections_count > 0:
