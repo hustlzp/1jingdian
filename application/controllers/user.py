@@ -21,7 +21,7 @@ def profile(uid, page):
 @bp.route('/people/<int:uid>/share/page/<int:page>')
 def share(uid, page):
     user = User.query.get_or_404(uid)
-    pieces = user.created_pieces.paginate(page, 20)
+    pieces = user.pieces.paginate(page, 20)
     return render_template('user/share.html', user=user, pieces=pieces)
 
 

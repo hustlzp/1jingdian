@@ -54,7 +54,7 @@ class PieceAddRule(Rule):
         return UserRule()
 
     def check(self):
-        today_pieces_count = g.user.created_pieces.filter(
+        today_pieces_count = g.user.pieces.filter(
             db.func.date(Piece.created_at) == date.today()).count()
         return today_pieces_count < 2
 

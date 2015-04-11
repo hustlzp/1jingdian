@@ -23,7 +23,7 @@ class Piece(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('created_pieces',
+    user = db.relationship('User', backref=db.backref('pieces',
                                                       lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
 
