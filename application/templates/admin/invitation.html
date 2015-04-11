@@ -22,12 +22,14 @@
 
                {% for code in codes.items %}
                   <tr>
-                     <td>{{ code.code }}</td>
+                     <td {% if code.used %}class="used"{% endif %}>
+                        {{ code.code }}
+                     </td>
                      <td>{{ code.email or "" }}</td>
                      <td>{{ code.sended_at|timesince }}</td>
                      <td>
                         {% if code.user %}
-                           <a href="{{ url_for('people.profile', uid=code.user.id) }}"
+                           <a href="{{ url_for('user.profile', uid=code.user.id) }}"
                               target="_blank">{{ code.user.name }}
                            </a>
                         {% endif %}

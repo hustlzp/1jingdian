@@ -28,8 +28,7 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         params = form.data.copy()
-        params.pop('repassword')
-        user = User(**params)
+        user = User(name=form.name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
 
@@ -92,7 +91,9 @@ def forgot_password():
         if not user.is_active:
             return render_template('site/message.html', title="提示", message='请先完成账号激活')
         send_reset_password_mail(user)
-        return render_template('site/message.html', title="邮件发送成功", message='请登录邮箱完成密码重置')
+        return render_template('site/message.html',
+                               title="密码重置链接已发送到你的邮箱",
+                               message='请登录邮箱完成密码重置')
     return render_template('account/forgot_password.html', form=form)
 
 
