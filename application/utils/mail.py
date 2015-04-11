@@ -10,7 +10,7 @@ from ..models import db, MailLog
 
 def send_invitation_mail(to, invitation_code):
     """发送内测邀请码到用户邮箱"""
-    url = absolute_url_for('account.register', code=invitation_code)
+    url = absolute_url_for('account.signup', code=invitation_code)
     return send_mail(to,
                      "邀请您参与壹经典内测",
                      render_template('mail/invitation.html', invitation_code=invitation_code,

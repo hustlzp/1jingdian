@@ -25,7 +25,7 @@ def signin():
 @VisitorPermission()
 def signup():
     """Signup"""
-    form = SignupForm()
+    form = SignupForm(code=request.args.get('code'))
     if form.validate_on_submit():
         params = form.data.copy()
         user = User(name=form.name.data, email=form.email.data, password=form.password.data)
