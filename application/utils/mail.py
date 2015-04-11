@@ -12,8 +12,7 @@ def send_invitation_mail(to, invitation_code):
     """发送内测邀请码到用户邮箱"""
     url = absolute_url_for('account.register', code=invitation_code)
     return send_mail(to,
-                     '小流派',
-                     "邀请您参与小流派内测",
+                     "邀请您参与壹经典内测",
                      render_template('mail/invitation.html', invitation_code=invitation_code,
                                      url=url))
 
@@ -22,8 +21,7 @@ def send_activate_mail(user):
     """发送激活链接到用户邮箱"""
     url = absolute_url_for('account.activate', token=encode(user.id))
     return send_mail(user.email,
-                     '小流派',
-                     "激活你在小流派的账号",
+                     "账号激活",
                      render_template('mail/activate.html', url=url))
 
 
@@ -31,12 +29,11 @@ def send_reset_password_mail(user):
     """发送密码重置链接"""
     url = absolute_url_for('account.reset_password', token=encode(user.id))
     return send_mail(user.email,
-                     '小流派',
                      "密码重置",
                      render_template('mail/reset_password.html', url=url))
 
 
-def send_mail(to, fromname, subject, html):
+def send_mail(to, subject, html):
     """通用的邮件发送函数，返回成功与否"""
     config = current_app.config
     url = "http://sendcloud.sohu.com/webapi/mail.send.json"
@@ -45,7 +42,7 @@ def send_mail(to, fromname, subject, html):
         "api_key": config['SC_API_KEY'],
         "to": to,
         "from": config['SC_FROM'],
-        "fromname": fromname,
+        "fromname": '壹经典',
         "subject": subject,
         "html": html
     }
