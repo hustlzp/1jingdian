@@ -15,9 +15,10 @@ bp = Blueprint('account', __name__)
 def signin():
     """Signin"""
     form = SigninForm()
+    referer = request.form.get('referer')
     if form.validate_on_submit():
         signin_user(form.user)
-        return redirect(url_for('site.index'))
+        return redirect(referer or url_for('site.index'))
     return render_template('account/signin.html', form=form)
 
 

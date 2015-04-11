@@ -16,7 +16,7 @@
                {% for report in reports %}
                   <tr>
                      <td>
-                        {{ render_piece_log(report.log) }}
+                        {{ render_piece_log(report.log, False) }}
                      </td>
                      <td>
                         {% if report.processed %}

@@ -48,7 +48,7 @@
          <div class="log-meta">
             {{ log.created_at|timesince }}
 
-            {% if with_options %}
+            {% if with_options and g.user %}
                <div class="wap-report {% if log.reported_by_user() %}reported{% endif %}">
                   <a href="javascript: void(0)" data-id="{{ log.id }}"
                      class="need-signed-in btn-report-collection-log">
@@ -129,11 +129,14 @@
                <span class="fa fa-file-text-o"></span>
             </a>
 
-            <a class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
-               data-id="{{ collection.id }}" href="javascript: void(0)">
-               <span class="fa fa-bookmark-o" title="收藏句集"></span>
-               <span class="fa fa-bookmark" title="取消收藏"></span>
-            </a>
+            {% if g.user %}
+               <a class="btn-like-collection need-signed-in
+                  {% if collection.liked_by_user() %}liked{% endif %}"
+                  data-id="{{ collection.id }}" href="javascript: void(0)">
+                  <span class="fa fa-bookmark-o" title="收藏句集"></span>
+                  <span class="fa fa-bookmark" title="取消收藏"></span>
+               </a>
+            {% endif %}
          </div>
       </div>
 
@@ -267,11 +270,13 @@
                <div class="desc">{{ collection.desc or "" }}</div>
             </div>
 
-            <div class="btn-like-collection {% if collection.liked_by_user() %}liked{% endif %}"
-                 data-id="{{ collection.id }}">
-               <span class="fa fa-bookmark-o" title="收藏句集"></span>
-               <span class="fa fa-bookmark" title="取消收藏"></span>
-            </div>
+            {% if g.user %}
+               <div class="btn-like-collection need-signed-in {% if collection.liked_by_user() %}liked{% endif %}"
+                    data-id="{{ collection.id }}">
+                  <span class="fa fa-bookmark-o" title="收藏句集"></span>
+                  <span class="fa fa-bookmark" title="取消收藏"></span>
+               </div>
+            {% endif %}
          </div>
       {% endfor %}
    </div>

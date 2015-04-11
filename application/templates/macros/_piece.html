@@ -286,7 +286,7 @@
 {% endmacro %}
 
 
-{% macro render_piece_log(log, with_options=False) %}
+{% macro render_piece_log(log, with_options=True) %}
    <div class="piece-log media">
       <div class="media-left">{{ render_user_avatar(log.user) }}</div>
       <div class="media-body">
@@ -377,7 +377,7 @@
          <div class="log-meta">
             {{ log.created_at|timesince }}
 
-            {% if with_options %}
+            {% if with_options and g.user %}
                <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
                   <a href="javascript: void(0)" data-id="{{ log.id }}"
                      class="need-signed-in btn-report-abuse">

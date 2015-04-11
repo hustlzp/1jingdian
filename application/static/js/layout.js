@@ -103,9 +103,17 @@ function toggleVoteEffect($voteElement) {
 }
 
 // 若某操作需要登陆，而用户尚未登陆，则跳转登陆页
+$('.need-signed-in').click(function () {
+    if (!$(document.body).hasClass('signed-in')) {
+        window.location = urlFor('account.signin');
+        return false;
+    }
+});
+
 $(document).on('click', '.need-signed-in', function () {
     if (!$(document.body).hasClass('signed-in')) {
         window.location = urlFor('account.signin');
+        return false;
     }
 });
 

@@ -13,6 +13,8 @@
                {{ vertical_field(form.email) }}
                {{ vertical_field(form.password) }}
 
+               <input type="hidden" name="referer" value="{{ request.referrer }}"/>
+
                <div class="submit-wap submit-right">
                   <button type="submit" class="btn btn-submit btn-primary">登陆</button>
                </div>
