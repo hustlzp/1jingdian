@@ -185,28 +185,18 @@
                url = urlFor('piece.vote_comment', {uid: commentId});
             }
 
+            toggleCommentVoteEffect(_this);
+
             $.ajax({
                url: url,
                dataType: 'json',
                method: 'post'
             }).done(function (response) {
-               if (response.result) {
-                  _this.toggleClass('voted-by-me');
-
-                  var $votesCountElement = _this.find('.comment-votes-count');
-                  var votesCount = parseInt($.trim($votesCountElement.text()));
-
-                  if (voted) {
-                     votesCount -= 1;
-                  } else {
-                     votesCount += 1;
-                  }
-                  $votesCountElement.text(votesCount);
-
-                  if (votesCount === 0) {
-                     _this.removeClass('voted-by-people');
-                  }
+               if (!response.result) {
+                  toggleCommentVoteEffect(_this);
                }
+            }).fail(function () {
+               toggleCommentVoteEffect(_this);
             });
          });
 
@@ -267,6 +257,30 @@
             $form.find('textarea').val('');
             $form.hide();
          });
+
+         /**
+          * 切换顶评论效果
+          * @param $btnVoteComment
+          */
+         function toggleCommentVoteEffect($btnVoteComment) {
+            var voted = $btnVoteComment.hasClass('voted-by-me');
+            var $votesCountElement = $btnVoteComment.find('.comment-votes-count');
+            var votesCount = parseInt($.trim($votesCountElement.text()));
+
+            $btnVoteComment.toggleClass('voted-by-me');
+
+            if (voted) {
+               votesCount -= 1;
+            } else {
+               votesCount += 1;
+            }
+
+            $votesCountElement.text(votesCount);
+
+            if (votesCount === 0) {
+               $btnVoteComment.removeClass('voted-by-people');
+            }
+         }
       })();
    </script>
 {% endmacro %}
