@@ -1010,10 +1010,14 @@
 
    <script type="text/javascript">
       (function () {
-         var timerForContent = null,
-               timerForSourceLink = null,
-               sourceFavicon = $('.source-favicon'),
-               sourceLinkInput = $('#source_link');
+         var timerForContent = null;
+         var timerForSourceLink = null;
+         var $sourceFavicon = $('.source-favicon');
+         var $sourceLinkInput = $('#source_link');
+         var $authorInput = $('#author');
+         var timerForAuthorTypeahead = null;
+         var $sourceInput = $('#source');
+         var timerForSourceTypeahead = null;
 
          $('.source-help').popover({
             trigger: 'hover',
@@ -1021,6 +1025,7 @@
             content: '如：书籍、电影、歌曲、文章标题等。'
          });
 
+         // 字数更新
          updateWordCount();
 
          $('#content').keyup(function () {
@@ -1041,30 +1046,96 @@
             }
          });
 
-         if ($.trim(sourceLinkInput.val()) !== "") {
-            sourceFavicon.attr('src', 'http://g.soz.im/' + sourceLinkInput.val());
+         if ($.trim($sourceLinkInput.val()) !== "") {
+            $sourceFavicon.attr('src', 'http://g.soz.im/' + $sourceLinkInput.val());
          }
 
          // 输入source url时，加载favicon
-         sourceLinkInput.keyup(function () {
+         $sourceLinkInput.keyup(function () {
             var input = $(this);
             clearTimeout(timerForSourceLink);
             timerForSourceLink = setTimeout(function () {
-               sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
+               $sourceFavicon.attr('src', 'http://g.soz.im/' + input.val());
             }, 500);
          });
 
          // change或input事件时，加载favicon
-         sourceLinkInput.on('change input', function () {
-            sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
+         $sourceLinkInput.on('change input', function () {
+            $sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
          });
 
-         // 图片加载失败时，隐藏
-         sourceFavicon.load(function () {
+         // Favicon加载失败时，隐藏
+         $sourceFavicon.load(function () {
             $(this).fadeIn('fast');
          }).error(function () {
             $(this).hide();
          });
+
+         // 启动author的Typeahead自动完成
+         $authorInput.typeahead({
+            minLength: 1,
+            highlight: true,
+            hint: false
+         }, {
+            displayKey: 'value',
+            source: function (q, cb) {
+               if (timerForAuthorTypeahead) {
+                  clearTimeout(timerForAuthorTypeahead);
+               }
+
+               timerForAuthorTypeahead = setTimeout(function () {
+                  $.ajax({
+                     url: urlFor('piece.query_author'),
+                     method: 'post',
+                     dataType: 'json',
+                     data: {
+                        q: q
+                     }
+                  }).done(function (matchs) {
+                     cb(matchs);
+                  });
+               }, 300);
+            },
+            templates: {
+               'suggestion': function (data) {
+                  return '<p>' + data.value + '</p>';
+               }
+            }
+         });
+
+         // 启动source的Typeahead自动完成
+         $sourceInput.typeahead({
+            minLength: 1,
+            highlight: true,
+            hint: false
+         }, {
+            displayKey: 'value',
+            source: function (q, cb) {
+               if (timerForSourceTypeahead) {
+                  clearTimeout(timerForSourceTypeahead);
+               }
+
+               timerForSourceTypeahead = setTimeout(function () {
+                  $.ajax({
+                     url: urlFor('piece.query_source'),
+                     method: 'post',
+                     dataType: 'json',
+                     data: {
+                        q: q
+                     }
+                  }).done(function (matchs) {
+                     cb(matchs);
+                  });
+               }, 300);
+            },
+            templates: {
+               'suggestion': function (data) {
+                  return '<p>' + data.value + '</p>';
+               }
+            }
+         });
+
+         $('.twitter-typeahead').css('display', 'block');
 
          /**
           * 更新字数

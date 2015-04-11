@@ -395,6 +395,28 @@ def report_log(uid):
     return json.dumps({'result': True})
 
 
+@bp.route('/piece/query_author', methods=['POST'])
+@UserPermission()
+def query_author():
+    q = request.form.get('q')
+    if q:
+        authors = PieceAuthor.query.filter(PieceAuthor.name.like("%%%s%%" % q))
+        return json.dumps([{'value': author.name} for author in authors])
+    else:
+        return json.dumps({})
+
+
+@bp.route('/piece/query_source', methods=['POST'])
+@UserPermission()
+def query_source():
+    q = request.form.get('q')
+    if q:
+        sources = PieceSource.query.filter(PieceSource.name.like("%%%s%%" % q))
+        return json.dumps([{'value': source.name} for source in sources])
+    else:
+        return json.dumps({})
+
+
 def _save_piece_source(source):
     """存储Piece来源，若存在，则count加1"""
     piece_source = PieceSource.query.filter(PieceSource.name == source).first()
