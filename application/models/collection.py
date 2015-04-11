@@ -148,7 +148,7 @@ class CollectionEditLog(db.Model):
 
     def reported_by_user(self):
         return g.user and g.user.reported_collection_edit_logs.filter(
-            CollectionEditLogReport.collection_edit_log_id == self.id).count() > 0
+            CollectionEditLogReport.log_id == self.id).count() > 0
 
 
 class CollectionEditLogReport(db.Model):
@@ -161,10 +161,10 @@ class CollectionEditLogReport(db.Model):
                                               lazy='dynamic',
                                               order_by='desc(CollectionEditLogReport.created_at)'))
 
-    collection_edit_log_id = db.Column(db.Integer, db.ForeignKey('collection_edit_log.id'))
-    collection_edit_log = db.relationship('CollectionEditLog',
-                                          backref=db.backref(
-                                              'reports',
-                                              lazy='dynamic',
-                                              order_by='desc(CollectionEditLogReport.created_at)'
-                                          ))
+    log_id = db.Column(db.Integer, db.ForeignKey('collection_edit_log.id'))
+    log = db.relationship('CollectionEditLog',
+                          backref=db.backref(
+                              'reports',
+                              lazy='dynamic',
+                              order_by='desc(CollectionEditLogReport.created_at)'
+                          ))

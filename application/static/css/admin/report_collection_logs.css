@@ -4,3 +4,7 @@
 .table > tbody > tr > th {
   border-top: 0;
 }
+.table .collection-log {
+  padding: 0;
+  border-top: 0;
+}

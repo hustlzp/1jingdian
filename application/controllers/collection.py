@@ -152,7 +152,7 @@ def report_log(uid):
     log = CollectionEditLog.query.get_or_404(uid)
     report = log.reports.filter(CollectionEditLog.user_id == g.user.id).first()
     if not report:
-        report = CollectionEditLogReport(collection_edit_log_id=uid, user_id=g.user.id)
+        report = CollectionEditLogReport(log_id=uid, user_id=g.user.id)
         db.session.add(report)
         db.session.commit()
     return json.dumps({'result': True})

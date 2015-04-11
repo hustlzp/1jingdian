@@ -1,5 +1,83 @@
 @import "../utils";
 
+.collection-log {
+  border-top: 1px solid @border-color;
+  padding: 15px 0 15px 0;
+  margin: 0;
+
+  &:hover {
+    .log-meta .wap-report {
+      visibility: visible;
+    }
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    margin-bottom: 12px;
+    color: #999;
+
+    a {
+      color: #333;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
+  }
+
+  .content {
+    margin-bottom: 12px;
+
+    .fa-long-arrow-right {
+      margin: 0 5px;
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .log-meta {
+    color: #999;
+    font-size: 12px;
+
+    .wap-report {
+      display: inline-block;
+      visibility: hidden;
+      margin-left: 15px;
+
+      &.reported {
+        visibility: visible !important;
+
+        .btn-report-collection-log {
+          display: none;
+        }
+        .flag-reported {
+          display: inline-block;
+        }
+      }
+
+      .btn-report-collection-log {
+        display: inline-block;
+        color: #999;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .flag-reported {
+        display: none;
+      }
+    }
+  }
+}
+
 .collection-logs-wap {
   display: none;
   position: absolute;
@@ -20,84 +98,6 @@
     margin: 0 0 15px 0;
   }
 
-  .collection-log {
-    border-top: 1px solid @border-color;
-    padding: 15px 0 15px 0;
-    margin: 0;
-
-    &:hover {
-      .log-meta .wap-report {
-        visibility: visible;
-      }
-    }
-
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-    }
-
-    .title {
-      margin-bottom: 12px;
-      color: #999;
-
-      a {
-        color: #333;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-    }
-
-    .content {
-      margin-bottom: 12px;
-
-      .fa-long-arrow-right {
-        margin: 0 5px;
-      }
-
-      img {
-        width: 48px;
-        height: 48px;
-      }
-    }
-
-    .log-meta {
-      color: #999;
-      font-size: 12px;
-
-      .wap-report {
-        display: inline-block;
-        visibility: hidden;
-        margin-left: 15px;
-
-        &.reported {
-          visibility: visible !important;
-
-          .btn-report-collection-log {
-            display: none;
-          }
-          .flag-reported {
-            display: inline-block;
-          }
-        }
-
-        .btn-report-collection-log {
-          display: inline-block;
-          color: #999;
-
-          &:hover {
-            color: @main-color;
-          }
-        }
-
-        .flag-reported {
-          display: none;
-        }
-      }
-    }
-  }
-
   .btn-close-collection-logs-wap {
     position: absolute;
     right: 20px;
@@ -112,7 +112,6 @@
     }
   }
 }
-
 
 .collections-wap {
   padding: 35px 20px 0 20px;

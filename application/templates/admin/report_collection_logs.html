@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from 'macros/_collection.html' import render_collection_log %}
 
 {% block page_title %}句集恶意编辑 - 壹经典{% endblock %}
 {% block page_content %}
@@ -14,8 +15,10 @@
 
                {% for report in reports %}
                   <tr>
-                     <td>{{ report.id }}</td>
                      <td>
+                        {{ render_collection_log(report.log, False) }}
+                     </td>
+                     <td class="text-sm">
                         <a href="#" class="btn btn-xs btn-default">处理</a>
                      </td>
                   </tr>

@@ -1,3 +1,63 @@
+.collection-log {
+  border-top: 1px solid #e2e2e2;
+  padding: 15px 0 15px 0;
+  margin: 0;
+}
+.collection-log:hover .log-meta .wap-report {
+  visibility: visible;
+}
+.collection-log .user-avatar {
+  width: 32px;
+  height: 32px;
+}
+.collection-log .title {
+  margin-bottom: 12px;
+  color: #999;
+}
+.collection-log .title a {
+  color: #333;
+}
+.collection-log .title a:hover {
+  color: #1e88a8;
+}
+.collection-log .content {
+  margin-bottom: 12px;
+}
+.collection-log .content .fa-long-arrow-right {
+  margin: 0 5px;
+}
+.collection-log .content img {
+  width: 48px;
+  height: 48px;
+}
+.collection-log .log-meta {
+  color: #999;
+  font-size: 12px;
+}
+.collection-log .log-meta .wap-report {
+  display: inline-block;
+  visibility: hidden;
+  margin-left: 15px;
+}
+.collection-log .log-meta .wap-report.reported {
+  visibility: visible !important;
+}
+.collection-log .log-meta .wap-report.reported .btn-report-collection-log {
+  display: none;
+}
+.collection-log .log-meta .wap-report.reported .flag-reported {
+  display: inline-block;
+}
+.collection-log .log-meta .wap-report .btn-report-collection-log {
+  display: inline-block;
+  color: #999;
+}
+.collection-log .log-meta .wap-report .btn-report-collection-log:hover {
+  color: #1e88a8;
+}
+.collection-log .log-meta .wap-report .flag-reported {
+  display: none;
+}
 .collection-logs-wap {
   display: none;
   position: absolute;
@@ -16,66 +76,6 @@
   font-size: 16px;
   color: #aaa;
   margin: 0 0 15px 0;
-}
-.collection-logs-wap .collection-log {
-  border-top: 1px solid #e2e2e2;
-  padding: 15px 0 15px 0;
-  margin: 0;
-}
-.collection-logs-wap .collection-log:hover .log-meta .wap-report {
-  visibility: visible;
-}
-.collection-logs-wap .collection-log .user-avatar {
-  width: 32px;
-  height: 32px;
-}
-.collection-logs-wap .collection-log .title {
-  margin-bottom: 12px;
-  color: #999;
-}
-.collection-logs-wap .collection-log .title a {
-  color: #333;
-}
-.collection-logs-wap .collection-log .title a:hover {
-  color: #1e88a8;
-}
-.collection-logs-wap .collection-log .content {
-  margin-bottom: 12px;
-}
-.collection-logs-wap .collection-log .content .fa-long-arrow-right {
-  margin: 0 5px;
-}
-.collection-logs-wap .collection-log .content img {
-  width: 48px;
-  height: 48px;
-}
-.collection-logs-wap .collection-log .log-meta {
-  color: #999;
-  font-size: 12px;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report {
-  display: inline-block;
-  visibility: hidden;
-  margin-left: 15px;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report.reported {
-  visibility: visible !important;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report.reported .btn-report-collection-log {
-  display: none;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report.reported .flag-reported {
-  display: inline-block;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report .btn-report-collection-log {
-  display: inline-block;
-  color: #999;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report .btn-report-collection-log:hover {
-  color: #1e88a8;
-}
-.collection-logs-wap .collection-log .log-meta .wap-report .flag-reported {
-  display: none;
 }
 .collection-logs-wap .btn-close-collection-logs-wap {
   position: absolute;
