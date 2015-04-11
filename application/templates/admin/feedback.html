@@ -5,8 +5,8 @@
    <div class="container">
       <div class="panel panel-primary">
          <div class="panel-heading">意见反馈</div>
-         <div class="panel-body panel-body-no-padding">
-            <table class="table no-margin">
+         <div class="panel-body">
+            <table class="table">
                <tr>
                   <th>用户</th>
                   <th>反馈</th>
@@ -26,7 +26,7 @@
                      <td>{{ feedback.created_at|timesince }}</td>
                      <td>
                         {% if feedback.processed %}
-                           <span class="text-light">已处理</span>
+                           <span class="text-light text-sm">已处理</span>
                         {% else %}
                            <a href="{{ url_for('admin.process_feedback', uid=feedback.id) }}"
                               class="btn btn-xs btn-default">

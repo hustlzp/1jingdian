@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block page_title %}Dashboard - 壹经典{% endblock %}
+{% block page_content %}
+   <div class="container">
+      <div class="panel panel-primary">
+         <div class="panel-heading">Dashboard</div>
+         <div class="panel-body">
+            <ul class="list-text no-margin">
+               <li>今日注册用户：{{ today_users_count }}</li>
+               <li>今日句子：{{ today_pieces_count }}</li>
+               <li>今日句集：{{ today_collections_count }}</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+{% endblock %}

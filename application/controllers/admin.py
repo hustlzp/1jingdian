@@ -5,9 +5,25 @@ from flask import render_template, Blueprint, redirect, request, url_for, flash
 from ..utils.permissions import AdminPermission
 from ..utils.mail import send_invitation_mail
 from ..forms import SendInvitationCodeForm
-from ..models import db, CollectionEditLogReport, PieceEditLogReport, Feedback, InvitationCode
+from ..models import db, CollectionEditLogReport, PieceEditLogReport, Feedback, InvitationCode, \
+    User, Piece, Collection
 
 bp = Blueprint('admin', __name__)
+
+
+@bp.route('/admin/dashboard')
+@AdminPermission()
+def dashboard():
+    today = datetime.date.today()
+    today_users_count = User.query.filter(
+        db.func.date(User.created_at) == today).count()
+    today_pieces_count = Piece.query.filter(
+        db.func.date(Piece.created_at) == today).count()
+    today_collections_count = Collection.query.filter(
+        db.func.date(Collection.created_at) == today).count()
+    return render_template('admin/dashboard.html', today_users_count=today_users_count,
+                           today_pieces_count=today_pieces_count,
+                           today_collections_count=today_collections_count)
 
 
 @bp.route('/admin/report_piece_logs', methods=['GET', 'POST'])

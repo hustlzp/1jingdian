@@ -89,7 +89,7 @@
                            管理 <span class="fa fa-angle-down"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                           <li><a href="#">Dashboard</a></li>
+                           <li><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
                            <li><a href="#">用户管理</a></li>
                            <li><a href="{{ url_for('admin.invitation') }}">邀请码</a></li>
                            <li><a href="{{ url_for('admin.feedback') }}">意见反馈</a></li>

@@ -39,6 +39,9 @@
 .list-text li {
   padding-bottom: 5px;
 }
+.list-text li:last-child {
+  padding-bottom: 0;
+}
 .list-no-margin {
   margin: 0;
 }
