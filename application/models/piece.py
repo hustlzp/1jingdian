@@ -240,11 +240,12 @@ class PieceEditLog(db.Model):
 
     def reported_by_user(self):
         return g.user and g.user.reported_piece_edit_logs.filter(
-            PieceEditLogReport.piece_edit_log_id == self.id).count() > 0
+            PieceEditLogReport.log_id == self.id).count() > 0
 
 
 class PieceEditLogReport(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    processed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -253,9 +254,9 @@ class PieceEditLogReport(db.Model):
                                               lazy='dynamic',
                                               order_by='desc(PieceEditLogReport.created_at)'))
 
-    piece_edit_log_id = db.Column(db.Integer, db.ForeignKey('piece_edit_log.id'))
-    piece_edit_log = db.relationship('PieceEditLog',
-                                     backref=db.backref('reports',
-                                                        lazy='dynamic',
-                                                        order_by='desc('
-                                                                 'PieceEditLogReport.created_at)'))
+    log_id = db.Column(db.Integer, db.ForeignKey('piece_edit_log.id'))
+    log = db.relationship('PieceEditLog',
+                          backref=db.backref('reports',
+                                             lazy='dynamic',
+                                             order_by='desc('
+                                                      'PieceEditLogReport.created_at)'))

@@ -272,99 +272,98 @@
 {% endmacro %}
 
 
-{% macro render_piece_logs(piece) %}
-   <div class="subtitle">句子编辑日志</div>
+{% macro render_piece_log(log, with_options=False) %}
+   <div class="piece-log media">
+      <div class="media-left">{{ render_user_avatar(log.user) }}</div>
+      <div class="media-body">
+         <div class="title">
+            <a href="{{ url_for('user.profile', uid=log.user_id) }}">
+               {{ log.user.name }}
+            </a>
 
-   {% for log in piece.logs %}
-      <div class="piece-log media">
-         <div class="media-left">{{ render_user_avatar(log.user) }}</div>
-         <div class="media-body">
-            <div class="title">
-               <a href="{{ url_for('user.profile', uid=log.user_id) }}">
-                  {{ log.user.name }}
+            {% if log.kind == PIECE_EDIT_KIND.CREATE %}
+               分享了句子
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+               添加了话题
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+               移除了话题
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+               编辑了句子
+            {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
+               将句子设为原创
+            {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
+               将句子设为引用
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+               添加了原作者
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+               更新了原作者
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+               移除了原作者
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+               添加了出处
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+               更新了出处
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+               移除了出处
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+               添加了链接
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+               更新了链接
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+               移除了链接
+            {% endif %}
+         </div>
+
+         <div class="content">
+            {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+               <a href="{{ url_for('collection.view', uid=log.after_id) }}" target="_blank">
+                  <ins class="collection">{{ log.after }}</ins>
                </a>
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+               <a href="{{ url_for('collection.view', uid=log.before_id) }}" target="_blank">
+                  <del class="collection">{{ log.before }}</del>
+               </a>
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+               {{ log.compare|safe }}
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+               <ins>{{ log.after }}</ins>
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+               <del>{{ log.before }}</del>
+               <span class="fa fa-long-arrow-right"></span>
+               <ins>{{ log.after }}</ins>
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+               <del>{{ log.before }}</del>
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+               <ins>{{ log.after }}</ins>
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+               <del>{{ log.before }}</del>
+               <span class="fa fa-long-arrow-right"></span>
+               <ins>{{ log.after }}</ins>
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+               <del>{{ log.before }}</del>
+            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+               <a href="{{ log.after }}" target="_blank">
+                  <ins class="link">{{ log.after }}</ins>
+               </a>
+            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+               <a href="{{ log.before }}" target="_blank">
+                  <del class="link">{{ log.before }}</del>
+               </a>
+               <span class="fa fa-long-arrow-right"></span>
+               <a href="{{ log.after }}" target="_blank">
+                  <ins class="link">{{ log.after }}</ins>
+               </a>
+            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+               <a href="{{ log.before }}" target="_blank">
+                  <del class="link">{{ log.before }}</del>
+               </a>
+            {% endif %}
+         </div>
 
-               {% if log.kind == PIECE_EDIT_KIND.CREATE %}
-                  分享了句子
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
-                  添加了话题
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
-                  移除了话题
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
-                  编辑了句子
-               {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
-                  将句子设为原创
-               {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
-                  将句子设为引用
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
-                  添加了原作者
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
-                  更新了原作者
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
-                  移除了原作者
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
-                  添加了出处
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
-                  更新了出处
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
-                  移除了出处
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
-                  添加了链接
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
-                  更新了链接
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
-                  移除了链接
-               {% endif %}
-            </div>
+         <div class="log-meta">
+            {{ log.created_at|timesince }}
 
-            <div class="content">
-               {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
-                  <a href="{{ url_for('collection.view', uid=log.after_id) }}" target="_blank">
-                     <ins class="collection">{{ log.after }}</ins>
-                  </a>
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
-                  <a href="{{ url_for('collection.view', uid=log.before_id) }}" target="_blank">
-                     <del class="collection">{{ log.before }}</del>
-                  </a>
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
-                  {{ log.compare|safe }}
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
-                  <ins>{{ log.after }}</ins>
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
-                  <del>{{ log.before }}</del>
-                  <span class="fa fa-long-arrow-right"></span>
-                  <ins>{{ log.after }}</ins>
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
-                  <del>{{ log.before }}</del>
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
-                  <ins>{{ log.after }}</ins>
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
-                  <del>{{ log.before }}</del>
-                  <span class="fa fa-long-arrow-right"></span>
-                  <ins>{{ log.after }}</ins>
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
-                  <del>{{ log.before }}</del>
-               {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
-                  <a href="{{ log.after }}" target="_blank">
-                     <ins class="link">{{ log.after }}</ins>
-                  </a>
-               {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
-                  <a href="{{ log.before }}" target="_blank">
-                     <del class="link">{{ log.before }}</del>
-                  </a>
-                  <span class="fa fa-long-arrow-right"></span>
-                  <a href="{{ log.after }}" target="_blank">
-                     <ins class="link">{{ log.after }}</ins>
-                  </a>
-               {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
-                  <a href="{{ log.before }}" target="_blank">
-                     <del class="link">{{ log.before }}</del>
-                  </a>
-               {% endif %}
-            </div>
-
-            <div class="log-meta">
-               {{ log.created_at|timesince }}
+            {% if with_options %}
                <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
                   <a href="javascript: void(0)" data-id="{{ log.id }}"
                      class="need-signed-in btn-report-abuse">
@@ -372,9 +371,18 @@
                   </a>
                   <span class="flag-reported">已举报</span>
                </div>
-            </div>
+            {% endif %}
          </div>
       </div>
+   </div>
+{% endmacro %}
+
+
+{% macro render_piece_logs(piece) %}
+   <div class="subtitle">句子编辑日志</div>
+
+   {% for log in piece.logs %}
+      {{ render_piece_log(log, True) }}
    {% endfor %}
 
    <script type="text/javascript">

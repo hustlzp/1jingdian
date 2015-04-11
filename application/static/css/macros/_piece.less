@@ -774,6 +774,88 @@
   }
 }
 
+.piece-log {
+  border-top: 1px solid @border-color;
+  padding: 15px 0 15px 0;
+  margin: 0;
+
+  &:hover {
+    .log-meta .wap-report-abuse {
+      visibility: visible;
+    }
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    margin-bottom: 12px;
+    color: #999;
+
+    a {
+      color: #333;
+
+      &:hover {
+        color: @main-color;
+      }
+    }
+  }
+
+  .content {
+    margin-bottom: 12px;
+
+    .fa-long-arrow-right {
+      margin: 0 5px;
+    }
+
+    .collection {
+      padding: 4px 10px;
+      border-radius: 30px;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .log-meta {
+    color: #999;
+    font-size: 12px;
+
+    .wap-report-abuse {
+      display: inline-block;
+      visibility: hidden;
+      margin-left: 15px;
+
+      &.reported {
+        visibility: visible !important;
+
+        .btn-report-abuse {
+          display: none;
+        }
+        .flag-reported {
+          display: inline-block;
+        }
+      }
+
+      .btn-report-abuse {
+        display: inline-block;
+        color: #999;
+
+        &:hover {
+          color: @main-color;
+        }
+      }
+
+      .flag-reported {
+        display: none;
+      }
+    }
+  }
+}
+
 .piece-logs-wap {
   display: none;
   position: absolute;
@@ -790,88 +872,6 @@
 
   .subtitle {
     margin: 0 0 15px 0;
-  }
-
-  .piece-log {
-    border-top: 1px solid @border-color;
-    padding: 15px 0 15px 0;
-    margin: 0;
-
-    &:hover {
-      .log-meta .wap-report-abuse {
-        visibility: visible;
-      }
-    }
-
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-    }
-
-    .title {
-      margin-bottom: 12px;
-      color: #999;
-
-      a {
-        color: #333;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-    }
-
-    .content {
-      margin-bottom: 12px;
-
-      .fa-long-arrow-right {
-        margin: 0 5px;
-      }
-
-      .collection {
-        padding: 4px 10px;
-        border-radius: 30px;
-      }
-
-      .link:hover {
-        text-decoration: underline;
-      }
-    }
-
-    .log-meta {
-      color: #999;
-      font-size: 12px;
-
-      .wap-report-abuse {
-        display: inline-block;
-        visibility: hidden;
-        margin-left: 15px;
-
-        &.reported {
-          visibility: visible !important;
-
-          .btn-report-abuse {
-            display: none;
-          }
-          .flag-reported {
-            display: inline-block;
-          }
-        }
-
-        .btn-report-abuse {
-          display: inline-block;
-          color: #999;
-
-          &:hover {
-            color: @main-color;
-          }
-        }
-
-        .flag-reported {
-          display: none;
-        }
-      }
-    }
   }
 
   .btn-close-logs-wap {

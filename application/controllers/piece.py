@@ -131,7 +131,7 @@ def edit(uid):
         if not form.original.data:
             # author变更
             # 此处的 or "" 是为了判断
-            if piece.author or "" != form.author.data:
+            if (piece.author or "") != form.author.data:
                 author_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
                                           before=piece.author, after=form.author.data)
                 if piece.author == "":
@@ -143,7 +143,7 @@ def edit(uid):
                 db.session.add(author_log)
 
             # source变更
-            if piece.source or "" != form.source.data:
+            if (piece.source or "") != form.source.data:
                 source_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
                                           before=piece.source, after=form.source.data)
                 if piece.source == "":
@@ -155,7 +155,7 @@ def edit(uid):
                 db.session.add(source_log)
 
             # source_link变更
-            if piece.source_link or "" != form.source_link.data:
+            if (piece.source_link or "") != form.source_link.data:
                 source_link_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
                                                before=piece.source_link,
                                                after=form.source_link.data)
@@ -389,7 +389,7 @@ def report_log(uid):
     log = PieceEditLog.query.get_or_404(uid)
     report = log.reports.filter(PieceEditLog.user_id == g.user.id).first()
     if not report:
-        report = PieceEditLogReport(piece_edit_log_id=uid, user_id=g.user.id)
+        report = PieceEditLogReport(log_id=uid, user_id=g.user.id)
         db.session.add(report)
         db.session.commit()
     return json.dumps({'result': True})

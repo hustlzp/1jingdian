@@ -12,10 +12,21 @@ bp = Blueprint('admin', __name__)
 
 @bp.route('/admin/report_piece_logs', methods=['GET', 'POST'])
 @AdminPermission()
-def report_piece_logs():
+def piece_log_reports():
     """管理句子恶意编辑举报"""
     reports = PieceEditLogReport.query
-    return render_template('admin/report_piece_logs.html', reports=reports)
+    return render_template('admin/piece_log_reports.html', reports=reports)
+
+
+@bp.route('/admin/piece_log_report/<int:uid>/process')
+@AdminPermission()
+def process_piece_log_report(uid):
+    """处理句子恶意编辑举报"""
+    report = PieceEditLogReport.query.get_or_404(uid)
+    report.processed = True
+    db.session.add(report)
+    db.session.commit()
+    return redirect(request.referrer or url_for('.piece_log_reports'))
 
 
 @bp.route('/admin/report_collection_logs', methods=['GET', 'POST'])

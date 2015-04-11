@@ -55,7 +55,7 @@ def edit(uid):
             db.session.add(title_log)
 
         # desc变更
-        if collection.desc or "" != form.desc.data:
+        if (collection.desc or "") != form.desc.data:
             desc_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
                                          before=collection.desc, after=form.desc.data,
                                          compare=generate_lcs_html(collection.desc, form.desc.data))

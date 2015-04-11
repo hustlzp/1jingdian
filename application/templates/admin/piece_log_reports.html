@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from "macros/_piece.html" import render_piece_log %}
 
 {% block page_title %}句子恶意编辑 - 壹经典{% endblock %}
 {% block page_content %}
@@ -6,7 +7,7 @@
       <div class="panel panel-primary">
          <div class="panel-heading">句子恶意编辑</div>
          <div class="panel-body">
-            <table class="table">
+            <table class="table table-responsive">
                <tr>
                   <th>编辑内容</th>
                   <th>操作</th>
@@ -14,9 +15,16 @@
 
                {% for report in reports %}
                   <tr>
-                     <td>{{ report.id }}</td>
                      <td>
-                        <a href="#" class="btn btn-xs btn-default">处理</a>
+                        {{ render_piece_log(report.log) }}
+                     </td>
+                     <td>
+                        {% if report.processed %}
+                           <span class="text-light text-sm">已处理</span>
+                        {% else %}
+                           <a href="{{ url_for('admin.process_piece_log_report', uid=report.id) }}"
+                              class="btn btn-xs btn-default">处理</a>
+                        {% endif %}
                      </td>
                   </tr>
                {% endfor %}
