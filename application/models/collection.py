@@ -13,7 +13,7 @@ class Collection(db.Model):
     cover = db.Column(db.String(200), default="default.png")
     desc = db.Column(db.Text)
 
-    kind_id = db.Column(db.Integer, db.ForeignKey('collection_kind.id'))
+    kind_id = db.Column(db.Integer, db.ForeignKey('collection_kind.id'), default=1)
     kind = db.relationship('CollectionKind',
                            backref=db.backref('collections',
                                               lazy='dynamic',
@@ -69,8 +69,9 @@ class Collection(db.Model):
 
 class CollectionKind(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.now())
     name = db.Column(db.String(100))
+    show_order = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
 
 class CollectionPiece(db.Model):
