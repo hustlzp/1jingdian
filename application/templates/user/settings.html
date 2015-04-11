@@ -15,7 +15,7 @@
                      <img class="user-avatar img-circle" src="{{ g.user.avatar_url }}" alt=""/>
                   </div>
 
-                  <button type="button" class="btn btn-primary btn-xs" id="btn-upload-avatar">
+                  <button type="button" class="btn btn-default btn-xs" id="btn-upload-avatar">
                      更换头像
                   </button>
 
@@ -27,6 +27,17 @@
                {{ vertical_field(form.weibo) }}
                {{ vertical_field(form.douban) }}
                {# {{ vertical_field(form.zhihu) }}#}
+
+               <div class="form-group">
+                  <label for="mottoa">密码</label>
+
+                  <div>
+                     <a class="btn btn-default btn-xs"
+                        href="{{ url_for('user.change_password') }}">
+                        修改密码
+                     </a>
+                  </div>
+               </div>
 
                <div class="submit-wap submit-right">
                   <button type="submit" class="btn btn-submit btn-primary">保存</button>

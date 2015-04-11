@@ -70,23 +70,6 @@ class SignupForm(Form):
             raise ValueError('无效的邀请码')
 
 
-class ChangePasswordForm(Form):
-    password = PasswordField('当前密码',
-                             validators=[DataRequired('当前密码不能为空')])
-
-    new_password = PasswordField('新的密码',
-                                 validators=[DataRequired('新密码不能为空')])
-
-    re_new_password = PasswordField('确认密码',
-                                    validators=[
-                                        DataRequired('请再输入一次新密码'),
-                                        EqualTo('new_password', message='两次输入密码不一致')])
-
-    def validate_password(self, field):
-        if not g.user or not g.user.check_password(self.password.data):
-            raise ValueError('密码错误')
-
-
 class ForgotPasswordForm(Form):
     email = StringField('注册邮箱',
                         validators=[

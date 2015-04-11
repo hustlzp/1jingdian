@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, flash,
 from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, process_avatar
 from ..models import db, User, Notification
-from ..forms import SettingsForm
+from ..forms import SettingsForm, ChangePasswordForm
 
 bp = Blueprint('user', __name__)
 
@@ -47,7 +47,21 @@ def settings():
     return render_template('user/settings.html', form=form)
 
 
-@bp.route('/upload_avatar', methods=['POST'])
+@bp.route('/my/change_password', methods=['GET', 'POST'])
+@UserPermission()
+def change_password():
+    """修改密码"""
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        g.user.password = form.new_password.data
+        db.session.add(g.user)
+        db.session.commit()
+        flash('密码修改成功')
+        return redirect(url_for('.settings'))
+    return render_template('user/change_password.html', form=form)
+
+
+@bp.route('/my/upload_avatar', methods=['POST'])
 @UserPermission()
 def upload_avatar():
     try:
