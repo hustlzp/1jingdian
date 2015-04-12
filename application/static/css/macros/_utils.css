@@ -1,0 +1,51 @@
+.upload-and-crop-image-wap .image-wap {
+  position: relative;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+}
+.upload-and-crop-image-wap .image-wap .image {
+  width: 80px;
+  height: 80px;
+}
+.upload-and-crop-image-wap .image-wap .image-uploading-percent {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  line-height: 80px;
+}
+.upload-and-crop-image-wap #btn-upload-image {
+  margin-top: 15px;
+  outline: none;
+}
+.upload-and-crop-image-wap .upload-error-info {
+  display: none;
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 20px;
+  margin-left: 5px;
+}
+#modal-crop-image .modal-body {
+  text-align: center;
+  padding-top: 20px;
+}
+#modal-crop-image .image-preview-wap {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+#modal-crop-image .image-preview-wap .image-preview {
+  display: inline-block;
+}
+#modal-crop-image .jcrop-holder {
+  display: inline-block;
+}

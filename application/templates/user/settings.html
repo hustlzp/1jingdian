@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% from 'macros/_form.html' import vertical_field, form_submit %}
+{% from 'macros/_utils.html' import upload_and_crop_image %}
 
 {% block page_title %}设置 - 壹经典{% endblock %}
 {% block page_content %}
@@ -11,17 +12,12 @@
                {{ form.csrf_token() }}
 
                <div class="form-group form-group-avatar">
-                  <div class="avatar-wap">
-                     <img class="user-avatar img-circle" src="{{ g.user.avatar_url }}" alt=""/>
-
-                     <div class="avatar-loading-percent"></div>
-                  </div>
-
-                  <button type="button" class="btn btn-default btn-xs" id="btn-upload-avatar">
-                     更换头像
-                  </button>
-
-                  <div class="upload-error-info text-danger">上传失败，请刷新页面后再试。</div>
+                  {{ upload_and_crop_image(
+                        g.user.avatar_url,
+                        url_for('user.upload_avatar'),
+                        url_for('user.crop_avatar'),
+                        "更新头像"
+                  ) }}
                </div>
 
                {{ vertical_field(form.motto) }}
@@ -49,29 +45,5 @@
       </div>
    </div>
 
-   <div class="modal fade modal-need-adjust-height" id="modal-crop-avatar">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                     aria-hidden="true">&times;</span></button>
-               <h4 class="modal-title">裁剪图片</h4>
-            </div>
-            <div class="modal-body">
-               <img src="{{ g.user.avatar_url }}" alt=""
-                    class="avatar-to-crop"/>
 
-               <div class="avatar-preview-wap">
-                  <img src="{{ g.user.avatar_url }}" alt="" class="avatar-preview"/>
-               </div>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-default btn-close-modal"
-                       data-dismiss="modal">取消
-               </button>
-               <button type="button" class="btn btn-primary btn-save-avatar">保存图片</button>
-            </div>
-         </div>
-      </div>
-   </div>
 {% endblock %}

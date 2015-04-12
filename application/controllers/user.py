@@ -79,7 +79,7 @@ def upload_avatar():
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
         return json.dumps({'result': True,
-                           'avatar_url': avatars.url(filename),
+                           'image_url': avatars.url(filename),
                            'width': show_w,
                            'height': show_h})
 
@@ -102,7 +102,7 @@ def crop_avatar():
         g.user.avatar = new_avatar_filename
         db.session.add(g.user)
         db.session.commit()
-        return json.dumps({'result': True, 'avatar_url': avatars.url(new_avatar_filename)})
+        return json.dumps({'result': True, 'image_url': avatars.url(new_avatar_filename)})
 
 
 @bp.route('/my/notifications', defaults={'page': 1})
