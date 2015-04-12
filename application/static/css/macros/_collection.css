@@ -203,6 +203,7 @@
 .collection-header .collection-info .options .btn-like-collection .fa-bookmark-o:hover {
   color: #1e88a8;
 }
+.collection-header .collection-info .options .flag-collection-lock,
 .collection-header .collection-info .options .btn-edit-collection,
 .collection-header .collection-info .options .btn-like-collection,
 .collection-header .collection-info .options .btn-show-collection-logs-wap {

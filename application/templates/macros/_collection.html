@@ -116,13 +116,29 @@
             {#               <span class="fa fa-play-circle"></span>#}
             {#            </a>#}
 
+            {% if permissions.AdminPermission().check() %}
+               {% if collection.locked %}
+                  <a href="{{ url_for('collection.unlock', uid=collection.id) }}"
+                     class="btn btn-xs btn-default">
+                     <span class="fa fa-unlock"></span> 解锁
+                  </a>
+               {% else %}
+                  <a href="{{ url_for('collection.lock', uid=collection.id) }}"
+                     class="btn btn-xs btn-default">
+                     <span class="fa fa-lock"></span> 锁定
+                  </a>
+               {% endif %}
+            {% endif %}
+
+            {% if collection.locked %}
+               <span class="fa fa-lock flag-collection-lock" title="该话题已锁定"></span>
+            {% endif %}
+
             {% if permissions.CollectionEditPermission(collection).check() %}
                <a href="{{ url_for('collection.edit', uid=collection.id) }}"
                   class="btn-edit-collection" title="编辑句集">
                   <span class="fa fa-pencil"></span>
                </a>
-            {% elif collection.locked %} %}
-               <span class="fa fa-lock" title="该话题已锁定"></span>
             {% endif %}
 
             <a href="javascript: void(0)" class="btn-show-collection-logs-wap" title="句集编辑日志">

@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask import render_template, Blueprint, redirect, request, url_for, g, json
-from ..utils.permissions import UserPermission, CollectionEditPermission
+from ..utils.permissions import UserPermission, CollectionEditPermission, AdminPermission
 from ..models import db, Piece, Collection, CollectionPiece, CollectionLike, \
     CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport
 from ..forms import CollectionForm
@@ -156,3 +156,23 @@ def report_log(uid):
         db.session.add(report)
         db.session.commit()
     return json.dumps({'result': True})
+
+
+@bp.route('/collection/<int:uid>/lock')
+@AdminPermission()
+def lock(uid):
+    collection = Collection.query.get_or_404(uid)
+    collection.locked = True
+    db.session.add(collection)
+    db.session.commit()
+    return redirect(request.referrer or url_for('.view', uid=uid))
+
+
+@bp.route('/collection/<int:uid>/unlock')
+@AdminPermission()
+def unlock(uid):
+    collection = Collection.query.get_or_404(uid)
+    collection.locked = False
+    db.session.add(collection)
+    db.session.commit()
+    return redirect(request.referrer or url_for('.view', uid=uid))
