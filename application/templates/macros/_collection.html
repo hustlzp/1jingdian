@@ -170,14 +170,18 @@
                url = urlFor('collection.like', {uid: id});
             }
 
+            _this.toggleClass('liked');
+
             $.ajax({
                url: url,
                method: 'post',
                dataType: 'json'
             }).done(function (response) {
-               if (response.result) {
+               if (!response.result) {
                   _this.toggleClass('liked');
                }
+            }).fail(function () {
+               _this.toggleClass('liked');
             });
          });
 
@@ -283,11 +287,13 @@
 
    <script type="text/javascript">
       (function () {
+         // 跳转句集单页
          $('.collection').click(function () {
             var collectionId = $(this).data('collection-id');
             window.location = urlFor('collection.view', {'uid': collectionId});
          });
 
+         // 收藏句集
          $('.btn-like-collection').click(function (e) {
             var id = $(this).data('id');
             var url = "";
@@ -300,14 +306,18 @@
                url = urlFor('collection.like', {uid: id});
             }
 
+            _this.toggleClass('liked');
+
             $.ajax({
                url: url,
                method: 'post',
                dataType: 'json'
             }).done(function (response) {
-               if (response.result) {
+               if (!response.result) {
                   _this.toggleClass('liked');
                }
+            }).fail(function () {
+               _this.toggleClass('liked');
             });
 
             e.stopPropagation();
