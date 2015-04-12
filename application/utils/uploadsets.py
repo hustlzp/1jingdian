@@ -91,10 +91,12 @@ def crop_by_ratio(image, top_left_x_ratio, top_left_y_ratio, bottom_right_x_rati
 
 
 def resize_square(image, border):
+    """将图片缩放为正方形"""
     return image.resize((border, border), Image.ANTIALIAS)
 
 
 def resize_with_max(image, max_value):
+    """等比例调整图片大小，使其长与宽不超过某值"""
     w, h = image.size
     if w > h and w > max_value:
         target_w = max_value
