@@ -20,10 +20,29 @@ def process_avatar(file_storage, upload_set, border):
 
 
 def process_avatar_to_crop(file_storage, upload_set):
+    """将图片处理为适合裁剪的大小，即长宽均不超过1000"""
     image = open_image(file_storage)
     image = resize_with_max(image, 1000)
     ext = extension(file_storage.filename)
     return save_image(image, upload_set, ext), image.size
+
+
+def crop_avatar(filename, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
+                bottom_right_y_ratio):
+    """裁剪用户头像"""
+    file_path = avatars.path(filename)
+    image = Image.open(file_path)
+    image = crop_by_ratio(image, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
+                          bottom_right_y_ratio)
+    image = center_crop(image)
+    image = resize_square(image, 160)
+
+    # 删除裁剪前的图片
+    os.remove(file_path)
+
+    # 保存裁剪后的图片
+    ext = extension(filename)
+    return save_image(image, avatars, ext)
 
 
 def open_image(file_storage):
@@ -48,7 +67,11 @@ def save_image(image, upload_set, ext):
 
 
 def center_crop(image):
+    """居中裁剪"""
     w, h = image.size
+    if w == h:
+        return image
+
     if w > h:
         border = h
         avatar_crop_region = ((w - border) / 2, 0, (w + border) / 2, border)
@@ -56,6 +79,15 @@ def center_crop(image):
         border = w
         avatar_crop_region = (0, (h - border) / 2, border, (h + border) / 2)
     return image.crop(avatar_crop_region)
+
+
+def crop_by_ratio(image, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
+                  bottom_right_y_ratio):
+    """通过左上角和右下角的坐标比例进行裁剪"""
+    w, h = image.size
+    crop_rect = (int(top_left_x_ratio * w), int(top_left_y_ratio * h),
+                 int(bottom_right_x_ratio * w), int(bottom_right_y_ratio * h))
+    return image.crop(crop_rect)
 
 
 def resize_square(image, border):

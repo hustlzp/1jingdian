@@ -1,8 +1,8 @@
 # coding: utf-8
 from datetime import datetime
-from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
+from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json, abort
 from ..utils.permissions import UserPermission
-from ..utils.uploadsets import avatars, process_avatar, process_avatar_to_crop
+from ..utils.uploadsets import avatars, crop_avatar as _crop_avatar, process_avatar_to_crop
 from ..models import db, User, Notification
 from ..forms import SettingsForm, ChangePasswordForm
 
@@ -68,23 +68,41 @@ def upload_avatar():
         filename, (w, h) = process_avatar_to_crop(request.files['file'], avatars)
         if w > h and w > 400:
             show_w = 400
-            show_h = float(show_w) * h / w
+            show_h = show_w * h / w
         elif h > w and h > 400:
             show_h = 400
-            show_w = float(show_h) * w / h
+            show_w = show_h * w / h
         else:
             show_w = w
             show_h = h
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
-        # g.user.avatar = filename
-        # db.session.add(g.user)
-        # db.session.commit()
         return json.dumps({'result': True,
                            'avatar_url': avatars.url(filename),
                            'width': show_w,
                            'height': show_h})
+
+
+@bp.route('/my/crop_avatar', methods=['POST'])
+@UserPermission()
+def crop_avatar():
+    filename = request.form.get('filename')
+    top_left_x_ratio = request.form.get('top_left_x_ratio', type=float)
+    top_left_y_ratio = request.form.get('top_left_y_ratio', type=float)
+    bottom_right_x_ratio = request.form.get('bottom_right_x_ratio', type=float)
+    bottom_right_y_ratio = request.form.get('bottom_right_y_ratio', type=float)
+
+    try:
+        new_avatar_filename = _crop_avatar(filename, top_left_x_ratio, top_left_y_ratio,
+                                           bottom_right_x_ratio, bottom_right_y_ratio)
+    except Exception, e:
+        return json.dumps({'result': False, 'message': e.__repr__()})
+    else:
+        g.user.avatar = new_avatar_filename
+        db.session.add(g.user)
+        db.session.commit()
+        return json.dumps({'result': True, 'avatar_url': avatars.url(new_avatar_filename)})
 
 
 @bp.route('/my/notifications', defaults={'page': 1})
