@@ -20,11 +20,12 @@ uploader.bind('FilesAdded', function (up, files) {
 uploader.bind('FileUploaded', function (up, file, info) {
     var response = $.parseJSON(info.response);
 
-    $('.avatar-wap .loading-flag').hide();
     if (response.result) {
         $('.upload-error-info').fadeOut();
-        $('.user-avatar').hide().attr('src', response.avatar_url).fadeIn('fast');
+        $('.user-avatar').attr('src', response.avatar_url);
     } else {
         $('.upload-error-info').fadeOut();
     }
+
+    $('.avatar-wap .loading-flag').hide();
 });
