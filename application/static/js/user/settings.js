@@ -10,10 +10,15 @@ uploader.init();
 
 // 文件添加后立即上传
 uploader.bind('FilesAdded', function (up, files) {
-    $('.avatar-wap .loading-flag').show();
+    $('.avatar-loading-percent').show();
     plupload.each(files, function () {
         uploader.start();
     });
+});
+
+// 上传进度
+uploader.bind('UploadProgress', function (up, file) {
+    $('.avatar-loading-percent').text(file.percent + "%");
 });
 
 // 上传头像
@@ -25,10 +30,10 @@ uploader.bind('FileUploaded', function (up, file, info) {
         $('.user-avatar')
             .attr('src', response.avatar_url)
             .onOnce('load', function () {
-                $('.avatar-wap .loading-flag').hide();
+                $('.avatar-loading-percent').hide();
             });
     } else {
         $('.upload-error-info').fadeOut();
-        $('.avatar-wap .loading-flag').hide();
+        $('.avatar-loading-percent').hide();
     }
 });
