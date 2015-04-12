@@ -37,7 +37,7 @@ def search():
 def collections(page):
     kind_id = request.args.get('kind_id')
     current_kind = CollectionKind.query.get_or_404(kind_id) if kind_id else None
-    collection_kinds = CollectionKind.query.order_by(CollectionKind.show_order.desc())
+    collection_kinds = CollectionKind.query.order_by(CollectionKind.show_order.asc())
     if kind_id:
         collections = current_kind.collections.paginate(page, 20)
     else:
