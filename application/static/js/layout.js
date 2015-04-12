@@ -175,6 +175,16 @@ $(document).on('click', '.btn-close-backdrop', function () {
     closeBackdrop();
 });
 
+// 调整modal高度
+$('.modal-need-adjust-height').on('show.bs.modal', function () {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) * 0.3;
+    if (offset > 0) {
+        $dialog.css('margin-top', offset);
+    }
+});
+
 /**
  * Open the backdrop.
  */
