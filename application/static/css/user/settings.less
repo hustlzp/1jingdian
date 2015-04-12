@@ -12,10 +12,32 @@
       width: 80px;
       height: 80px;
     }
+
+    .loading-flag {
+      display: none;
+      background-color: rgba(255, 255, 255, .6);
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+
+      .fa {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 18px;
+        margin-left: -9px;
+        margin-top: -9px;
+      }
+    }
   }
 
   #btn-upload-avatar {
     margin-top: 15px;
+    outline: none;
   }
 
   .upload-error-info {

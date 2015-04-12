@@ -10,7 +10,8 @@ uploader.init();
 
 // 文件添加后立即上传
 uploader.bind('FilesAdded', function (up, files) {
-    plupload.each(files, function (file) {
+    $('.avatar-wap .loading-flag').show();
+    plupload.each(files, function () {
         uploader.start();
     });
 });
@@ -18,10 +19,12 @@ uploader.bind('FilesAdded', function (up, files) {
 // 上传头像
 uploader.bind('FileUploaded', function (up, file, info) {
     var response = $.parseJSON(info.response);
+
+    $('.avatar-wap .loading-flag').hide();
     if (response.result) {
         $('.upload-error-info').fadeOut();
         $('.user-avatar').hide().attr('src', response.avatar_url).fadeIn('fast');
     } else {
-        $('.upload-error-info').fadeIn();
+        $('.upload-error-info').fadeOut();
     }
 });
