@@ -1,3 +1,39 @@
+@import "../utils";
+
 .pagination {
   margin: 0 0 25px 27px;
+}
+
+.collection-kinds-wap {
+  padding: 30px 27px 0 27px;
+
+  .collection-kind {
+    padding: 6px 10px;
+    line-height: 1;
+    border: 1px solid #d9d9d9;
+    border-radius: 30px;
+    font-size: 12px;
+    text-decoration: none;
+    margin-right: 10px;
+    display: inline-block;
+    color: #666;
+
+    &.active {
+      background-color: @main-color;
+      border-color: @main-color;
+      color: white;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    &:hover {
+      color: @main-color;
+    }
+  }
+}
+
+.collections-wap {
+  padding-top: 30px;
 }

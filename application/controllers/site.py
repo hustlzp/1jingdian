@@ -1,7 +1,7 @@
 # coding: utf-8
 from datetime import date, timedelta
-from flask import render_template, Blueprint
-from ..models import Piece, Collection
+from flask import render_template, Blueprint, request
+from ..models import Piece, Collection, CollectionKind
 
 bp = Blueprint('site', __name__)
 
@@ -35,8 +35,15 @@ def search():
 @bp.route('/collections', defaults={'page': 1})
 @bp.route('/collections/page/<int:page>')
 def collections(page):
-    collections = Collection.query.paginate(page, 20)
-    return render_template('site/collections.html', collections=collections)
+    kind_id = request.args.get('kind_id')
+    current_kind = CollectionKind.query.get_or_404(kind_id) if kind_id else None
+    collection_kinds = CollectionKind.query.order_by(CollectionKind.show_order.desc())
+    if kind_id:
+        collections = current_kind.collections.paginate(page, 20)
+    else:
+        collections = Collection.query.paginate(page, 20)
+    return render_template('site/collections.html', collections=collections,
+                           collection_kinds=collection_kinds, kind_id=kind_id)
 
 
 @bp.route('/test')

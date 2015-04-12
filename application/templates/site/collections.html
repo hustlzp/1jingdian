@@ -8,6 +8,18 @@
       <div class="panel panel-primary">
          <div class="panel-heading">句集</div>
          <div class="panel-body panel-body-no-padding">
+            <div class="collection-kinds-wap">
+               <a href="{{ url_for('site.collections') }}"
+                  class="collection-kind {% if not kind_id %}active{% endif %}">全部</a>
+               {% for kind in collection_kinds %}
+                  <a href="{{ url_for('site.collections', kind_id=kind.id) }}"
+                     class="collection-kind {% if kind_id|int == kind.id %}active{% endif %}">
+                     {{ kind.name }}
+                  </a>
+               {% endfor %}
+            </div>
+
+
             {{ render_collections(collections.items) }}
 
             {% if collections.pages > 1 %}
