@@ -73,6 +73,7 @@
    <script type="text/javascript">
       (function () {
          var imageWidth, imageHeight, imageUrl;
+         var imageMaxBorder = 400;
          var previewWidth = 80, previewHeight = 80;
          var jcropAPI = null;
          var topLeftX, topLeftY, bottomRightX, bottomRightY;
@@ -103,9 +104,21 @@
                // 上传完毕
                FileUploaded: function (up, file, info) {
                   var response = $.parseJSON(info.response);
+                  var originalWidth = parseInt(response.width);
+                  var originalHeight = parseInt(response.height);
 
-                  imageWidth = response.width;
-                  imageHeight = response.height;
+                  // 计算不超过imageMaxBorder的图片宽高
+                  if (originalWidth > originalHeight && originalWidth > imageMaxBorder) {
+                     imageWidth = imageMaxBorder;
+                     imageHeight = imageWidth * originalHeight / originalWidth;
+                  } else if (originalHeight > originalWidth && originalHeight > imageMaxBorder) {
+                     imageHeight = imageMaxBorder;
+                     imageWidth = imageHeight * originalWidth / originalHeight;
+                  } else {
+                     imageWidth = originalWidth;
+                     imageHeight = originalHeight;
+                  }
+
                   imageUrl = response.image_url;
 
                   up.disableBrowse(false);

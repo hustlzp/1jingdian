@@ -19,7 +19,7 @@ def process_avatar(file_storage, upload_set, border):
     return save_image(image, upload_set, ext)
 
 
-def process_avatar_to_crop(file_storage, upload_set):
+def process_image_for_cropping(file_storage, upload_set):
     """将图片处理为适合裁剪的大小，即长宽均不超过1000"""
     image = open_image(file_storage)
     image = resize_with_max(image, 1000)
@@ -27,10 +27,10 @@ def process_avatar_to_crop(file_storage, upload_set):
     return save_image(image, upload_set, ext), image.size
 
 
-def crop_avatar(filename, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
-                bottom_right_y_ratio):
+def crop_image(filename, upload_set, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
+               bottom_right_y_ratio):
     """裁剪用户头像"""
-    file_path = avatars.path(filename)
+    file_path = upload_set.path(filename)
     image = Image.open(file_path)
     image = crop_by_ratio(image, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
                           bottom_right_y_ratio)
@@ -42,7 +42,7 @@ def crop_avatar(filename, top_left_x_ratio, top_left_y_ratio, bottom_right_x_rat
 
     # 保存裁剪后的图片
     ext = extension(filename)
-    return save_image(image, avatars, ext)
+    return save_image(image, upload_set, ext)
 
 
 def open_image(file_storage):

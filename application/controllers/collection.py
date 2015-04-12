@@ -4,7 +4,7 @@ from ..utils.permissions import UserPermission, CollectionEditPermission, AdminP
 from ..models import db, Piece, Collection, CollectionPiece, CollectionLike, \
     CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport
 from ..forms import CollectionForm
-from ..utils.uploadsets import collection_covers, process_avatar
+from ..utils.uploadsets import collection_covers, crop_image, process_image_for_cropping
 from ..utils.helpers import generate_lcs_html
 
 bp = Blueprint('collection', __name__)
@@ -74,29 +74,57 @@ def edit(uid):
     return render_template('collection/edit.html', form=form, collection=collection)
 
 
-@bp.route('/collection/<int:uid>/upload_cover', methods=['POST'])
+@bp.route('/collection/upload_cover', methods=['POST'])
 @UserPermission()
-def upload_cover(uid):
-    collection = Collection.query.get_or_404(uid)
+def upload_cover():
     try:
-        filename = process_avatar(request.files['file'], collection_covers, 160)
+        filename, (w, h) = process_image_for_cropping(request.files['file'], collection_covers)
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
-        # cover变更
+        return json.dumps({
+            'result': True,
+            'image_url': collection_covers.url(filename),
+            'width': w,
+            'height': h
+        })
+
+
+@bp.route('/collection/<int:uid>/crop_avatar', methods=['POST'])
+@UserPermission()
+def crop_cover(uid):
+    collection = Collection.query.get_or_404(uid)
+    filename = request.form.get('filename')
+    top_left_x_ratio = request.form.get('top_left_x_ratio', type=float)
+    top_left_y_ratio = request.form.get('top_left_y_ratio', type=float)
+    bottom_right_x_ratio = request.form.get('bottom_right_x_ratio', type=float)
+    bottom_right_y_ratio = request.form.get('bottom_right_y_ratio', type=float)
+
+    try:
+        new_cover_filename = crop_image(filename, collection_covers, top_left_x_ratio,
+                                        top_left_y_ratio, bottom_right_x_ratio,
+                                        bottom_right_y_ratio)
+    except Exception, e:
+        return json.dumps({'result': False, 'message': e.__repr__()})
+    else:
+        # cover变更记录
         cover_log = CollectionEditLog(collection_id=uid, user_id=g.user.id,
                                       before=collection.cover_url,
-                                      after=collection_covers.url(filename))
+                                      after=collection_covers.url(new_cover_filename))
         if not collection.cover or collection.cover == 'default.png':
             cover_log.kind = COLLECTION_EDIT_KIND.ADD_COVER
         else:
             cover_log.kind = COLLECTION_EDIT_KIND.UPDATE_COVER
         db.session.add(cover_log)
 
-        collection.cover = filename
+        # 保存图标
+        collection.cover = new_cover_filename
         db.session.add(collection)
         db.session.commit()
-        return json.dumps({'result': True, 'avatar_url': collection_covers.url(filename)})
+        return json.dumps({
+            'result': True,
+            'image_url': collection_covers.url(new_cover_filename)
+        })
 
 
 @bp.route('/collection/query', methods=['POST'])

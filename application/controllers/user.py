@@ -2,7 +2,7 @@
 from datetime import datetime
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json, abort
 from ..utils.permissions import UserPermission
-from ..utils.uploadsets import avatars, crop_avatar as _crop_avatar, process_avatar_to_crop
+from ..utils.uploadsets import avatars, crop_image, process_image_for_cropping
 from ..models import db, User, Notification
 from ..forms import SettingsForm, ChangePasswordForm
 
@@ -65,23 +65,16 @@ def change_password():
 @UserPermission()
 def upload_avatar():
     try:
-        filename, (w, h) = process_avatar_to_crop(request.files['file'], avatars)
-        if w > h and w > 400:
-            show_w = 400
-            show_h = show_w * h / w
-        elif h > w and h > 400:
-            show_h = 400
-            show_w = show_h * w / h
-        else:
-            show_w = w
-            show_h = h
+        filename, (w, h) = process_image_for_cropping(request.files['file'], avatars)
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
-        return json.dumps({'result': True,
-                           'image_url': avatars.url(filename),
-                           'width': show_w,
-                           'height': show_h})
+        return json.dumps({
+            'result': True,
+            'image_url': avatars.url(filename),
+            'width': w,
+            'height': h
+        })
 
 
 @bp.route('/my/crop_avatar', methods=['POST'])
@@ -94,8 +87,8 @@ def crop_avatar():
     bottom_right_y_ratio = request.form.get('bottom_right_y_ratio', type=float)
 
     try:
-        new_avatar_filename = _crop_avatar(filename, top_left_x_ratio, top_left_y_ratio,
-                                           bottom_right_x_ratio, bottom_right_y_ratio)
+        new_avatar_filename = crop_image(filename, avatars, top_left_x_ratio, top_left_y_ratio,
+                                         bottom_right_x_ratio, bottom_right_y_ratio)
     except Exception, e:
         return json.dumps({'result': False, 'message': e.__repr__()})
     else:

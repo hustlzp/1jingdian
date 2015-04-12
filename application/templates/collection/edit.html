@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% from 'macros/_form.html' import vertical_field, form_submit %}
+{% from 'macros/_utils.html' import upload_and_crop_image %}
 
 {% block page_title %}编辑句集「{{ collection.title }}」- 壹经典{% endblock %}
 {% block page_content %}
@@ -11,16 +12,12 @@
                {{ form.csrf_token() }}
 
                <div class="form-group form-group-cover">
-                  <div class="cover-wap">
-                     <img class="cover img-circle" src="{{ collection.cover_url }}" alt=""/>
-                  </div>
-
-                  <button type="button" data-collection-id="{{ collection.id }}"
-                          class="btn btn-primary btn-xs" id="btn-upload-cover">
-                     更换图标
-                  </button>
-
-                  <div class="upload-error-info text-danger">上传失败，请稍后再试。</div>
+                  {{ upload_and_crop_image(
+                        collection.cover_url,
+                        url_for('collection.upload_cover'),
+                        url_for('collection.crop_cover', uid=collection.id),
+                        "更新图标"
+                     ) }}
                </div>
 
                {{ vertical_field(form.title) }}
