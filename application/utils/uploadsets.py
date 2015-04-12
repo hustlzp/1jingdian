@@ -19,6 +19,13 @@ def process_avatar(file_storage, upload_set, border):
     return save_image(image, upload_set, ext)
 
 
+def process_avatar_to_crop(file_storage, upload_set):
+    image = open_image(file_storage)
+    image = resize_with_max(image, 1000)
+    ext = extension(file_storage.filename)
+    return save_image(image, upload_set, ext), image.size
+
+
 def open_image(file_storage):
     """Open image from FileStorage."""
     image = Image.open(file_storage.stream)
@@ -53,6 +60,20 @@ def center_crop(image):
 
 def resize_square(image, border):
     return image.resize((border, border), Image.ANTIALIAS)
+
+
+def resize_with_max(image, max_value):
+    w, h = image.size
+    if w > h and w > max_value:
+        target_w = max_value
+        target_h = max_value * h / w
+        return image.resize((target_w, target_h), Image.ANTIALIAS)
+    elif h > w and h > max_value:
+        target_h = max_value
+        target_w = max_value * w / h
+        return image.resize((target_w, target_h), Image.ANTIALIAS)
+    else:
+        return image
 
 
 def random_filename():

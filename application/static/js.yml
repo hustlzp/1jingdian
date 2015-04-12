@@ -1,6 +1,6 @@
 libs:
-  - js/modernizr.js
   - bower_components/respond/dest/respond.min.js
+  - js/modernizr.js
   - bower_components/jquery/dist/jquery.min.js
   - bower_components/jquery.transit/jquery.transit.js
   - bower_components/jquery.scrollTo/jquery.scrollTo.min.js
@@ -9,6 +9,7 @@ libs:
   - bower_components/plupload/js/plupload.full.min.js
   - bower_components/typeahead.js/dist/typeahead.bundle.min.js
   - bower_components/jquery-mousewheel/jquery.mousewheel.min.js
+  - bower_components/Jcrop/js/jquery.Jcrop.min.js
   - js/init.js
 
 layout:

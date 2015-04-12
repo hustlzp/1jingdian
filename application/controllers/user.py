@@ -2,7 +2,7 @@
 from datetime import datetime
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json
 from ..utils.permissions import UserPermission
-from ..utils.uploadsets import avatars, process_avatar
+from ..utils.uploadsets import avatars, process_avatar, process_avatar_to_crop
 from ..models import db, User, Notification
 from ..forms import SettingsForm, ChangePasswordForm
 
@@ -65,14 +65,26 @@ def change_password():
 @UserPermission()
 def upload_avatar():
     try:
-        filename = process_avatar(request.files['file'], avatars, 160)
+        filename, (w, h) = process_avatar_to_crop(request.files['file'], avatars)
+        if w > h and w > 400:
+            show_w = 400
+            show_h = float(show_w) * h / w
+        elif h > w and h > 400:
+            show_h = 400
+            show_w = float(show_h) * w / h
+        else:
+            show_w = w
+            show_h = h
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
-        g.user.avatar = filename
-        db.session.add(g.user)
-        db.session.commit()
-        return json.dumps({'result': True, 'avatar_url': avatars.url(filename)})
+        # g.user.avatar = filename
+        # db.session.add(g.user)
+        # db.session.commit()
+        return json.dumps({'result': True,
+                           'avatar_url': avatars.url(filename),
+                           'width': show_w,
+                           'height': show_h})
 
 
 @bp.route('/my/notifications', defaults={'page': 1})
