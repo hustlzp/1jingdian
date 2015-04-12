@@ -43,8 +43,7 @@
 
 
 {% macro render_piece_comment(comment) %}
-   <a name="comment_{{ comment.id }}"></a>
-   <div class="comment {% if sub %}sub-comment{% endif %}">
+   <div class="comment {% if sub %}sub-comment{% endif %}" data-comment-id="{{ comment.id }}">
       <div class="media">
          <div class="media-left">
             {{ render_user_avatar(comment.user) }}

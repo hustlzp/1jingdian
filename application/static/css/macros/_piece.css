@@ -196,7 +196,7 @@
   cursor: pointer;
 }
 .piece-details-wap .comment {
-  margin-bottom: 15px;
+  padding: 7.5px 0;
 }
 .piece-details-wap .comment:hover .comment-meta .options {
   visibility: visible;
