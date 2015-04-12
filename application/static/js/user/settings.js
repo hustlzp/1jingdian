@@ -22,10 +22,13 @@ uploader.bind('FileUploaded', function (up, file, info) {
 
     if (response.result) {
         $('.upload-error-info').fadeOut();
-        $('.user-avatar').attr('src', response.avatar_url);
+        $('.user-avatar')
+            .attr('src', response.avatar_url)
+            .on('load', function () {
+                $('.avatar-wap .loading-flag').hide();
+            });
     } else {
         $('.upload-error-info').fadeOut();
+        $('.avatar-wap .loading-flag').hide();
     }
-
-    $('.avatar-wap .loading-flag').hide();
 });
