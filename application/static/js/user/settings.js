@@ -32,6 +32,7 @@ var uploader = new plupload.Uploader($.extend(g.pluploadDefaults, {
             up.disableBrowse(false);
             imageWidth = response.width;
             imageHeight = response.height;
+            console.log(imageWidth, imageHeight);
 
             if (jcrop_api) {
                 jcrop_api.destroy();
@@ -45,6 +46,7 @@ var uploader = new plupload.Uploader($.extend(g.pluploadDefaults, {
                 $('.avatar-to-crop')
                     .attr('src', response.avatar_url)
                     .attr({'width': imageWidth, 'height': imageHeight})
+                    .removeAttr('style')
                     .onOnce('load', function () {
                         var selectRect = null;
 
