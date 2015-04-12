@@ -95,6 +95,15 @@ function showPreview(coords) {
     });
 }
 
-$('#modal-avatar-crop').on('hidden.bs.modal', function () {
-    jcrop_api.destroy();
-});
+$('#modal-avatar-crop')
+    .on('hidden.bs.modal', function () {
+        jcrop_api.destroy();
+    })
+    .on('show.bs.modal', function () {
+        $(this).css('display', 'block');
+        var $dialog = $(this).find(".modal-dialog");
+        var offset = ($(window).height() - $dialog.height()) * 0.3;
+        if (offset > 0) {
+            $dialog.css('margin-top', offset);
+        }
+    });
