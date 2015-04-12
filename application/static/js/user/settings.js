@@ -24,7 +24,7 @@ uploader.bind('FileUploaded', function (up, file, info) {
         $('.upload-error-info').fadeOut();
         $('.user-avatar')
             .attr('src', response.avatar_url)
-            .on('load', function () {
+            .onOnce('load', function () {
                 $('.avatar-wap .loading-flag').hide();
             });
     } else {
