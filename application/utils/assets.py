@@ -17,9 +17,9 @@ JS_CONFIG = "js.yml"
 CSS_CONFIG = "css.yml"
 
 # Output files
-HEAD_JS = "build/libs.js"
-BOTTOM_JS = "build/page.js"
-HEAD_CSS = "build/app.css"
+LIBS_JS = "build/libs.js"
+PAGE_JS = "build/page.js"
+APP_CSS = "build/app.css"
 
 
 class G(object):
@@ -33,7 +33,6 @@ class G(object):
 def register_assets(app):
     """Load assets config, and inject some helper funcions to jinja2 globals."""
     G.static_path = static_path = app.static_folder
-
     js_config_path = os.path.join(static_path, JS_CONFIG)
     css_config_path = os.path.join(static_path, CSS_CONFIG)
 
@@ -42,7 +41,7 @@ def register_assets(app):
     G.css_config = yaml.load(open(css_config_path, 'r'))
 
     # Mkdir if output dir not exists
-    output_dir = os.path.dirname(os.path.join(static_path, HEAD_JS))
+    output_dir = os.path.dirname(os.path.join(static_path, LIBS_JS))
     if not os.path.isdir(output_dir):
         mkdir_p(output_dir)
 
@@ -54,7 +53,8 @@ def register_assets(app):
     G.css_config['excluded_libs'] = []
     for index, lib_path in enumerate(G.css_config['libs']):
         if lib_path.startswith(('~', 'http://', 'https://')):
-            lib_path = lib_path[1:]
+            if lib_path.startswith('~'):
+                lib_path = lib_path[1:]
             G.css_config['libs'][index] = lib_path
             G.css_config['excluded_libs'].append(lib_path)
     G.css_config['libs'] = [item for item in G.css_config['libs'] if
@@ -64,7 +64,8 @@ def register_assets(app):
     G.js_config['excluded_libs'] = []
     for index, lib_path in enumerate(G.js_config['libs']):
         if lib_path.startswith(('~', 'http://', 'https://')):
-            lib_path = lib_path[1:]
+            if lib_path.startswith('~'):
+                lib_path = lib_path[1:]
             G.js_config['libs'][index] = lib_path
             G.js_config['excluded_libs'].append(lib_path)
     G.js_config['libs'] = [item for item in G.js_config['libs'] if
@@ -110,7 +111,7 @@ def build_js(app):
             libs_js_string += jsmin(file_content)
 
     libs_js_string = libs_js_string.replace('\n', '').replace('\r', '')
-    with open(os.path.join(static_path, HEAD_JS), "w") as text_file:
+    with open(os.path.join(static_path, LIBS_JS), "w") as text_file:
         text_file.write(libs_js_string)
     print('libs.js builded.')
 
@@ -144,7 +145,7 @@ def build_js(app):
                         # print(file)
 
     page_js_string = jsmin(page_js_string).replace('\n', '').replace('\r', '')
-    with open(os.path.join(static_path, BOTTOM_JS), "w") as text_file:
+    with open(os.path.join(static_path, PAGE_JS), "w") as text_file:
         text_file.write(page_js_string)
     print('page.js builded.')
 
@@ -208,26 +209,32 @@ def build_css(app):
                         # print(file)
 
     app_css_string = app_css_string.replace('\n', '').replace('\r', '')
-    with open(os.path.join(static_path, HEAD_CSS), "w") as text_file:
+    with open(os.path.join(static_path, APP_CSS), "w") as text_file:
         text_file.write(app_css_string)
     print('app.css builded.')
 
 
 def libs_js():
-    """Generate js script tags for Flask app."""
-    script_paths = G.js_config['excluded_libs'][:]
+    """Generate libs js script tags for Flask app."""
+    script_tags = ""
+
+    # Excluded libs
+    for ex_lib in G.js_config['excluded_libs']:
+        if ex_lib.startswith('http'):
+            script_tags += script(ex_lib, absolute=True)
+        else:
+            script_tags += script(ex_lib)
 
     # if False:
     if G.debug:
-        # 全局js引用
-        script_paths += G.js_config['libs']
+        script_tags += ''.join(map(script, G.js_config['libs']))
     else:
-        script_paths.append(HEAD_JS)
-    return Markup(''.join([script(path) for path in script_paths]))
+        script_tags += script(LIBS_JS)
+    return Markup(script_tags)
 
 
 def page_js(template_reference):
-    """Generate js script tags for Flask app."""
+    """Generate page js script tags for Flask app."""
 
     # if False:
     if G.debug:
@@ -239,37 +246,45 @@ def page_js(template_reference):
         page_js_path = os.path.join(G.js_config['page'],
                                     template_name.replace('html', 'js'))
         script_paths.append(page_js_path)
-        return Markup(''.join([script(path) for path in script_paths]))
+        return Markup(''.join(map(script, script_paths)))
     else:
-        return Markup(script(BOTTOM_JS))
+        return Markup(script(PAGE_JS))
 
 
 def app_css(template_reference):
-    """Generate js script tags for Flask app."""
-    css_paths = G.css_config['excluded_libs'][:]
+    """Generate app css link tags for Flask app."""
+    link_tags = ""
+
+    # Excluded css libs
+    for ex_lib in G.css_config['excluded_libs']:
+        if ex_lib.startswith('http'):
+            link_tags += link(ex_lib, absolute=True)
+        else:
+            link_tags += link(ex_lib)
 
     # if False:
     if G.debug:
         # libs
-        css_paths += G.css_config['libs']
+        link_tags += ''.join(map(link, G.css_config['libs']))
 
         # layout
-        for layout in G.css_config['layout']:
+        for layout_path in G.css_config['layout']:
             # 支持通配符
-            if '*' in layout:
-                for path in glob2.iglob(os.path.join(G.static_path, layout)):
-                    css_paths.append(path.split(G.static_path)[1][1:])
+            if '*' in layout_path:
+                for path in glob2.iglob(os.path.join(G.static_path, layout_path)):
+                    relative_path = path.split(G.static_path)[1][1:]
+                    link_tags += link(relative_path)
             else:
-                css_paths.append(layout)
+                link_tags += link(layout_path)
 
         # page
         template_name = _get_template_name(template_reference)
         page_css_path = os.path.join(G.css_config['page'],
                                      template_name.replace('html', 'css'))
-        css_paths.append(page_css_path)
+        link_tags += link(page_css_path)
     else:
-        css_paths.append(HEAD_CSS)
-    return Markup(''.join([link(path) for path in css_paths]))
+        link_tags += link(APP_CSS)
+    return Markup(link_tags)
 
 
 def static(filename):
@@ -297,22 +312,28 @@ def static(filename):
     return url
 
 
-def script(path):
+def script(path, absolute=False):
     """Generate script tag."""
-    script_path = static(path)
-    if script_path:
-        return Markup("<script type='text/javascript' src='%s'></script>" % script_path)
+    if absolute:
+        return "<script type='text/javascript' src='%s'></script>" % path
     else:
-        return Markup("<!-- 404: %s -->" % path)
+        script_path = static(path)
+        if script_path:
+            return "<script type='text/javascript' src='%s'></script>" % script_path
+        else:
+            return "<!-- 404: %s -->" % path
 
 
-def link(path):
+def link(path, absolute=False):
     """Generate link tag."""
-    link_path = static(path)
-    if link_path:
-        return Markup("<link rel='stylesheet' href='%s'>" % link_path)
+    if absolute:
+        return "<link rel='stylesheet' href='%s'>" % path
     else:
-        return Markup("<!-- 404: %s -->" % path)
+        link_path = static(path)
+        if link_path:
+            return "<link rel='stylesheet' href='%s'>" % link_path
+        else:
+            return "<!-- 404: %s -->" % path
 
 
 def page_id(template_reference):
