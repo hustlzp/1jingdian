@@ -35,6 +35,9 @@
   text-align: center;
   padding-top: 20px;
 }
+#modal-crop-image .image-to-crop {
+  display: inline-block;
+}
 #modal-crop-image .image-preview-wap {
   display: inline-block;
   width: 80px;
@@ -45,6 +48,7 @@
 }
 #modal-crop-image .image-preview-wap .image-preview {
   display: inline-block;
+  vertical-align: bottom;
 }
 #modal-crop-image .jcrop-holder {
   display: inline-block;
