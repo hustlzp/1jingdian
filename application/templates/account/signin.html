@@ -5,7 +5,7 @@
 {% block page_content %}
    <div class="container">
       <div class="panel panel-primary">
-         <div class="panel-heading">登陆</div>
+         <div class="panel-heading">登录</div>
          <div class="panel-body">
             <form method="post" action="{{ url_for('account.signin') }}">
                {{ form.csrf_token() }}
@@ -16,7 +16,7 @@
                <input type="hidden" name="referer" value="{{ request.referrer }}"/>
 
                <div class="submit-wap submit-right">
-                  <button type="submit" class="btn btn-submit btn-primary">登陆</button>
+                  <button type="submit" class="btn btn-submit btn-primary">登录</button>
                </div>
             </form>
          </div>
