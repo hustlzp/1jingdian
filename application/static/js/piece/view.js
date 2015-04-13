@@ -13,7 +13,7 @@ if (hash) {
             setTimeout(function () {
                 $comment.animate({
                     'backgroundColor': '#ffffff'
-                }, 800)
+                }, 2000)
             }, 1000);
         }
     });
