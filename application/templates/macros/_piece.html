@@ -379,9 +379,7 @@
             {% if with_options and g.user %}
                <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
                   <a href="javascript: void(0)" data-id="{{ log.id }}"
-                     class="need-signed-in btn-report-abuse">
-                     <span class="fa fa-exclamation-triangle" title="举报恶意编辑"></span> 举报
-                  </a>
+                     class="need-signed-in btn-report-abuse">举报</a>
                   <span class="flag-reported">已举报</span>
                </div>
             {% endif %}
