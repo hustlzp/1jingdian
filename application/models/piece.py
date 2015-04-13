@@ -53,7 +53,7 @@ class Piece(db.Model):
         template = "http://service.weibo.com/share/share.php?searchPic=false&title=%s&url=%s"
         title = self.content
         if self.source_string:
-            title += " ——%s" % self.source_string
+            title += " —— %s" % self.source_string
         url = absolute_url_for('piece.view', uid=self.id)
         return template % (title, url)
 
