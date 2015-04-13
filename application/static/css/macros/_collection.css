@@ -163,6 +163,9 @@
 .collection-header .collection-info .title {
   font-size: 20px;
 }
+.collection-header .collection-info .title .fa {
+  margin-right: 4px;
+}
 .collection-header .collection-info .desc {
   margin-top: 10px;
   color: #999;
