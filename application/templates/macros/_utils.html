@@ -108,10 +108,10 @@
                   var originalHeight = parseInt(response.height);
 
                   // 计算不超过imageMaxBorder的图片宽高
-                  if (originalWidth > originalHeight && originalWidth > imageMaxBorder) {
+                  if (originalWidth >= originalHeight && originalWidth > imageMaxBorder) {
                      imageWidth = imageMaxBorder;
                      imageHeight = imageWidth * originalHeight / originalWidth;
-                  } else if (originalHeight > originalWidth && originalHeight > imageMaxBorder) {
+                  } else if (originalHeight >= originalWidth && originalHeight > imageMaxBorder) {
                      imageHeight = imageMaxBorder;
                      imageWidth = imageHeight * originalWidth / originalHeight;
                   } else {
