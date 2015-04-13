@@ -184,7 +184,6 @@ $('.modal-need-adjust-height').on('show.bs.modal', function () {
         var offset;
 
         _this.css('display', 'block');
-        console.log($(window).height() + ", " + $dialog.height());
         offset = ($(window).height() - $dialog.height()) * 0.3;
 
         if (offset > 0) {
