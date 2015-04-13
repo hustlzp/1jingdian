@@ -180,6 +180,8 @@ $('.modal-need-adjust-height').on('show.bs.modal', function () {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog");
     var offset = ($(window).height() - $dialog.height()) * 0.3;
+
+    console.log($(window).height() + ", " + $dialog.height());
     if (offset > 0) {
         $dialog.css('margin-top', offset);
     }
