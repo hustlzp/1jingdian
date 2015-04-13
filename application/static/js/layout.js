@@ -177,10 +177,14 @@ $(document).on('click', '.btn-close-backdrop', function () {
 
 // 调整modal高度
 $('.modal-need-adjust-height').on('show.bs.modal', function () {
+    var _this = $(this);
+
     setTimeout(function () {
-        $(this).css('display', 'block');
-        var $dialog = $(this).find(".modal-dialog");
-        var offset = ($(window).height() - $dialog.height()) * 0.3;
+        var $dialog = _this.find(".modal-dialog");
+        var offset = 0;
+
+        _this.css('display', 'block');
+        offset = ($(window).height() - $dialog.height()) * 0.3;
 
         if (offset > 0) {
             $dialog.css('margin-top', offset);
