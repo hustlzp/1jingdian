@@ -107,6 +107,8 @@
                   var originalWidth = parseInt(response.width);
                   var originalHeight = parseInt(response.height);
 
+                  imageUrl = response.image_url;
+
                   // 计算不超过imageMaxBorder的图片宽高
                   if (originalWidth >= originalHeight && originalWidth > imageMaxBorder) {
                      imageWidth = imageMaxBorder;
@@ -119,31 +121,30 @@
                      imageHeight = originalHeight;
                   }
 
-                  imageUrl = response.image_url;
-
                   up.disableBrowse(false);
 
                   if (response.result) {
+                     var selectRect = null;
+
                      $('.upload-error-info').fadeOut();
                      $('#modal-crop-image').modal('show');
                      $('.image-preview').hide();
+
+                     // 计算居中rect
+                     if (imageWidth > imageHeight) {
+                        selectRect = [(imageWidth - imageHeight) / 2.0, 0,
+                                 (imageWidth + imageHeight) / 2.0, imageHeight];
+                     } else {
+                        selectRect = [0, (imageHeight - imageWidth) / 2.0,
+                           imageWidth, (imageHeight + imageWidth) / 2.0];
+                     }
+
                      $('.image-to-crop')
                            .attr('src', imageUrl)
                            .attr({'width': imageWidth, 'height': imageHeight})
                            .removeAttr('style')
                            .onOnce('load', function () {
-                              var selectRect = null;
-
                               $('.image-preview').attr('src', imageUrl).show();
-
-                              // 计算居中rect
-                              if (imageWidth > imageHeight) {
-                                 selectRect = [(imageWidth - imageHeight) / 2.0, 0,
-                                          (imageWidth + imageHeight) / 2.0, imageHeight];
-                              } else {
-                                 selectRect = [0, (imageHeight - imageWidth) / 2.0,
-                                    imageWidth, (imageHeight + imageWidth) / 2.0];
-                              }
 
                               $('.image-to-crop').Jcrop({
                                  onChange: showPreview,
