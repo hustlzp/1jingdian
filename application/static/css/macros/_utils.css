@@ -43,9 +43,6 @@
   border-radius: 50%;
   margin-left: 15px;
 }
-#modal-crop-image .image-preview-wap .image-preview {
-  display: inline-block;
-}
 #modal-crop-image .jcrop-holder {
   display: inline-block;
 }
