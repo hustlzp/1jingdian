@@ -21,8 +21,8 @@ def view(uid):
     return render_template("piece/view.html", piece=piece)
 
 
-@bp.route('/piece/<int:uid>/add_clicks_count', methods=['POST'])
-def add_clicks_count(uid):
+@bp.route('/piece/<int:uid>/click', methods=['POST'])
+def click(uid):
     piece = Piece.query.get_or_404(uid)
     piece.clicks_count += 1
     db.session.add(piece)

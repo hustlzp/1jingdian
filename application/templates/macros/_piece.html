@@ -826,7 +826,7 @@
           */
          function addClicksCount(pieceId) {
             $.ajax({
-               url: urlFor('piece.add_clicks_count', {uid: pieceId}),
+               url: urlFor('piece.click', {uid: pieceId}),
                method: 'post'
             });
          }
