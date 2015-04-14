@@ -72,21 +72,23 @@
    </div>
 
    <script type="text/javascript">
-      // 举报句集修改操作
-      $(document).onOnce('click', '.btn-report-collection-log', function () {
-         var id = $(this).data('id');
-         var _this = $(this);
+      (function () {
+         // 举报句集修改操作
+         $(document).onOnce('click', '.btn-report-collection-log', function () {
+            var id = $(this).data('id');
+            var _this = $(this);
 
-         $.ajax({
-            url: urlFor('collection.report_log', {uid: id}),
-            method: 'post',
-            dataType: 'json'
-         }).done(function (response) {
-            if (response.result) {
-               _this.parent().addClass('reported');
-            }
+            $.ajax({
+               url: urlFor('collection.report_log', {uid: id}),
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.parent().addClass('reported');
+               }
+            });
          });
-      });
+      })();
    </script>
 {% endmacro %}
 

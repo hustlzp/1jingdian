@@ -397,20 +397,22 @@
    {% endfor %}
 
    <script type="text/javascript">
-      $(document).onOnce('click', '.btn-report-abuse', function () {
-         var id = $(this).data('id');
-         var _this = $(this);
+      (function () {
+         $(document).onOnce('click', '.btn-report-abuse', function () {
+            var id = $(this).data('id');
+            var _this = $(this);
 
-         $.ajax({
-            url: urlFor('piece.report_log', {uid: id}),
-            method: 'post',
-            dataType: 'json'
-         }).done(function (response) {
-            if (response.result) {
-               _this.parent().addClass('reported');
-            }
+            $.ajax({
+               url: urlFor('piece.report_log', {uid: id}),
+               method: 'post',
+               dataType: 'json'
+            }).done(function (response) {
+               if (response.result) {
+                  _this.parent().addClass('reported');
+               }
+            });
          });
-      });
+      })();
    </script>
 {% endmacro %}
 
@@ -726,128 +728,132 @@
    </div>
 
    <script type="text/javascript">
-      // 弹出侧边栏
-      $(document).on('click', '.pieces-wap .piece', function (event) {
-         // 链接和vote不触发此事件
-         if (event.target.tagName.toLowerCase() === 'a'
-               || $(event.target).parent('a').length
-               || $(event.target).hasClass('user-avatar')
-               || $(event.target).hasClass('vote')
-               || $(event.target).parents('.vote').length) {
-            return true;
-         }
+      (function () {
 
-         var pieceId = parseInt($(this).attr('data-piece-id')),
-               pieceModal = $('.piece-modal-wap').first(),
-               pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
 
-         // 点击的piece与modal的piece一致
-         if (pieceId === pieceIdOfModal) {
-            if (pieceModal.hasClass('open')) {
-               closeModal(pieceId);
-            } else {
-               openModal(pieceId);
+         // 弹出侧边栏
+         $(document).on('click', '.pieces-wap .piece', function (event) {
+            // 链接和vote不触发此事件
+            if (event.target.tagName.toLowerCase() === 'a'
+                  || $(event.target).parent('a').length
+                  || $(event.target).hasClass('user-avatar')
+                  || $(event.target).hasClass('vote')
+                  || $(event.target).parents('.vote').length) {
+               return true;
             }
-         } else {
-            showLoadingFlag(pieceModal);
 
-            if (pieceModal.hasClass('open')) {
-               $('.piece').removeClass('selected');
-               $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
-               pieceModal.attr('data-piece-id', pieceId);
-               addClicksCount(pieceId);
+            var pieceId = parseInt($(this).attr('data-piece-id')),
+                  pieceModal = $('.piece-modal-wap').first(),
+                  pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
 
-               $.ajax({
-                  url: urlFor('piece.modal', {uid: pieceId}),
-                  success: function (modal) {
-                     $('.piece-modal-wap').html(modal);
-                  }
-               });
+            // 点击的piece与modal的piece一致
+            if (pieceId === pieceIdOfModal) {
+               if (pieceModal.hasClass('open')) {
+                  closeModal(pieceId);
+               } else {
+                  openModal(pieceId);
+               }
             } else {
-               openModal(pieceId, function () {
+               showLoadingFlag(pieceModal);
+
+               if (pieceModal.hasClass('open')) {
+                  $('.piece').removeClass('selected');
+                  $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
                   pieceModal.attr('data-piece-id', pieceId);
+                  addClicksCount(pieceId);
+
                   $.ajax({
                      url: urlFor('piece.modal', {uid: pieceId}),
                      success: function (modal) {
                         $('.piece-modal-wap').html(modal);
                      }
                   });
-               });
+               } else {
+                  openModal(pieceId, function () {
+                     pieceModal.attr('data-piece-id', pieceId);
+                     $.ajax({
+                        url: urlFor('piece.modal', {uid: pieceId}),
+                        success: function (modal) {
+                           $('.piece-modal-wap').html(modal);
+                        }
+                     });
+                  });
+               }
             }
+         });
+
+         /**
+          * Open the piece modal.
+          * @param pieceId
+          * @param callback
+          */
+         function openModal(pieceId, callback) {
+            addClicksCount(pieceId);
+            $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
+
+            $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
+               $(this).addClass('open');
+
+               if ($.isFunction(callback)) {
+                  callback();
+               }
+            });
          }
-      });
 
-      /**
-       * Open the piece modal.
-       * @param pieceId
-       * @param callback
-       */
-      function openModal(pieceId, callback) {
-         addClicksCount(pieceId);
-         $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
+         /**
+          * Close the piece modal.
+          * @param callback
+          */
+         function closeModal(callback) {
+            $('.piece').removeClass('selected');
 
-         $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
-            $(this).addClass('open');
+            $('.piece-modal-wap').stop().transition({
+               'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
+            }, 400, function () {
+               quitEditCollectionMode();
+               closeUpperLayers();
+               $(this).removeClass('open');
 
-            if ($.isFunction(callback)) {
-               callback();
-            }
-         });
-      }
+               if ($.isFunction(callback)) {
+                  callback();
+               }
+            });
+         }
 
-      /**
-       * Close the piece modal.
-       * @param callback
-       */
-      function closeModal(callback) {
-         $('.piece').removeClass('selected');
+         /**
+          * Add piece's clicks count.
+          * @param pieceId
+          */
+         function addClicksCount(pieceId) {
+            $.ajax({
+               url: urlFor('piece.add_clicks_count', {uid: pieceId}),
+               method: 'post'
+            });
+         }
 
-         $('.piece-modal-wap').stop().transition({
-            'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
-         }, 400, function () {
-            quitEditCollectionMode();
-            closeUpperLayers();
-            $(this).removeClass('open');
+         /**
+          * Show the loading flag.
+          * @param pieceModal
+          */
+         function showLoadingFlag(pieceModal) {
+            pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+         }
 
-            if ($.isFunction(callback)) {
-               callback();
-            }
-         });
-      }
+         /**
+          * Quit edit collection mode.
+          */
+         function quitEditCollectionMode() {
+            $('#input-collection').typeahead('val', '');
+            $('.collections-container').removeClass('edit-mode');
+         }
 
-      /**
-       * Add piece's clicks count.
-       * @param pieceId
-       */
-      function addClicksCount(pieceId) {
-         $.ajax({
-            url: urlFor('piece.add_clicks_count', {uid: pieceId}),
-            method: 'post'
-         });
-      }
-
-      /**
-       * Show the loading flag.
-       * @param pieceModal
-       */
-      function showLoadingFlag(pieceModal) {
-         pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
-      }
-
-      /**
-       * Quit edit collection mode.
-       */
-      function quitEditCollectionMode() {
-         $('#input-collection').typeahead('val', '');
-         $('.collections-container').removeClass('edit-mode');
-      }
-
-      /**
-       * Close layers upon piece modal.
-       */
-      function closeUpperLayers() {
-         $('.share-wap').hide();
-      }
+         /**
+          * Close layers upon piece modal.
+          */
+         function closeUpperLayers() {
+            $('.share-wap').hide();
+         }
+      })();
    </script>
 {% endmacro %}
 
@@ -957,11 +963,13 @@
    </div>
 
    <script type="text/javascript">
-      // 显示被隐藏的句子
-      $(document).on('click', '.btn-show-hide-pieces', function () {
-         $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
-         $(this).parents('.panel-footer').first().detach();
-      });
+      (function () {
+         // 显示被隐藏的句子
+         $(document).on('click', '.btn-show-hide-pieces', function () {
+            $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
+            $(this).parents('.panel-footer').first().detach();
+         });
+      })();
    </script>
 {% endmacro %}
 
