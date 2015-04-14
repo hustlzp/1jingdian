@@ -126,7 +126,7 @@
                   if (response.result) {
                      $('.upload-error-info').fadeOut();
                      $('#modal-crop-image').modal('show');
-                     $('.image-preview').attr('src', imageUrl);
+                     $('.image-preview').hide();
                      $('.image-to-crop')
                            .attr('src', imageUrl)
                            .attr({'width': imageWidth, 'height': imageHeight})
@@ -134,6 +134,9 @@
                            .onOnce('load', function () {
                               var selectRect = null;
 
+                              $('.image-preview').attr('src', imageUrl).show();
+
+                              // 计算居中rect
                               if (imageWidth > imageHeight) {
                                  selectRect = [(imageWidth - imageHeight) / 2.0, 0,
                                           (imageWidth + imageHeight) / 2.0, imageHeight];
