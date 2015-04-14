@@ -1,7 +1,7 @@
 libs:
   - bower_components/bootstrap/dist/css/bootstrap.min.css
   - bower_components/font-awesome/css/font-awesome.min.css
-  - bower_components/Jcrop/css/jquery.Jcrop.min.css
+  - ~bower_components/Jcrop/css/jquery.Jcrop.min.css
 
 layout:
   - css/bootstrap.theme.css
