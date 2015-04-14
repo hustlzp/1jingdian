@@ -152,44 +152,52 @@ ol {
   box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
 }
 
-.panel-primary {
+// Panel
+.panel {
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, .1) 0 1px 3px 0;
   border: none;
   overflow: hidden;
+}
 
-  .panel-heading {
-    text-align: center;
-    font-size: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin-bottom: 0px;
-    line-height: 1;
-    background-color: @main-color;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: #ffffff;
-  }
+.panel-heading {
+  text-align: center;
+  font-size: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 0px;
+  line-height: 1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: none;
+  color: #ffffff;
+}
 
-  .panel-body {
-    padding: 25px;
+.panel-body {
+  padding: 25px;
 
-    &.panel-body-no-padding {
-      padding: 0;
-    }
-  }
-
-  .panel-footer {
-    padding: 16px 25px;
-    background-color: #fff;
-
-    &.panel-footer-no-padding {
-      padding: 0;
-    }
+  &.panel-body-no-padding {
+    padding: 0;
   }
 }
 
+.panel-footer {
+  padding: 16px 25px;
+  background-color: #fff;
+
+  &.panel-footer-no-padding {
+    padding: 0;
+  }
+}
+
+.panel-primary {
+  .panel-heading {
+    background-color: @main-color;
+  }
+}
+
+// Button
 .btn-primary {
   background-color: @main-color;
   border: none;
