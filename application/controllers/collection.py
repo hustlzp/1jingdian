@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint, redirect, request, url_for, g, json
 from ..utils.permissions import UserPermission, CollectionEditPermission, AdminPermission
 from ..models import db, Piece, Collection, CollectionPiece, CollectionLike, \
-    CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport
+    CollectionEditLog, COLLECTION_EDIT_KIND, CollectionEditLogReport, CollectionKind
 from ..forms import CollectionForm
 from ..utils.uploadsets import collection_covers, crop_image, process_image_for_cropping
 from ..utils.helpers import generate_lcs_html
@@ -44,6 +44,8 @@ def edit(uid):
         return permission.deny()
 
     form = CollectionForm(obj=collection)
+    form.kind_id.choices = [(kind.id, kind.name) for kind in
+                            CollectionKind.query.order_by(CollectionKind.show_order.asc())]
     if form.validate_on_submit():
         # title变更
         if collection.title != form.title.data:

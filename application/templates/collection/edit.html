@@ -23,6 +23,10 @@
                {{ vertical_field(form.title) }}
                {{ vertical_field(form.desc) }}
 
+               {% if permissions.AdminPermission().check() %}
+                  {{ vertical_field(form.kind_id) }}
+               {% endif %}
+
                {{ form_submit('保存') }}
             </form>
          </div>

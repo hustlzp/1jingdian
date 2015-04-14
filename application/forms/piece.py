@@ -1,7 +1,6 @@
 # coding: utf-8
 import re
 import math
-from urlparse import urlparse
 from flask_wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, URL, Optional
