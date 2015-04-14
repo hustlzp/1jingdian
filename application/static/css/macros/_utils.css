@@ -53,3 +53,6 @@
 #modal-crop-image .jcrop-holder {
   display: inline-block;
 }
+#modal-crop-image .jcrop-holder .jcrop-keymgr {
+  visibility: hidden;
+}
