@@ -365,12 +365,11 @@ def _rewrite_relative_url(content, asset_path, static_path):
         if inner_url.startswith("../"):
             dir_path = dirname(dirname(asset_path))
             absolute_path = "%s/%s" % (dir_path, inner_url[3:])
-            absolute_url = "/static%s" % absolute_path.split(static_path)[1]
         else:
             dir_path = dirname(asset_path)
             absolute_path = "%s/%s" % (dir_path, inner_url)
-            absolute_url = "/static%s" % absolute_path.split(static_path)[1]
 
+        absolute_url = "/static%s" % absolute_path.split(static_path)[1]
         result = "url('%s')" % absolute_url
         content = content.replace(full, result)
     return content
