@@ -61,9 +61,17 @@ def build_assets():
 
 @manager.command
 def test():
-    src = u'ABCBDAB'
-    dest = u'BDCABA'
-    print(generate_lcs_html(src, dest))
+    # src = u'ABCBDAB'
+    # dest = u'BDCABA'
+    # print(generate_lcs_html(src, dest))
+    import re
+
+    pattern = re.compile(r"url\([\'\"]?([^\'\"/][^\'\"\)]+)[\'\"]?\)")
+    for match in pattern.finditer(
+            'backurl("../dsada")ground: #ffffff url("/Jcrop.gif");font-size: 0;url("dsada")'):
+        full = match.group(0)
+        inner_url = match.group(1)
+        print("%s, %s" % full, inner_url)
 
 
 if __name__ == "__main__":

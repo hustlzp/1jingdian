@@ -355,6 +355,13 @@ def _get_template_name(template_reference):
 
 def _rewrite_relative_url(content, asset_path, static_path):
     from os.path import dirname
+    import re
+
+    # pattern = re.compile(r"url\([\'\"]?([^\'\"/][^\'\"\)]+)[\'\"]?\)")
+    # for match in pattern.finditer(
+    #         'backurl("../dsada")ground: #ffffff url("/Jcrop.gif");font-size: 0;url("dsada")'):
+    #     full = match.group(0)
+    #     inner_url = match.group(1)
     # Rewrite relative path to absolute path
     parent_dir = dirname(dirname(asset_path))
     absolute_path = "/static%s/" % parent_dir.split(static_path)[1]
