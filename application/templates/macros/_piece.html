@@ -784,6 +784,11 @@
             }
          });
 
+         // 小屏下禁止modal影响父元素滑动
+         if ($(window).width() < 767) {
+            $('.piece-modal-wap').isolatedScroll();
+         }
+
          $('.btn-close-piece-modal-wap').click(function () {
             closeModal();
          });
