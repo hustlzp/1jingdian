@@ -38,15 +38,17 @@ body {
   padding: 2px 5px;
   vertical-align: 1px;
 }
-#nav-signin {
-  padding-right: 4px;
-}
-#nav-signup {
-  padding-left: 4px;
-}
-.nav-devider {
-  color: #777;
-  vertical-align: 1px;
+@media (min-width: 768px) {
+  #nav-signin {
+    padding-right: 4px;
+  }
+  #nav-signup {
+    padding-left: 4px;
+  }
+  .nav-devider {
+    color: #777;
+    vertical-align: 1px;
+  }
 }
 #footer {
   position: absolute;

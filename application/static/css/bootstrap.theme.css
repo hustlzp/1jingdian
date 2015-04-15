@@ -56,11 +56,13 @@ ol li {
 .navbar-nav > li > a {
   padding-top: 19px !important;
   padding-bottom: 19px !important;
+  display: inline-block;
 }
 @media (max-width: 767px) {
   .navbar-nav > li > a {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
+    display: block;
   }
 }
 .navbar-nav > li > a.disabled {
