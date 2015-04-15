@@ -60,6 +60,7 @@
    </div>
 {% endmacro %}
 
+
 {% macro render_collection_logs_wap(collection) %}
    <div class="collection-logs-wap">
       <span class="btn-close-collection-logs-wap">×</span>
@@ -271,32 +272,34 @@
 
 
 {% macro render_collections(collections, attr=None) %}
-   <div class="collections-wap clearfix">
+   <div class="collections-wap clearfix row">
       {% for collection in collections %}
          {% if attr %}
             {% set collection = collection[attr] %}
          {% endif %}
 
-         <div class="collection media" data-collection-id="{{ collection.id }}">
-            <div class="media-left">
-               <a href="#">
-                  <img src="{{ collection.cover_url }}" alt=""
-                       class="media-object img-circle collection-cover"/>
-               </a>
-            </div>
-
-            <div class="media-body">
-               <div class="title">{{ collection.title }}</div>
-               <div class="desc">{{ collection.desc or "" }}</div>
-            </div>
-
-            {% if g.user %}
-               <div class="btn-like-collection need-signed-in {% if collection.liked_by_user() %}liked{% endif %}"
-                    data-id="{{ collection.id }}">
-                  <span class="fa fa-bookmark-o" title="收藏句集"></span>
-                  <span class="fa fa-bookmark" title="取消收藏"></span>
+         <div class="col-sm-6 collection-wap">
+            <div class="collection media " data-collection-id="{{ collection.id }}">
+               <div class="media-left">
+                  <a href="#">
+                     <img src="{{ collection.cover_url }}" alt=""
+                          class="media-object img-circle collection-cover"/>
+                  </a>
                </div>
-            {% endif %}
+
+               <div class="media-body">
+                  <div class="title">{{ collection.title }}</div>
+                  <div class="desc">{{ collection.desc or "" }}</div>
+               </div>
+
+               {% if g.user %}
+                  <div class="btn-like-collection need-signed-in {% if collection.liked_by_user() %}liked{% endif %}"
+                       data-id="{{ collection.id }}">
+                     <span class="fa fa-bookmark-o" title="收藏句集"></span>
+                     <span class="fa fa-bookmark" title="取消收藏"></span>
+                  </div>
+               {% endif %}
+            </div>
          </div>
       {% endfor %}
    </div>

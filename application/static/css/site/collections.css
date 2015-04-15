@@ -12,6 +12,7 @@
   font-size: 12px;
   text-decoration: none;
   margin-right: 10px;
+  margin-bottom: 10px;
   display: inline-block;
   color: #666;
 }
@@ -27,5 +28,5 @@
   color: #1e88a8;
 }
 .collections-wap {
-  padding-top: 28px;
+  padding-top: 18px;
 }
