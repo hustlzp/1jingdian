@@ -729,8 +729,6 @@
 
    <script type="text/javascript">
       (function () {
-
-
          // 弹出侧边栏
          $(document).on('click', '.pieces-wap .piece', function (event) {
             // 链接和vote不触发此事件
@@ -788,10 +786,14 @@
           * @param callback
           */
          function openModal(pieceId, callback) {
+            var $modal = $('.piece-modal-wap');
+            var modalWidth = $modal.outerWidth();
+
             addClicksCount(pieceId);
             $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
+            $modal.css('right', -(modalWidth + 3)).show();
 
-            $('.piece-modal-wap').stop().transition({'right': '0'}, 400, function () {
+            $modal.stop().transition({'right': 0}, 400, function () {
                $(this).addClass('open');
 
                if ($.isFunction(callback)) {
@@ -805,11 +807,15 @@
           * @param callback
           */
          function closeModal(callback) {
+            var $modal = $('.piece-modal-wap');
+            var modalWidth = $modal.outerWidth();
+
             $('.piece').removeClass('selected');
 
-            $('.piece-modal-wap').stop().transition({
-               'right': '-' + ($('.piece-modal-wap').outerWidth() + 3) + 'px'
+            $modal.stop().transition({
+               'right': -(modalWidth + 3)
             }, 400, function () {
+               $('.piece-modal-wap').hide();
                quitEditCollectionMode();
                closeUpperLayers();
                $(this).removeClass('open');

@@ -1,9 +1,9 @@
 @import "../utils";
 
 .piece-modal-wap {
+  display: none;
   position: fixed;
   top: 0;
-  right: -503px;
   bottom: 0;
   background-color: #fff;
   width: 500px;
@@ -11,6 +11,10 @@
   padding: 30px 20px 20px 20px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: @screen-xs-max) {
+    width: 100%;
+  }
 
   .flag-loading-piece {
     position: absolute;
