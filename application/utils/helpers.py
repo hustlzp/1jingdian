@@ -26,6 +26,34 @@ def mkdir_p(path):
             raise
 
 
+def get_domain_from_email(email):
+    """获取邮箱的登录入口"""
+    email_domains = {
+        'qq.com': 'http://mail.qq.com',
+        'foxmail.com': 'http://mail.qq.com',
+        'gmail.com': 'http://www.gmail.com',
+        '126.com': 'http://www.126.com',
+        '163.com': 'http://www.163.com',
+        '189.cn': 'http://www.189.cn',
+        '263.net': 'http://www.263.net',
+        'yeah.net': 'http://www.yeah.net',
+        'sohu.com': 'http://mail.sohu.com',
+        'tom.com': 'http://mail.tom.com',
+        'hotmail.com': 'http://www.hotmail.com',
+        'yahoo.com.cn': 'http://mail.cn.yahoo.com',
+        'yahoo.cn': 'http://mail.cn.yahoo.com',
+        '21cn.com': 'http://mail.21cn.com',
+    }
+
+    email_domain = ""
+    for key, value in email_domains.items():
+        if email.count(key) >= 1:
+            email_domain = value
+            break
+
+    return email_domain
+
+
 def lcs(a, b):
     if not a or not b:
         return [], []

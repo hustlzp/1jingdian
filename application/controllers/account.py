@@ -5,6 +5,7 @@ from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission
 from ..utils.mail import send_activate_mail, send_reset_password_mail
 from ..utils.security import decode
+from ..utils.helpers import get_domain_from_email
 from ..models import db, User, InvitationCode
 
 bp = Blueprint('account', __name__)
@@ -49,7 +50,12 @@ def signup():
             return redirect(url_for('site.index'))
         else:
             send_activate_mail(user)
-            return render_template('site/message.html', title='注册成功', message='请登录邮箱激活账号')
+            email_domain = get_domain_from_email(user.email)
+            if email_domain:
+                message = "请 <a href='%s' target='_blank'>登录邮箱</a> 激活账号" % email_domain
+            else:
+                message = "请登录邮箱激活账号"
+            return render_template('site/message.html', title='注册成功', message=message)
     return render_template('account/signup.html', form=form)
 
 
@@ -89,12 +95,18 @@ def forgot_password():
     form = ForgotPasswordForm()
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
+
         if not user.is_active:
             return render_template('site/message.html', title="提示", message='请先完成账号激活')
         send_reset_password_mail(user)
-        return render_template('site/message.html',
-                               title="密码重置链接已发送到你的邮箱",
-                               message='请登录邮箱完成密码重置')
+
+        email_domain = get_domain_from_email(user.email)
+        if email_domain:
+            message = "请 <a href='%s' target='_blank'>登录邮箱</a> 完成密码重置" % email_domain
+        else:
+            message = "请登录邮箱完成密码重置"
+        return render_template('site/message.html', title="密码重置链接已发送到你的邮箱",
+                               message=message)
     return render_template('account/forgot_password.html', form=form)
 
 
