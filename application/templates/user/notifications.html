@@ -31,8 +31,8 @@
                         {{ notification.sender.name }}
                         在句子「{{ notification.target|truncate(15, true) }}」中回复了你
                      {% endif %}
-                     <span class="created-at">{{ notification.created_at|timesince }}</span>
                   </div>
+                  <span class="created-at">{{ notification.created_at|timesince }}</span>
                </div>
             {% endfor %}
          </div>
