@@ -13,6 +13,7 @@
 @media (max-width: 767px) {
   .piece-modal-wap {
     width: 100%;
+    padding-top: 35px;
   }
 }
 .piece-modal-wap .flag-loading-piece {
@@ -27,7 +28,27 @@
 .piece-modal-wap .piece-logs-wap {
   padding: 30px 20px 10px 20px;
 }
+.piece-modal-wap .btn-close-piece-modal-wap {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  border: 1px solid #bbb;
+  border-top: 0;
+  font-size: 20px;
+  padding: 0px 12px 3px 12px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+}
+.piece-modal-wap .btn-close-piece-modal-wap:hover {
+  background-color: #1e88a8;
+  border-color: #1e88a8;
+  color: #ffffff;
+}
 .piece-details-wap .piece-header {
+  margin: 0;
   padding-bottom: 20px;
   border-bottom: 1px solid #e2e2e2;
 }

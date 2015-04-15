@@ -14,6 +14,7 @@
 
   @media (max-width: @screen-xs-max) {
     width: 100%;
+    padding-top: 35px;
   }
 
   .flag-loading-piece {
@@ -29,10 +30,32 @@
   .piece-logs-wap {
     padding: 30px 20px 10px 20px;
   }
+
+  .btn-close-piece-modal-wap {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    border: 1px solid #bbb;
+    border-top: 0;
+    font-size: 20px;
+    padding: 0px 12px 3px 12px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      background-color: @main-color;
+      border-color: @main-color;
+      color: #ffffff;
+    }
+  }
 }
 
 .piece-details-wap {
   .piece-header {
+    margin: 0;
     padding-bottom: 20px;
     border-bottom: 1px solid @border-color;
 

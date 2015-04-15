@@ -722,9 +722,13 @@
 
 {% macro render_piece_modal_wap(piece) %}
    <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
-      {% if piece %}
-         {{ render_piece_details_wap(piece) }}
-      {% endif %}
+      <div class="btn-close-piece-modal-wap visible-xs-block">×</div>
+
+      <div class="piece-details-outer-wap">
+         {% if piece %}
+            {{ render_piece_details_wap(piece) }}
+         {% endif %}
+      </div>
    </div>
 
    <script type="text/javascript">
@@ -752,7 +756,7 @@
                   openModal(pieceId);
                }
             } else {
-               showLoadingFlag(pieceModal);
+               showLoadingFlag();
 
                if (pieceModal.hasClass('open')) {
                   $('.piece').removeClass('selected');
@@ -763,7 +767,7 @@
                   $.ajax({
                      url: urlFor('piece.modal', {uid: pieceId}),
                      success: function (modal) {
-                        $('.piece-modal-wap').html(modal);
+                        $('.piece-details-outer-wap').html(modal);
                      }
                   });
                } else {
@@ -772,12 +776,16 @@
                      $.ajax({
                         url: urlFor('piece.modal', {uid: pieceId}),
                         success: function (modal) {
-                           $('.piece-modal-wap').html(modal);
+                           $('.piece-details-outer-wap').html(modal);
                         }
                      });
                   });
                }
             }
+         });
+
+         $('.btn-close-piece-modal-wap').click(function () {
+            closeModal();
          });
 
          /**
@@ -841,8 +849,8 @@
           * Show the loading flag.
           * @param pieceModal
           */
-         function showLoadingFlag(pieceModal) {
-            pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+         function showLoadingFlag() {
+            $('.piece-details-outer-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
          }
 
          /**
