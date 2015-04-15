@@ -49,7 +49,7 @@ class Collection(db.Model):
     def get_by_title(title, create_if_not_exist=False):
         """通过title获取句集，若不存在则创建"""
         title = title or ""
-        title = title.strip().replace(" ", "")
+        title = title.strip()
         if title:
             # 若不存在该title的句集，则创建
             collection = Collection.query.filter(Collection.title == title).first()
