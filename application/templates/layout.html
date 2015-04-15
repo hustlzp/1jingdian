@@ -48,15 +48,18 @@
          <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                <li>
-                  {% if not g.user or permissions.PieceAddPermission().check() %}
-                     <a href="{{ url_for('piece.add') }}" class="need-signed-in">
-                        <span class="fa fa-plus"></span> 分享句子
-                     </a>
-                  {% else %}
-                     <a title="今日已分享 2 个句子" class="disabled">
-                        <span class="fa fa-plus"></span> 分享句子
-                     </a>
-                  {% endif %}
+                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">
+                     <span class="fa fa-plus"></span> 分享句子
+                  </a>
+                  {#                  {% if not g.user or permissions.PieceAddPermission().check() %}#}
+                  {#                     <a href="{{ url_for('piece.add') }}" class="need-signed-in">#}
+                  {#                        <span class="fa fa-plus"></span> 分享句子#}
+                  {#                     </a>#}
+                  {#                  {% else %}#}
+                  {#                     <a title="今日已分享 2 个句子" class="disabled">#}
+                  {#                        <span class="fa fa-plus"></span> 分享句子#}
+                  {#                     </a>#}
+                  {#                  {% endif %}#}
                </li>
 
                {#            <li>#}

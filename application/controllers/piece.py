@@ -43,9 +43,9 @@ def modal(uid):
 @bp.route('/piece/add', methods=['GET', 'POST'])
 @UserPermission()
 def add():
-    permission = PieceAddPermission()
-    if not permission.check():
-        return permission.deny()
+    # permission = PieceAddPermission()
+    # if not permission.check():
+    #     return permission.deny()
 
     form = PieceForm()
     if form.validate_on_submit():
