@@ -1,3 +1,9 @@
 .pagination {
   margin: 0px 25px 25px 25px;
 }
+@media (max-width: 767px) {
+  .pagination {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

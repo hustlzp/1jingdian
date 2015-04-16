@@ -3,9 +3,3 @@
   position: relative;
   overflow-y: auto;
 }
-@media (max-width: 767px) {
-  .panel-primary .panel-body {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}

@@ -93,6 +93,12 @@
   padding: 30px 25px 10px 25px;
   margin: 0 -12px;
 }
+@media (max-width: 767px) {
+  .collections-wap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 .collections-wap .collection-wap {
   padding: 0 12px;
 }

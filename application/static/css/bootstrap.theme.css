@@ -155,6 +155,12 @@ ol li {
 .panel-body {
   padding: 25px 25px;
 }
+@media (max-width: 767px) {
+  .panel-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 .panel-body.panel-body-no-padding {
   padding: 0;
 }
