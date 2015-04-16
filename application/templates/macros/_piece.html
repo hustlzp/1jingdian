@@ -807,6 +807,8 @@
                   if (!$('.piece-modal-wap').has($(e.target)).length)
                      e.preventDefault();
                });
+            } else {
+               $(document).off('touchmove');
             }
 
             $modal.stop().transition({'right': 0}, 400, function () {
@@ -827,10 +829,6 @@
             var modalWidth = $modal.outerWidth();
 
             $('.piece').removeClass('selected');
-
-            if ($(window).width() < 767) {
-               $(document).off('touchmove');
-            }
 
             $modal.stop().transition({
                'right': -(modalWidth + 3)
@@ -919,7 +917,7 @@
                   <div class="meta">
                      {{ render_piece_source(piece, false) }}
 
-                     <div class="options">
+                     <div class="options hidden-xs">
                         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
                            data-content="{{ piece.content }}"
                            data-source-string="{{ piece.source_string }}">
