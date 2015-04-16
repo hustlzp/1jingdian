@@ -804,7 +804,7 @@
             // 小屏下禁止modal影响父元素滑动
             if ($(window).width() < 767) {
                $modal.bind('touchmove', function (e) {
-                  e.preventDefault();
+                  e.stopPropagation();
                });
             } else {
                $modal.unbind('touchmove');
