@@ -766,9 +766,13 @@
       color: #333;
     }
 
-    .negative .content-length {
+    .negative {
       color: @error-color;
       display: none;
+
+      .content-length {
+        color: @error-color;
+      }
     }
   }
 
