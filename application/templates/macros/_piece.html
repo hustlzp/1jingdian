@@ -748,6 +748,11 @@
                   pieceModal = $('.piece-modal-wap').first(),
                   pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
 
+            if ($(window).width() < 767) {
+               window.location = urlFor('piece.view', {uid: pieceId});
+               return;
+            }
+
             // 点击的piece与modal的piece一致
             if (pieceId === pieceIdOfModal) {
                if (pieceModal.hasClass('open')) {
@@ -801,15 +806,6 @@
             $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
             $modal.css('right', -(modalWidth + 3)).show();
 
-            // 小屏下禁止modal影响父元素滑动
-            if ($(window).width() < 767) {
-               $(document).on('touchmove', function (e) {
-                  e.preventDefault();
-               }).on('touchmove', '.piece-modal-wap', function () {
-                  e.stopPropagation();
-               });
-            }
-
             $modal.stop().transition({'right': 0}, 400, function () {
                $(this).addClass('open');
 
@@ -828,10 +824,6 @@
             var modalWidth = $modal.outerWidth();
 
             $('.piece').removeClass('selected');
-
-            if ($(window).width() < 767) {
-               $(document).off('touchmove');
-            }
 
             $modal.stop().transition({
                'right': -(modalWidth + 3)
