@@ -807,8 +807,6 @@
                   if (!$('.piece-modal-wap').has($(e.target)).length)
                      e.preventDefault();
                });
-            } else {
-               $(document).off('touchmove');
             }
 
             $modal.stop().transition({'right': 0}, 400, function () {
@@ -829,6 +827,10 @@
             var modalWidth = $modal.outerWidth();
 
             $('.piece').removeClass('selected');
+
+            if ($(window).width() < 767) {
+               $(document).off('touchmove');
+            }
 
             $modal.stop().transition({
                'right': -(modalWidth + 3)
