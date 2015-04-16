@@ -804,11 +804,10 @@
             // 小屏下禁止modal影响父元素滑动
             if ($(window).width() < 767) {
                $(document).on('touchmove', function (e) {
-                  if (!$('.piece-modal-wap').has($(e.target)).length)
-                     e.preventDefault();
+                  e.preventDefault();
+               }).on('touchmove', '.piece-modal-wap', function () {
+                  e.stopPropagation();
                });
-            } else {
-               $(document).off('touchmove');
             }
 
             $modal.stop().transition({'right': 0}, 400, function () {
