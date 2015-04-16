@@ -26,8 +26,8 @@ class PieceForm(Form):
         en_length = len(content) - cn_length
         content_length = cn_length + int(math.ceil(en_length / 2.0))
 
-        if content_length > 160:
-            raise ValueError('不超过160字')
+        if content_length > 200:
+            raise ValueError('不超过200字')
 
 
 class PieceCommentForm(Form):
