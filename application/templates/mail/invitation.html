@@ -1,7 +1,7 @@
 {% extends "mail/layout.html" %}
 
 {% block content %}
-   <p>欢迎参与<b>壹经典</b>内测，你的专属邀请码：{{ invitation_code }}。</p>
+   <p>欢迎参与壹经典内测，你的专属邀请码：<b>{{ invitation_code }}</b></p>
 
-   <p>你也可以点击此链接直接注册：<a href="{{ url }}">{{ url|safe }}</a> 。</p>
+   <p>你也可以点击此链接直接注册：<a href="{{ url }}">{{ url|safe }}</a></p>
 {% endblock %}
