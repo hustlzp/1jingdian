@@ -9,6 +9,14 @@
    <meta name="csrf-token" content="{{ csrf_token() }}"/>
    {% block meta %}{% endblock %}
    <link rel="Shortcut Icon" href="{{ static('image/favicon.ico') }}">
+   <link rel="apple-touch-icon-precomposed" sizes="152x152"
+         href="{{ static('image/apple/apple-touch-icon-precomposed-152.png') }}">
+   <link rel="apple-touch-icon-precomposed" sizes="120x120"
+         href="{{ static('image/apple/apple-touch-icon-precomposed-120.png') }}">
+   <link rel="apple-touch-icon-precomposed" sizes="76x76"
+         href="{{ static('image/apple/apple-touch-icon-precomposed-76.png') }}">
+   <link rel="apple-touch-icon-precomposed"
+         href="{{ static('image/apple/apple-touch-icon-precomposed.png') }}">
    {{ app_css(self) }}
    <!--[if IE 9]>
    <link rel="stylesheet" href="{{ static('css/ie9.css') }}"/>
