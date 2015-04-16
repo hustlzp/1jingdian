@@ -530,12 +530,15 @@
          var timerForTypeahead = null;
          var pieceId = {{ piece.id }};
          var $collectionInput = $('#input-collection');
-         var $detailsParentWap = $('.piece-details-wap').parent();
+         var $detailsParentWap = null;
          var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
 
          if (isModal) {
+            $detailsParentWap = $('.piece-modal-wap');
             $('.share-wap').isolatedScroll();
             $('.piece-logs-wap').isolatedScroll();
+         } else {
+            $detailsParentWap = $('.piece-details-wap').parent();
          }
 
          // 弹出分享框
