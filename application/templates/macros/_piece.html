@@ -530,15 +530,13 @@
          var timerForTypeahead = null;
          var pieceId = {{ piece.id }};
          var $collectionInput = $('#input-collection');
-         var $detailsParentWap = null;
+         var $detailsParentWap = $('.piece-details-wap').parent();
+         ;
          var isModal = $('.piece-details-wap').parents('piece-modal-wap').length;   //是否为右侧弹出框
 
          if (isModal) {
-            $detailsParentWap = $('.piece-modal-wap');
             $('.share-wap').isolatedScroll();
             $('.piece-logs-wap').isolatedScroll();
-         } else {
-            $detailsParentWap = $('.piece-details-wap').parent();
          }
 
          // 弹出分享框
@@ -725,13 +723,9 @@
 
 {% macro render_piece_modal_wap(piece) %}
    <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
-      <div class="btn-close-piece-modal-wap visible-xs-block">×</div>
-
-      <div class="piece-details-outer-wap">
-         {% if piece %}
-            {{ render_piece_details_wap(piece) }}
-         {% endif %}
-      </div>
+      {% if piece %}
+         {{ render_piece_details_wap(piece) }}
+      {% endif %}
    </div>
 
    <script type="text/javascript">
@@ -775,7 +769,7 @@
                   $.ajax({
                      url: urlFor('piece.modal', {uid: pieceId}),
                      success: function (modal) {
-                        $('.piece-details-outer-wap').html(modal);
+                        $('.piece-modal-wap').html(modal);
                      }
                   });
                } else {
@@ -784,16 +778,12 @@
                      $.ajax({
                         url: urlFor('piece.modal', {uid: pieceId}),
                         success: function (modal) {
-                           $('.piece-details-outer-wap').html(modal);
+                           $('.piece-modal-wap').html(modal);
                         }
                      });
                   });
                }
             }
-         });
-
-         $('.btn-close-piece-modal-wap').click(function () {
-            closeModal();
          });
 
          /**
@@ -858,7 +848,7 @@
           * @param pieceModal
           */
          function showLoadingFlag() {
-            $('.piece-details-outer-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+            $('.piece-modal-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
          }
 
          /**
