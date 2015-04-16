@@ -16,6 +16,16 @@
     padding-top: 35px;
   }
 }
+@media (min-width: 1400) {
+  .piece-modal-wap {
+    width: 550px;
+  }
+}
+@media (min-width: 1800) {
+  .piece-modal-wap {
+    width: 600px;
+  }
+}
 .piece-modal-wap .flag-loading-piece {
   position: absolute;
   left: 50%;
