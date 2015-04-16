@@ -18,11 +18,16 @@
    <![endif]-->
    <script type="text/javascript">
       var g = {
+         rules: {{ rules|safe }},
          domain: "{{ config.SITE_DOMAIN }}",
          csrfToken: "{{ csrf_token() }}",
-         rules: {{ rules|safe }},
          method: "{{ request.method }}",
-         signedIn: {% if g.user %}true{% else %}false{% endif %}
+         signedIn: {% if g.user %}true{% else %}false{% endif %},
+         pluploadDefaults: {
+            flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
+            silverlight_xap_url: '/static/bower_components/plupload/js/Moxie.xap'
+         },
+         timerForBackdrop: null
       };
    </script>
    {{ libs_js() }}

@@ -1,12 +1,3 @@
-// plupload全局配置
-registerContext({
-    pluploadDefaults: {
-        flash_swf_url: '/static/bower_components/plupload/js/Moxie.swf',
-        silverlight_xap_url: '/static/bower_components/plupload/js/Moxie.xap'
-    },
-    timerForBackdrop: null
-});
-
 // Flash message
 setTimeout(showFlash, 200);
 setTimeout(hideFlash, 2000);
