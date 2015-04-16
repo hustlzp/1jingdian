@@ -531,7 +531,7 @@
          var pieceId = {{ piece.id }};
          var $collectionInput = $('#input-collection');
          var $detailsParentWap = null;
-         var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
+         var isModal = $('.piece-details-wap').parents('piece-modal-wap').length;   //是否为右侧弹出框
 
          if (isModal) {
             $detailsParentWap = $('.piece-modal-wap');
