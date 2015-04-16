@@ -27,17 +27,20 @@ def signin():
 @VisitorPermission()
 def signup():
     """Signup"""
-    form = SignupForm(code=request.args.get('code'))
-
-    code = InvitationCode.query.filter(InvitationCode.code == form.code.data).first_or_404()
-    if code.email:
-        form.email.data = code.email
+    form = SignupForm()
+    code_string = request.args.get('code')
+    if code_string:
+        form.code.data = code_string
+        code = InvitationCode.query.filter(InvitationCode.code == code_string).first()
+        if code and code.email:
+            form.email.data = code.email
 
     if form.validate_on_submit():
         user = User(name=form.name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
 
+        code = InvitationCode.query.filter(InvitationCode.code == form.code.data).first_or_404()
         code.used = True
         code.user_id = user.id
         db.session.add(code)
