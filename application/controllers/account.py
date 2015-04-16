@@ -111,7 +111,8 @@ def forgot_password():
             message = "请 <a href='%s' target='_blank'>登录邮箱</a> 完成密码重置" % email_domain
         else:
             message = "请登录邮箱完成密码重置"
-        return render_template('site/message.html', title="密码重置链接已发送到你的邮箱",
+        return render_template('site/message.html',
+                               title="发送成功",
                                message=message)
     return render_template('account/forgot_password.html', form=form)
 
