@@ -178,6 +178,10 @@
             var _this = $(this);
             var voted = $(this).hasClass('voted-by-me');
 
+            if (!g.signedIn) {
+               return;
+            }
+
             if (voted) {
                url = urlFor('piece.unvote_comment', {uid: commentId});
             } else {
@@ -206,7 +210,7 @@
             var targetUserName = $(this).data('target-user-name');
             var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
 
-            if (!$(document.body).hasClass('signed-in')) {
+            if (!g.signedIn) {
                return;
             }
 

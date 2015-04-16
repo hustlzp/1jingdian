@@ -21,13 +21,14 @@
          domain: "{{ config.SITE_DOMAIN }}",
          csrfToken: "{{ csrf_token() }}",
          rules: {{ rules|safe }},
-         method: "{{ request.method }}"
+         method: "{{ request.method }}",
+         signedIn: {% if g.user %}true{% else %}false{% endif %}
       };
    </script>
    {{ libs_js() }}
 </head>
 
-<body class="{% if g.user %}signed-in{% endif %}">
+<body>
 <div id="favicon-wx-share" style="margin: 0; display: none;">
    <img src="{{ static('image/favicon_wx_share.png') }}" alt=""/>
 </div>
