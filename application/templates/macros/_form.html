@@ -1,5 +1,5 @@
 {% macro field_error(field) %}
-   <span class="text-danger form-error">
+   <span class="text-danger form-error {% if field.errors[0] %}show{% endif %}">
       {% if field.errors[0] %}
          {{ field.errors[0] }}
       {% endif %}

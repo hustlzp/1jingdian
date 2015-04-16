@@ -30,6 +30,10 @@
 .form-error {
   font-size: 12px;
   padding-top: 5px;
+  display: none;
+}
+.form-error.show {
+  display: block;
 }
 .text-light {
   color: #999;
