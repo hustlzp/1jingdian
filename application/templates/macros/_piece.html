@@ -784,11 +784,6 @@
             }
          });
 
-         // 小屏下禁止modal影响父元素滑动
-         if ($(window).width() < 767) {
-            $('.piece-modal-wap').isolatedScroll();
-         }
-
          $('.btn-close-piece-modal-wap').click(function () {
             closeModal();
          });
@@ -805,6 +800,15 @@
             addClicksCount(pieceId);
             $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
             $modal.css('right', -(modalWidth + 3)).show();
+
+            // 小屏下禁止modal影响父元素滑动
+            if ($(window).width() < 767) {
+               $modal.bind('touchmove', function (e) {
+                  e.preventDefault();
+               });
+            } else {
+               $modal.unbind('touchmove');
+            }
 
             $modal.stop().transition({'right': 0}, 400, function () {
                $(this).addClass('open');
