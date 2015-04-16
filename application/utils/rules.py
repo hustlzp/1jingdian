@@ -81,7 +81,7 @@ class CollectionEditableRule(Rule):
         super(CollectionEditableRule, self).__init__()
 
     def check(self):
-        return self.collection and self.collection.locked
+        return self.collection and not self.collection.locked
 
     def deny(self):
         abort(403)
