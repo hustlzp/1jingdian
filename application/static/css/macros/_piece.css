@@ -16,12 +16,12 @@
     padding-top: 35px;
   }
 }
-@media (min-width: 1400) {
+@media (min-width: 1400px) {
   .piece-modal-wap {
     width: 550px;
   }
 }
-@media (min-width: 1800) {
+@media (min-width: 1800px) {
   .piece-modal-wap {
     width: 600px;
   }
