@@ -541,7 +541,7 @@
          // 弹出分享框
          $('.btn-share').click(function () {
             var $shareInnerWap = $('.share-wap .inner-wap');
-            var marginTop = 0;
+            var marginTop;
 
             $('.share-wap').show();
             marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
@@ -1003,7 +1003,7 @@
       </div>
 
       {% set original = form.original.data %}
-      <div class="btn-group btn-group-sm btn-group-original" data-toggle="buttons">
+      <div class="btn-group btn-group-sm btn-group-original clearfix" data-toggle="buttons">
          <label class="btn btn-default {% if not original %}active{% endif %}">
             <input type="radio" name="original" value="false" autocomplete="off"
                    {% if not original %}checked="checked"{% endif %}> 引用

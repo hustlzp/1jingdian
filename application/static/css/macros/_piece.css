@@ -623,6 +623,7 @@
 }
 .form-piece .btn-group-original {
   margin-bottom: 20px;
+  display: block;
 }
 .form-piece .btn-group-original > label {
   padding: 3px 8px;
