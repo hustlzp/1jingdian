@@ -10,15 +10,6 @@ collection_covers = UploadSet('collectionCovers', IMAGES)
 qrcodes = UploadSet('qrcodes', IMAGES)
 
 
-def process_avatar(file_storage, upload_set, border):
-    """Center clipping, resize and then save the avatar."""
-    image = open_image(file_storage)
-    image = center_crop(image)
-    image = resize_square(image, border)
-    ext = extension(file_storage.filename)
-    return save_image(image, upload_set, ext)
-
-
 def process_image_for_cropping(file_storage, upload_set):
     """将图片处理为适合裁剪的大小，即长宽均不超过1000"""
     image = open_image(file_storage)
