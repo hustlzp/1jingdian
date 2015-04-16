@@ -830,6 +830,10 @@
 
             $('.piece').removeClass('selected');
 
+            if ($(window).width() < 767) {
+               $(document).off('touchmove');
+            }
+
             $modal.stop().transition({
                'right': -(modalWidth + 3)
             }, 400, function () {
