@@ -931,11 +931,11 @@
             </div>
          </div>
       {% endfor %}
-
-      {{ piece_full_screen_script() }}
    </div>
 
    {% if show_modal %}
+      {{ piece_full_screen_script() }}
+
       {% set first_piece = pieces|first %}
       {% if first_piece and attr %}
          {% set first_piece = first_piece[attr] %}
