@@ -6,7 +6,7 @@
 {% macro piece_full_screen_script() %}
    <script type="text/javascript">
       (function () {
-         $(document).on('click', '.btn-full-screen', function () {
+         $(document).onOnce('click', '.btn-full-screen', function () {
             var content = $(this).data('content'),
                   sourceString = $(this).data('source-string'),
                   html = "";
@@ -786,6 +786,17 @@
                      });
                   });
                }
+            }
+         });
+
+         $(document).on('click', function (event) {
+            if (!($(event.target).hasClass('full-screen-backdrop')
+                  || $(event.target).parents('.full-screen-backdrop').length
+                  || $(event.target).hasClass('piece')
+                  || $(event.target).parents('.piece').length
+                  || $(event.target).hasClass('piece-modal-wap')
+                  || $(event.target).parents('.piece-modal-wap').length)) {
+               closeModal();
             }
          });
 
