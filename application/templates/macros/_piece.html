@@ -995,9 +995,9 @@
       <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
       <div class="panel-body">
-         {% if pieces_data.pieces.count() %}
-            {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
-         {% else %}
+         {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
+
+         {% if not pieces_data.pieces.count() %}
             <div class="text-center share-piece">
                {#               {% if page == 1 %}#}
                {% if show_modal %}
@@ -1036,15 +1036,17 @@
       {#      </div>#}
    </div>
 
-   <script type="text/javascript">
-      (function () {
-         // 显示被隐藏的句子
-         $(document).onOnce('click', '.btn-show-hide-pieces', function () {
-            $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
-            $(this).parents('.panel-footer').first().detach();
-         });
-      })();
-   </script>
+   {% if show_modal %}
+      <script type="text/javascript">
+         (function () {
+            // 显示被隐藏的句子
+            $(document).onOnce('click', '.btn-show-hide-pieces', function () {
+               $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
+               $(this).parents('.panel-footer').first().detach();
+            });
+         })();
+      </script>
+   {% endif %}
 {% endmacro %}
 
 
