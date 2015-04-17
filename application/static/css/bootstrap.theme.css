@@ -154,6 +154,7 @@ ol li {
 }
 .panel-body {
   padding: 25px 25px;
+  min-height: 40px;
 }
 @media (max-width: 767px) {
   .panel-body {
