@@ -999,7 +999,8 @@
             {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
          {% else %}
             <div class="text-center share-piece">
-               {% if page == 1 %}
+               {#               {% if page == 1 %}#}
+               {% if show_modal %}
                   <a href="{{ url_for('piece.add') }}" class="need-signed-in">
                      <span class="fa fa-plus"></span> 分享句子
                   </a>
