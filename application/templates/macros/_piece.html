@@ -733,6 +733,8 @@
 
    <script type="text/javascript">
       (function () {
+         var $pieceModal = $('.piece-modal-wap');
+
          // 弹出侧边栏
          $(document).on('click', '.pieces-wap .piece', function (event) {
             // 链接和vote不触发此事件
@@ -745,8 +747,7 @@
             }
 
             var pieceId = parseInt($(this).attr('data-piece-id')),
-                  pieceModal = $('.piece-modal-wap').first(),
-                  pieceIdOfModal = parseInt(pieceModal.attr('data-piece-id'));
+                  pieceIdOfModal = parseInt($pieceModal.attr('data-piece-id'));
 
             if ($(window).width() < 767) {
                window.location = urlFor('piece.view', {uid: pieceId});
@@ -755,7 +756,7 @@
 
             // 点击的piece与modal的piece一致
             if (pieceId === pieceIdOfModal) {
-               if (pieceModal.hasClass('open')) {
+               if ($pieceModal.hasClass('open')) {
                   closeModal(pieceId);
                } else {
                   openModal(pieceId);
@@ -763,10 +764,10 @@
             } else {
                showLoadingFlag();
 
-               if (pieceModal.hasClass('open')) {
+               if ($pieceModal.hasClass('open')) {
                   $('.piece').removeClass('selected');
                   $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
-                  pieceModal.attr('data-piece-id', pieceId);
+                  $pieceModal.attr('data-piece-id', pieceId);
                   addClicksCount(pieceId);
 
                   $.ajax({
@@ -777,7 +778,7 @@
                   });
                } else {
                   openModal(pieceId, function () {
-                     pieceModal.attr('data-piece-id', pieceId);
+                     $pieceModal.attr('data-piece-id', pieceId);
                      $.ajax({
                         url: urlFor('piece.modal', {uid: pieceId}),
                         success: function (modal) {
@@ -795,7 +796,8 @@
                   || $(event.target).hasClass('piece')
                   || $(event.target).parents('.piece').length
                   || $(event.target).hasClass('piece-modal-wap')
-                  || $(event.target).parents('.piece-modal-wap').length)) {
+                  || $(event.target).parents('.piece-modal-wap').length)
+                  && $pieceModal.hasClass('open')) {
                closeModal();
             }
          });
