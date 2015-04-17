@@ -1,4 +1,5 @@
 # coding: utf-8
+from datetime import timedelta, date, datetime
 from flask import render_template, Blueprint, redirect, request, url_for, g, \
     get_template_attribute, json, abort
 from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPermission
@@ -19,6 +20,24 @@ def view(uid):
     db.session.add(piece)
     db.session.commit()
     return render_template("piece/view.html", piece=piece)
+
+
+@bp.route('/json', methods=['POST'])
+def pieces_by_date():
+    """获取从指定date开始的指定天数的pieces"""
+    start = request.form.get('start')
+    if start:
+        start_date = datetime.strptime(start, '%Y-%m-%d').date()
+    else:
+        start_date = date.today() - timedelta(days=3)
+    days = request.form.get('days', 2, type=int)
+    html = ""
+    for i in xrange(days):
+        target_day = start_date - timedelta(days=i)
+        pieces_data = Piece.get_pieces_data_by_day(target_day)
+        pieces_wap_macro = get_template_attribute('macros/_piece.html', 'render_pieces_by_date')
+        html += pieces_wap_macro(pieces_data, show_modal=False)
+    return html
 
 
 @bp.route('/piece/<int:uid>/click', methods=['POST'])
@@ -45,7 +64,7 @@ def modal(uid):
 def add():
     # permission = PieceAddPermission()
     # if not permission.check():
-    #     return permission.deny()
+    # return permission.deny()
 
     form = PieceForm()
     if form.validate_on_submit():

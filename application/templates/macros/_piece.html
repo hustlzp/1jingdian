@@ -873,7 +873,7 @@
 {% endmacro %}
 
 
-{% macro render_pieces(pieces, attr=None) %}
+{% macro render_pieces(pieces, attr=None, show_modal=True) %}
    <div class="pieces-wap">
       {% for piece in pieces %}
          {% if attr %}
@@ -924,21 +924,79 @@
       {{ piece_full_screen_script() }}
    </div>
 
-   {% set first_piece = pieces|first %}
-   {% if first_piece and attr %}
-      {% set first_piece = first_piece[attr] %}
+   {% if show_modal %}
+      {% set first_piece = pieces|first %}
+      {% if first_piece and attr %}
+         {% set first_piece = first_piece[attr] %}
+      {% endif %}
+      {{ render_piece_modal_wap(first_piece) }}
    {% endif %}
-   {{ render_piece_modal_wap(first_piece) }}
 {% endmacro %}
 
 
-{% macro render_pieces_by_date(pieces_data, page, pre_page, next_page) %}
+{#{% macro render_pieces_by_date(pieces_data, page, pre_page, next_page) %}#}
+{#   <div class="panel panel-primary pieces-by-date-wap">#}
+{#      <div class="panel-heading date">{{ pieces_data.date_string }}</div>#}
+{##}
+{#      <div class="panel-body">#}
+{#         {% if pieces_data.pieces.count() %}#}
+{#            {{ render_pieces(pieces_data.pieces) }}#}
+{#         {% else %}#}
+{#            <div class="text-center share-piece">#}
+{#               {% if page == 1 %}#}
+{#                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">#}
+{#                     <span class="fa fa-plus"></span> 分享句子#}
+{#                  </a>#}
+{#               {% else %}#}
+{#                  <span class="text-light">无</span>#}
+{#               {% endif %}#}
+{#            </div>#}
+{#         {% endif %}#}
+{##}
+{#         {% if pieces_data.hide_pieces_count %}#}
+{#            <div class="hide-pieces">#}
+{#               {{ render_pieces(pieces_data.hide_pieces) }}#}
+{#            </div>#}
+{#         {% endif %}#}
+{#      </div>#}
+{##}
+{#      {% if pieces_data.hide_pieces_count %}#}
+{#         <div class="panel-footer text-center">#}
+{#            <div class="btn-show-hide-pieces">#}
+{#               展开其余 {{ pieces_data.hide_pieces_count }} 段文字#}
+{#            </div>#}
+{#         </div>#}
+{#      {% endif %}#}
+{##}
+{#      <div class="pieces-pager clearfix">#}
+{#         <a class="pre-page {% if not pre_page %}disabled{% endif %}"#}
+{#            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>#}
+{#            <span class="fa fa-angle-left"></span>#}
+{#         </a>#}
+{#         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">#}
+{#            <span class="fa fa-angle-right"></span>#}
+{#         </a>#}
+{#      </div>#}
+{#   </div>#}
+{##}
+{#   <script type="text/javascript">#}
+{#      (function () {#}
+{#         // 显示被隐藏的句子#}
+{#         $(document).on('click', '.btn-show-hide-pieces', function () {#}
+{#            $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();#}
+{#            $(this).parents('.panel-footer').first().detach();#}
+{#         });#}
+{#      })();#}
+{#   </script>#}
+{#{% endmacro %}#}
+
+{% macro render_pieces_by_date(pieces_data, show_modal=False) %}
    <div class="panel panel-primary pieces-by-date-wap">
       <div class="panel-heading date">{{ pieces_data.date_string }}</div>
 
       <div class="panel-body">
          {% if pieces_data.pieces.count() %}
-            {{ render_pieces(pieces_data.pieces) }}
+            {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
          {% else %}
             <div class="text-center share-piece">
                {% if page == 1 %}
@@ -966,21 +1024,21 @@
          </div>
       {% endif %}
 
-      <div class="pieces-pager clearfix">
-         <a class="pre-page {% if not pre_page %}disabled{% endif %}"
-            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>
-            <span class="fa fa-angle-left"></span>
-         </a>
-         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">
-            <span class="fa fa-angle-right"></span>
-         </a>
-      </div>
+      {#      <div class="pieces-pager clearfix">#}
+      {#         <a class="pre-page {% if not pre_page %}disabled{% endif %}"#}
+      {#            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>#}
+      {#            <span class="fa fa-angle-left"></span>#}
+      {#         </a>#}
+      {#         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">#}
+      {#            <span class="fa fa-angle-right"></span>#}
+      {#         </a>#}
+      {#      </div>#}
    </div>
 
    <script type="text/javascript">
       (function () {
          // 显示被隐藏的句子
-         $(document).on('click', '.btn-show-hide-pieces', function () {
+         $(document).onOnce('click', '.btn-show-hide-pieces', function () {
             $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
             $(this).parents('.panel-footer').first().detach();
          });

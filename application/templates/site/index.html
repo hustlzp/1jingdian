@@ -2,8 +2,22 @@
 {% from "macros/_piece.html" import render_pieces_by_date %}
 
 {% block page_title %}壹经典{% endblock %}
+{% block page_vars %}
+   <script type="text/javascript">
+      g.startDate = "{{ start_date }}";
+   </script>
+{% endblock %}`
 {% block page_content %}
    <div class="container">
-      {{ render_pieces_by_date(pieces, page, pre_page, next_page) }}
+      {#      {{ render_pieces_by_date(pieces, page, pre_page, next_page) }}#}
+
+      <div class="pieces-container">
+         {{ render_pieces_by_date(today_pieces, show_modal=true) }}
+         {{ render_pieces_by_date(yesterday_pieces) }}
+         {{ render_pieces_by_date(the_day_before_yesterday_pieces) }}
+      </div>
+      <div class="text-center loading-flag">
+         正在加载
+      </div>
    </div>
 {% endblock %}
