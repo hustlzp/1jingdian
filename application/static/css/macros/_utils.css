@@ -42,6 +42,8 @@
   overflow: hidden;
   border-radius: 50%;
   margin-left: 15px;
+  vertical-align: text-bottom;
+  margin-bottom: 2px;
 }
 #modal-crop-image .jcrop-holder {
   display: inline-block;
