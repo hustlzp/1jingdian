@@ -86,8 +86,10 @@ class Piece(db.Model):
                 Piece.votes_count.desc()).offset(SHOW_PIECES_COUNT)
         else:
             hide_pieces = None
-        pieces = Piece.query.filter(db.func.date(Piece.created_at) == day).order_by(
-            Piece.votes_count.desc()).limit(SHOW_PIECES_COUNT)
+        pieces = Piece.query.filter(db.func.date(Piece.created_at) == day). \
+            order_by(Piece.votes_count.desc()). \
+            order_by(Piece.created_at.desc()). \
+            limit(SHOW_PIECES_COUNT)
         if day == date.today():
             date_string = '今天'
         elif day == date.today() - timedelta(days=1):
