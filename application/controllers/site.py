@@ -9,7 +9,7 @@ bp = Blueprint('site', __name__)
 # @bp.route('/page/<int:page>')
 # @bp.route('/', defaults={'page': 1})
 # def index(page):
-#     """Index page."""
+# """Index page."""
 #     target_day = date.today() - timedelta(days=page - 1)
 #     pieces = Piece.get_pieces_data_by_day(target_day)
 #     if page == 1:
@@ -62,9 +62,10 @@ def collections(page):
     current_kind = CollectionKind.query.get_or_404(kind_id) if kind_id else None
     collection_kinds = CollectionKind.query.order_by(CollectionKind.show_order.asc())
     if kind_id:
-        collections = current_kind.collections.paginate(page, 20)
+        collections = current_kind.collections
     else:
-        collections = Collection.query.paginate(page, 20)
+        collections = Collection.query
+    collections = collections.order_by(Collection.created_at.desc()).paginate(page, 20)
     return render_template('site/collections.html', collections=collections,
                            collection_kinds=collection_kinds, kind_id=kind_id)
 
