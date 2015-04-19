@@ -43,11 +43,6 @@
                         {% endif %}
                      </td>
                      <td>
-                        {% if code.user %}
-                           {{ code.user.created_at|timesince }}
-                        {% endif %}
-                     </td>
-                     <td>
                         {% if not code.used and not code.email %}
                            <a href="{{ url_for('admin.send_invitation_code', uid=code.id) }}"
                               class="btn btn-default btn-xs">发送</a>
