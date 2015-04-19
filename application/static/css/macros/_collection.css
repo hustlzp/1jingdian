@@ -126,6 +126,7 @@
 .collections-wap .collection .title {
   font-size: 16px;
   margin-bottom: 8px;
+  padding-top: 1px;
 }
 .collections-wap .collection .collection-cover {
   width: 48px;
