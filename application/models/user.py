@@ -54,6 +54,15 @@ class InvitationCode(db.Model):
 
     # 当用户使用此邀请码注册后，填充user_id字段
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
-    user = db.relationship('User', backref=db.backref('invitation_code',
-                                                      cascade="all, delete, delete-orphan",
-                                                      uselist=False))
+    user = db.relationship('User',
+                           backref=db.backref('invitation_code',
+                                              cascade="all, delete, delete-orphan",
+                                              uselist=False),
+                           foreign_keys=[user_id])
+
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
+    sender = db.relationship('User',
+                             backref=db.backref('sended_invitation_codes',
+                                                cascade="all, delete, delete-orphan",
+                                                uselist=False),
+                             foreign_keys=[sender_id])

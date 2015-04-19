@@ -1,7 +1,7 @@
 # coding: utf-8
 import datetime
 from werkzeug.security import gen_salt
-from flask import render_template, Blueprint, redirect, request, url_for, flash
+from flask import render_template, Blueprint, redirect, request, url_for, flash, g
 from ..utils.permissions import AdminPermission
 from ..utils.mail import send_invitation_mail
 from ..forms import SendInvitationCodeForm
@@ -124,6 +124,7 @@ def send_invitation_code(uid):
         if send_invitation_mail(form.email.data, invitation_code.code):
             invitation_code.email = form.email.data
             invitation_code.sended_at = datetime.datetime.now()
+            invitation_code.sender_id = g.user.id
             db.session.add(invitation_code)
             db.session.commit()
             flash('发送成功')

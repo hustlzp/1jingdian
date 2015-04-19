@@ -15,8 +15,8 @@
                   <th>邀请码</th>
                   <th>发送邮箱</th>
                   <th>发送时间</th>
+                  <th>发送者</th>
                   <th>注册用户</th>
-                  <th>注册时间</th>
                   <th>操作</th>
                </tr>
 
@@ -27,6 +27,14 @@
                      </td>
                      <td>{{ code.email or "" }}</td>
                      <td>{{ code.sended_at|timesince }}</td>
+                     <td>
+                        {% if code.sender_id %}
+                           <a href="{{ url_for('user.profile', uid=code.sender_id) }}"
+                              target="_blank">
+                              {{ code.sender.name }}
+                           </a>
+                        {% endif %}
+                     </td>
                      <td>
                         {% if code.user %}
                            <a href="{{ url_for('user.profile', uid=code.user.id) }}"
