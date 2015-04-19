@@ -86,6 +86,7 @@ def add():
 
         g.user.votes_count += 1
         g.user.pieces_count += 1
+        piece.votes_count += 1
         db.session.add(g.user)
 
         # log
