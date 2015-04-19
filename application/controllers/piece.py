@@ -68,11 +68,20 @@ def add():
 
     form = PieceForm()
     if form.validate_on_submit():
+        comment = form.comment.data.strip()
+
         form.original.data = request.form.get('original') == 'true'
-        piece = Piece(**form.data)
+        params = form.data.copy()
+        params.pop('comment')
+        piece = Piece(**params)
         piece.user_id = g.user.id
         db.session.add(piece)
         db.session.commit()
+
+        # comment
+        if comment:
+            piece_comment = PieceComment(content=comment, piece_id=piece.id, user_id=g.user.id)
+            db.session.add(piece_comment)
 
         # 存储source和author
         if piece.source:

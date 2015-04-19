@@ -14,6 +14,7 @@ class PieceForm(Form):
     source = StringField('出处', validators=[Optional()])
     source_link = StringField('链接', validators=[Optional(), check_url, URL(message='链接格式不正确')],
                               description='选填')
+    comment = TextAreaField('附言', validators=[Optional()], description='选填，个人感想或推荐理由')
 
     def validate_content(self, field):
         content = self.content.data

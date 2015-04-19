@@ -1123,6 +1123,10 @@
          </div>
       </div>
 
+      {% if add %}
+         {{ vertical_field(form.comment, rows=4) }}
+      {% endif %}
+
       <div class="submit-wap submit-right">
          <button type="submit" class="btn btn-submit btn-primary">
             {% if add %}分享{% else %}保存{% endif %}
