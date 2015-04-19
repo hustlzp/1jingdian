@@ -667,6 +667,12 @@
 
          // 完成添加句集
          $('.btn-finish-add-collection').click(function () {
+            var title = $.trim($('#input-collection').typeahead('val'));
+
+            // 如果此时输入框中有值，则进行句集添加
+            if (title !== "") {
+               addToCollection(pieceId, {title: title});
+            }
             quitEditCollectionMode();
          });
 
@@ -683,7 +689,7 @@
                data: data
             }).done(function (response) {
                if (response.result) {
-                  if (!$(".collections .collection[data-id='" + response.id + "']").length) {
+                  if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
                      $(".collections").append(response.html);
                      checkCollectionsCount();
                   }
