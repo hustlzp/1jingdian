@@ -80,6 +80,11 @@ def add():
         if piece.author:
             _save_piece_author(piece.author)
 
+        # 自动vote
+        vote = PieceVote(piece_id=piece.id, user_id=g.user.id)
+        db.session.add(vote)
+
+        g.user.votes_count += 1
         g.user.pieces_count += 1
         db.session.add(g.user)
 
