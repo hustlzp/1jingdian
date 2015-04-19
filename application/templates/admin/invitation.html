@@ -30,7 +30,7 @@
                      <td>
                         {% if code.sender_id %}
                            <a href="{{ url_for('user.profile', uid=code.sender_id) }}"
-                              target="_blank">
+                              target="_blank" class="sender">
                               {{ code.sender.name }}
                            </a>
                         {% endif %}
