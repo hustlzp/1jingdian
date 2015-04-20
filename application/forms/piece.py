@@ -4,17 +4,20 @@ import math
 from flask_wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, URL, Optional
-from ._helper import check_url
+from ._helper import check_url, trim
 
 
 class PieceForm(Form):
-    content = TextAreaField('句子', validators=[DataRequired('句子不能为空')])
+    content = TextAreaField('句子', validators=[DataRequired('句子不能为空'), trim])
     original = BooleanField('原创', default=False)
-    author = StringField('原作者', validators=[Optional()], description='选填')
-    source = StringField('出处', validators=[Optional()])
-    source_link = StringField('链接', validators=[Optional(), check_url, URL(message='链接格式不正确')],
+    author = StringField('原作者', validators=[Optional(), trim], description='选填')
+    source = StringField('出处', validators=[Optional(), trim])
+    source_link = StringField('链接',
+                              validators=[Optional(), trim, check_url, URL(message='链接格式不正确')],
                               description='选填')
-    comment = TextAreaField('附言', validators=[Optional()], description='选填，个人感想或推荐理由')
+    comment = TextAreaField('附言',
+                            validators=[Optional(), trim],
+                            description='选填，个人感想或推荐理由')
 
     def validate_content(self, field):
         content = self.content.data

@@ -11,3 +11,8 @@ def check_url(form, field):
     result = urlparse(url)
     if result.scheme == "":
         field.data = "http://%s" % re.sub(r'^:?/*', '', url)
+
+
+def trim(form, field):
+    if field.data and isinstance(field.data, basestring):
+        field.data = field.data.strip()
