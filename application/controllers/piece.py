@@ -400,20 +400,19 @@ def random():
     collection_id = request.form.get('collection_id', type=int)
     if collection_id:
         collection = Collection.query.get_or_404(collection_id)
+        if collection.pieces.count() == 0:
+            abort(404)
         collection_piece = collection.pieces.order_by(db.func.random()).first()
-        piece = collection_piece.piece if collection_piece else None
+        piece = collection_piece.piece
     else:
-        piece = Piece.query.order_by(db.func.random()).first()
+        piece = Piece.query.order_by(db.func.random()).first_or_404()
 
-    if piece:
-        return json.dumps({
-            'id': piece.id,
-            'content': piece.content,
-            'content_length': piece.content_length,
-            'source': piece.source_string,
-        })
-    else:
-        abort(404)
+    return json.dumps({
+        'id': piece.id,
+        'content': piece.content,
+        'content_length': piece.content_length,
+        'source': piece.source_string,
+    })
 
 
 @bp.route('/piece/log/<int:uid>/report', methods=['POST'])
