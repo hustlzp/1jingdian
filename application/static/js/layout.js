@@ -155,7 +155,9 @@ $(document).keydown(function (e) {
 // 切入tab时，继续偶遇
 window.onfocus = function () {
     if (checkRandomBackdropExist()) {
-        setTimeout(function () {
+        clearTimeout(g.timerForBackdrop);
+
+        g.timerForBackdrop = setTimeout(function () {
             beginMeet();
         }, 4000);
     }
