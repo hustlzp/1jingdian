@@ -60,6 +60,17 @@ def build_assets():
 
 
 @manager.command
+def calculate_piece_content_length():
+    from application.models import Piece
+
+    with app.app_context():
+        for piece in Piece.query:
+            piece.content = piece.content
+            db.session.add(piece)
+        db.session.commit()
+
+
+@manager.command
 def test():
     # src = u'ABCBDAB'
     # dest = u'BDCABA'
