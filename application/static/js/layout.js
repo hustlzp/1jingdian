@@ -155,9 +155,9 @@ function beginMeet() {
         var contentLength = piece.content_length;
         var seconds = calculateTimeByContentLength(contentLength);
 
-        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
+        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn('slow');
         if (piece.source) {
-            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
+            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn('slow');
         } else {
             $('.full-screen-backdrop .source').hide();
         }
@@ -193,9 +193,15 @@ function calculateTimeByContentLength(contentLength) {
 }
 
 // 按下Esc，关闭backdrop
-$(document).keyup(function (e) {
+$(document).keydown(function (e) {
     if (e.keyCode == 27) {
         closeBackdrop();
+    }
+
+    if (e.keyCode == 32 && checkBackdropExist()) {
+        e.preventDefault();
+        e.stopPropagation();
+        beginMeet();
     }
 });
 
@@ -282,6 +288,14 @@ function closeBackdrop() {
     $('.base-wap').removeClass('blur');
     $('.full-screen-backdrop').detach();
     clearInterval(g.timerForBackdrop);
+}
+
+/**
+ * Check if the backdrop is open.
+ * @returns {boolean}
+ */
+function checkBackdropExist() {
+    return $('.full-screen-backdrop').length > 0;
 }
 
 /**
