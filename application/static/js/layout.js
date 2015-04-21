@@ -141,57 +141,6 @@ $('.btn-meet').click(function () {
     });
 });
 
-/**
- * Begin meet random piece.
- */
-function beginMeet() {
-    clearTimeout(g.timerForBackdrop);
-
-    $.ajax({
-        url: urlFor('piece.random'),
-        method: 'POST',
-        dataType: 'json'
-    }).done(function (piece) {
-        var contentLength = piece.content_length;
-        var seconds = calculateTimeByContentLength(contentLength);
-
-        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn('slow');
-        if (piece.source) {
-            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn('slow');
-        } else {
-            $('.full-screen-backdrop .source').hide();
-        }
-
-        adjustBackdropContent();
-
-        g.timerForBackdrop = setTimeout(function () {
-            beginMeet();
-        }, seconds * 1000);
-    });
-}
-
-/**
- * Calculate read time based on content length.
- * @param contentLength
- * @returns read time
- */
-function calculateTimeByContentLength(contentLength) {
-    var seconds;
-    contentLength = parseInt(contentLength);
-
-    if ($.isNumeric(contentLength)) {
-        // 设定阅读速度为10字/s
-        seconds = Math.ceil(contentLength / 10);
-        if (seconds < 8) {
-            seconds = 8;
-        }
-    } else {
-        seconds = 8;
-    }
-
-    return seconds;
-}
-
 // 按下Esc，关闭backdrop
 $(document).keydown(function (e) {
     if (e.keyCode == 27) {
@@ -204,6 +153,22 @@ $(document).keydown(function (e) {
         beginMeet();
     }
 });
+
+// 切入tab时，继续偶遇
+window.onfocus = function () {
+    if (checkBackdropExist()) {
+        setTimeout(function () {
+            beginMeet();
+        }, 4000);
+    }
+};
+
+// 切出tab时，停止偶遇
+window.onblur = function () {
+    if (checkBackdropExist()) {
+        clearTimeout(g.timerForBackdrop);
+    }
+};
 
 // 按下关闭按钮，关闭backdrop
 $(document).on('click', '.btn-close-backdrop', function () {
@@ -310,6 +275,57 @@ function showFlash() {
  */
 function hideFlash() {
     $('.flash-message').slideUp('fast');
+}
+
+/**
+ * Begin meet random piece.
+ */
+function beginMeet() {
+    clearTimeout(g.timerForBackdrop);
+
+    $.ajax({
+        url: urlFor('piece.random'),
+        method: 'POST',
+        dataType: 'json'
+    }).done(function (piece) {
+        var contentLength = piece.content_length;
+        var seconds = calculateTimeByContentLength(contentLength);
+
+        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn('slow');
+        if (piece.source) {
+            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn('slow');
+        } else {
+            $('.full-screen-backdrop .source').hide();
+        }
+
+        adjustBackdropContent();
+
+        g.timerForBackdrop = setTimeout(function () {
+            beginMeet();
+        }, seconds * 1000);
+    });
+}
+
+/**
+ * Calculate read time based on content length.
+ * @param contentLength
+ * @returns read time
+ */
+function calculateTimeByContentLength(contentLength) {
+    var seconds;
+    contentLength = parseInt(contentLength);
+
+    if ($.isNumeric(contentLength)) {
+        // 设定阅读速度为10字/s
+        seconds = Math.ceil(contentLength / 10);
+        if (seconds < 8) {
+            seconds = 8;
+        }
+    } else {
+        seconds = 8;
+    }
+
+    return seconds;
 }
 
 window.openBackdrop = openBackdrop;
