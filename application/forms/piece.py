@@ -5,6 +5,7 @@ from flask_wtf import Form
 from wtforms import StringField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, URL, Optional
 from ._helper import check_url, trim
+from ..models import Piece
 
 
 class PieceForm(Form):
@@ -26,10 +27,7 @@ class PieceForm(Form):
         content = re.sub('\s+', ' ', content)  # 将多个空格替换为单个空格
         self.content.data = content
 
-        cn_length = (len(bytes(content)) - len(content)) / 2
-        en_length = len(content) - cn_length
-        content_length = cn_length + int(math.ceil(en_length / 2.0))
-
+        content_length = Piece.calculate_content_length(self.content.data)
         if content_length > 200:
             raise ValueError('不超过200字')
 

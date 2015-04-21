@@ -1,5 +1,6 @@
 # coding: utf-8
 import qrcode
+import math
 from flask import g
 from urlparse import urlparse
 from datetime import datetime, date, timedelta
@@ -12,6 +13,7 @@ class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
+    content_length = db.Column(db.Integer, default=0)
     original = db.Column(db.Boolean, default=False)
     author = db.Column(db.String(100))
     source = db.Column(db.String(100))
@@ -26,6 +28,12 @@ class Piece(db.Model):
     user = db.relationship('User', backref=db.backref('pieces',
                                                       lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
+
+    def __setattr__(self, name, value):
+        # Hash password when set it.
+        if name == 'content':
+            super(Piece, self).__setattr__('content_length', Piece.calculate_content_length(value))
+        super(Piece, self).__setattr__(name, value)
 
     @property
     def source_link_favicon(self):
@@ -60,6 +68,12 @@ class Piece(db.Model):
     @property
     def root_comments(self):
         return self.comments.filter(PieceComment.root_comment_id == None)
+
+    @staticmethod
+    def calculate_content_length(content):
+        cn_length = (len(bytes(content)) - len(content)) / 2
+        en_length = len(content) - cn_length
+        return cn_length + int(math.ceil(en_length / 2.0))
 
     def voted_by_user(self):
         if not g.user:
