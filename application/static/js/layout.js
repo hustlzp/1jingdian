@@ -132,9 +132,14 @@ $('.btn-meet').click(function () {
         openBackdrop('偶遇', html);
     });
 
-    if (g.timerForBackdrop) {
-        clearInterval(g.timerForBackdrop);
-    }
+    beginMeet();
+});
+
+/**
+ * Begin meet random piece.
+ */
+function beginMeet() {
+    stopMeet();
 
     g.timerForBackdrop = setInterval(function () {
         $.ajax({
@@ -152,7 +157,16 @@ $('.btn-meet').click(function () {
             adjustBackdropContent();
         });
     }, 8000);
-});
+}
+
+/**
+ * Stop meet random piece.
+ */
+function stopMeet() {
+    if (g.timerForBackdrop) {
+        clearInterval(g.timerForBackdrop);
+    }
+}
 
 // 按下Esc，关闭backdrop
 $(document).keyup(function (e) {
