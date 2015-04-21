@@ -128,7 +128,7 @@ $('.btn-meet').click(function () {
         var contentLength = piece.content_length;
         var seconds = calculateTimeByContentLength(contentLength);
 
-        openBackdrop('偶遇', piece.id, piece.content, piece.source);
+        openBackdrop(true, '偶遇', piece.id, piece.content, piece.source);
 
         g.timerForBackdrop = setTimeout(function () {
             beginMeet();
@@ -145,13 +145,16 @@ $(document).keydown(function (e) {
     if (e.keyCode == 32 && checkBackdropExist()) {
         e.preventDefault();
         e.stopPropagation();
-        beginMeet();
+
+        if (checkRandomBackdropExist()) {
+            beginMeet();
+        }
     }
 });
 
 // 切入tab时，继续偶遇
 window.onfocus = function () {
-    if (checkBackdropExist()) {
+    if (checkRandomBackdropExist()) {
         setTimeout(function () {
             beginMeet();
         }, 4000);
@@ -160,7 +163,7 @@ window.onfocus = function () {
 
 // 切出tab时，停止偶遇
 window.onblur = function () {
-    if (checkBackdropExist()) {
+    if (checkRandomBackdropExist()) {
         clearTimeout(g.timerForBackdrop);
     }
 };
@@ -190,8 +193,14 @@ $('.modal-need-adjust-height').on('show.bs.modal', function () {
 /**
  * Open the backdrop.
  */
-function openBackdrop(title, id, content, source) {
-    var html = "<div class='full-screen-backdrop'>";
+function openBackdrop(random, title, id, content, source) {
+    var html = "<div class='full-screen-backdrop";
+
+    if (random) {
+        html += " random"
+    }
+
+    html += "'>";
 
     if (title !== "") {
         html += "<div class='title'>" + title + "</div>";
@@ -208,10 +217,10 @@ function openBackdrop(title, id, content, source) {
         html += "<div class='source'>" + source + "</div>";
     }
 
-    html += "</div>"
-        + "</div>";
+    html += "</div></div>";
 
     $('body').append(html);
+
     adjustBackdropContent();
 
     setTimeout(function () {
@@ -239,6 +248,8 @@ function adjustBackdropContent() {
         $content.removeClass('text-center');
     }
 
+    console.log($wap.height());
+
     // 上边距最小为80px
     verticalMargin = ($(window).height() - $wap.height()) / 2;
     if (verticalMargin < 80) {
@@ -258,6 +269,14 @@ function closeBackdrop() {
     $('.base-wap').removeClass('blur');
     $('.full-screen-backdrop').detach();
     clearInterval(g.timerForBackdrop);
+}
+
+/**
+ * Check if the backdrop with class 'random' is open.
+ * @returns {boolean}
+ */
+function checkRandomBackdropExist() {
+    return $('.full-screen-backdrop.random').length > 0;
 }
 
 /**

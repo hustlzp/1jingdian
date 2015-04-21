@@ -233,7 +233,7 @@
                   collection_id: id
                }
             }).done(function (piece) {
-               openBackdrop('「' + collection + '」', piece.id, piece.content, piece.source);
+               openBackdrop(true, '「' + collection + '」', piece.id, piece.content, piece.source);
             });
 
             if (g.timerForBackdrop) {

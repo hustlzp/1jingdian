@@ -411,7 +411,7 @@ def random():
         'id': piece.id,
         'content': piece.content,
         'content_length': piece.content_length,
-        'source': piece.source_string,
+        'source': piece.source_string
     })
 
 
