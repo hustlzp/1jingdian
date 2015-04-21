@@ -155,8 +155,6 @@ $(document).keydown(function (e) {
 // 切入tab时，继续偶遇
 window.onfocus = function () {
     if (checkRandomBackdropExist()) {
-        clearTimeout(g.timerForBackdrop);
-
         g.timerForBackdrop = setTimeout(function () {
             beginMeet();
         }, 4000);
@@ -249,8 +247,6 @@ function adjustBackdropContent() {
     } else {
         $content.removeClass('text-center');
     }
-
-    console.log($wap.height());
 
     // 上边距最小为80px
     verticalMargin = ($(window).height() - $wap.height()) / 2;
