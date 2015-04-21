@@ -233,13 +233,7 @@
                   collection_id: id
                }
             }).done(function (piece) {
-               var html = "<div class='content'>" + piece.content + "</div>";
-
-               if (piece.source) {
-                  html += "<div class='source'>" + piece.source + "</div>";
-               }
-
-               openBackdrop('「' + collection + '」', html);
+               openBackdrop('「' + collection + '」', piece.id, piece.content, piece.source);
             });
 
             if (g.timerForBackdrop) {

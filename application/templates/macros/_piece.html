@@ -7,15 +7,11 @@
    <script type="text/javascript">
       (function () {
          $(document).onOnce('click', '.btn-full-screen', function () {
-            var content = $(this).data('content'),
-                  sourceString = $(this).data('source-string'),
-                  html = "";
+            var id = $(this).data('id');
+            var content = $(this).data('content');
+            var source = $(this).data('source-string');
 
-            html = "<div class='content'>" + content + "</div>";
-            if (sourceString) {
-               html += "<div class='source'>" + sourceString + "</div>";
-            }
-            openBackdrop('', html);
+            openBackdrop('', id, content, source);
          });
       })();
    </script>
@@ -929,6 +925,7 @@
 
                      <div class="options hidden-xs">
                         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
+                           data-id="{{ piece.id }}"
                            data-content="{{ piece.content }}"
                            data-source-string="{{ piece.source_string }}">
                            <span class="fa fa-arrows-alt "></span>

@@ -127,13 +127,8 @@ $('.btn-meet').click(function () {
     }).done(function (piece) {
         var contentLength = piece.content_length;
         var seconds = calculateTimeByContentLength(contentLength);
-        var html = "<div class='content'>" + piece.content + "</div>";
 
-        if (piece.source) {
-            html += "<div class='source'>" + piece.source + "</div>";
-        }
-
-        openBackdrop('偶遇', html);
+        openBackdrop('偶遇', piece.id, piece.content, piece.source);
 
         g.timerForBackdrop = setTimeout(function () {
             beginMeet();
@@ -195,7 +190,7 @@ $('.modal-need-adjust-height').on('show.bs.modal', function () {
 /**
  * Open the backdrop.
  */
-function openBackdrop(title, content_html) {
+function openBackdrop(title, id, content, source) {
     var html = "<div class='full-screen-backdrop'>";
 
     if (title !== "") {
@@ -203,7 +198,17 @@ function openBackdrop(title, content_html) {
     }
 
     html += "<span class='btn-close-backdrop'>×</span>"
-        + "<div class='wap'>" + content_html + "</div>"
+        + "<a target='_blank' class='piece-link' href='" + urlFor('piece.view', {uid: id}) + "'>"
+        + "<span class='fa fa-external-link'></span>"
+        + "</a>"
+        + "<div class='wap'>"
+        + "<div class='content'>" + content + "</div>";
+
+    if (source !== "") {
+        html += "<div class='source'>" + source + "</div>";
+    }
+
+    html += "</div>"
         + "</div>";
 
     $('body').append(html);
@@ -221,7 +226,7 @@ function openBackdrop(title, content_html) {
 function adjustBackdropContent() {
     var $wap = $('.full-screen-backdrop .wap'),
         $content = $('.full-screen-backdrop .wap .content'),
-        verticalMargin = 0;
+        verticalMargin;
 
     if (!$wap.length) {
         return;
@@ -292,11 +297,14 @@ function beginMeet() {
         var seconds = calculateTimeByContentLength(contentLength);
 
         $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn('slow');
+
         if (piece.source) {
             $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn('slow');
         } else {
             $('.full-screen-backdrop .source').hide();
         }
+
+        $('.full-screen-backdrop .piece-link').attr('href', urlFor('piece.view', {uid: piece.id}));
 
         adjustBackdropContent();
 
