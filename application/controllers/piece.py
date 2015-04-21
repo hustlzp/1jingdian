@@ -409,6 +409,7 @@ def random():
         return json.dumps({
             'id': piece.id,
             'content': piece.content,
+            'content_length': piece.content_length,
             'source': piece.source_string,
             'source_link': piece.source_link
         })

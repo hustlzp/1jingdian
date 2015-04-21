@@ -118,11 +118,15 @@ if (navigator.platform.indexOf('Win') > -1) {
 
 // 偶遇
 $('.btn-meet').click(function () {
+    clearTimeout(g.timerForBackdrop);
+
     $.ajax({
         url: urlFor('piece.random'),
         method: 'POST',
         dataType: 'json'
     }).done(function (piece) {
+        var contentLength = piece.content_length;
+        var seconds = calculateTimeByContentLength(contentLength);
         var html = "<div class='content'>" + piece.content + "</div>";
 
         if (piece.source) {
@@ -130,42 +134,62 @@ $('.btn-meet').click(function () {
         }
 
         openBackdrop('偶遇', html);
-    });
 
-    beginMeet();
+        g.timerForBackdrop = setTimeout(function () {
+            beginMeet();
+        }, seconds * 1000);
+    });
 });
 
 /**
  * Begin meet random piece.
  */
 function beginMeet() {
-    stopMeet();
+    clearTimeout(g.timerForBackdrop);
 
-    g.timerForBackdrop = setInterval(function () {
-        $.ajax({
-            url: urlFor('piece.random'),
-            method: 'POST',
-            dataType: 'json'
-        }).done(function (piece) {
-            $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
-            if (piece.source) {
-                $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
-            } else {
-                $('.full-screen-backdrop .source').hide();
-            }
+    $.ajax({
+        url: urlFor('piece.random'),
+        method: 'POST',
+        dataType: 'json'
+    }).done(function (piece) {
+        var contentLength = piece.content_length;
+        var seconds = calculateTimeByContentLength(contentLength);
 
-            adjustBackdropContent();
-        });
-    }, 8000);
+        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn();
+        if (piece.source) {
+            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn();
+        } else {
+            $('.full-screen-backdrop .source').hide();
+        }
+
+        adjustBackdropContent();
+
+        g.timerForBackdrop = setTimeout(function () {
+            beginMeet();
+        }, seconds * 1000);
+    });
 }
 
 /**
- * Stop meet random piece.
+ * Calculate read time based on content length.
+ * @param contentLength
+ * @returns read time
  */
-function stopMeet() {
-    if (g.timerForBackdrop) {
-        clearInterval(g.timerForBackdrop);
+function calculateTimeByContentLength(contentLength) {
+    var seconds;
+    contentLength = parseInt(contentLength);
+
+    if ($.isNumeric(contentLength)) {
+        // 设定阅读速度为10字/s
+        seconds = Math.ceil(contentLength / 10);
+        if (seconds < 8) {
+            seconds = 8;
+        }
+    } else {
+        seconds = 8;
     }
+
+    return seconds;
 }
 
 // 按下Esc，关闭backdrop
