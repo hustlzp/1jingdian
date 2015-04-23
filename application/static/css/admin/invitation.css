@@ -9,3 +9,6 @@
 .sender {
   color: #333;
 }
+.sender:hover {
+  color: #1e88a8;
+}
