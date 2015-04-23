@@ -93,7 +93,7 @@ function toggleVoteEffect($voteElement) {
     }
 }
 
-// 若某操作需要登陆，而用户尚未登陆，则跳转登陆页
+// 若某操作需要登录，而用户尚未登录，则跳转登录页
 $('.need-signed-in').click(function () {
     if (!g.signedIn) {
         window.location = urlFor('account.signin');

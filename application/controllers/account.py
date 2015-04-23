@@ -136,6 +136,6 @@ def reset_password():
         user.password = form.new_password.data
         db.session.add(user)
         db.session.commit()
-        flash('密码重置成功，请使用新密码登陆账户')
+        flash('密码重置成功，请使用新密码登录账户')
         return redirect(url_for('.signin'))
     return render_template('account/reset_password.html', form=form)
