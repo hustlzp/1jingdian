@@ -116,26 +116,6 @@ if (navigator.platform.indexOf('Win') > -1) {
     $('body').addClass('windows');
 }
 
-// 偶遇
-$('.btn-meet').click(function () {
-    clearTimeout(g.timerForBackdrop);
-
-    $.ajax({
-        url: urlFor('piece.random'),
-        method: 'POST',
-        dataType: 'json'
-    }).done(function (piece) {
-        var contentLength = piece.content_length;
-        var seconds = calculateTimeByContentLength(contentLength);
-
-        openBackdrop(true, '偶遇', piece.id, piece.content, piece.source);
-
-        g.timerForBackdrop = setTimeout(function () {
-            beginMeet();
-        }, seconds * 1000);
-    });
-});
-
 // 按下Esc，关闭backdrop
 $(document).keydown(function (e) {
     if (e.keyCode == 27) {
@@ -145,28 +125,8 @@ $(document).keydown(function (e) {
     if (e.keyCode == 32 && checkBackdropExist()) {
         e.preventDefault();
         e.stopPropagation();
-
-        if (checkRandomBackdropExist()) {
-            beginMeet();
-        }
     }
 });
-
-// 切入tab时，继续偶遇
-window.onfocus = function () {
-    if (checkRandomBackdropExist()) {
-        g.timerForBackdrop = setTimeout(function () {
-            beginMeet();
-        }, 4000);
-    }
-};
-
-// 切出tab时，停止偶遇
-window.onblur = function () {
-    if (checkRandomBackdropExist()) {
-        clearTimeout(g.timerForBackdrop);
-    }
-};
 
 // 按下关闭按钮，关闭backdrop
 $(document).on('click', '.btn-close-backdrop', function () {
@@ -266,15 +226,7 @@ function adjustBackdropContent() {
 function closeBackdrop() {
     $('.base-wap').removeClass('blur');
     $('.full-screen-backdrop').detach();
-    clearInterval(g.timerForBackdrop);
-}
-
-/**
- * Check if the backdrop with class 'random' is open.
- * @returns {boolean}
- */
-function checkRandomBackdropExist() {
-    return $('.full-screen-backdrop.random').length > 0;
+    clearTimeout(g.timerForBackdrop);
 }
 
 /**
@@ -299,58 +251,5 @@ function hideFlash() {
     $('.flash-message').slideUp('fast');
 }
 
-/**
- * Begin meet random piece.
- */
-function beginMeet() {
-    clearTimeout(g.timerForBackdrop);
-
-    $.ajax({
-        url: urlFor('piece.random'),
-        method: 'POST',
-        dataType: 'json'
-    }).done(function (piece) {
-        var contentLength = piece.content_length;
-        var seconds = calculateTimeByContentLength(contentLength);
-
-        $('.full-screen-backdrop .content').hide().text(piece.content).fadeIn('slow');
-
-        if (piece.source) {
-            $('.full-screen-backdrop .source').hide().text(piece.source).fadeIn('slow');
-        } else {
-            $('.full-screen-backdrop .source').hide();
-        }
-
-        $('.full-screen-backdrop .piece-link').attr('href', urlFor('piece.view', {uid: piece.id}));
-
-        adjustBackdropContent();
-
-        g.timerForBackdrop = setTimeout(function () {
-            beginMeet();
-        }, seconds * 1000);
-    });
-}
-
-/**
- * Calculate read time based on content length.
- * @param contentLength
- * @returns read time
- */
-function calculateTimeByContentLength(contentLength) {
-    var seconds;
-    contentLength = parseInt(contentLength);
-
-    if ($.isNumeric(contentLength)) {
-        // 设定阅读速度为10字/s
-        seconds = Math.ceil(contentLength / 10);
-        if (seconds < 8) {
-            seconds = 8;
-        }
-    } else {
-        seconds = 8;
-    }
-
-    return seconds;
-}
-
 window.openBackdrop = openBackdrop;
+window.checkBackdropExist = checkBackdropExist;

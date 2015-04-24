@@ -395,6 +395,11 @@ def remove_from_collection(uid, collection_id):
     return json.dumps({'result': True})
 
 
+@bp.route('/piece/meet')
+def meet():
+    return render_template('piece/meet.html')
+
+
 @bp.route('/piece/random', methods=['POST'])
 def random():
     collection_id = request.form.get('collection_id', type=int)
