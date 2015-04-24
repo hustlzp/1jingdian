@@ -310,6 +310,11 @@
 .piece-details-wap .sub-comments-wap {
   padding-left: 42px;
 }
+@media (max-width: 500px) {
+  .piece-details-wap .sub-comments-wap {
+    padding-left: 0;
+  }
+}
 .piece-details-wap #form-comment .form-group {
   margin-top: 5px;
   margin-bottom: 12px;
