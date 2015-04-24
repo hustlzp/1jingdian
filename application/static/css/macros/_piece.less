@@ -67,6 +67,10 @@
 
     .media-left {
       padding-right: 18px;
+
+      @media (max-width: @screen-xxs-max) {
+        display: none;
+      }
     }
 
     .vote {
@@ -578,6 +582,16 @@
 
     .media-left {
       padding-right: 18px;
+
+      @media (max-width: @screen-xxs-max) {
+        display: none;
+      }
+    }
+
+    .other-info {
+      @media (max-width: @screen-xxs-max) {
+        display: none;
+      }
     }
 
     .user-avatar {
@@ -601,11 +615,12 @@
       margin-bottom: 15px;
       line-height: 1.6;
       font-size: 16px;
-    }
 
-    @media (max-width: @screen-xs-max) {
-      .content {
+      @media (max-width: @screen-xs-max) {
         padding-right: 50px;
+      }
+      @media (max-width: @screen-xxs-max) {
+        padding-right: 0px;
       }
     }
 

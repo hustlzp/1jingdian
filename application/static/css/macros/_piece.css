@@ -65,6 +65,11 @@
 .piece-details-wap .piece-header .media-left {
   padding-right: 18px;
 }
+@media (max-width: 500px) {
+  .piece-details-wap .piece-header .media-left {
+    display: none;
+  }
+}
 .piece-details-wap .piece-header .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
@@ -466,6 +471,16 @@
 .pieces-wap .piece .media-left {
   padding-right: 18px;
 }
+@media (max-width: 500px) {
+  .pieces-wap .piece .media-left {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .pieces-wap .piece .other-info {
+    display: none;
+  }
+}
 .pieces-wap .piece .user-avatar {
   width: 32px;
   height: 32px;
@@ -488,6 +503,11 @@
 @media (max-width: 767px) {
   .pieces-wap .piece .content {
     padding-right: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .pieces-wap .piece .content {
+    padding-right: 0px;
   }
 }
 .pieces-wap .piece .meta {
