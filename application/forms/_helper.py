@@ -16,3 +16,9 @@ def check_url(form, field):
 def trim(form, field):
     if field.data and isinstance(field.data, basestring):
         field.data = field.data.strip()
+
+
+def remove_book_tilte_mark(form, field):
+    if not field.data:
+        return
+    field.data = field.data.strip("《》")
