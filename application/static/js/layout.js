@@ -253,3 +253,4 @@ function hideFlash() {
 
 window.openBackdrop = openBackdrop;
 window.checkBackdropExist = checkBackdropExist;
+window.adjustBackdropContent = adjustBackdropContent;
