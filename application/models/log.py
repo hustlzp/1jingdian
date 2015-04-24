@@ -33,5 +33,5 @@ class MailLog(db.Model):
     """邮件发送日志"""
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200))
-    message = db.Column(db.String(200))
+    message = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.now)
