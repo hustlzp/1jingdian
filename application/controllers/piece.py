@@ -92,11 +92,8 @@ def add():
         # 自动vote
         vote = PieceVote(piece_id=piece.id, user_id=g.user.id)
         db.session.add(vote)
-
         g.user.votes_count += 1
-        g.user.pieces_count += 1
         piece.votes_count += 1
-        db.session.add(g.user)
 
         # log
         log = PieceEditLog(piece_id=piece.id, user_id=g.user.id, kind=PIECE_EDIT_KIND.CREATE)
@@ -118,6 +115,8 @@ def add():
             source_collection_piece = CollectionPiece(collection_id=source_collection.id)
             piece.collections.append(source_collection_piece)
 
+        g.user.pieces_count += 1
+        db.session.add(g.user)
         db.session.commit()
         return redirect(url_for('.view', uid=piece.id))
     return render_template('piece/add.html', form=form)
@@ -135,6 +134,7 @@ def edit(uid):
             return permission.deny()
         form.original.data = request.form.get('original') == 'true'
 
+        # 单独存储source和author
         source = form.source.data
         author = form.author.data
         if source and source != piece.source:
@@ -164,7 +164,7 @@ def edit(uid):
         # 仅当句子为引用时，才去记录其他的变更
         if not form.original.data:
             # author变更
-            # 此处的 or "" 是为了判断
+            # 此处的 or "" 是为了避免 None != "" 的情况
             if (piece.author or "") != form.author.data:
                 author_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
                                           before=piece.author, after=form.author.data)
