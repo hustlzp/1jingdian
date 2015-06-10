@@ -25,7 +25,7 @@ def index():
     pieces_data = []
     pieces_data_count = 0
     start_date = None
-    delta = 1
+    delta = 0
 
     while pieces_data_count < 5:
         target_day = date.today() - timedelta(days=delta)
@@ -34,6 +34,8 @@ def index():
             pieces_data.append(Piece.get_pieces_data_by_day(target_day))
             pieces_data_count += 1
             start_date = (target_day - timedelta(days=1)).strftime("%Y-%m-%d")
+        elif delta == 0:  # 无论如何，把今天的数据加上去（即使是空）
+            pieces_data.append(Piece.get_pieces_data_by_day(target_day))
         delta += 1
     return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date)
 
