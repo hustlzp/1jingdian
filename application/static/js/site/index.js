@@ -18,13 +18,14 @@ $(window).scroll(function () {
                 $.ajax({
                     url: urlFor('piece.pieces_by_date'),
                     method: 'post',
+                    dataType: 'json',
                     data: {
                         'start': g.startDate.format('YYYY-MM-DD'),
                         'days': g.DAYS
                     }
-                }).done(function (html) {
-                    $('.pieces-container').append(html);
-                    g.startDate = g.startDate.subtract(g.DAYS, 'days');
+                }).done(function (response) {
+                    $('.pieces-container').append(response.html);
+                    g.startDate = moment(response.start)
                 }).always(function () {
                     g.loading = false;
                     $('.loading-flag').fadeOut();

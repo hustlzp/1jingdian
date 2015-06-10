@@ -1,7 +1,7 @@
 # coding: utf-8
 from datetime import date, timedelta
 from flask import render_template, Blueprint, request
-from ..models import Piece, Collection, CollectionKind
+from ..models import db, Piece, Collection, CollectionKind
 
 bp = Blueprint('site', __name__)
 
@@ -23,11 +23,18 @@ bp = Blueprint('site', __name__)
 def index():
     """Index page."""
     pieces_data = []
+    pieces_data_count = 0
     start_date = None
-    for delta in xrange(0, 5):
+    delta = 1
+
+    while pieces_data_count < 5:
         target_day = date.today() - timedelta(days=delta)
-        pieces_data.append(Piece.get_pieces_data_by_day(target_day))
-        start_date = target_day.strftime("%Y-%m-%d")
+        pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == target_day).count()
+        if pieces_count:
+            pieces_data.append(Piece.get_pieces_data_by_day(target_day))
+            pieces_data_count += 1
+            start_date = (target_day - timedelta(days=1)).strftime("%Y-%m-%d")
+        delta += 1
     return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date)
 
 

@@ -22,22 +22,35 @@ def view(uid):
     return render_template("piece/view.html", piece=piece)
 
 
-@bp.route('/json', methods=['POST'])
+@bp.route('/pieces/json', methods=['POST'])
 def pieces_by_date():
     """获取从指定date开始的指定天数的pieces"""
     start = request.form.get('start')
     if start:
         start_date = datetime.strptime(start, '%Y-%m-%d').date()
     else:
-        start_date = date.today() - timedelta(days=3)
+        start_date = date.today() - timedelta(days=2)
+
     days = request.form.get('days', 2, type=int)
     html = ""
-    for i in xrange(days):
-        target_day = start_date - timedelta(days=i)
-        pieces_data = Piece.get_pieces_data_by_day(target_day)
-        pieces_wap_macro = get_template_attribute('macros/_piece.html', 'render_pieces_by_date')
-        html += pieces_wap_macro(pieces_data, show_modal=False)
-    return html
+    pieces_wap_macro = get_template_attribute('macros/_piece.html', 'render_pieces_by_date')
+
+    data_count = 0
+    delta = 1
+
+    while data_count < days:
+        target_day = start_date - timedelta(days=delta)
+        pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == target_day).count()
+        if pieces_count:
+            pieces_data = Piece.get_pieces_data_by_day(target_day)
+            html += pieces_wap_macro(pieces_data, show_modal=False)
+            next_start_date = (target_day - timedelta(days=1)).strftime("%Y-%m-%d")
+            data_count += 1
+        delta += 1
+    return json.dumps({
+        'html': html,
+        'start': next_start_date
+    })
 
 
 @bp.route('/piece/<int:uid>/click', methods=['POST'])
